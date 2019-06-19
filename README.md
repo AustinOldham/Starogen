@@ -1,3 +1,2 @@
 # Starogen
-An open source 2D space exploration and colonization game.
-Made using SDL2.
+An open source 2D space exploration, colonization, and trading game.
