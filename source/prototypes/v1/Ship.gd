@@ -33,6 +33,8 @@ func _physics_process(delta):
 
 	if (Input.is_action_pressed("ui_up")):
 		current_direction = current_direction.linear_interpolate(new_direction, acceleration)
+	elif (Input.is_action_pressed("ui_down")):
+		current_direction = current_direction.linear_interpolate(-new_direction, acceleration)
 	else:
 		current_direction = current_direction.linear_interpolate(Vector2(0,0), deceleration)
 
