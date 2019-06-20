@@ -28,12 +28,12 @@ func _physics_process(delta):
 		rotation_degrees -= rotation_speed * delta
 	if (Input.is_action_pressed("ui_right")):
 		rotation_degrees += rotation_speed * delta
-	
+
 	var new_direction = Vector2(1,0).rotated(rotation)
-	
+
 	if (Input.is_action_pressed("ui_up")):
 		current_direction = current_direction.linear_interpolate(new_direction, acceleration)
 	else:
 		current_direction = current_direction.linear_interpolate(Vector2(0,0), deceleration)
-	
+
 	move_and_collide(current_direction * speed * delta)

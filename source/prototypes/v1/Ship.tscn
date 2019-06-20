@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://prototypes/v1/KinematicBody2D.gd" type="Script" id=1]
+[ext_resource path="res://prototypes/v1/Ship.gd" type="Script" id=1]
 [ext_resource path="res://assets/ships/ship1.png" type="Texture" id=2]
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
-position = Vector2( 111, 59 )
+[node name="Ship" type="KinematicBody2D"]
+position = Vector2( 120, 60 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -15,3 +15,6 @@ polygon = PoolVector2Array( -8, -4, -4, -4, -4, -3, -3, -3, -3, -2, 7, -2, 7, -1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
