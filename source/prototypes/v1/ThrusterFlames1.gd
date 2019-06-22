@@ -15,13 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends KinematicBody2D
+extends AnimatedSprite
 
-class_name Ship
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
 
-export (int) var rotation_speed = 180
-export (int) var speed = 150
-export (float) var acceleration = 0.10
-export (float) var deceleration = 0.01
-var current_direction = Vector2(0,0)
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.play()
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
