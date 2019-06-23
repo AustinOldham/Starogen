@@ -15,10 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends AnimatedSprite
+extends Ship
 
+var rotation_multiplier
+var direction
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	self.play()
+	speed = 45
+	randomize()
+	rotation_degrees = (randf() * 8) * 45
+	print(rotation_degrees)
+	direction = Vector2(1,0).rotated(rotation)
 
+func _physics_process(delta):
+	move_and_collide(direction * speed * delta)

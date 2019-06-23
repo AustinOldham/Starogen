@@ -22,6 +22,9 @@ var ai_thrust = 0 #0 through 4: nothing, 5: backwards, 5 through 10: forwards
 var ai_rotation_time = 0
 var ai_thrust_time = 0
 
+func _ready():
+	randomize()
+
 func _physics_process(delta):
 	ai_rotation_time += delta
 	ai_thrust_time += delta
