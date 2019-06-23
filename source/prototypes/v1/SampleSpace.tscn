@@ -5,7 +5,7 @@
 [ext_resource path="res://prototypes/v1/PlayerShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://prototypes/v1/NPCShip.tscn" type="PackedScene" id=4]
 
-[node name="MainScene" type="Node2D"]
+[node name="SampleSpace" type="Node2D"]
 
 [node name="SamplePlanet" parent="." instance=ExtResource( 1 )]
 position = Vector2( 540, 327 )

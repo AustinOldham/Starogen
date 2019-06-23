@@ -1,32 +1,23 @@
-extends MarginContainer
+extends CanvasLayer
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$MarginContainer/VBoxContainer/MenuOptions/Continue.connect("pressed", self, "continue_game")
+	$MarginContainer/VBoxContainer/MenuOptions/NewGame.connect("pressed", self, "new_game")
+	$MarginContainer/VBoxContainer/MenuOptions/Options.connect("pressed", self, "options")
+	$MarginContainer/VBoxContainer/MenuOptions/Credits.connect("pressed", self, "credits")
+	$MarginContainer/VBoxContainer/MenuOptions/Quit.connect("pressed", self, "quit_game")
 
-export (int) var rotation_speed = 180
-export (int) var speed = 150
-export (float) var acceleration = 0.10
-export (float) var deceleration = 0.01
-var current_direction = Vector2(0,0)
+func continue_game():
+	get_tree().change_scene("res://prototypes/v1/SampleSpace.tscn")
 
-func _physics_process(delta):
-	if (Input.is_action_pressed("ui_left")):
-		rotation_degrees -= rotation_speed * delta
-	if (Input.is_action_pressed("ui_right")):
-		rotation_degrees += rotation_speed * delta
+func new_game():
+	get_tree().change_scene("res://prototypes/v1/SampleSpace.tscn")
 
-	var new_direction = Vector2(1,0).rotated(rotation)
+func options():
+	pass
 
-	if (Input.is_action_pressed("ui_up")):
-		current_direction = current_direction.linear_interpolate(new_direction, acceleration)
-	elif (Input.is_action_pressed("ui_down")):
-		current_direction = current_direction.linear_interpolate(-new_direction, acceleration)
-	else:
-		current_direction = current_direction.linear_interpolate(Vector2(0,0), deceleration)
+func credits():
+	pass
 
-	move_and_collide(current_direction * speed * delta)
+func quit_game():
+	get_tree().quit()
