@@ -24,7 +24,7 @@ func _ready():
 	speed = 45
 	randomize()
 	rotation_degrees = (randf() * 8) * 45
-	print(rotation_degrees)
+	#print(rotation_degrees)
 	direction = Vector2(1,0).rotated(rotation)
 
 func _physics_process(delta):

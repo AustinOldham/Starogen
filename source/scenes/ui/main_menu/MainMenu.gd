@@ -11,7 +11,7 @@ func continue_game():
 	get_tree().change_scene("res://prototypes/v1/SampleSpace.tscn")
 
 func new_game():
-	get_tree().change_scene("res://prototypes/v1/SampleSpace.tscn")
+	get_tree().change_scene("res://prototypes/sample_space/SampleSpace.tscn")
 
 func options():
 	pass

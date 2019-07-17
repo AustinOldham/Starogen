@@ -10,7 +10,8 @@
 [ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire8.png" type="Texture" id=8]
 [ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire9.png" type="Texture" id=9]
 [ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire10.png" type="Texture" id=10]
-[ext_resource path="res://prototypes/v1/ThrusterFlames1.gd" type="Script" id=11]
+[ext_resource path="res://scenes/special_effects/ThrusterFlames1.gd" type="Script" id=11]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

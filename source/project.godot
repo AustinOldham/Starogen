@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Ship",
 "language": "GDScript",
-"path": "res://prototypes/v1/Ship.gd"
+"path": "res://scenes/ships/Ship.gd"
 } ]
 _global_script_class_icons={
 "Ship": ""
@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Starogen"
-run/main_scene="res://prototypes/v1/MainMenu.tscn"
+run/main_scene="res://scenes/ui/main_menu/MainMenu.tscn"
 boot_splash/image="res://assets/application/starogen_logo_v2_256px.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
