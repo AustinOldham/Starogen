@@ -1,2 +1,6 @@
 *.dll
 *.o
+*.obj
+*.dblite
+
+source/plugins/bin/

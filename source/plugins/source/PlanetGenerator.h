@@ -13,23 +13,18 @@ class PlanetGenerator : public Sprite {
 	GODOT_CLASS(PlanetGenerator, Sprite)
 
 private:
-	float time_passed;
-	float time_emit;
-	float amplitude;
-	float speed;
-
+	int diameter;
 public:
 	static void _register_methods();
 
 	PlanetGenerator();
 	~PlanetGenerator();
 
-	void _init(); // our initializer called by Godot
+	void _init();
 
 	void _process(float delta);
-	void set_speed(float p_speed);
 	void set_planet();
-	float get_speed();
+	ImageTexture * get_planet();
 };
 
 }
