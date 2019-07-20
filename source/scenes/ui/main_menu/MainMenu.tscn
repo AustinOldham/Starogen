@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/ui/main_menu/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/starogen_font_wider/starogen_font_wider_title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/fonts/starogen_font_wider/starogen_font_wider_30px.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=4]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_30px.tres" type="DynamicFont" id=3]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=5]
-[ext_resource path="res://assets/backgrounds/starrybg_1.png" type="Texture" id=6]
+[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=6]
 [ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=7]
 [ext_resource path="res://scenes/ui/main_menu/FakeShip.gd" type="Script" id=8]
 

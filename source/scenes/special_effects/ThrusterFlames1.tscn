@@ -1,16 +1,17 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire1.png" type="Texture" id=1]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire2.png" type="Texture" id=2]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire3.png" type="Texture" id=3]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire4.png" type="Texture" id=4]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire5.png" type="Texture" id=5]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire6.png" type="Texture" id=6]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire7.png" type="Texture" id=7]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire8.png" type="Texture" id=8]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire9.png" type="Texture" id=9]
-[ext_resource path="res://assets/special_effects/thrusters/fire_animation_1/fire10.png" type="Texture" id=10]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire1.png" type="Texture" id=1]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire2.png" type="Texture" id=2]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire3.png" type="Texture" id=3]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire4.png" type="Texture" id=4]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire5.png" type="Texture" id=5]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire6.png" type="Texture" id=6]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire7.png" type="Texture" id=7]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire8.png" type="Texture" id=8]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire9.png" type="Texture" id=9]
+[ext_resource path="res://images/special_effects/thrusters/fire_animation_1/fire10.png" type="Texture" id=10]
 [ext_resource path="res://scenes/special_effects/ThrusterFlames1.gd" type="Script" id=11]
+
 
 
 [sub_resource type="SpriteFrames" id=1]
