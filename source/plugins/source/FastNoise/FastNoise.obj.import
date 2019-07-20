@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/FastNoise.obj-fd2984cda2980690890d3db29719b428.mesh"
+
+[deps]
+
+files=[ "res://.import/FastNoise.obj-fd2984cda2980690890d3db29719b428.mesh" ]
+
+source_file="res://plugins/source/FastNoise/FastNoise.obj"
+dest_files=[ "res://.import/FastNoise.obj-fd2984cda2980690890d3db29719b428.mesh", "res://.import/FastNoise.obj-fd2984cda2980690890d3db29719b428.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
