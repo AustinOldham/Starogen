@@ -17,11 +17,12 @@
 
 #include "PlanetGenerator.h"
 #include "FastNoise/FastNoise.h"
-#include "RadialGradient.h"
+#include "RadialGradient/RadialGradient.h"
 
 using namespace godot;
 
 // TODO: Separate this from the actual planet generation and rename this to PlanetAPI.cpp
+// and separate these into different folders (e.g. plugins/PlanetGenerator/source)
 
 void PlanetGenerator::_register_methods() {
 	register_method("_process", &PlanetGenerator::_process);
