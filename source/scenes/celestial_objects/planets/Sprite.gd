@@ -1,9 +1,9 @@
 extends Sprite
 
-onready var planet_generator = preload("res://plugins/bin/PlanetGenerator.gdns").new()
+onready var planet_generator = preload("res://plugins/PlanetGenerator/bin/PlanetGenerator.gdns").new()
 
 func _ready():
-	self.texture = planet_generator.getPlanet(123, 500)
+	self.texture = planet_generator.getPlanet(123, 50)
 
 #func _process(delta):
 #	pass

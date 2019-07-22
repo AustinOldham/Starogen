@@ -16,13 +16,9 @@
 //along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "PlanetGenerator.h"
-#include "FastNoise/FastNoise.h"
-#include "RadialGradient/RadialGradient.h"
 
 using namespace godot;
 
-// TODO: Separate this from the actual planet generation and rename this to PlanetAPI.cpp
-// and separate these into different folders (e.g. plugins/PlanetGenerator/source)
 
 void PlanetGenerator::_register_methods() {
 	register_method("_process", &PlanetGenerator::_process);
@@ -65,14 +61,21 @@ void PlanetGenerator::setPlanet() {
 
 ImageTexture * PlanetGenerator::getPlanet(int seed, int diameter) {
 	// TODO: Allow strings to be input as seeds instead of ints
-	RadialGradient<double> gradient;
-	gradient.sharpRadialGradient(diameter, diameter, 0, 1, 0.5);
+	Godot::print("testhere");
+	CreatePlanet planet(seed, diameter);
+	//String testString(CreatePlanet::colors[0])
+	//Godot::print(CreatePlanet::colors[1]);
+	//RadialGradient<double> gradient;
+	//gradient.sharpRadialGradient(diameter, diameter, 0, 1, 0.5);
 	Image *m = Image::_new();
+	// TODO: Change the 5 to the proper enum
 	m->create(diameter, diameter, false, 5);
 	m->lock();
 	for (int y = 0; y < diameter; y++) {
 		for (int x = 0; x < diameter; x++) {
-			m->set_pixel(x, y, Color(0, gradient.gradient[y][x], 0, 1));
+			int curr = planet.planetVector[y][x];
+			Godot::print(CreatePlanet::colors[curr][0]);
+			m->set_pixel(x, y, Color(CreatePlanet::colors[curr][0], CreatePlanet::colors[curr][1], CreatePlanet::colors[curr][2], CreatePlanet::colors[curr][3]));
 		}
 	}
 	m->unlock();

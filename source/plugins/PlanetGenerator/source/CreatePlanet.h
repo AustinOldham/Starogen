@@ -15,46 +15,42 @@
 //You should have received a copy of the GNU General Public License
 //along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PLANETGENERATOR_H
-#define PLANETGENERATOR_H
+#ifndef CREATEPLANET_H_
+#define CREATEPLANET_H_
 
+#include <random>
 #include <vector>
-#include <cmath>
-
-#include <Godot.hpp>
-#include <Sprite.hpp>
-#include <Image.hpp>
-#include <ImageTexture.hpp>
-#include <Texture.hpp>
-#include <String.hpp>
+#include <algorithm>
+#include <limits>
+#include <string>
+#include <cstdint>
 
 #include "FastNoise/FastNoise.h"
 #include "RadialGradient/RadialGradient.h"
-#include "CreatePlanet.h"
 
-namespace godot {
 
-class PlanetGenerator : public Sprite {
-	GODOT_CLASS(PlanetGenerator, Sprite)
+class CreatePlanet {
+	public:
+		std::vector<std::vector<uint8_t>> planetVector;
+		//static char colors[][3];
+		static const std::vector<std::vector<int>> colors;
 
-private:
-	
-	int diameter;
-public:
-	// NOTE: Static methods do not work
+		CreatePlanet(int seedInput, int diameterInput);
+		CreatePlanet(int seedInput, int diameterInput, int endInput, double frequencyInput);
 
-	static void _register_methods();
 
-	PlanetGenerator();
-	~PlanetGenerator();
 
-	void _init();
 
-	void _process(float delta);
-	void setPlanet();
-	ImageTexture * getPlanet(int seed, int diameter);
+	private:
+		int seed;
+		int diameter;
+		int end;
+		double frequency;
+		FastNoise myNoise;
+
+		void generate();
+		void addLayer(uint8_t outerMaterial, uint8_t innerMaterial, double sharpMult = 0.5, double adjustedMin = 0.7);
+		double adjustRange(double oldNum, double oldMin, double oldMax, double newMin, double newMax);
 };
 
-}
-
-#endif
+#endif  // CREATEPLANET_H_
