@@ -74,13 +74,15 @@ ImageTexture * PlanetGenerator::getPlanet(int seed, int diameter) {
 	for (int y = 0; y < diameter; y++) {
 		for (int x = 0; x < diameter; x++) {
 			int curr = planet.planetVector[y][x];
-			Godot::print(CreatePlanet::colors[curr][0]);
+			// Godot::print(CreatePlanet::colors[curr][0]);
 			m->set_pixel(x, y, Color(CreatePlanet::colors[curr][0], CreatePlanet::colors[curr][1], CreatePlanet::colors[curr][2], CreatePlanet::colors[curr][3]));
+			// NOTE: Memory could be saved by using m->set_pixel(x, y, Color::hex(uint32_t)); at the cost of a little speed
 		}
 	}
 	m->unlock();
 	ImageTexture *t = ImageTexture::_new();
 	t->create_from_image(m);
+	t->set_flags(0);  // Disables filtering
 	return t;
 }
 

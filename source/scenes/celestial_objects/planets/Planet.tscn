@@ -3,7 +3,6 @@
 [ext_resource path="res://scenes/celestial_objects/planets/Sprite.gd" type="Script" id=1]
 
 [node name="Planet" type="Node2D"]
-position = Vector2( 360, 200 )
 __meta__ = {
 "_edit_group_": true
 }

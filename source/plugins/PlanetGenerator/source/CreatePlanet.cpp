@@ -23,11 +23,11 @@ using std::string;
 using std::endl;
 using std::vector;
 
-const vector<vector<int>> CreatePlanet::colors = {
-	{0, 0, 0, 0},
-	{34, 177, 76, 255},
-	{185, 122, 87, 255},
-	{127, 127, 127, 255}
+const vector<vector<float>> CreatePlanet::colors = {
+	{0.0f, 0.0f, 0.0f, 0.0f},  // Space
+	{0.133f, 0.694f, 0.298f, 1.0f},  // Grass
+	{0.725f, 0.478f, 0.341f, 1.0f},  // Dirt
+	{0.498f, 0.498f, 0.498f, 1.0f}  // Stone
 };
 
 CreatePlanet::CreatePlanet(int seedInput, int diameterInput) {

@@ -33,7 +33,7 @@ class CreatePlanet {
 	public:
 		std::vector<std::vector<uint8_t>> planetVector;
 		//static char colors[][3];
-		static const std::vector<std::vector<int>> colors;
+		static const std::vector<std::vector<float>> colors;
 
 		CreatePlanet(int seedInput, int diameterInput);
 		CreatePlanet(int seedInput, int diameterInput, int endInput, double frequencyInput);
