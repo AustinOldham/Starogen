@@ -20,21 +20,21 @@ extends Node2D
 
 const ClickableStar = preload("res://scenes/ui/galaxy_viewer/ClickableStar.gd")
 
-
+#TODO: Rewrite in C++, try tilemaps, or generate the galaxy as one image
 func _ready():
-	var i = 0
-	var objects = 25
-	var columns = int(sqrt(objects))
-	$GalaxyGrid.columns = columns
-	while (i < objects):
-		var myButton = ClickableStar.new()
-		myButton.set_modulate(Color(0, 0.5, 0, 1))
-		var myTexture = load("res://images/ui/galaxy_viewer/white_pixel.png")
-		myButton.texture_normal = myTexture
-		myButton.connect("pressed", self, "my_button_test", [myButton])
-		$GalaxyGrid.add_child(myButton)
-		i = i + 1
+	var pixels = 100
+	$GalaxyGrid.columns = pixels
+	var myTexture = load("res://images/ui/galaxy_viewer/white_pixel.png")
+	for y in range(pixels):
+		for x in range(pixels):
+			var myButton = ClickableStar.new()
+			myButton.x = x
+			myButton.y = y
+			myButton.set_modulate(Color(0, 0.5, 0, 1))
+			myButton.texture_normal = myTexture
+			myButton.connect("pressed", self, "my_button_test", [myButton])
+			$GalaxyGrid.add_child(myButton)
 
 func my_button_test(myButton):
-	print(myButton.num)
+	print("x: " + str(myButton.x) + "  y:" + str(myButton.y))
 

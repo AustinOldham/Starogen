@@ -17,9 +17,10 @@
 
 extends TextureButton
 
-var num
+var x
+var y
 
 func _ready():
-	num = 777
+	pass
 
 

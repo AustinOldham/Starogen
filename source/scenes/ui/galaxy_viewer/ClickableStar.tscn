@@ -4,4 +4,3 @@
 
 [node name="ClickableStar" type="TextureButton"]
 script = ExtResource( 1 )
-[connection signal="pressed" from="." to="." method="_on_ClickableStar_pressed" binds= [ 0 ]]
