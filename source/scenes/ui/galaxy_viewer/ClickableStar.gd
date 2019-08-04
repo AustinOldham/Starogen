@@ -15,8 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends Button
+extends TextureButton
+
+var num
 
 func _ready():
-	self.add_color_override("font_color_shadow", Color(0, 0, 0))
+	num = 777
+
 

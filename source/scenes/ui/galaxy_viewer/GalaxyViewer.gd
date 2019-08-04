@@ -15,8 +15,26 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends Button
+extends Node2D
+
+
+const ClickableStar = preload("res://scenes/ui/galaxy_viewer/ClickableStar.gd")
+
 
 func _ready():
-	self.add_color_override("font_color_shadow", Color(0, 0, 0))
+	var i = 0
+	var objects = 25
+	var columns = int(sqrt(objects))
+	$GalaxyGrid.columns = columns
+	while (i < objects):
+		var myButton = ClickableStar.new()
+		myButton.set_modulate(Color(0, 0.5, 0, 1))
+		var myTexture = load("res://images/ui/galaxy_viewer/white_pixel.png")
+		myButton.texture_normal = myTexture
+		myButton.connect("pressed", self, "my_button_test", [myButton])
+		$GalaxyGrid.add_child(myButton)
+		i = i + 1
+
+func my_button_test(myButton):
+	print(myButton.num)
 
