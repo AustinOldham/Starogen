@@ -15,12 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends TextureButton
-
-var x
-var y
+extends Node2D
 
 func _ready():
-	pass
+	$TextureRect.texture = load("res://images/application/starogen_logo_v2_256px.png") 
 
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
+		self.on_click()
 
+func on_click():
+	print("Click")
+	print(get_global_mouse_position())
+	print(get_global_transform().origin)

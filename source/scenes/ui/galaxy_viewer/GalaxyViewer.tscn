@@ -1,14 +1,42 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/ui/galaxy_viewer/GalaxyViewer.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/galaxy_viewer/GalaxyBox.gd" type="Script" id=1]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=2]
 
 [node name="GalaxyViewer" type="Node2D"]
-position = Vector2( 130, 100 )
+z_as_relative = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 80
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+margin_left = 20.0
+margin_top = 80.0
+margin_right = 1004.0
+margin_bottom = 590.0
+
+[node name="GalaxyBox" type="Node2D" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+position = Vector2( -20, -80 )
 script = ExtResource( 1 )
 
-[node name="GalaxyGrid" type="GridContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox"]
 margin_right = 40.0
 margin_bottom = 40.0
-rect_scale = Vector2( 5, 5 )
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_right = 193.0
+margin_bottom = 510.0
+
+[node name="Version" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 193.0
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 2 )
+text = "Prototype 6-23-19"
