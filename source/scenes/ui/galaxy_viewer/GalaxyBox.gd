@@ -17,6 +17,8 @@
 
 extends Node2D
 
+var width = 256
+
 func _ready():
 	$TextureRect.texture = load("res://images/application/starogen_logo_v2_256px.png") 
 
@@ -28,3 +30,8 @@ func on_click():
 	print("Click")
 	print(get_global_mouse_position())
 	print(get_global_transform().origin)
+	var x = get_global_mouse_position().x - get_global_transform().origin.x
+	var y = get_global_mouse_position().y - get_global_transform().origin.y
+	print("x: " + str(x) + "  y: " + str(y))
+	if (x < width and y < width and x >= 0 and y >= 0):
+		print("Contained")
