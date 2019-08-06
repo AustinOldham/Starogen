@@ -17,10 +17,10 @@
 
 extends Node2D
 
-var width = 256
+var width = 500
 
 func _ready():
-	$TextureRect.texture = load("res://images/application/starogen_logo_v2_256px.png") 
+	pass
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():

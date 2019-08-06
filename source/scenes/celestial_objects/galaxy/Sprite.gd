@@ -23,6 +23,7 @@ func _ready():
 	randomize()
 	galaxy_generator.generateGalaxy("testName", "testSeed", 500, 0.05, -1, -1.0, -1.0, -1.0, 0.1, 0.3, -1, -1, -1.0)
 	self.texture = galaxy_generator.getGalaxy()
+	#self.texture = load("res://images/application/starogen_logo_v2_256px.png")
 	#self.scale.x = 5
 	#self.scale.y = 5
 

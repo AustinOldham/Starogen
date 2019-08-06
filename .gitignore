@@ -4,5 +4,4 @@
 *.dblite
 *.import
 
-source/plugins/bin/
 source/.import/

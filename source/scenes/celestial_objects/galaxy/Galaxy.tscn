@@ -5,4 +5,5 @@
 [node name="Galaxy" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+centered = false
 script = ExtResource( 1 )
