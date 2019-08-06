@@ -1,0 +1,667 @@
+//Copyright (C) 2019  Austin Oldham
+//
+//This file is part of Starogen.
+//
+//Starogen is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+//
+//Starogen is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+//
+//You should have received a copy of the GNU General Public License
+//along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
+
+#include "CreateGalaxy.h"
+
+using std::cout;
+using std::string;
+using std::cos;
+using std::sin;
+using std::atan;
+using std::vector;
+using std::exp;
+using std::pow;
+using std::sqrt;
+using std::max;
+using std::min;
+using std::endl;
+using std::find;
+using std::unordered_map;
+
+
+// TODO: Replace "type_x" with more specific types such as "red_dwarf", "red_giant", etc.
+// TODO: Replace hardcoded values with values read in from a file in order to make adding new stars easier
+
+// IDEA: Instead of just choosing a number and replacing the pixel, add to it so the less dense areas will naturally have different colors
+// IDEA: Each star has an 8 (or higher) bit number pair that determines its local coordinates and may have a min/max value (e.g. 256 numbers for 8 bit but min is 10 and max is 245) to ensure sufficient space between stars. If 8 bit, the coordinates are determined by the main map coordinate plus the local coordinate divided by 255.
+// TODO: Clouds will be generated using density map where the number of stars in a square around each star (or every pixel) is used for the calculation (odd number width of search only so offset = searchWidth / 2 and the locations at galaxy[y - offset + i][x - offset + j] are checked)
+
+CreateGalaxy::CreateGalaxy() {
+	initializeContainers();
+}
+
+void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput) {
+	seed = getSeed(seedInput);
+
+	name = getName(nameInput);
+
+	pixels = pixelsInput;
+
+	arms = getArms(armsInput);
+
+	radialDistanceMult = getRadialDistanceMult(radialDistanceMultInput);
+
+	clusterStddev = getClusterStddev(clusterStddevInput);  // pixels/100.0? pixels/40.0?(worse)
+
+	density = getDensity(densityInput);
+
+	a = getA(aInput);
+	b = getB(bInput);
+
+	extraStars = getExtraStars(extraStarsInput);
+
+	densityGrid = getDensityGrid(densityGridInput);
+
+	cloudsMult = getCloudsMult(cloudsMultInput);
+
+	std::hash<string> seedHasher;
+	int seedInt = seedHasher(seed);
+	starClusterGen.setSeed(seed);
+	cloudNoise.SetSeed(seedInt);
+	cloudNoise.SetNoiseType(FastNoise::SimplexFractal);  // SimplexFractal for clouds
+	cloudNoise.SetFrequency(cloudsFrequencyInput);  // 0.05 for clouds
+
+	myGalaxy.clear();
+	myGalaxy.resize(pixels, vector<int>(pixels, 0));
+	densityMap.clear();
+	densityMap.resize(pixels, vector<double>(pixels, 0));
+	clouds.clear();
+	clouds.resize(pixels, vector<double>(pixels, 0));
+
+	cout << name << endl;
+	cout << seed << endl;
+
+	generate();
+
+	cout << "finished" << endl;
+
+	/*printGalaxy(myGalaxy, name);
+	string densityName = name + "_densitymap";
+	printDensityMap(densityMap, densityName);
+	string cloudsName = name + "_clouds";
+	printClouds(clouds, cloudsName);
+	string theColors = "thecolors";
+	printColorPalette(theColors);*/
+}
+
+void CreateGalaxy::generate() {
+	double theta;
+	double halfway = pixels / 2.0;
+	//int arms = 4;  // 4
+	vector<double> rotation = getAngles(arms, 0);
+
+	double maxRadialDistance = radialDistance(0, 0, halfway, halfway);
+
+	double counter = 0.0;
+
+	vector<bool> finished(arms, false);
+
+	vector<vector<bool>> markedMap(pixels, vector<bool>(pixels, false));  // Prevents extremely large number of clusters in the core
+
+	//double a = 0.1;
+
+	//double b = 0.3;
+
+	while (!isFinished(finished)) {  // Runs until all items are marked as true
+		// double t = counter / 20.0;
+		double t = counter / density;
+		double mult = getMult(t, a, b); //0.1, 0.3
+		for (int j = 0; j < arms; j++) {
+			if (finished[j]) {
+				continue;
+			}
+			theta = rotation[j];
+			int x = static_cast<int>((logSpiralX(t, theta, mult)) + halfway);
+			int y = static_cast<int>((logSpiralY(t, theta, mult)) + halfway);
+
+			if (x < 0 || y < 0 || x >= pixels || y >= pixels) {
+				finished[j] = true;
+				continue;
+			} else {
+				if (markedMap[y][x] == false) {
+					markedMap[y][x] = true;
+				} else {
+					continue;
+				}
+			}
+			// Add second less dense cluster to fill out the galaxy
+
+			double currRadialDistance = radialDistance(x, y, halfway, halfway);
+
+			// TODO: Add option to have star colors based off of distance from the center. Currently not implemented because variety is better for gameplay.
+			// Create a map between star type and distance then choose the closest type that is greater than or equal to the number generated with "probability = starClusterGen.nextNormal(distanceProportion, 0.1)".
+			double distanceProportion = (maxRadialDistance - currRadialDistance) / maxRadialDistance;
+			int localDensity = static_cast<int>(distanceProportion * radialDistanceMult);
+			if (extraStars) {
+				starCluster(x, y, localDensity, 10.0 * clusterStddev, distanceProportion); //5.0 * 10.0  Adds background clutter
+			}
+			starCluster(x, y, localDensity, clusterStddev, distanceProportion);  //stddev = 5.0
+		}
+		counter++;
+	}
+
+
+	createDensityMap();
+	createClouds();
+	// cout << "myGalaxy[y][x]: " << myGalaxy[2][1] << endl;
+}
+
+int CreateGalaxy::at(int x, int y) {
+	return myGalaxy[y][x];
+}
+
+float CreateGalaxy::getRed(int index) {
+	return colors[index][0];
+}
+
+float CreateGalaxy::getGreen(int index) {
+	return colors[index][1];
+}
+
+float CreateGalaxy::getBlue(int index) {
+	return colors[index][2];
+}
+
+float CreateGalaxy::getAlpha(int index) {
+	return colors[index][3];
+}
+
+int CreateGalaxy::getPixels() {
+	return pixels;
+}
+
+// NOTE: Add padding to the myGalaxy vector so the star clusters don't get cut off on the edges
+
+void CreateGalaxy::createDensityMap() {
+	int subtracted = densityGrid / 2;
+	double gridSquared = static_cast<double>(densityGrid * densityGrid);
+	for (int y = 0; y < pixels; y++) {
+		for (int x = 0; x < pixels; x++) {
+			for (int i = 0; i < densityGrid; i++) {  // NxN area where N is an odd number is the number being subtracted is N / 2
+				for (int j = 0; j < densityGrid; j++) {
+					int gridY = y - subtracted + i;
+					int gridX = x - subtracted + j;
+					if (gridY < 0 || gridX < 0) {
+						break;
+					}
+
+					if (gridY >= myGalaxy.size() || gridX >= myGalaxy[y].size()) {
+						break;
+					}
+
+					if (myGalaxy[gridY][gridX] > 0) {
+						densityMap[y][x]++;
+					}
+				}
+			}
+			densityMap[y][x] = densityMap[y][x] / gridSquared;
+			if (densityMap[y][x] > 1.0) {
+				densityMap[y][x] = 1.0;
+			}
+		}
+	}
+}
+
+void CreateGalaxy::createClouds() {
+	for (int y = 0; y < pixels; y++) {
+		for (int x = 0; x < pixels; x++) {
+			clouds[y][x] = 0.5 * (cloudNoise.GetNoise(x, y) + 1);  // Puts it in the range of 0 to 1
+			clouds[y][x] *= densityMap[y][x];
+			clouds[y][x] *= cloudsMult;
+			clouds[y][x] = max(0.0, clouds[y][x]);
+			clouds[y][x] = min(1.0, clouds[y][x]);
+		}
+	}
+}
+
+void CreateGalaxy::starCluster(int x, int y, int num, double stddev, double distanceProportion) {  // stddev = 5.0
+	for (int i = 0; i < num; i++) {
+		double modX = starClusterGen.nextNormal(0.0, stddev);
+		double modY = starClusterGen.nextNormal(0.0, stddev);
+		if (x + modX < 0 || y + modY < 0 || x + modX >= pixels || y + modY >= pixels) {
+			continue;
+		}
+
+		myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
+	}
+}
+
+int CreateGalaxy::plotStar(double distanceProportion) {
+	// TODO: Choose stars randomly (maybe add bias by storing the first star generated at x and y then rerolling if that star does not match)
+	// Choose using this https://stackoverflow.com/a/9330667/11356785
+
+	double probability = starClusterGen.next(0.0, 1.0);
+	double probabilitySum = 0.0;
+
+	// cout << probability << endl;
+
+	for (auto x : starChance) {
+		probabilitySum += x.second;
+		if (probability <= probabilitySum) {
+			// cout << x.first << endl;
+			return cmap.at(x.first);
+		}
+	}
+
+	cout << "THIS CODE SHOULD NEVER BE REACHED" << endl;
+	return 0;
+
+	// An option will be added in the future to guarantee certain types of celestial bodies are generated by adding them after the galaxy has generated.
+}
+
+
+
+vector<double> CreateGalaxy::getAngles(int num, double additional) {
+	vector<double> myAngles(num, 0);
+	double divisor = static_cast<double>(num);
+	for (int i = 0; i < num; i++) {
+		myAngles[i] = ((2 * PI) * (i / divisor)) + additional;
+		// cout << myAngles[i] << endl;
+	}
+	return myAngles;
+}
+
+string CreateGalaxy::getName(string nameInput) {
+	if (nameInput.empty()) {
+		return string("placeholdername");
+	} else {
+		return nameInput;
+	}
+}
+
+string CreateGalaxy::getSeed(string seedInput) {
+	if (seedInput.empty()) {
+		return string("placeholderseed");
+	} else {
+		return seedInput;
+	}
+}
+
+int CreateGalaxy::getArms(int armsInput) {
+	if (armsInput <= 0) {
+		return 4;  // Placeholder
+	} else {
+		return armsInput;
+	}
+}
+
+double CreateGalaxy::getClusterStddev(double clusterStddevInput) {
+	if (clusterStddevInput <= 0.0) {
+		if (pixels <= 100) {
+			return pixels / 40.0;
+		} else {
+			return pixels / 100.0;
+		}
+	} else {
+		return clusterStddevInput;
+	}
+}
+
+double CreateGalaxy::getRadialDistanceMult(double radialDistanceMultInput) {
+	if (radialDistanceMultInput <= 0.0) {
+		return 10.0;  // Not a placeholder
+	} else {
+		return radialDistanceMultInput;
+	}
+}
+
+double CreateGalaxy::getDensity(double densityInput) {
+	if (densityInput <= 0.0) {
+		return (pixels / 25);
+	} else {
+		return densityInput;
+	}
+}
+
+double CreateGalaxy::getA(double aInput) {
+	return aInput;  // TODO: Determine what values are invalid and randomly pick a value.
+}
+
+double CreateGalaxy::getB(double bInput) {
+	return bInput;  // TODO: Determine what values are invalid and randomly pick a value.
+}
+
+bool CreateGalaxy::getExtraStars(int extraStarsInput) {
+	if (extraStarsInput < 0) {
+		if (pixels <= 100) {
+			return false;
+		} else {
+			return true;
+		}
+	} else if (extraStarsInput == 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+int CreateGalaxy::getDensityGrid(int densityGridInput) {
+	if (densityGridInput <= 0) {
+		if (pixels <= 100) {
+			return 5;
+		} else {
+			return 15;
+		}
+	} else {
+		return densityGridInput;
+	}
+}
+
+double CreateGalaxy::getCloudsMult(double cloudsMultInput) {
+	if (cloudsMultInput <= 0.0) {
+		return 5.0;
+	} else {
+		return cloudsMultInput;
+	}
+}
+
+double CreateGalaxy::getMult(double t, double a, double b) {
+	return a * exp(b * t);
+}
+
+// x = a * (e^(bt)) * cos(t);
+double CreateGalaxy::logSpiralX(double t, double theta, double a, double b) {
+	double mult = exp(b * t);
+	return (a * mult * cos(t - theta));
+}
+
+// y = a * (e^(bt)) * sin(t);
+double CreateGalaxy::logSpiralY(double t, double theta, double a, double b) {
+	double mult = exp(b * t);
+	return (a * mult * sin(t - theta));
+}
+
+double CreateGalaxy::logSpiralX(double t, double theta, double mult) {
+	return (mult * cos(t - theta));
+}
+
+double CreateGalaxy::logSpiralY(double t, double theta, double mult) {
+	return (mult * sin(t - theta));
+}
+
+bool CreateGalaxy::isFinished(vector<bool> finished) {
+	for (int i = 0; i < finished.size(); i++) {
+		if (finished[i] == false) {
+			return false;
+		}
+	}
+	return true;
+}
+
+double CreateGalaxy::radialDistance(int x, int y, double centerX, double centerY) {
+	double distanceX = pow(abs(centerX - x), 2);
+	double distanceY = pow(abs(centerY - y), 2);
+	return sqrt(distanceX + distanceY);
+}
+
+void CreateGalaxy::printWhiteGalaxy(const vector<vector<int>> myVector, string fileName) {
+	std::ofstream myFile;
+	myFile.open("output/" + fileName + ".ppm");
+	myFile << "P3";
+	myFile << " ";
+	myFile << myVector[0].size();
+	myFile << " ";
+	myFile << myVector.size();
+	myFile << " ";
+	myFile << 255;
+	myFile << "\n";
+
+	for (int y = 0; y < myVector.size(); y++) {
+		for (int x = 0; x < myVector[0].size(); x++) {
+			if (myVector[y][x] == 0) {
+				myFile << "0 0 0 ";
+			} else {
+				/*if (myVector[y][x] > 25) {
+					myFile << 255;
+				} else {
+					myFile << myVector[y][x] * 10;
+				}
+				myFile << " 255 255 ";*/
+				myFile << "255 255 255 ";
+			}
+		}
+		myFile << "\n";
+	}
+	myFile.close();
+}
+
+void CreateGalaxy::printDensityMap(const vector<vector<double>> myVector, string fileName) {
+	std::ofstream myFile;
+	myFile.open("output/" + fileName + ".ppm");
+	myFile << "P3";
+	myFile << " ";
+	myFile << myVector[0].size();
+	myFile << " ";
+	myFile << myVector.size();
+	myFile << " ";
+	myFile << 255;
+	myFile << "\n";
+
+	for (int y = 0; y < myVector.size(); y++) {
+		for (int x = 0; x < myVector[0].size(); x++) {
+			if (myVector[y][x] == 0) {
+				myFile << "0 0 0 ";
+			} else {
+				/*if (myVector[y][x] > 25) {
+					myFile << 255;
+				} else {
+					myFile << myVector[y][x] * 10;
+				}
+				myFile << " 255 255 ";*/
+				// myFile << "255 255 255 ";
+				myFile << static_cast<int>(densityMap[y][x] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(densityMap[y][x] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(densityMap[y][x] * 255.0);
+				myFile << " ";
+			}
+		}
+		myFile << "\n";
+	}
+	myFile.close();
+}
+
+void CreateGalaxy::printClouds(const vector<vector<double>> myVector, string fileName) {
+	std::ofstream myFile;
+	myFile.open("output/" + fileName + ".ppm");
+	myFile << "P3";
+	myFile << " ";
+	myFile << myVector[0].size();
+	myFile << " ";
+	myFile << myVector.size();
+	myFile << " ";
+	myFile << 255;
+	myFile << "\n";
+
+	for (int y = 0; y < myVector.size(); y++) {
+		for (int x = 0; x < myVector[0].size(); x++) {
+			if (myVector[y][x] == 0) {
+				myFile << "0 0 0 ";
+			} else {
+				myFile << static_cast<int>(clouds[y][x] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(clouds[y][x] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(clouds[y][x] * 255.0);
+				myFile << " ";
+			}
+		}
+		myFile << "\n";
+	}
+	myFile.close();
+}
+
+void CreateGalaxy::printGalaxy(const vector<vector<int>> myVector, string fileName) {
+	std::ofstream myFile;
+	myFile.open("output/" + fileName + ".ppm");
+	myFile << "P3";
+	myFile << " ";
+	myFile << myVector[0].size();
+	myFile << " ";
+	myFile << myVector.size();
+	myFile << " ";
+	myFile << 255;
+	myFile << "\n";
+
+	for (int y = 0; y < myVector.size(); y++) {
+		for (int x = 0; x < myVector[0].size(); x++) {
+			if (myVector[y][x] == 0) {
+				myFile << "0 0 0 ";
+			} else {
+				// cout << myVector[y][x] << endl;
+				myFile << static_cast<int>(colors[myVector[y][x]][0] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(colors[myVector[y][x]][1] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(colors[myVector[y][x]][2] * 255.0);
+				myFile << " ";
+				//myFile << "255 255 255 ";
+			}
+		}
+		myFile << "\n";
+	}
+	myFile.close();
+}
+
+void CreateGalaxy::printColorPalette(string fileName) {
+	std::ofstream myFile;
+	myFile.open("output/" + fileName + ".ppm");
+	myFile << "P3";
+	myFile << " ";
+	myFile << colors.size();
+	myFile << " ";
+	myFile << 1;
+	myFile << " ";
+	myFile << 255;
+	myFile << "\n";
+
+	/*
+
+	for (int y = 0; y < myVector.size(); y++) {
+		for (int x = 0; x < myVector[0].size(); x++) {
+			if (myVector[y][x] == 0) {
+				myFile << "0 0 0 ";
+			} else {
+				// cout << myVector[y][x] << endl;
+				myFile << static_cast<int>(colors[myVector[y][x]][0] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(colors[myVector[y][x]][1] * 255.0);
+				myFile << " ";
+				myFile << static_cast<int>(colors[myVector[y][x]][2] * 255.0);
+				myFile << " ";
+				//myFile << "255 255 255 ";
+			}
+		}
+		myFile << "\n";
+	}
+
+	*/
+
+	for (int i = 0; i < colors.size(); i++) {
+		// cout << "colors[" << i << "][0]: " << colors[i][0] << endl;
+		// cout << "colors[" << i << "][1]: " << colors[i][1] << endl;
+		// cout << "colors[" << i << "][2]: " << colors[i][2] << endl;
+
+		// cout << "colors[" << i << "][0] * 255.0: " << static_cast<int>(colors[i][0] * 255.0) << endl;
+		// cout << "colors[" << i << "][1] * 255.0: " << static_cast<int>(colors[i][1] * 255.0) << endl;
+		// cout << "colors[" << i << "][2] * 255.0: " << static_cast<int>(colors[i][2] * 255.0) << endl;
+
+		myFile << static_cast<int>(colors[i][0] * 255.0);
+		myFile << " ";
+		myFile << static_cast<int>(colors[i][1] * 255.0);
+		myFile << " ";
+		myFile << static_cast<int>(colors[i][2] * 255.0);
+		myFile << " ";
+	}
+
+	myFile.close();
+}
+
+void CreateGalaxy::initializeContainers() {
+	cmap = getIDMap();
+	starChance = getProbabilities();
+	colors = getColors();
+}
+
+unordered_map<string, int> CreateGalaxy::getIDMap() {
+	unordered_map<string, int> myIDMap({
+		{"blank", 0},
+		{"type_a", 1},
+		{"type_b", 2},
+		{"type_c", 3},
+		{"type_f", 4},
+		{"type_g", 5},
+		{"type_k", 6},
+		{"type_l", 7},
+		{"type_m", 8},
+		{"type_o", 9},
+		{"type_s", 10},
+		{"type_t", 11},
+		{"type_w", 12},
+		{"type_y", 13}
+	});
+	return myIDMap;
+}
+
+unordered_map<string, double> CreateGalaxy::getProbabilities() {
+	unordered_map<string, double> myProbabilities({
+		{"blank", 0.0},
+		{"type_a", 1.0},
+		{"type_b", 2.0},
+		{"type_c", 0.0},
+		{"type_f", 2.0},
+		{"type_g", 1.0},
+		{"type_k", 1.0},
+		{"type_l", 0.0},
+		{"type_m", 1.0},
+		{"type_o", 0.2},
+		{"type_s", 0.0},
+		{"type_t", 0.0},
+		{"type_w", 0.0},
+		{"type_y", 0.0}
+	});
+
+	double probabilitySum = 0.0;
+
+	for (auto x : myProbabilities) {
+		probabilitySum += x.second;
+	}
+
+	for (auto x : myProbabilities) {
+		myProbabilities[x.first] = x.second / probabilitySum;  // Normalizes the probabilities so they are between 0.0 and 1.0.
+	}
+
+	return myProbabilities;
+}
+
+vector<vector<float>> CreateGalaxy::getColors() {
+	// Each star will be assigned a random value that slightly alters the color of them when visited by the player
+
+	vector<vector<float>> myColors(cmap.size(), vector<float>(4, 0));
+	// myColors[cmap.at("x")] = {0.0f, 0.0f, 0.0f, 1.0f};
+	myColors[cmap.at("blank")] = {0.0f, 0.0f, 0.0f, 0.0f};
+	myColors[cmap.at("type_o")] = {0.0f, 0.0f, 1.0f, 1.0f};
+	myColors[cmap.at("type_b")] = {0.682f, 0.737f, 0.976f, 1.0f};
+	myColors[cmap.at("type_a")] = {1.0f, 1.0f, 1.0f, 1.0f};
+	myColors[cmap.at("type_f")] = {1.0f, 1.0f, 0.760f, 1.0f};
+	myColors[cmap.at("type_g")] = {0.949f, 0.949f, 0.149f, 1.0f};
+	myColors[cmap.at("type_k")] = {0.949f, 0.419f, 0.203f, 1.0f};
+	myColors[cmap.at("type_m")] = {0.952f, 0.113f, 0.215f, 1.0f};
+
+	return myColors;
+}

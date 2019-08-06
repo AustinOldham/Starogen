@@ -30,6 +30,8 @@ const vector<vector<float>> CreatePlanet::colors = {
 	{0.498f, 0.498f, 0.498f, 1.0f}  // Stone
 };
 
+// TODO: Make the constructor separate from generate()
+
 CreatePlanet::CreatePlanet(int seedInput, int diameterInput) {
 	seed = seedInput;
 	diameter = diameterInput;

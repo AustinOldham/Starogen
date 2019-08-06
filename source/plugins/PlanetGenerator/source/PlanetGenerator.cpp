@@ -22,7 +22,6 @@ using namespace godot;
 
 void PlanetGenerator::_register_methods() {
 	register_method("_process", &PlanetGenerator::_process);
-	register_method("setPlanet", &PlanetGenerator::setPlanet);
 	register_method("getPlanet", &PlanetGenerator::getPlanet);
 	//register_method("sharpRadialGradient", &PlanetGenerator::sharpRadialGradient);
 	//register_method("radialDistance", &PlanetGenerator::radialDistance);
@@ -44,20 +43,6 @@ void PlanetGenerator::_process(float delta) {
 
 }
 
-void PlanetGenerator::setPlanet() {
-	Image *m = Image::_new();
-	m->create(500, 500, false, 5);
-	m->lock();
-	for (int i = 0; i < 500; i++) {
-		for (int j = 0; j < 500; j++) {
-			m->set_pixel(i, j, Color(0, 1, 0, 1));
-		}
-	}
-	m->unlock();
-	ImageTexture *t = ImageTexture::_new();
-	t->create_from_image(m);
-	set_texture(t);
-}
 
 ImageTexture * PlanetGenerator::getPlanet(int seed, int diameter) {
 	// TODO: Allow strings to be input as seeds instead of ints

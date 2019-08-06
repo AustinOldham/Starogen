@@ -18,8 +18,7 @@
 #ifndef PLANETGENERATOR_H
 #define PLANETGENERATOR_H
 
-#include <vector>
-#include <cmath>
+#include <string>
 
 #include <Godot.hpp>
 #include <Sprite.hpp>
@@ -28,30 +27,30 @@
 #include <Texture.hpp>
 #include <String.hpp>
 
-#include "FastNoise/FastNoise.h"
-#include "RadialGradient/RadialGradient.h"
-#include "CreatePlanet.h"
+#include "CreateGalaxy.h"
 
 namespace godot {
 
-class PlanetGenerator : public Object {
-	GODOT_CLASS(PlanetGenerator, Object)
+class GalaxyGenerator : public Object {
+	GODOT_CLASS(GalaxyGenerator, Object)
 
 	private:
-		// TODO: Make CreatePlanet.cpp be the only one storing variables like this.
-		int diameter;
+		CreateGalaxy myGalaxy;
 	public:
 		// NOTE: Static methods do not work
 
 		static void _register_methods();
 
-		PlanetGenerator();
-		~PlanetGenerator();
+		GalaxyGenerator();
+		~GalaxyGenerator();
 
 		void _init();
 
 		void _process(float delta);
-		ImageTexture * getPlanet(int seed, int diameter);
+		void generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput);
+		ImageTexture * getGalaxy();
+
+		std::string toStandardString(String oldString);
 };
 
 }
