@@ -27,5 +27,31 @@ func _ready():
 	#self.scale.x = 5
 	#self.scale.y = 5
 
-#func _process(delta):
-#	pass
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if event.button_index == BUTTON_WHEEL_DOWN:
+				zoom_camera(-1)
+			if event.button_index == BUTTON_WHEEL_UP:
+				zoom_camera(1)
+
+#TODO: Add rounding to avoid float rounding errors
+
+func zoom_camera(direction):
+	print(global_scale)
+	var temp = scale + Vector2(0.1, 0.1) * direction
+	if (temp.x <= 0.01 or temp.y <= 0.01):
+		pass
+	else:
+		scale = temp
+
+func _process(delta):
+	if (Input.is_action_pressed("ui_left")):
+		global_position += Vector2(-0.1, 0.0) * 30
+	if (Input.is_action_pressed("ui_right")):
+		global_position += Vector2(0.1, 0.0) * 30
+
+	if (Input.is_action_pressed("ui_down")):
+		global_position += Vector2(0.0, 0.1) * 30
+	elif (Input.is_action_pressed("ui_up")):
+		global_position += Vector2(0.0, -0.1) * 30
