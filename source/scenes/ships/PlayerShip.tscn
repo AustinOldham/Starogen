@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/ships/PlayerShip.gd" type="Script" id=1]
 [ext_resource path="res://images/ships/ship1.png" type="Texture" id=2]
-
-
+[ext_resource path="res://scenes/ships/Camera2D.gd" type="Script" id=3]
 
 [node name="PlayerShip" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -19,3 +18,4 @@ texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+script = ExtResource( 3 )

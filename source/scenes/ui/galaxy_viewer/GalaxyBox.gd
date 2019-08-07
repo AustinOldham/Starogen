@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends Node2D
+extends ViewportContainer
 
 var width = 500
 

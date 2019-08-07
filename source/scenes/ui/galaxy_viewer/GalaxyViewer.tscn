@@ -30,19 +30,20 @@ custom_constants/margin_top = 80
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="HBoxContainer" type="HSplitContainer" parent="CanvasLayer/MarginContainer"]
 margin_left = 20.0
 margin_top = 80.0
 margin_right = 1004.0
 margin_bottom = 590.0
+split_offset = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 editor/display_folded = true
-margin_right = 268.0
+margin_right = 278.0
 margin_bottom = 510.0
 
 [node name="Settings" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
-margin_right = 268.0
+margin_right = 278.0
 margin_bottom = 33.0
 custom_fonts/font = ExtResource( 1 )
 text = "Settings"
@@ -50,7 +51,7 @@ text = "Settings"
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
 editor/display_folded = true
 margin_top = 37.0
-margin_right = 268.0
+margin_right = 278.0
 margin_bottom = 449.0
 columns = 2
 
@@ -274,18 +275,12 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/selection_color = Color( 0, 0, 1, 1 )
 custom_colors/cursor_color = Color( 1, 1, 1, 1 )
 
-[node name="Blank" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
-margin_left = 272.0
-margin_top = 248.0
+[node name="GalaxyBox" type="ViewportContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_left = 290.0
 margin_right = 984.0
-margin_bottom = 262.0
-size_flags_horizontal = 3
-
-[node name="GalaxyBox" type="Node2D" parent="CanvasLayer/MarginContainer/HBoxContainer"]
-position = Vector2( 450, 10 )
+margin_bottom = 510.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Galaxy" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]
+[node name="Galaxy" type="Viewport" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]
+handle_input_locally = false
+render_target_update_mode = 3
