@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scenes/ui/galaxy_viewer/GalaxyBox.gd" type="Script" id=2]
-[ext_resource path="res://scenes/celestial_objects/galaxy/Galaxy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_30px.tres" type="DynamicFont" id=1]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/ui/galaxy_viewer/GalaxyBox.gd" type="Script" id=3]
+[ext_resource path="res://scenes/celestial_objects/galaxy/Galaxy.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 5.0
+content_margin_top = 5.0
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+corner_detail = 1
 
 [node name="GalaxyViewer" type="Node2D"]
 z_as_relative = false
@@ -25,17 +37,255 @@ margin_right = 1004.0
 margin_bottom = 590.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
-margin_right = 84.0
+editor/display_folded = true
+margin_right = 268.0
 margin_bottom = 510.0
 
 [node name="Settings" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
-margin_right = 84.0
-margin_bottom = 22.0
+margin_right = 268.0
+margin_bottom = 33.0
 custom_fonts/font = ExtResource( 1 )
 text = "Settings"
 
-[node name="GalaxyBox" type="Node2D" parent="."]
-position = Vector2( 470, 270 )
-script = ExtResource( 2 )
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+editor/display_folded = true
+margin_top = 37.0
+margin_right = 268.0
+margin_bottom = 449.0
+columns = 2
 
-[node name="Galaxy" parent="GalaxyBox" instance=ExtResource( 3 )]
+[node name="Name" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 3.0
+margin_right = 198.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 2 )
+text = "Name:"
+
+[node name="NameEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_right = 268.0
+margin_bottom = 28.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="Seed" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 35.0
+margin_right = 198.0
+margin_bottom = 57.0
+custom_fonts/font = ExtResource( 2 )
+text = "Seed:"
+
+[node name="SeedEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 32.0
+margin_right = 268.0
+margin_bottom = 60.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="Size" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 67.0
+margin_right = 198.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 2 )
+text = "Size:"
+
+[node name="SizeEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 64.0
+margin_right = 268.0
+margin_bottom = 92.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="CloudsFrequency" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 99.0
+margin_right = 198.0
+margin_bottom = 121.0
+custom_fonts/font = ExtResource( 2 )
+text = "Clouds Frequency:"
+
+[node name="CloudsFrequencyEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 96.0
+margin_right = 268.0
+margin_bottom = 124.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="Arms" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 131.0
+margin_right = 198.0
+margin_bottom = 153.0
+custom_fonts/font = ExtResource( 2 )
+text = "Arms:"
+
+[node name="ArmsEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 128.0
+margin_right = 268.0
+margin_bottom = 156.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="RadialDistanceMult" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 163.0
+margin_right = 198.0
+margin_bottom = 185.0
+custom_fonts/font = ExtResource( 2 )
+text = "Radial Distance Mult:"
+
+[node name="RadialDistanceMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 160.0
+margin_right = 268.0
+margin_bottom = 188.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="ClusterStddev" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 195.0
+margin_right = 198.0
+margin_bottom = 217.0
+custom_fonts/font = ExtResource( 2 )
+text = "ClusterStddev:"
+
+[node name="ClusterStddevEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 192.0
+margin_right = 268.0
+margin_bottom = 220.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="Density" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 227.0
+margin_right = 198.0
+margin_bottom = 249.0
+custom_fonts/font = ExtResource( 2 )
+text = "Density:"
+
+[node name="DensityEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 224.0
+margin_right = 268.0
+margin_bottom = 252.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="A" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 259.0
+margin_right = 198.0
+margin_bottom = 281.0
+custom_fonts/font = ExtResource( 2 )
+text = "A:"
+
+[node name="AEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 256.0
+margin_right = 268.0
+margin_bottom = 284.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="B" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 291.0
+margin_right = 198.0
+margin_bottom = 313.0
+custom_fonts/font = ExtResource( 2 )
+text = "B:"
+
+[node name="BEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 288.0
+margin_right = 268.0
+margin_bottom = 316.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="ExtraStars" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 323.0
+margin_right = 198.0
+margin_bottom = 345.0
+custom_fonts/font = ExtResource( 2 )
+text = "Extra Stars:"
+
+[node name="ExtraStarsEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 320.0
+margin_right = 268.0
+margin_bottom = 348.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="DensityGrid" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 355.0
+margin_right = 198.0
+margin_bottom = 377.0
+custom_fonts/font = ExtResource( 2 )
+text = "Density Grid:"
+
+[node name="DensityGridEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 352.0
+margin_right = 268.0
+margin_bottom = 380.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="CloudsMult" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 387.0
+margin_right = 198.0
+margin_bottom = 409.0
+custom_fonts/font = ExtResource( 2 )
+text = "Clouds Mult:"
+
+[node name="CloudsMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 384.0
+margin_right = 268.0
+margin_bottom = 412.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+
+[node name="Blank" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_left = 272.0
+margin_top = 248.0
+margin_right = 984.0
+margin_bottom = 262.0
+size_flags_horizontal = 3
+
+[node name="GalaxyBox" type="Node2D" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+position = Vector2( 450, 10 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Galaxy" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]

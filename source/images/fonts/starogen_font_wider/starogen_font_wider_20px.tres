@@ -2,7 +2,6 @@
 
 [ext_resource path="res://images/fonts/starogen_font_wider/starogen-font-wider.ttf" type="DynamicFontData" id=1]
 
-
 [resource]
 size = 20
 outline_size = 1
