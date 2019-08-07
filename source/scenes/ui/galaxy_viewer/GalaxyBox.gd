@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends ViewportContainer
+extends PanelContainer
 
 var width = 500
 
@@ -29,9 +29,11 @@ func _input(event):
 func on_click():
 	print("Click")
 	print(get_global_mouse_position())
-	print(get_global_transform().origin)
-	var x = get_global_mouse_position().x - get_global_transform().origin.x
-	var y = get_global_mouse_position().y - get_global_transform().origin.y
+	print($Galaxy/Sprite.get_global_transform().origin)
+	#var x = get_global_mouse_position().x - ($Galaxy/Sprite.get_global_transform().origin.x * (width / ($Galaxy/Sprite.scale.x * width)))
+	#var y = get_global_mouse_position().y - ($Galaxy/Sprite.get_global_transform().origin.y * (width / ($Galaxy/Sprite.scale.y * width)))
+	var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) * (width / ($Galaxy/Sprite.scale.x * width))
+	var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) * (width / ($Galaxy/Sprite.scale.y * width))
 	print("x: " + str(x) + "  y: " + str(y))
 	if (x < width and y < width and x >= 0 and y >= 0):
 		print("Contained")

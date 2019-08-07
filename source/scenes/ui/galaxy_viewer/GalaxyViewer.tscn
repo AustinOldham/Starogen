@@ -276,15 +276,14 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/selection_color = Color( 0, 0, 1, 1 )
 custom_colors/cursor_color = Color( 1, 1, 1, 1 )
 
-[node name="GalaxyBox" type="ViewportContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="GalaxyBox" type="PanelContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 margin_left = 290.0
 margin_right = 984.0
 margin_bottom = 510.0
+rect_clip_content = true
 script = ExtResource( 3 )
 
-[node name="Galaxy" type="Viewport" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]
-handle_input_locally = false
-render_target_update_mode = 3
+[node name="Galaxy" type="Node2D" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource( 5 )
