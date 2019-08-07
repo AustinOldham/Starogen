@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_30px.tres" type="DynamicFont" id=1]
 [ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/ui/galaxy_viewer/GalaxyBox.gd" type="Script" id=3]
 [ext_resource path="res://scenes/celestial_objects/galaxy/Galaxy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/ui/galaxy_viewer/Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=5]
+[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -14,6 +16,15 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 corner_detail = 1
 
@@ -281,9 +292,21 @@ margin_left = 290.0
 margin_right = 984.0
 margin_bottom = 510.0
 rect_clip_content = true
+custom_styles/panel = SubResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Galaxy" type="Node2D" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/MarginContainer"]
+editor/display_folded = true
+layer = -20
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/MarginContainer/ParallaxBackground"]
+motion_mirroring = Vector2( 500, 500 )
 script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 2
+script = ExtResource( 7 )
