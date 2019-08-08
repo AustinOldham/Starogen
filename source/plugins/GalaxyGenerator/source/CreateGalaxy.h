@@ -19,6 +19,7 @@
 #define CREATEGALAXY_H
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <cmath>
 #include <fstream>
@@ -40,7 +41,9 @@ class CreateGalaxy {
 		std::vector<std::vector<double>> densityMap;
 		std::vector<std::vector<double>> clouds;
 
+		std::vector<std::vector<std::string>> starFile;
 		std::unordered_map<std::string, int> cmap;
+		std::vector<std::string> numToString;
 		std::unordered_map<std::string, double> starChance;
 		std::vector<std::vector<float>> colors;
 
@@ -88,7 +91,10 @@ class CreateGalaxy {
 		void printClouds(const std::vector<std::vector<double>> myVector, std::string fileName);
 		void printColorPalette(std::string fileName);
 		void initializeContainers();
+		std::vector<std::vector<std::string>> readFile(std::string fileName);
+		std::vector<std::string> splitString(const std::string &s, char delimiter);
 		std::unordered_map<std::string, int> getIDMap();
+		std::vector<std::string> getNumToString();
 		std::unordered_map<std::string, double> getProbabilities();
 		std::vector<std::vector<float>> getColors();
 

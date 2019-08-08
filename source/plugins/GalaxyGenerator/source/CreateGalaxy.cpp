@@ -593,48 +593,69 @@ void CreateGalaxy::printColorPalette(string fileName) {
 }
 
 void CreateGalaxy::initializeContainers() {
+	starFile = readFile("config/galaxy_stars.txt");
+	for (int i = 0; i < starFile.size(); i++) {
+		cout << starFile[i][0] << endl;
+	}
 	cmap = getIDMap();
+	numToString = getNumToString();
 	starChance = getProbabilities();
 	colors = getColors();
 }
 
+vector<vector<string>> CreateGalaxy::readFile(string fileName) {
+	vector<vector<string>> myVector;
+	std::ifstream myFile(fileName);
+	if (myFile.is_open()) {
+		string line;
+		while (std::getline(myFile, line)) {
+			if (line.empty()) {
+				continue;
+			}
+
+			if (line.at(0) == '#') {
+				continue;
+			}
+			myVector.push_back(splitString(line, '\t'));
+		}
+		myFile.close();
+	}
+	return myVector;
+}
+
+vector<string> CreateGalaxy::splitString(const string &s, char delimiter) {
+	vector<string> result;
+	std::stringstream ss(s);
+	string item;
+
+	while (getline(ss, item, delimiter)) {
+		result.push_back(item);
+	}
+
+	return result;
+}
+
 unordered_map<string, int> CreateGalaxy::getIDMap() {
-	unordered_map<string, int> myIDMap({
-		{"blank", 0},
-		{"type_a", 1},
-		{"type_b", 2},
-		{"type_c", 3},
-		{"type_f", 4},
-		{"type_g", 5},
-		{"type_k", 6},
-		{"type_l", 7},
-		{"type_m", 8},
-		{"type_o", 9},
-		{"type_s", 10},
-		{"type_t", 11},
-		{"type_w", 12},
-		{"type_y", 13}
-	});
+	unordered_map<string, int> myIDMap;
+	for (int i = 0; i < starFile.size(); i++) {
+		myIDMap[starFile[i][0]] = i;
+	}
 	return myIDMap;
 }
 
+vector<string> CreateGalaxy::getNumToString() {
+	vector<string> myStrings;
+	for (int i = 0; i < starFile.size(); i++) {
+		myStrings.push_back(starFile[i][0]);
+	}
+	return myStrings;
+}
+
 unordered_map<string, double> CreateGalaxy::getProbabilities() {
-	unordered_map<string, double> myProbabilities({
-		{"blank", 0.0},
-		{"type_a", 1.0},
-		{"type_b", 2.0},
-		{"type_c", 0.0},
-		{"type_f", 2.0},
-		{"type_g", 1.0},
-		{"type_k", 1.0},
-		{"type_l", 0.0},
-		{"type_m", 1.0},
-		{"type_o", 0.2},
-		{"type_s", 0.0},
-		{"type_t", 0.0},
-		{"type_w", 0.0},
-		{"type_y", 0.0}
-	});
+	unordered_map<string, double> myProbabilities;
+	for (int i = 0; i < starFile.size(); i++) {
+		myProbabilities[starFile[i][0]] = std::stod(starFile[i][1]);
+	}
 
 	double probabilitySum = 0.0;
 
@@ -653,15 +674,10 @@ vector<vector<float>> CreateGalaxy::getColors() {
 	// Each star will be assigned a random value that slightly alters the color of them when visited by the player
 
 	vector<vector<float>> myColors(cmap.size(), vector<float>(4, 0));
-	// myColors[cmap.at("x")] = {0.0f, 0.0f, 0.0f, 1.0f};
-	myColors[cmap.at("blank")] = {0.0f, 0.0f, 0.0f, 0.0f};
-	myColors[cmap.at("type_o")] = {0.0f, 0.0f, 1.0f, 1.0f};
-	myColors[cmap.at("type_b")] = {0.682f, 0.737f, 0.976f, 1.0f};
-	myColors[cmap.at("type_a")] = {1.0f, 1.0f, 1.0f, 1.0f};
-	myColors[cmap.at("type_f")] = {1.0f, 1.0f, 0.760f, 1.0f};
-	myColors[cmap.at("type_g")] = {0.949f, 0.949f, 0.149f, 1.0f};
-	myColors[cmap.at("type_k")] = {0.949f, 0.419f, 0.203f, 1.0f};
-	myColors[cmap.at("type_m")] = {0.952f, 0.113f, 0.215f, 1.0f};
+
+	for (int i = 0; i < starFile.size(); i++) {
+		myColors[cmap.at(starFile[i][0])] = {std::stof(starFile[i][2]), std::stof(starFile[i][3]), std::stof(starFile[i][4]), std::stof(starFile[i][5])};
+	}
 
 	return myColors;
 }

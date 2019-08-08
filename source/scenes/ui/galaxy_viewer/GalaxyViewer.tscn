@@ -295,7 +295,7 @@ rect_clip_content = true
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 3 )
 
-[node name="Galaxy" type="Node2D" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]
+[node name="Galaxy" parent="CanvasLayer/MarginContainer/HBoxContainer/GalaxyBox" instance=ExtResource( 4 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/MarginContainer"]
 editor/display_folded = true

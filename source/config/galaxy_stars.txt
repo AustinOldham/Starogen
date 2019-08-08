@@ -1,0 +1,88 @@
+#wd: white dwarf
+
+#name	chance	R	G	B	A
+
+blank	0.0	0.0	0.0	0.0	0.0
+
+
+#A-Type
+
+white	1.0	1.0	1.0	1.0	1.0
+
+
+#B-Type
+
+blue_white	2.0	0.682	0.737	0.976	1.0
+
+
+#C-Type
+
+type_c	0.0	0.0	0.0	0.0	0.0
+
+
+#F-Type
+
+yellow_white	2.0	1.0	1.0	0.760	1.0
+
+
+#G-Type
+
+yellow	1.0	0.949	0.949	0.149	1.0
+yellow_dwarf	1.0	0.949	0.949	0.149	1.0
+yellow_supergiant	1.0	0.949	0.949	0.149	1.0
+yellow_hypergiant	1.0	0.949	0.949	0.149	1.0
+
+
+#K-Type
+
+orange	1.0	0.949	0.419	0.203	1.0
+orange_dwarf	1.0	0.949	0.419	0.203	1.0
+
+
+#L-Type
+
+type_l	0.0	0.0	0.0	0.0	0.0
+
+
+#M-Type
+
+red	1.0	0.952	0.113	0.215	1.0
+red_dwarf	1.0	0.952	0.113	0.215	1.0
+red_supergiant	1.0	0.952	0.113	0.215	1.0
+red_hypergiant	1.0	0.952	0.113	0.215	1.0
+
+
+#O-Type
+
+blue	0.2	0.0	0.0	1.0	1.0
+blue_wd	0.2	0.0	0.0	1.0	1.0
+blue_dwarf	0.2	0.0	0.0	1.0	1.0
+blue_giant	0.2	0.0	0.0	1.0	1.0
+blue_supergiant	0.2	0.0	0.0	1.0	1.0
+blue_hypergiant	0.2	0.0	0.0	1.0	1.0
+blue_sdO	0.0	0.0	0.0	1.0	1.0
+
+
+#S-Type
+
+type_s	0.0	0.0	0.0	0.0	0.0
+
+
+#T-Type
+
+type_t	0.0	0.0	0.0	0.0	0.0
+
+
+#W-Type
+
+type_w	0.0	0.0	0.0	0.0	0.0
+
+
+#Y-Type
+
+type_y	0.0	0.0	0.0	0.0	0.0
+
+#Other stars
+
+
+
