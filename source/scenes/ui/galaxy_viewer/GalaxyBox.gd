@@ -30,10 +30,6 @@ func on_click():
 	print("Click")
 	print(get_global_mouse_position())
 	print($Galaxy/Sprite.get_global_transform().origin)
-	#var x = get_global_mouse_position().x - ($Galaxy/Sprite.get_global_transform().origin.x * (width / ($Galaxy/Sprite.scale.x * width)))
-	#var y = get_global_mouse_position().y - ($Galaxy/Sprite.get_global_transform().origin.y * (width / ($Galaxy/Sprite.scale.y * width)))
-	#var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) * (width / ($Galaxy/Sprite.scale.x * width))
-	#var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) * (width / ($Galaxy/Sprite.scale.y * width))
 	var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) / $Galaxy/Sprite.scale.x
 	var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) / $Galaxy/Sprite.scale.y
 	$Galaxy/Sprite.localX = x

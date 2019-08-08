@@ -19,16 +19,30 @@ extends Sprite
 
 onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
+signal invalid_check(type)
+
 var localX = -1
 var localY = -1
 
+var is_invalid = false
+var name_input = ""
+var seed_input = ""
+var pixels = 500
+var clouds_mult = -1.0
+var clouds_frequency = 0.05
+var arms = -1
+var radial_distance_mult = -1.0
+var cluster_stddev = -1.0
+var density = -1.0
+var a = 0.1
+var b = 0.3
+var extra_stars = -1
+var density_grid = -1
+
+
 func _ready():
-	randomize()
-	galaxy_generator.generateGalaxy("testName", "testSeed", 500, 0.05, -1, -1.0, -1.0, -1.0, 0.1, 0.3, -1, -1, -1.0)
-	self.texture = galaxy_generator.getGalaxy()
-	#self.texture = load("res://images/application/starogen_logo_v2_256px.png")
-	#self.scale.x = 5
-	#self.scale.y = 5
+	pass
+
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -74,3 +88,122 @@ func _draw():
 		var rect5 = Rect2(Vector2(roundX, roundY), Vector2(1.0, 1.0))
 		draw_rect(rect5, Color(1.0, 1.0, 1.0, 1.0), false)
 		print(scale)
+
+
+func _check_input_float(text, type, default, less_than, invalid_num):
+	if (text.empty()):
+		emit_signal("invalid_check", "")
+		return default
+	elif (text.is_valid_float()):
+		if (less_than):
+			if (float(text) <= invalid_num):
+				emit_signal("invalid_check", type)
+				return default
+			else:
+				emit_signal("invalid_check", "")
+				return float(text)
+		else:
+			if (float(text) >= invalid_num):
+				emit_signal("invalid_check", type)
+				return default
+			else:
+				emit_signal("invalid_check", "")
+				return float(text)
+	else:
+		emit_signal("invalid_check", type)
+		return default
+
+func _check_input_int(text, type, default, less_than, invalid_num):
+	if (text.empty()):
+		emit_signal("invalid_check", "")
+		return default
+	elif (text.is_valid_float()):
+		if (less_than):
+			if (int(text) <= invalid_num):
+				emit_signal("invalid_check", type)
+				return default
+			else:
+				emit_signal("invalid_check", "")
+				return int(text)
+		else:
+			if (int(text) >= invalid_num):
+				emit_signal("invalid_check", type)
+				return default
+			else:
+				emit_signal("invalid_check", "")
+				return int(text)
+	else:
+		emit_signal("invalid_check", type)
+		return default
+
+func _on_CloudsMultEdit_text_changed(new_text):
+	clouds_mult = _check_input_float(new_text, "Clouds Mult", -1.0, true, 0.0)
+
+
+
+func _on_NameEdit_text_changed(new_text):
+	name_input = new_text
+
+
+func _on_SeedEdit_text_changed(new_text):
+	seed_input = new_text
+
+
+func _on_SizeEdit_text_changed(new_text):
+	pixels = _check_input_int(new_text, "Size", 500, true, 0)
+
+
+func _on_CloudsFrequencyEdit_text_changed(new_text):
+	clouds_frequency = _check_input_float(new_text, "Clouds Frequency", 0.05, true, 0.0)
+
+
+func _on_ArmsEdit_text_changed(new_text):
+	arms = _check_input_int(new_text, "Arms", -1, true, 0)
+
+
+func _on_RadialDistanceMultEdit_text_changed(new_text):
+	radial_distance_mult = _check_input_float(new_text, "Radial Distance Mult", -1.0, true, 0.0)
+
+
+func _on_ClusterStddevEdit_text_changed(new_text):
+	cluster_stddev = _check_input_float(new_text, "Cluster Stddev", -1.0, true, 0.0)
+
+
+func _on_DensityEdit_text_changed(new_text):
+	density = _check_input_float(new_text, "Density", -1.0, true, 0.0)
+
+
+func _on_AEdit_text_changed(new_text):
+	if (new_text.is_valid_float()):
+		a = float(new_text)
+		emit_signal("invalid_check", "")
+	else:
+		a = 0.1
+		emit_signal("invalid_check", "A")
+
+
+func _on_BEdit_text_changed(new_text):
+	if (new_text.is_valid_float()):
+		b = float(new_text)
+		emit_signal("invalid_check", "")
+	else:
+		b = 0.3
+		emit_signal("invalid_check", "B")
+
+
+func _on_ExtraStarsEdit_item_selected(ID):
+	if (ID == 1):
+		extra_stars = 1
+	elif (ID == 2):
+		extra_stars = 0
+	else:
+		extra_stars = -1
+
+
+func _on_DensityGridEdit_text_changed(new_text):
+	density_grid = _check_input_int(new_text, "Density Grid", -1, true, 0)
+
+
+func _on_Generate_pressed():
+	galaxy_generator.generateGalaxy(name_input, seed_input, pixels, clouds_frequency, arms, radial_distance_mult, cluster_stddev, density, a, b, extra_stars, density_grid, clouds_mult)
+	self.texture = galaxy_generator.getGalaxy()
