@@ -29,6 +29,12 @@
 #include <cassert>
 #include <functional>
 
+
+#include <iomanip>
+// delete this later
+
+
+#include <nlohmann/json.hpp>
 #include "RandClass/RandClass.h"
 #include "FastNoise/FastNoise.h"
 
@@ -37,15 +43,12 @@ class CreateGalaxy {
 		RandClass starClusterGen;
 		FastNoise cloudNoise;
 
+		struct StarInfo;
+		std::vector<StarInfo> starList;
+
 		std::vector<std::vector<int>> myGalaxy;
 		std::vector<std::vector<double>> densityMap;
 		std::vector<std::vector<double>> clouds;
-
-		std::vector<std::vector<std::string>> starFile;
-		std::unordered_map<std::string, int> cmap;
-		std::vector<std::string> numToString;
-		std::unordered_map<std::string, double> starChance;
-		std::vector<std::vector<float>> colors;
 
 		std::string name;
 		std::string seed;
@@ -85,18 +88,19 @@ class CreateGalaxy {
 		double logSpiralY(double t, double theta, double mult);
 		bool isFinished(std::vector<bool> finished);
 		double radialDistance(int x, int y, double centerX, double centerY);
-		void printWhiteGalaxy(const std::vector<std::vector<int>> myVector, std::string fileName);
-		void printGalaxy(const std::vector<std::vector<int>> myVector, std::string fileName);
-		void printDensityMap(const std::vector<std::vector<double>> myVector, std::string fileName);
-		void printClouds(const std::vector<std::vector<double>> myVector, std::string fileName);
-		void printColorPalette(std::string fileName);
+		//void printWhiteGalaxy(const std::vector<std::vector<int>> myVector, std::string fileName);
+		//void printGalaxy(const std::vector<std::vector<int>> myVector, std::string fileName);
+		//void printDensityMap(const std::vector<std::vector<double>> myVector, std::string fileName);
+		//void printClouds(const std::vector<std::vector<double>> myVector, std::string fileName);
+		//void printColorPalette(std::string fileName);
 		void initializeContainers();
-		std::vector<std::vector<std::string>> readFile(std::string fileName);
-		std::vector<std::string> splitString(const std::string &s, char delimiter);
-		std::unordered_map<std::string, int> getIDMap();
-		std::vector<std::string> getNumToString();
-		std::unordered_map<std::string, double> getProbabilities();
-		std::vector<std::vector<float>> getColors();
+		std::vector<StarInfo> readStarFile(std::string fileName);
+		//std::vector<std::vector<std::string>> readFile(std::string fileName);
+		//std::vector<std::string> splitString(const std::string &s, char delimiter);
+		//std::unordered_map<std::string, int> getIDMap();
+		//std::vector<std::string> getNumToString();
+		void getProbabilities();
+		//std::vector<std::vector<float>> getColors();
 
 	public:
 		const double PI = std::atan(1.0)*4;
@@ -112,6 +116,20 @@ class CreateGalaxy {
 		float getBlue(int index);
 		float getAlpha(int index);
 		int getPixels();
+};
+
+struct CreateGalaxy::StarInfo {
+	std::string name;
+	std::string type;
+
+	// int id;
+	double chance;
+	double adjustedChance;
+
+	float red;
+	float green;
+	float blue;
+	float alpha;
 };
 
 #endif  // CREATEGALAXY_H
