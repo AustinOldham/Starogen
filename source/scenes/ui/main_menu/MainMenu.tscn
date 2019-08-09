@@ -127,7 +127,7 @@ text = "© 2019 Austin Oldham. All rights reserved."
 align = 2
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="MarginContainer"]
-editor/display_folded = true
+scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="MarginContainer/ParallaxBackground"]
 motion_mirroring = Vector2( 500, 500 )

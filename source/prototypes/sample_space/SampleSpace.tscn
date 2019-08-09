@@ -11,6 +11,7 @@
 position = Vector2( 400, 210 )
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
+scroll_ignore_camera_zoom = true
 
 [node name="PlayerShip" parent="." instance=ExtResource( 3 )]
 
