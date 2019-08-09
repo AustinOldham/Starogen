@@ -22,26 +22,34 @@ onready var planet_generator = preload("res://plugins/PlanetGenerator/bin/Planet
 func _ready():
 	randomize()
 	var seed_input = int(rand_range(0, 2147483647))
-	var temp = 123
-	self.texture = planet_generator.getPlanet(temp, 100)
+	#seed_input = 2078663171
+	self.texture = planet_generator.getPlanet(seed_input, 100)
 	scale = Vector2(5, 5)
 	_create_collision_polygon()
-	#self.scale.x = 5
-	#self.scale.y = 5
+
 
 func _create_collision_polygon():
+	#NOTE: This is probably very inefficient and was done this way due to simplicity. I might write an optimized version if performance becomes an issue.
 	var bm = BitMap.new()
 	bm.create_from_image_alpha(texture.get_data())
 	var rect = Rect2(position.x, position.y, texture.get_width(), texture.get_height())
-	#print(rect)
-	#bm.grow_mask(100, rect)
 	var my_array = bm.opaque_to_polygons(rect, 0.0001)
-	#print(my_array)
 	var my_polygon = Polygon2D.new()
 	my_polygon.set_polygons(my_array)
-	#print(my_polygon.polygons)
-	get_parent().get_node("CollisionPolygon2D").set_polygon(my_polygon.polygons[0])
-	#print(get_parent().get_node("CollisionPolygon2D").polygon)
-	#get_parent().get_node("CollisionPolygon2D").update()
-	get_parent().get_node("CollisionPolygon2D").scale = scale
-	
+	for i in range(my_polygon.polygons.size()):
+		var my_collision = CollisionPolygon2D.new()
+		my_collision.set_polygon(my_polygon.polygons[i])
+		my_collision.scale = scale
+		get_parent().call_deferred("add_child", my_collision)
+
+func _generate():
+	var seed_input = int(rand_range(0, 2147483647))
+	print(seed_input)
+	self.texture = planet_generator.getPlanet(seed_input, 100)	
+	_create_collision_polygon()
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.is_pressed():
+			#self._generate()
+			pass

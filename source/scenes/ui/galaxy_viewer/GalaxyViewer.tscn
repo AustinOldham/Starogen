@@ -51,6 +51,7 @@ custom_fonts/font = ExtResource( 1 )
 text = "Settings"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer"]
+editor/display_folded = true
 margin_top = 37.0
 margin_right = 300.0
 margin_bottom = 425.0
