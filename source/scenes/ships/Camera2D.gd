@@ -12,7 +12,7 @@ func _input(event):
 				zoom_camera(1)
 
 func zoom_camera(direction):
-	print(global_scale)
+	#print(global_scale)
 	var temp = zoom + Vector2(0.1, 0.1) * direction
 	if (temp.x <= 0.01 or temp.y <= 0.01):
 		pass

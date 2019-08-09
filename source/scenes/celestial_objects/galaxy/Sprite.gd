@@ -94,10 +94,13 @@ func _draw():
 func on_click():
 	print("Click")
 	print(get_global_mouse_position())
+	print(get_local_mouse_position())
 	print(get_global_transform().origin)
 	print(get_transform().origin)
-	var localX = (get_global_mouse_position().x - get_global_transform().origin.x) / scale.x
-	var localY = (get_global_mouse_position().y - get_global_transform().origin.y) / scale.y
+	#var localX = (get_global_mouse_position().x - get_global_transform().origin.x) / scale.x
+	#var localY = (get_global_mouse_position().y - get_global_transform().origin.y) / scale.y
+	var localX = get_local_mouse_position().x
+	var localY = get_local_mouse_position().y
 	print("sprite x: " + str(localX) + "  sprite y: " + str(localY))
 	if (localX < last_width and localY < last_width and localX >= 0 and localY >= 0):
 		print("Contained")
@@ -234,6 +237,8 @@ func _on_Generate_pressed():
 	galaxy_generator.generateGalaxy(name_input, seed_input, pixels, clouds_frequency, arms, radial_distance_mult, cluster_stddev, density, a, b, extra_stars, density_grid, clouds_mult)
 	self.texture = galaxy_generator.getGalaxy()
 	print("Generation complete")
+	print(get_global_transform().x)
+	print(get_global_transform().y)
 
 
 func _on_Recenter_pressed():
