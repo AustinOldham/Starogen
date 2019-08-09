@@ -22,8 +22,21 @@ onready var planet_generator = preload("res://plugins/PlanetGenerator/bin/Planet
 func _ready():
 	randomize()
 	self.texture = planet_generator.getPlanet(int(rand_range(0, 2147483647)), 100)
-	self.scale.x = 5
-	self.scale.y = 5
+	_create_collision_polygon()
+	#self.scale.x = 5
+	#self.scale.y = 5
 
-#func _process(delta):
-#	pass
+func _create_collision_polygon():
+	var bm = BitMap.new()
+	bm.create_from_image_alpha(texture.get_data())
+	var rect = Rect2(position.x, position.y, texture.get_width(), texture.get_height())
+	print(rect)
+	#bm.grow_mask(100, rect)
+	var my_array = bm.opaque_to_polygons(rect)
+	print(my_array)
+	var my_polygon = Polygon2D.new()
+	my_polygon.set_polygons(my_array)
+	print(my_polygon.polygons)
+	get_parent().get_node("CollisionPolygon2D").set_polygon(my_polygon.polygons[0])
+	print(get_parent().get_node("CollisionPolygon2D").polygon)
+	#get_parent().get_node("CollisionPolygon2D").update()

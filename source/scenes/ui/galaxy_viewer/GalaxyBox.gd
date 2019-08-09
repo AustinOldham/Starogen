@@ -22,22 +22,7 @@ var width = 500
 func _ready():
 	pass
 
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
-		self.on_click()
 
-func on_click():
-	print("Click")
-	print(get_global_mouse_position())
-	print($Galaxy/Sprite.get_global_transform().origin)
-	var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) / $Galaxy/Sprite.scale.x
-	var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) / $Galaxy/Sprite.scale.y
-	$Galaxy/Sprite.localX = x
-	$Galaxy/Sprite.localY = y
-	print("sprite x: " + str(x) + "  sprite y: " + str(y))
-	if (x < width and y < width and x >= 0 and y >= 0):
-		print("Contained")
-		$Galaxy/Sprite.update()
 
 
 
