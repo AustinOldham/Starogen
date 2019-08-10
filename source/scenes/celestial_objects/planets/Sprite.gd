@@ -25,8 +25,10 @@ func _ready():
 	#seed_input = 2078663171
 	self.texture = planet_generator.getPlanet(seed_input, 100)
 	#self.texture = load("res://images/application/starogen_logo_v2_256px.png")
-	scale = Vector2(5, 5) #5 normally
+	#scale = Vector2(50, 50) #5 normally
+	scale = Vector2(5, 5)
 	_create_collision_polygon()
+	get_parent().get_node("Area2D").scale = scale
 
 
 func _create_collision_polygon():

@@ -17,6 +17,12 @@
 
 extends Ship
 
+var gravity_array = []
+
+func _ready():
+	#add_to_group("movable")
+	pass
+
 func _physics_process(delta):
 	if (Input.is_action_pressed("ui_left")):
 		rotation_degrees -= rotation_speed * delta
@@ -24,13 +30,37 @@ func _physics_process(delta):
 		rotation_degrees += rotation_speed * delta
 
 	var new_direction = Vector2(1,0).rotated(rotation)
+	
 
 	if (Input.is_action_pressed("ui_up")):
 		current_direction = current_direction.linear_interpolate(new_direction, acceleration)
 	elif (Input.is_action_pressed("ui_down")):
 		current_direction = current_direction.linear_interpolate(-new_direction, acceleration)
 	else:
-		current_direction = current_direction.linear_interpolate(Vector2(0,0), deceleration)
+		pass
+		#current_direction = current_direction.linear_interpolate(Vector2(0,0), deceleration)
+
+	current_direction = _apply_gravity(current_direction)
+
 
 	move_and_collide(current_direction * speed * delta)
+	#move_and_slide(current_direction * speed)
 
+func _apply_gravity(current_direction):
+	#print("applied gravity")
+	for i in range(gravity_array.size()):
+		var new_gravity = get_global_transform().origin.direction_to(gravity_array[i].get_global_transform().origin)
+		current_direction = current_direction.linear_interpolate(new_gravity, 0.01)
+	return current_direction
+
+func _set_gravity(the_planet):
+	gravity_array.append(the_planet)
+	print("set gravity")
+	#print(body_position)
+	#print(get_global_transform().origin)
+	#gravity_array[index] = body_position
+
+func _remove_gravity(the_planet):
+	gravity_array.erase(the_planet)
+	print("remove gravity")
+	#gravity_array[index] = Vector2(0, 0)
