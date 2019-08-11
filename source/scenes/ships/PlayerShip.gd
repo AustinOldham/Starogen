@@ -34,8 +34,8 @@ func _physics_process(delta):
 	#Add option to toggle between the += and linear_interpolate versions
 
 	if (Input.is_action_pressed("ui_up")):
-		#current_direction = current_direction.linear_interpolate(new_direction, acceleration)
-		current_direction += (new_direction * acceleration)
+		current_direction = current_direction.linear_interpolate(new_direction, acceleration)
+		#current_direction += (new_direction * acceleration)
 	elif (Input.is_action_pressed("ui_down")):
 		current_direction = current_direction.linear_interpolate(-new_direction, acceleration)
 	else:
@@ -83,8 +83,8 @@ func _apply_gravity(current_direction):
 	#print("applied gravity")
 	for i in range(gravity_array.size()):
 		var new_gravity = get_global_transform().origin.direction_to(gravity_array[i].get_global_transform().origin)
-		#current_direction = current_direction.linear_interpolate(new_gravity, 0.01)
-		current_direction += (new_gravity * 0.01)
+		current_direction = current_direction.linear_interpolate(new_gravity, 0.01)
+		#current_direction += (new_gravity * 0.01)
 	return current_direction
 
 func _set_gravity(the_planet):
