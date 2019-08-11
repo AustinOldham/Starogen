@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite",
+"class": "CelestialSprite",
+"language": "GDScript",
+"path": "res://scenes/celestial_objects/CelestialSprite.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Ship",
 "language": "GDScript",
 "path": "res://scenes/ships/Ship.gd"
 } ]
 _global_script_class_icons={
+"CelestialSprite": "",
 "Ship": ""
 }
 
