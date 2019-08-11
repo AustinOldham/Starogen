@@ -84,7 +84,7 @@ func _apply_gravity(current_direction):
 	for i in range(gravity_array.size()):
 		var new_gravity = get_global_transform().origin.direction_to(gravity_array[i].get_global_transform().origin)
 		#current_direction = current_direction.linear_interpolate(new_gravity, 0.01)
-		#current_direction += (new_gravity * 0.01)
+		current_direction += (new_gravity * 0.01)
 	return current_direction
 
 func _set_gravity(the_planet):

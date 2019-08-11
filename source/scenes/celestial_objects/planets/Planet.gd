@@ -7,7 +7,7 @@ func _ready():
 
 
 func _process(delta):
-	#rotation_degrees += 2.0 * delta
+	rotation_degrees += 2.0 * delta
 	pass
 
 func _on_Area2D_body_enter(body):
