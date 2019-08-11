@@ -31,14 +31,24 @@ func _create_collision_polygon():
 				print("Duplicate at: ", j)
 				print("Count: ", count)
 				duplicates.append(j)
-		#var duplicates_offset
-
+		var duplicates_offset = 0
 		for j in range(duplicates.size() / 2):
+			var new_collision_points = []
 			for k in range(duplicates[1] - duplicates[0]):
-				print(temp_arr[duplicates[0]])
+				new_collision_points.append(temp_arr[duplicates[0]])
 				temp_arr.remove(duplicates[0])
+			duplicates_offset += duplicates[1] - duplicates[0]
+			duplicates.remove(0)
+			duplicates.remove(0)
+			var new_collision = CollisionPolygon2D.new()
+			new_collision.set_polygon(PoolVector2Array(new_collision_points))
+			new_collision.position -= Vector2((self.texture.get_width() / 2) + offsetX, (self.texture.get_height() / 2) + offsetY) * self.scale.x
+			new_collision.scale = self.scale
+			get_parent().call_deferred("add_child", new_collision)
 		var new_arr = PoolVector2Array(temp_arr)
 		my_collision.set_polygon(new_arr)
+		#print(my_array)
+		#my_collision.set_polygon(PoolVector2Array(my_array[i]))
 		my_collision.position -= Vector2((self.texture.get_width() / 2) + offsetX, (self.texture.get_height() / 2) + offsetY) * self.scale.x
 		my_collision.scale = self.scale
 		get_parent().call_deferred("add_child", my_collision)
