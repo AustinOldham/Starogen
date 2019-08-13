@@ -10,6 +10,8 @@ func _input(event):
 				zoom_camera(-1)
 			if event.button_index == BUTTON_WHEEL_DOWN:
 				zoom_camera(1)
+		if event.button_index == BUTTON_RIGHT and event.is_pressed():
+			zoom += Vector2(10, 10)
 
 func zoom_camera(direction):
 	#print(global_scale)

@@ -40,7 +40,7 @@ func _physics_process(delta):
 		current_direction = current_direction.linear_interpolate(-new_direction, acceleration)
 	else:
 		pass
-		#current_direction = current_direction.linear_interpolate(Vector2(0,0), deceleration)
+		current_direction = current_direction.linear_interpolate(Vector2(0,0), deceleration)
 
 	current_direction = _apply_gravity(current_direction)
 	#speed = _apply_rotation(speed)

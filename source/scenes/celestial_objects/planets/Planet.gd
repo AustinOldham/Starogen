@@ -9,15 +9,16 @@ func _ready():
 	size = 100
 	randomize()
 	seed_input = int(rand_range(0, 2147483647))
+	#scale = Vector2(2, 2)
 	#scale = Vector2(5, 5)
 	#scale = Vector2(20, 20)
-	#scale = Vector2(100, 100)
+	scale = Vector2(100, 100)
 	#scale = Vector2(50, 50)
 	#scale = Vector2(25, 25)
 	_generate()
 	get_node("GravitationalField/CollisionShape2D").shape.radius = size
-	get_node("GravitationalField").scale = scale
-	$Sprite.scale = scale
+	#get_node("GravitationalField").scale = scale
+	#$Sprite.scale = scale
 	_add_moon()
 	#print(get_child_count())
 	#print("Planet")
@@ -25,9 +26,10 @@ func _ready():
 func _add_moon():
 	print("Moon creation")
 	var some_moon = Moon.instance()
+	#some_moon.scale = scale
 	add_child(some_moon)
-	some_moon.orbit_distance = 200 * scale.x
-	some_moon.orbit_speed = 10.0
+	some_moon.orbit_distance = size# * scale.x
+	some_moon.orbit_speed = 0.005
 	some_moon.is_working()
 	orbiting_bodies.append(some_moon)
 	print("Moon path: ", some_moon.get_path())
@@ -47,9 +49,10 @@ func _generate():
 
 func _calculate_orbits(delta):
 	for body in orbiting_bodies:
-		var x = body.orbit_distance * cos(delta * body.orbit_speed)# + get_global_position().x
-		var y = body.orbit_distance * sin(delta * body.orbit_speed)# + get_global_position().y
+		var x = body.orbit_distance * cos(body.orbit_angle)# + get_global_position().x
+		var y = body.orbit_distance * sin(body.orbit_angle)# + get_global_position().y
 		body.set_position(Vector2(x, y))
+		body.orbit_angle = fmod(body.orbit_angle + (delta * body.orbit_speed), 2.0 * PI)
 
 func _on_GravitationalField_body_enter(body):
 	if (body.has_method("_set_gravity")):

@@ -14,8 +14,8 @@ func _ready():
 	#scale = Vector2(50, 50)
 	_generate()
 	get_node("GravitationalField/CollisionShape2D").shape.radius = size
-	get_node("GravitationalField").scale = scale
-	$Sprite.scale = scale
+	#get_node("GravitationalField").scale = scale
+	#$Sprite.scale = scale
 
 func adjust_scale(new_scale):
 	pass
@@ -30,6 +30,8 @@ func _generate():
 	$Sprite.texture = planet_generator.getPlanet(seed_input, size)	
 	_create_collision_polygon()
 
+func _calculate_orbits(delta):
+	pass
 
 func _on_GravitationalField_body_enter(body):
 	if (body.has_method("_set_gravity")):
@@ -41,3 +43,9 @@ func _on_GravitationalField_body_exit(body):
 
 func is_working():
 	print("Moon is working")
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.is_pressed():
+			print("Mouse Position: ", get_global_mouse_position())
+			print("Distance: ", get_global_mouse_position().distance_to(global_position))

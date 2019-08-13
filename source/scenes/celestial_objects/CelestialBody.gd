@@ -7,6 +7,7 @@ var seed_input
 var orbiting_bodies = []
 var orbit_distance
 var orbit_speed
+var orbit_angle = 0
 
 
 func _ready():
@@ -46,11 +47,11 @@ func _create_collision_polygon():
 			var new_collision = CollisionPolygon2D.new()
 			#new_collision.set_build_mode(1)
 			new_collision.set_polygon(PoolVector2Array(new_collision_points))
-			new_collision.position -= Vector2(($Sprite.texture.get_width() / 2) + offsetX, ($Sprite.texture.get_height() / 2) + offsetY) * self.scale.x
-			new_collision.scale = self.scale
+			new_collision.position -= Vector2(($Sprite.texture.get_width() / 2) + offsetX, ($Sprite.texture.get_height() / 2) + offsetY)# * self.scale.x
+			#new_collision.scale = self.scale
 			call_deferred("add_child", new_collision)
 		var new_arr = PoolVector2Array(temp_arr)
 		my_collision.set_polygon(new_arr)
-		my_collision.position -= Vector2(($Sprite.texture.get_width() / 2) + offsetX, ($Sprite.texture.get_height() / 2) + offsetY) * self.scale.x
-		my_collision.scale = self.scale
+		my_collision.position -= Vector2(($Sprite.texture.get_width() / 2) + offsetX, ($Sprite.texture.get_height() / 2) + offsetY)# * self.scale.x
+		#my_collision.scale = self.scale
 		call_deferred("add_child", my_collision)

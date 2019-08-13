@@ -1,22 +1,38 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://prototypes/sample_space/SampleSpace.gd" type="Script" id=1]
 [ext_resource path="res://scenes/celestial_objects/planets/Planet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/backgrounds/ParallaxBackground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ships/PlayerShip.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ships/NPCShip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://images/application/starogen_logo_v2_256px.png" type="Texture" id=6]
+[ext_resource path="res://prototypes/sample_space/Sprite2.gd" type="Script" id=7]
 
 [node name="SampleSpace" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Planet" parent="." instance=ExtResource( 2 )]
-position = Vector2( 780, 420 )
+position = Vector2( 1430, 360 )
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 3 )]
 scroll_ignore_camera_zoom = true
 
 [node name="PlayerShip" parent="." instance=ExtResource( 4 )]
+position = Vector2( 130, 30 )
 
 [node name="NPCShip" parent="." instance=ExtResource( 5 )]
 position = Vector2( 150, 110 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+show_behind_parent = true
+position = Vector2( 1430, 410 )
+texture = ExtResource( 6 )
+offset = Vector2( -6, -52 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 2230, 870 )
+texture = ExtResource( 6 )
+script = ExtResource( 7 )
