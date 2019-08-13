@@ -2,8 +2,6 @@
 
 [ext_resource path="res://scenes/celestial_objects/moons/Moon.gd" type="Script" id=1]
 
-
-
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="Moon" type="KinematicBody2D"]

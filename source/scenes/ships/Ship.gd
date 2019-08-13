@@ -24,4 +24,5 @@ export (int) var speed = 150
 export (float) var acceleration = 0.10
 export (float) var deceleration = 0.01
 var current_direction = Vector2(0,0)
+#var intersecting = true
 

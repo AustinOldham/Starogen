@@ -5,11 +5,13 @@ onready var planet_generator = preload("res://plugins/PlanetGenerator/bin/Planet
 func _ready():
 	$GravitationalField.connect("body_entered", self, "_on_GravitationalField_body_enter")
 	$GravitationalField.connect("body_exited", self, "_on_GravitationalField_body_exit")
-	size = 101
+	size = 20
 	randomize()
 	seed_input = int(rand_range(0, 2147483647))
 	#scale = Vector2(5, 5)
+	#scale = Vector2(20, 20)
 	#scale = Vector2(100, 100)
+	#scale = Vector2(50, 50)
 	_generate()
 	get_node("GravitationalField/CollisionShape2D").shape.radius = size
 	get_node("GravitationalField").scale = scale
@@ -18,7 +20,7 @@ func _ready():
 func adjust_scale(new_scale):
 	pass
 
-func _process(delta):
+func _physics_process(delta):
 	rotation_degrees += 2.0 * delta
 	pass
 

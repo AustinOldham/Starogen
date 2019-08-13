@@ -60,6 +60,9 @@ func _physics_process(delta):
 	#move_and_slide(current_direction * speed)
 	#var collision = move_and_slide(temp_current_direction)
 
+	#if collision:
+	#	print(collision.collider.scale)
+
 	#_bounce(collision)
 	
 
@@ -89,12 +92,12 @@ func _apply_gravity(current_direction):
 
 func _set_gravity(the_planet):
 	gravity_array.append(the_planet)
-	print("set gravity")
+	#print("set gravity")
 	#print(body_position)
 	#print(get_global_transform().origin)
 	#gravity_array[index] = body_position
 
 func _remove_gravity(the_planet):
 	gravity_array.erase(the_planet)
-	print("remove gravity")
+	#print("remove gravity")
 	#gravity_array[index] = Vector2(0, 0)

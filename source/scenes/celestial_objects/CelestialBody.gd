@@ -4,6 +4,10 @@ class_name CelestialBody
 
 var size
 var seed_input
+var orbiting_bodies = []
+var orbit_distance
+var orbit_speed
+
 
 func _ready():
 	pass
@@ -22,6 +26,7 @@ func _create_collision_polygon():
 		offsetY = 1
 	for i in range(my_array.size()):
 		var my_collision = CollisionPolygon2D.new()
+		#my_collision.set_build_mode(1)
 		# Godot has a glitch that prevents collision with CollisionPolygon2Ds if they have overlapping vertices. This removes those overlapping parts and creates a new node for them.
 		var temp_arr = Array(my_array[i])
 		var duplicates = []
@@ -39,6 +44,7 @@ func _create_collision_polygon():
 			duplicates.remove(0)
 			duplicates.remove(0)
 			var new_collision = CollisionPolygon2D.new()
+			#new_collision.set_build_mode(1)
 			new_collision.set_polygon(PoolVector2Array(new_collision_points))
 			new_collision.position -= Vector2(($Sprite.texture.get_width() / 2) + offsetX, ($Sprite.texture.get_height() / 2) + offsetY) * self.scale.x
 			new_collision.scale = self.scale
