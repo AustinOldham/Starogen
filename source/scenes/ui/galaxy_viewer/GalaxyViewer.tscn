@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_30px.tres" type="DynamicFont" id=1]
 [ext_resource path="res://images/ui/themes/default_theme.tres" type="Theme" id=2]
 [ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/ui/galaxy_viewer/Generate.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/galaxy_viewer/Invalid.gd" type="Script" id=5]
-[ext_resource path="res://scenes/celestial_objects/galaxy/Sprite.gd" type="Script" id=6]
-[ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=7]
-[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=8]
-[ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=9]
+[ext_resource path="res://scenes/ui/galaxy_viewer/Start.gd" type="Script" id=6]
+[ext_resource path="res://scenes/celestial_objects/galaxy/Sprite.gd" type="Script" id=7]
+[ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=8]
+[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=9]
+[ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -51,10 +52,9 @@ custom_fonts/font = ExtResource( 1 )
 text = "Settings"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 37.0
 margin_right = 300.0
-margin_bottom = 425.0
+margin_bottom = 453.0
 columns = 2
 
 [node name="Name" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
@@ -365,6 +365,18 @@ theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.921569, 0.0627451, 0.121569, 1 )
 script = ExtResource( 5 )
 
+[node name="Start" type="Button" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 392.0
+margin_right = 198.0
+margin_bottom = 416.0
+focus_mode = 1
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+disabled = true
+enabled_focus_mode = 1
+text = "Start"
+script = ExtResource( 6 )
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
 margin_left = 312.0
 margin_right = 984.0
@@ -382,7 +394,7 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy"]
 centered = false
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="Recenter" type="ToolButton" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2"]
 margin_top = 488.0
@@ -395,18 +407,17 @@ text = "Reset View"
 align = 0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/MarginContainer"]
-editor/display_folded = true
 layer = -20
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/MarginContainer/ParallaxBackground"]
 motion_mirroring = Vector2( 500, 500 )
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 stretch_mode = 2
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/NameEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_NameEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SeedEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_SeedEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SizeEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_SizeEdit_text_changed"]
@@ -421,6 +432,8 @@ script = ExtResource( 9 )
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityGridEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_DensityGridEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/CloudsMultEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_CloudsMultEdit_text_changed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Generate_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" method="_on_Generate_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Start_pressed"]
 [connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Sprite_invalid_check"]
 [connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_Sprite_invalid_check"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Recenter_pressed"]

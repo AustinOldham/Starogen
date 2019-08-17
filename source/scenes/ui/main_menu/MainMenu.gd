@@ -25,10 +25,10 @@ func _ready():
 	$MarginContainer/VBoxContainer/MenuOptions/Quit.connect("pressed", self, "quit_game")
 
 func continue_game():
-	get_tree().change_scene("res://prototypes/v1/SampleSpace.tscn")
+	get_tree().change_scene("res://prototypes/sample_space/SampleSpace.tscn")
 
 func new_game():
-	get_tree().change_scene("res://prototypes/sample_space/SampleSpace.tscn")
+	get_tree().change_scene("res://scenes/ui/galaxy_viewer/GalaxyViewer.tscn")
 
 func options():
 	pass

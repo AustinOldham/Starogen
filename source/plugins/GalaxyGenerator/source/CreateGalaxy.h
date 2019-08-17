@@ -43,8 +43,11 @@ class CreateGalaxy {
 		RandClass starClusterGen;
 		FastNoise cloudNoise;
 
-		struct StarInfo;
-		std::vector<StarInfo> starList;
+		struct StarType;
+		class Galaxy;
+		class Star;
+		class Planet;
+		std::vector<StarType> starList;
 
 		std::vector<std::vector<int>> myGalaxy;
 		std::vector<std::vector<double>> densityMap;
@@ -94,7 +97,7 @@ class CreateGalaxy {
 		//void printClouds(const std::vector<std::vector<double>> myVector, std::string fileName);
 		//void printColorPalette(std::string fileName);
 		void initializeContainers();
-		std::vector<StarInfo> readStarFile(std::string fileName);
+		std::vector<StarType> readStarFile(std::string fileName);
 		//std::vector<std::vector<std::string>> readFile(std::string fileName);
 		//std::vector<std::string> splitString(const std::string &s, char delimiter);
 		//std::unordered_map<std::string, int> getIDMap();
@@ -116,9 +119,11 @@ class CreateGalaxy {
 		float getBlue(int index);
 		float getAlpha(int index);
 		int getPixels();
+
+		void saveGalaxy();
 };
 
-struct CreateGalaxy::StarInfo {
+struct CreateGalaxy::StarType {
 	std::string name;
 	std::string type;
 
@@ -130,6 +135,25 @@ struct CreateGalaxy::StarInfo {
 	float green;
 	float blue;
 	float alpha;
+};
+
+class CreateGalaxy::Galaxy {
+	std::string name;
+	std::string seed;
+
+	int starAtPosition(int x, int y);
+};
+
+class CreateGalaxy::Star {
+	std::string name;
+	std::string seed;
+
+	int starTypeID;
+};
+
+class CreateGalaxy::Planet {
+	std::string name;
+	std::string seed;
 };
 
 #endif  // CREATEGALAXY_H

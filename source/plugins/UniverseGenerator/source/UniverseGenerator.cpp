@@ -15,41 +15,41 @@
 //You should have received a copy of the GNU General Public License
 //along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "GalaxyGenerator.h"
+#include "UniverseGenerator.h"
 
 using namespace godot;
 
 
-void GalaxyGenerator::_register_methods() {
-	register_method("_process", &GalaxyGenerator::_process);
-	register_method("generateGalaxy", &GalaxyGenerator::generateGalaxy);
-	register_method("getGalaxy", &GalaxyGenerator::getGalaxy);
+void UniverseGenerator::_register_methods() {
+	register_method("_process", &UniverseGenerator::_process);
+	register_method("generateGalaxy", &UniverseGenerator::generateGalaxy);
+	register_method("getGalaxy", &UniverseGenerator::getGalaxy);
 }
 
-GalaxyGenerator::GalaxyGenerator() {
+UniverseGenerator::UniverseGenerator() {
 }
 
-GalaxyGenerator::~GalaxyGenerator() {
-
-}
-
-void GalaxyGenerator::_init() {
+UniverseGenerator::~UniverseGenerator() {
 
 }
 
-void GalaxyGenerator::_process(float delta) {
+void UniverseGenerator::_init() {
 
 }
 
-void GalaxyGenerator::generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput) {
+void UniverseGenerator::_process(float delta) {
+
+}
+
+void UniverseGenerator::generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput) {
 	std::string name(toStandardString(nameInput));
 	std::string seed(toStandardString(seedInput));
-	myGalaxy.generate(name, seed, pixelsInput, cloudsFrequencyInput, armsInput, radialDistanceMultInput, clusterStddevInput, densityInput, aInput, bInput, extraStarsInput, densityGridInput, cloudsMultInput);
+	myUniverse.myGalaxy.generate(name, seed, pixelsInput, cloudsFrequencyInput, armsInput, radialDistanceMultInput, clusterStddevInput, densityInput, aInput, bInput, extraStarsInput, densityGridInput, cloudsMultInput);
 }
 
 
 
-ImageTexture * GalaxyGenerator::getGalaxy() {
+ImageTexture * UniverseGenerator::getGalaxy() {
 	// TODO: Allow strings to be input as seeds instead of ints
 	Godot::print("testhereg");
 
@@ -59,7 +59,7 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 
 	Godot::print("here2");
 
-	int pixels = myGalaxy.getPixels();
+	int pixels = myUniverse.myGalaxy.getPixels();
 
 	Godot::print("here3");
 
@@ -74,8 +74,8 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 
 	for (int y = 0; y < pixels; y++) {
 		for (int x = 0; x < pixels; x++) {
-			int curr = myGalaxy.at(x, y);
-			m->set_pixel(x, y, Color(myGalaxy.getRed(curr), myGalaxy.getGreen(curr), myGalaxy.getBlue(curr), myGalaxy.getAlpha(curr)));
+			int curr = myUniverse.myGalaxy.starAtPosition(x, y);
+			m->set_pixel(x, y, Color(myUniverse.myGalaxy.getRed(curr), myUniverse.myGalaxy.getGreen(curr), myUniverse.myGalaxy.getBlue(curr), myUniverse.myGalaxy.getAlpha(curr)));
 		}
 	}
 
@@ -100,6 +100,6 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 	return t;
 }
 
-std::string GalaxyGenerator::toStandardString(String oldString) {
+std::string UniverseGenerator::toStandardString(String oldString) {
 	return std::string(oldString.alloc_c_string());
 }

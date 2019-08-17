@@ -1,0 +1,18 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=false
+
+[entry]
+
+X11.64="res://plugins/UniverseGenerator/bin/x11/libUniverseGenerator.so"
+Windows.64="res://plugins/UniverseGenerator/bin/win64/libUniverseGenerator.dll"
+OSX.64="res://plugins/UniverseGenerator/bin/osx/libUniverseGenerator.dylib"
+
+[dependencies]
+
+X11.64=[  ]
+Windows.64=[  ]
+OSX.64=[  ]

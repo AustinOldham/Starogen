@@ -244,3 +244,7 @@ func _on_Generate_pressed():
 func _on_Recenter_pressed():
 	global_position = get_parent().get_parent().get_global_transform().origin
 	scale = Vector2(1, 1)
+
+
+func _on_Start_pressed():
+	pass #Create directory in godot based on the chosen name then save using C++ (the user directory will probably need to be passed to the generator)

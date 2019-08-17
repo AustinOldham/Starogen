@@ -1,0 +1,1 @@
+Folders containing data that must be read by the C++ plugins need to be manually copied over due to the way Godot handles exporting.

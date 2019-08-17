@@ -15,7 +15,7 @@
 //You should have received a copy of the GNU General Public License
 //along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "CreateGalaxy.h"
+#include "CreateUniverse.h"
 
 using std::cout;
 using std::string;
@@ -41,11 +41,11 @@ using json = nlohmann::json;
 // IDEA: Each star has an 8 (or higher) bit number pair that determines its local coordinates and may have a min/max value (e.g. 256 numbers for 8 bit but min is 10 and max is 245) to ensure sufficient space between stars. If 8 bit, the coordinates are determined by the main map coordinate plus the local coordinate divided by 255.
 // TODO: Clouds will be generated using density map where the number of stars in a square around each star (or every pixel) is used for the calculation (odd number width of search only so offset = searchWidth / 2 and the locations at galaxy[y - offset + i][x - offset + j] are checked)
 
-CreateGalaxy::CreateGalaxy() {
+CreateUniverse::Galaxy::Galaxy() {
 	initializeContainers();
 }
 
-void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput) {
+void CreateUniverse::Galaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput) {
 	seed = getSeed(seedInput);
 
 	name = getName(nameInput);
@@ -72,16 +72,16 @@ void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput,
 	std::hash<string> seedHasher;
 	int seedInt = seedHasher(seed);
 	starClusterGen.setSeed(seed);
-	cloudNoise.SetSeed(seedInt);
-	cloudNoise.SetNoiseType(FastNoise::SimplexFractal);  // SimplexFractal for clouds
-	cloudNoise.SetFrequency(cloudsFrequencyInput);  // 0.05 for clouds
+	galacticCloudNoise.SetSeed(seedInt);
+	galacticCloudNoise.SetNoiseType(FastNoise::SimplexFractal);  // SimplexFractal for clouds
+	galacticCloudNoise.SetFrequency(cloudsFrequencyInput);  // 0.05 for clouds
 
-	myGalaxy.clear();
-	myGalaxy.resize(pixels, vector<int>(pixels, 0));
+	galaxyMap.clear();
+	galaxyMap.resize(pixels, vector<int>(pixels, 0));
 	densityMap.clear();
 	densityMap.resize(pixels, vector<double>(pixels, 0));
-	clouds.clear();
-	clouds.resize(pixels, vector<double>(pixels, 0));
+	galacticClouds.clear();
+	galacticClouds.resize(pixels, vector<double>(pixels, 0));
 
 	cout << name << endl;
 	cout << seed << endl;
@@ -90,7 +90,7 @@ void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput,
 
 	cout << "finished" << endl;
 
-	/*printGalaxy(myGalaxy, name);
+	/*printGalaxy(galaxyMap, name);
 	string densityName = name + "_densitymap";
 	printDensityMap(densityMap, densityName);
 	string cloudsName = name + "_clouds";
@@ -99,7 +99,7 @@ void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput,
 	printColorPalette(theColors);*/
 }
 
-void CreateGalaxy::generate() {
+void CreateUniverse::Galaxy::generate() {
 	double theta;
 	double halfway = pixels / 2.0;
 	//int arms = 4;  // 4
@@ -158,36 +158,33 @@ void CreateGalaxy::generate() {
 
 	createDensityMap();
 	createClouds();
-	// cout << "myGalaxy[y][x]: " << myGalaxy[2][1] << endl;
+	// cout << "galaxyMap[y][x]: " << galaxyMap[2][1] << endl;
 }
 
-int CreateGalaxy::at(int x, int y) {
-	return myGalaxy[y][x];
-}
 
-float CreateGalaxy::getRed(int index) {
+float CreateUniverse::Galaxy::getRed(int index) {
 	return starList[index].red;
 }
 
-float CreateGalaxy::getGreen(int index) {
+float CreateUniverse::Galaxy::getGreen(int index) {
 	return starList[index].green;
 }
 
-float CreateGalaxy::getBlue(int index) {
+float CreateUniverse::Galaxy::getBlue(int index) {
 	return starList[index].blue;
 }
 
-float CreateGalaxy::getAlpha(int index) {
+float CreateUniverse::Galaxy::getAlpha(int index) {
 	return starList[index].alpha;
 }
 
-int CreateGalaxy::getPixels() {
+int CreateUniverse::Galaxy::getPixels() {
 	return pixels;
 }
 
-// NOTE: Add padding to the myGalaxy vector so the star clusters don't get cut off on the edges
+// NOTE: Add padding to the galaxyMap vector so the star clusters don't get cut off on the edges
 
-void CreateGalaxy::createDensityMap() {
+void CreateUniverse::Galaxy::createDensityMap() {
 	int subtracted = densityGrid / 2;
 	double gridSquared = static_cast<double>(densityGrid * densityGrid);
 	for (int y = 0; y < pixels; y++) {
@@ -200,11 +197,11 @@ void CreateGalaxy::createDensityMap() {
 						break;
 					}
 
-					if (gridY >= myGalaxy.size() || gridX >= myGalaxy[y].size()) {
+					if (gridY >= galaxyMap.size() || gridX >= galaxyMap[y].size()) {
 						break;
 					}
 
-					if (myGalaxy[gridY][gridX] > 0) {
+					if (galaxyMap[gridY][gridX] > 0) {
 						densityMap[y][x]++;
 					}
 				}
@@ -217,19 +214,19 @@ void CreateGalaxy::createDensityMap() {
 	}
 }
 
-void CreateGalaxy::createClouds() {
+void CreateUniverse::Galaxy::createClouds() {
 	for (int y = 0; y < pixels; y++) {
 		for (int x = 0; x < pixels; x++) {
-			clouds[y][x] = 0.5 * (cloudNoise.GetNoise(x, y) + 1);  // Puts it in the range of 0 to 1
-			clouds[y][x] *= densityMap[y][x];
-			clouds[y][x] *= cloudsMult;
-			clouds[y][x] = max(0.0, clouds[y][x]);
-			clouds[y][x] = min(1.0, clouds[y][x]);
+			galacticClouds[y][x] = 0.5 * (galacticCloudNoise.GetNoise(x, y) + 1);  // Puts it in the range of 0 to 1
+			galacticClouds[y][x] *= densityMap[y][x];
+			galacticClouds[y][x] *= cloudsMult;
+			galacticClouds[y][x] = max(0.0, galacticClouds[y][x]);
+			galacticClouds[y][x] = min(1.0, galacticClouds[y][x]);
 		}
 	}
 }
 
-void CreateGalaxy::starCluster(int x, int y, int num, double stddev, double distanceProportion) {  // stddev = 5.0
+void CreateUniverse::Galaxy::starCluster(int x, int y, int num, double stddev, double distanceProportion) {  // stddev = 5.0
 	for (int i = 0; i < num; i++) {
 		double modX = starClusterGen.nextNormal(0.0, stddev);
 		double modY = starClusterGen.nextNormal(0.0, stddev);
@@ -237,11 +234,11 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, double dist
 			continue;
 		}
 
-		myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
+		galaxyMap[y + modY][x + modX] = plotStar(distanceProportion);
 	}
 }
 
-int CreateGalaxy::plotStar(double distanceProportion) {
+int CreateUniverse::Galaxy::plotStar(double distanceProportion) {
 	// TODO: Choose stars randomly (maybe add bias by storing the first star generated at x and y then rerolling if that star does not match)
 	// Choose using this https://stackoverflow.com/a/9330667/11356785
 
@@ -265,7 +262,7 @@ int CreateGalaxy::plotStar(double distanceProportion) {
 
 
 
-vector<double> CreateGalaxy::getAngles(int num, double additional) {
+vector<double> CreateUniverse::Galaxy::getAngles(int num, double additional) {
 	vector<double> myAngles(num, 0);
 	double divisor = static_cast<double>(num);
 	for (int i = 0; i < num; i++) {
@@ -275,7 +272,7 @@ vector<double> CreateGalaxy::getAngles(int num, double additional) {
 	return myAngles;
 }
 
-string CreateGalaxy::getName(string nameInput) {
+string CreateUniverse::Galaxy::getName(string nameInput) {
 	if (nameInput.empty()) {
 		return string("placeholdername");
 	} else {
@@ -283,7 +280,7 @@ string CreateGalaxy::getName(string nameInput) {
 	}
 }
 
-string CreateGalaxy::getSeed(string seedInput) {
+string CreateUniverse::Galaxy::getSeed(string seedInput) {
 	if (seedInput.empty()) {
 		return string("placeholderseed");
 	} else {
@@ -291,7 +288,7 @@ string CreateGalaxy::getSeed(string seedInput) {
 	}
 }
 
-int CreateGalaxy::getArms(int armsInput) {
+int CreateUniverse::Galaxy::getArms(int armsInput) {
 	if (armsInput <= 0) {
 		return 4;  // Placeholder
 	} else {
@@ -299,7 +296,7 @@ int CreateGalaxy::getArms(int armsInput) {
 	}
 }
 
-double CreateGalaxy::getClusterStddev(double clusterStddevInput) {
+double CreateUniverse::Galaxy::getClusterStddev(double clusterStddevInput) {
 	if (clusterStddevInput <= 0.0) {
 		if (pixels <= 100) {
 			return pixels / 40.0;
@@ -311,7 +308,7 @@ double CreateGalaxy::getClusterStddev(double clusterStddevInput) {
 	}
 }
 
-double CreateGalaxy::getRadialDistanceMult(double radialDistanceMultInput) {
+double CreateUniverse::Galaxy::getRadialDistanceMult(double radialDistanceMultInput) {
 	if (radialDistanceMultInput <= 0.0) {
 		return 10.0;  // Not a placeholder
 	} else {
@@ -319,7 +316,7 @@ double CreateGalaxy::getRadialDistanceMult(double radialDistanceMultInput) {
 	}
 }
 
-double CreateGalaxy::getDensity(double densityInput) {
+double CreateUniverse::Galaxy::getDensity(double densityInput) {
 	if (densityInput <= 0.0) {
 		return (pixels / 25);
 	} else {
@@ -327,15 +324,15 @@ double CreateGalaxy::getDensity(double densityInput) {
 	}
 }
 
-double CreateGalaxy::getA(double aInput) {
+double CreateUniverse::Galaxy::getA(double aInput) {
 	return aInput;  // TODO: Determine what values are invalid and randomly pick a value.
 }
 
-double CreateGalaxy::getB(double bInput) {
+double CreateUniverse::Galaxy::getB(double bInput) {
 	return bInput;  // TODO: Determine what values are invalid and randomly pick a value.
 }
 
-bool CreateGalaxy::getExtraStars(int extraStarsInput) {
+bool CreateUniverse::Galaxy::getExtraStars(int extraStarsInput) {
 	if (extraStarsInput < 0) {
 		if (pixels <= 100) {
 			return false;
@@ -349,7 +346,7 @@ bool CreateGalaxy::getExtraStars(int extraStarsInput) {
 	}
 }
 
-int CreateGalaxy::getDensityGrid(int densityGridInput) {
+int CreateUniverse::Galaxy::getDensityGrid(int densityGridInput) {
 	if (densityGridInput <= 0) {
 		if (pixels <= 100) {
 			return 5;
@@ -361,7 +358,7 @@ int CreateGalaxy::getDensityGrid(int densityGridInput) {
 	}
 }
 
-double CreateGalaxy::getCloudsMult(double cloudsMultInput) {
+double CreateUniverse::Galaxy::getCloudsMult(double cloudsMultInput) {
 	if (cloudsMultInput <= 0.0) {
 		return 5.0;
 	} else {
@@ -369,31 +366,31 @@ double CreateGalaxy::getCloudsMult(double cloudsMultInput) {
 	}
 }
 
-double CreateGalaxy::getMult(double t, double a, double b) {
+double CreateUniverse::Galaxy::getMult(double t, double a, double b) {
 	return a * exp(b * t);
 }
 
 // x = a * (e^(bt)) * cos(t);
-double CreateGalaxy::logSpiralX(double t, double theta, double a, double b) {
+double CreateUniverse::Galaxy::logSpiralX(double t, double theta, double a, double b) {
 	double mult = exp(b * t);
 	return (a * mult * cos(t - theta));
 }
 
 // y = a * (e^(bt)) * sin(t);
-double CreateGalaxy::logSpiralY(double t, double theta, double a, double b) {
+double CreateUniverse::Galaxy::logSpiralY(double t, double theta, double a, double b) {
 	double mult = exp(b * t);
 	return (a * mult * sin(t - theta));
 }
 
-double CreateGalaxy::logSpiralX(double t, double theta, double mult) {
+double CreateUniverse::Galaxy::logSpiralX(double t, double theta, double mult) {
 	return (mult * cos(t - theta));
 }
 
-double CreateGalaxy::logSpiralY(double t, double theta, double mult) {
+double CreateUniverse::Galaxy::logSpiralY(double t, double theta, double mult) {
 	return (mult * sin(t - theta));
 }
 
-bool CreateGalaxy::isFinished(vector<bool> finished) {
+bool CreateUniverse::Galaxy::isFinished(vector<bool> finished) {
 	for (int i = 0; i < finished.size(); i++) {
 		if (finished[i] == false) {
 			return false;
@@ -402,27 +399,27 @@ bool CreateGalaxy::isFinished(vector<bool> finished) {
 	return true;
 }
 
-double CreateGalaxy::radialDistance(int x, int y, double centerX, double centerY) {
+double CreateUniverse::Galaxy::radialDistance(int x, int y, double centerX, double centerY) {
 	double distanceX = pow(abs(centerX - x), 2);
 	double distanceY = pow(abs(centerY - y), 2);
 	return sqrt(distanceX + distanceY);
 }
 
-void CreateGalaxy::initializeContainers() {
+void CreateUniverse::Galaxy::initializeContainers() {
 	starList = readStarFile("config/galaxy_stars.json");
 	getProbabilities();
 }
 
-vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileName) {
+vector<CreateUniverse::Galaxy::StarType> CreateUniverse::Galaxy::readStarFile(string fileName) {
 	cout << "herersf" << endl;
-	vector<CreateGalaxy::StarType> myStarList;
+	vector<CreateUniverse::Galaxy::StarType> myStarList;
 	std::ifstream input(fileName);
 	json j;
 	input >> j;
 	int i = 0;
 	for (auto& element : j) {
 		// cout << element["name"] << '\n';
-		myStarList.push_back(CreateGalaxy::StarType());
+		myStarList.push_back(CreateUniverse::Galaxy::StarType());
 		myStarList[i].name = element["name"];
 		// cout << myStarList[i].name << endl;
 		myStarList[i].type = element["type"];
@@ -436,7 +433,7 @@ vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileName) {
 	return myStarList;
 }
 
-void CreateGalaxy::getProbabilities() {
+void CreateUniverse::Galaxy::getProbabilities() {
 	double probabilitySum = 0.0;
 
 	for (int i = 0; i < starList.size(); i++) {
@@ -449,16 +446,16 @@ void CreateGalaxy::getProbabilities() {
 	}
 }
 
-void CreateGalaxy::saveGalaxy() {
+void CreateUniverse::Galaxy::saveGalaxy() {
 	// Godot autoload and cereal serialization
 	// Simplify things by combining all generators into one file (e.g. universegenerator)
 }
 
-int CreateGalaxy::Galaxy::starAtPosition(int x, int y) {
-	return 2;
+int CreateUniverse::Galaxy::starAtPosition(int x, int y) {
+	return galaxyMap[y][x];
 }
 
-/*vector<vector<string>> CreateGalaxy::readFile(string fileName) {
+/*vector<vector<string>> CreateUniverse::readFile(string fileName) {
 	vector<vector<string>> myVector;
 	std::ifstream myFile(fileName);
 	if (myFile.is_open()) {
@@ -478,7 +475,7 @@ int CreateGalaxy::Galaxy::starAtPosition(int x, int y) {
 	return myVector;
 }
 
-vector<string> CreateGalaxy::splitString(const string &s, char delimiter) {
+vector<string> CreateUniverse::splitString(const string &s, char delimiter) {
 	vector<string> result;
 	std::stringstream ss(s);
 	string item;
