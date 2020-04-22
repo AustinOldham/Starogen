@@ -55,7 +55,6 @@ custom_fonts/font = ExtResource( 2 )
 text = "Settings"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 37.0
 margin_right = 300.0
 margin_bottom = 453.0
@@ -422,22 +421,22 @@ texture = ExtResource( 10 )
 expand = true
 stretch_mode = 2
 script = ExtResource( 11 )
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/NameEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_NameEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SeedEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_SeedEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SizeEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_SizeEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/CloudsFrequencyEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_CloudsFrequencyEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ArmsEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_ArmsEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/RadialDistanceMultEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_RadialDistanceMultEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ClusterStddevEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_ClusterStddevEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_DensityEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/AEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_AEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/BEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_BEdit_text_changed"]
-[connection signal="item_selected" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ExtraStarsEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_ExtraStarsEdit_item_selected"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityGridEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_DensityGridEdit_text_changed"]
-[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/CloudsMultEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_CloudsMultEdit_text_changed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Generate_pressed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/NameEdit" to="." method="_on_NameEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SeedEdit" to="." method="_on_SeedEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SizeEdit" to="." method="_on_SizeEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/CloudsFrequencyEdit" to="." method="_on_CloudsFrequencyEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ArmsEdit" to="." method="_on_ArmsEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/RadialDistanceMultEdit" to="." method="_on_RadialDistanceMultEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ClusterStddevEdit" to="." method="_on_ClusterStddevEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityEdit" to="." method="_on_DensityEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/AEdit" to="." method="_on_AEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/BEdit" to="." method="_on_BEdit_text_changed"]
+[connection signal="item_selected" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ExtraStarsEdit" to="." method="_on_ExtraStarsEdit_item_selected"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityGridEdit" to="." method="_on_DensityGridEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/CloudsMultEdit" to="." method="_on_CloudsMultEdit_text_changed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="." method="_on_Generate_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" method="_on_Generate_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Start_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Sprite_invalid_check"]
 [connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_Sprite_invalid_check"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Recenter_pressed"]

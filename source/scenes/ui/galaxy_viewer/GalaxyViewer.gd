@@ -172,5 +172,9 @@ func _on_DensityGridEdit_text_changed(new_text):
 func _on_Generate_pressed():
 	print("Generation started")
 	galaxy_generator.generateGalaxy(name_input, seed_input, pixels, clouds_frequency, arms, radial_distance_mult, cluster_stddev, density, a, b, extra_stars, density_grid, clouds_mult)
-	$CanvasLayer/MarginContainer/HSplitContainer/GalaxyBox/Galaxy/Sprite.texture = galaxy_generator.getGalaxy()
+	$CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite.texture = galaxy_generator.getGalaxy()
 	print("Generation complete")
+
+
+func _on_Start_pressed():
+	pass # Replace with function body.
