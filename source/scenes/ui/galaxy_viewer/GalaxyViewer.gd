@@ -15,7 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-extends Sprite
+extends Node2D
+
 onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
 signal invalid_check(type)
@@ -24,7 +25,6 @@ var x = -1
 var y = -1
 var last_width = 500
 
-"""
 var is_invalid = false
 var name_input = ""
 var seed_input = ""
@@ -39,76 +39,12 @@ var a = 0.1
 var b = 0.3
 var extra_stars = -1
 var density_grid = -1
-"""
+
 
 func _ready():
 	pass
 
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			if event.button_index == BUTTON_WHEEL_DOWN:
-				_zoom_scale(-1)
-			if event.button_index == BUTTON_WHEEL_UP:
-				_zoom_scale(1)
-		if event.button_index == BUTTON_LEFT and event.is_pressed():
-			self.on_click()
-
-func _zoom_scale(direction):
-	#print(global_scale)
-	var temp = scale + Vector2(0.1, 0.1) * direction * 5.0
-	if (temp.x <= 0.00001 or temp.y <= 0.00001):
-		pass
-	else:
-		scale = temp
-
-func _process(delta):
-	if (Input.is_action_pressed("ui_right")):
-		global_position += Vector2(-0.1, 0.0) * 50
-	if (Input.is_action_pressed("ui_left")):
-		global_position += Vector2(0.1, 0.0) * 50
-
-	if (Input.is_action_pressed("ui_up")):
-		global_position += Vector2(0.0, 0.1) * 50
-	elif (Input.is_action_pressed("ui_down")):
-		global_position += Vector2(0.0, -0.1) * 50
-
-func _draw():
-		var roundX = int(x)
-		var roundY = int(y)
-		if (roundX >= 0 or roundY >= 0):
-			var black = Color(0.0, 0.0, 0.0, 1.0)
-			var rect1 = Rect2(Vector2(roundX, roundY), Vector2(0.5, 0.5))
-			draw_rect(rect1, black, false)
-			var rect2 = Rect2(Vector2(roundX + 0.5, roundY), Vector2(0.5, 0.5))
-			draw_rect(rect2, black, false)
-			var rect3 = Rect2(Vector2(roundX + 0.5, roundY + 0.5), Vector2(0.5, 0.5))
-			draw_rect(rect3, black, false)
-			var rect4 = Rect2(Vector2(roundX, roundY + 0.5), Vector2(0.5, 0.5))
-			draw_rect(rect4, black, false)
-			var rect5 = Rect2(Vector2(roundX, roundY), Vector2(1.0, 1.0))
-			draw_rect(rect5, Color(1.0, 1.0, 1.0, 1.0), false)
-			print(scale)
-
-func on_click():
-	print("Click")
-	print(get_global_mouse_position())
-	print(get_local_mouse_position())
-	print(get_global_transform().origin)
-	print(get_transform().origin)
-	#var localX = (get_global_mouse_position().x - get_global_transform().origin.x) / scale.x
-	#var localY = (get_global_mouse_position().y - get_global_transform().origin.y) / scale.y
-	var localX = get_local_mouse_position().x
-	var localY = get_local_mouse_position().y
-	print("sprite x: " + str(localX) + "  sprite y: " + str(localY))
-	if (localX < last_width and localY < last_width and localX >= 0 and localY >= 0):
-		print("Contained")
-		x = localX
-		y = localY
-		update()
-
-"""
 func _check_input_float(text, type, default, less_than, invalid_num):
 	if (text.empty()):
 		emit_signal("invalid_check", "")
@@ -236,16 +172,5 @@ func _on_DensityGridEdit_text_changed(new_text):
 func _on_Generate_pressed():
 	print("Generation started")
 	galaxy_generator.generateGalaxy(name_input, seed_input, pixels, clouds_frequency, arms, radial_distance_mult, cluster_stddev, density, a, b, extra_stars, density_grid, clouds_mult)
-	self.texture = galaxy_generator.getGalaxy()
+	$CanvasLayer/MarginContainer/HSplitContainer/GalaxyBox/Galaxy/Sprite.texture = galaxy_generator.getGalaxy()
 	print("Generation complete")
-	print(get_global_transform().x)
-	print(get_global_transform().y)
-"""
-
-func _on_Recenter_pressed():
-	global_position = get_parent().get_parent().get_global_transform().origin
-	scale = Vector2(1, 1)
-
-
-func _on_Start_pressed():
-	pass #Create directory in godot based on the chosen name then save using C++ (the user directory will probably need to be passed to the generator)
