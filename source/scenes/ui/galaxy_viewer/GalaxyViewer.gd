@@ -39,7 +39,7 @@ var a = 0.1
 var b = 0.3
 var extra_stars = -1
 var density_grid = -1
-var density_mult = 0
+var density_mult = 1
 
 
 func _ready():
@@ -183,3 +183,4 @@ func _on_Start_pressed():
 
 func _on_DensityMultEdit_text_changed(new_text):
 	density_mult = _check_input_float(new_text, "Density Mult", 1.0, true, 0.0)
+	print(density_mult)

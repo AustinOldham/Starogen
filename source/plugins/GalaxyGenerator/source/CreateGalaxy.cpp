@@ -45,7 +45,7 @@ CreateGalaxy::CreateGalaxy() {
 	initializeContainers();
 }
 
-void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMult) {
+void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput) {
 	seed = getSeed(seedInput);
 
 	name = getName(nameInput);
@@ -68,6 +68,8 @@ void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput,
 	densityGrid = getDensityGrid(densityGridInput);
 
 	cloudsMult = getCloudsMult(cloudsMultInput);
+
+	densityMult = densityMultInput;
 
 	std::hash<string> seedHasher;
 	int seedInt = seedHasher(seed);
