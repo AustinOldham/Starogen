@@ -45,7 +45,7 @@ CreateGalaxy::CreateGalaxy() {
 	initializeContainers();
 }
 
-void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput) {
+void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMult) {
 	seed = getSeed(seedInput);
 
 	name = getName(nameInput);
@@ -146,7 +146,7 @@ void CreateGalaxy::generate() {
 			// TODO: Add option to have star colors based off of distance from the center. Currently not implemented because variety is better for gameplay.
 			// Create a map between star type and distance then choose the closest type that is greater than or equal to the number generated with "probability = starClusterGen.nextNormal(distanceProportion, 0.1)".
 			double distanceProportion = (maxRadialDistance - currRadialDistance) / maxRadialDistance;
-			int localDensity = static_cast<int>(distanceProportion * radialDistanceMult);
+			int localDensity = static_cast<int>(distanceProportion * radialDistanceMult * densityMult);
 			if (extraStars) {
 				starCluster(x, y, localDensity, 10.0 * clusterStddev, distanceProportion); //5.0 * 10.0  Adds background clutter
 			}

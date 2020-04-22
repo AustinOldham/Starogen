@@ -41,10 +41,10 @@ void GalaxyGenerator::_process(float delta) {
 
 }
 
-void GalaxyGenerator::generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput) {
+void GalaxyGenerator::generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMult) {
 	std::string name(toStandardString(nameInput));
 	std::string seed(toStandardString(seedInput));
-	myGalaxy.generate(name, seed, pixelsInput, cloudsFrequencyInput, armsInput, radialDistanceMultInput, clusterStddevInput, densityInput, aInput, bInput, extraStarsInput, densityGridInput, cloudsMultInput);
+	myGalaxy.generate(name, seed, pixelsInput, cloudsFrequencyInput, armsInput, radialDistanceMultInput, clusterStddevInput, densityInput, aInput, bInput, extraStarsInput, densityGridInput, cloudsMultInput, densityMult);
 }
 
 

@@ -39,6 +39,7 @@ var a = 0.1
 var b = 0.3
 var extra_stars = -1
 var density_grid = -1
+var density_mult = 0
 
 
 func _ready():
@@ -171,10 +172,14 @@ func _on_DensityGridEdit_text_changed(new_text):
 
 func _on_Generate_pressed():
 	print("Generation started")
-	galaxy_generator.generateGalaxy(name_input, seed_input, pixels, clouds_frequency, arms, radial_distance_mult, cluster_stddev, density, a, b, extra_stars, density_grid, clouds_mult)
+	galaxy_generator.generateGalaxy(name_input, seed_input, pixels, clouds_frequency, arms, radial_distance_mult, cluster_stddev, density, a, b, extra_stars, density_grid, clouds_mult, density_mult)
 	$CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite.texture = galaxy_generator.getGalaxy()
 	print("Generation complete")
 
 
 func _on_Start_pressed():
 	pass # Replace with function body.
+
+
+func _on_DensityMultEdit_text_changed(new_text):
+	density_mult = _check_input_float(new_text, "Density Mult", 1.0, true, 0.0)

@@ -44,7 +44,6 @@ margin_bottom = 590.0
 split_offset = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
-editor/display_folded = true
 margin_right = 300.0
 margin_bottom = 510.0
 
@@ -57,7 +56,7 @@ text = "Settings"
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer"]
 margin_top = 37.0
 margin_right = 300.0
-margin_bottom = 453.0
+margin_bottom = 481.0
 columns = 2
 
 [node name="Name" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
@@ -326,15 +325,15 @@ expand_to_text_length = true
 focus_mode = 1
 caret_blink = true
 
-[node name="CloudsMult" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
+[node name="DensityMult" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_top = 337.0
 margin_right = 198.0
 margin_bottom = 359.0
 theme = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
-text = "Clouds Mult:"
+text = "Density Mult:"
 
-[node name="CloudsMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
+[node name="DensityMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 336.0
 margin_right = 290.0
@@ -348,10 +347,32 @@ expand_to_text_length = true
 focus_mode = 1
 caret_blink = true
 
-[node name="Generate" type="Button" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
-margin_top = 364.0
+[node name="CloudsMult" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 365.0
 margin_right = 198.0
+margin_bottom = 387.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Clouds Mult:"
+
+[node name="CloudsMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
+margin_left = 202.0
+margin_top = 364.0
+margin_right = 290.0
 margin_bottom = 388.0
+focus_mode = 1
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+expand_to_text_length = true
+focus_mode = 1
+caret_blink = true
+
+[node name="Generate" type="Button" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 392.0
+margin_right = 198.0
+margin_bottom = 416.0
 focus_mode = 1
 theme = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
@@ -361,17 +382,17 @@ script = ExtResource( 5 )
 
 [node name="Invalid" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
-margin_top = 365.0
+margin_top = 393.0
 margin_right = 290.0
-margin_bottom = 387.0
+margin_bottom = 415.0
 theme = ExtResource( 3 )
 custom_colors/font_color = Color( 0.921569, 0.0627451, 0.121569, 1 )
 script = ExtResource( 6 )
 
 [node name="Start" type="Button" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
-margin_top = 392.0
+margin_top = 420.0
 margin_right = 198.0
-margin_bottom = 416.0
+margin_bottom = 444.0
 focus_mode = 1
 theme = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
@@ -433,10 +454,11 @@ script = ExtResource( 11 )
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/BEdit" to="." method="_on_BEdit_text_changed"]
 [connection signal="item_selected" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ExtraStarsEdit" to="." method="_on_ExtraStarsEdit_item_selected"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityGridEdit" to="." method="_on_DensityGridEdit_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityMultEdit" to="." method="_on_DensityMultEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/CloudsMultEdit" to="." method="_on_CloudsMultEdit_text_changed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="." method="_on_Generate_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" method="_on_Generate_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="." method="_on_Start_pressed"]
-[connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Sprite_invalid_check"]
 [connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_Sprite_invalid_check"]
+[connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Sprite_invalid_check"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Recenter_pressed"]
