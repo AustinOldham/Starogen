@@ -64,28 +64,17 @@ class CreateGalaxy {
 		double spiralA;  // Arbitrary value that influences the shape of the spiral.
 		double spiralB;  // Rate of increase of the spiral (arbitrary value, can be calculated with b = cot(alpha) where alpha is the angle between the radius and the tangent).
 		bool extraStars;  // Whether or not an extra, less dense cluster of stars is added. TODO: Add extra variables that control the density and number of stars added.
-		int densityGrid;
+		// int densityGrid;
 		double cloudsFrequency;
 		double cloudsMult;
 		double densityMult;
 
 		void generate();
-		void createDensityMap();
+		void createApproximateDensityMap();
 		void createClouds();
 		void starCluster(int x, int y, int num, double stddev, double distanceProportion);
 		int plotStar(double distanceProportion);
-		std::vector<double> getAngles(int num, double additional);
-		std::string getName(std::string nameInput);
-		std::string getSeed(std::string seedInput);
-		int getArms(int armsInput);
-		double getClusterStddev(double clusterStddevInput);
-		double getRadialDistanceMult(double radialDistanceMultInput);
-		double getDensity(double densityInput);
-		double getA(double aInput);
-		double getB(double bInput);
-		bool getExtraStars(int extraStarsInput);
-		int getDensityGrid(int densityGridInput);
-		double getCloudsMult(double cloudsMultInput);
+		std::vector<double> calculateAngles(int num, double additional);
 		double getMult(double t, double a, double b);
 		double logSpiralX(double t, double theta, double a, double b);
 		double logSpiralY(double t, double theta, double a, double b);
@@ -117,11 +106,24 @@ class CreateGalaxy {
 		void generate(std::string nameInput, std::string seedInput = "", int pixelsInput = 500, double cloudsFrequencyInput = 0.05, int armsInput = -1, double radialDistanceMultInput = -1.0, double clusterStddevInput = -1.0, double densityInput = -1.0, double aInput = 0.1, double bInput = 0.3, int extraStarsInput = -1, int densityGridInput = -1, double cloudsMultInput = -1.0, double densityMultInput = 1.0);
 
 		int at(int x, int y);
+
 		float getRed(int index);
 		float getGreen(int index);
 		float getBlue(int index);
 		float getAlpha(int index);
+
 		int getPixels();
+		int getArms();
+
+		std::string suggestName();
+		std::string suggestSeed();
+		double suggestClusterStddev();
+		double suggestRadialDistanceMult();
+		double suggestDensity();
+		double suggestSpiralA();
+		double suggestSpiralB();
+		bool suggestExtraStars();
+		double suggestCloudsMult();
 
 		void saveGalaxy();
 };
@@ -140,6 +142,7 @@ struct CreateGalaxy::StarType {
 	float alpha;
 };
 
+// TODO: Put this in a completely separate file.
 class CreateGalaxy::Galaxy {
 	std::string name;
 	std::string seed;
