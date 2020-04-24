@@ -61,8 +61,8 @@ class CreateGalaxy {
 		double radialDistanceMult;  // Changes the density of stars (this should be replaced with some type of "base density" constant since densityMult basically does the same thing).
 		double clusterStddev;  // The standard deviation of the random offset applied to each star when a cluster is placed.
 		double density;  // Arbitrary value of the density of stars (in the current implementation, increases the total number of star clusters).
-		double a;  // Arbitrary constant
-		double b;  // Rate of increase of the spiral (arbitrary constant, can be calculated with b = cot(alpha) where alpha is the angle between the radius and the tangent).
+		double spiralA;  // Arbitrary value that influences the shape of the spiral.
+		double spiralB;  // Rate of increase of the spiral (arbitrary value, can be calculated with b = cot(alpha) where alpha is the angle between the radius and the tangent).
 		bool extraStars;  // Whether or not an extra, less dense cluster of stars is added. TODO: Add extra variables that control the density and number of stars added.
 		int densityGrid;
 		double cloudsFrequency;

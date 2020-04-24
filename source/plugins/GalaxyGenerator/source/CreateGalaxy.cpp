@@ -49,8 +49,8 @@ CreateGalaxy::CreateGalaxy() {
 	radialDistanceMult = 10.0;
 	clusterStddev = 5.0;
 	density;
-	a;
-	b;
+	spiralA;
+	spiralB;
 	extraStars;
 	densityGrid = 15;
 	cloudsFrequency = 0.05;
@@ -61,31 +61,6 @@ CreateGalaxy::CreateGalaxy() {
 
 // TODO: Rename this to "run".
 void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput) {
-	seed = getSeed(seedInput);
-
-	name = getName(nameInput);
-
-	pixels = pixelsInput;
-
-	arms = getArms(armsInput);
-
-	radialDistanceMult = getRadialDistanceMult(radialDistanceMultInput);
-
-	clusterStddev = getClusterStddev(clusterStddevInput);  // pixels/100.0? pixels/40.0?(worse)
-
-	density = getDensity(densityInput);
-
-	a = getA(aInput);
-	b = getB(bInput);
-
-	extraStars = getExtraStars(extraStarsInput);
-
-	densityGrid = getDensityGrid(densityGridInput);
-
-	cloudsMult = getCloudsMult(cloudsMultInput);
-
-	densityMult = densityMultInput;
-
 	std::hash<string> seedHasher;
 	int seedInt = seedHasher(seed);
 	starClusterGen.setSeed(seed);
@@ -135,16 +110,15 @@ void CreateGalaxy::generate() {
 	//double b = 0.3;
 
 	while (!isFinished(finished)) {  // Runs until all items are marked as true
-		// double t = counter / 20.0;
-		double t = counter / density;  // t is the distance along the spiral. Increasing the density shortens the distance between two clusters of stars, making the galaxy more dense.
-		double mult = getMult(t, a, b); //0.1, 0.3
+		double spiralDistance = counter / density;  // The distance along the spiral. Increasing the density shortens the distance between two clusters of stars, making the galaxy more dense.
+		double mult = getMult(spiralDistance, spiralA, spiralB); //0.1, 0.3
 		for (int j = 0; j < arms; j++) {
 			if (finished[j]) {
 				continue;
 			}
 			theta = rotation[j];  // Angle of the current arm in radians.
-			int x = static_cast<int>((logSpiralX(t, theta, mult)) + halfway);
-			int y = static_cast<int>((logSpiralY(t, theta, mult)) + halfway);
+			int x = static_cast<int>((logSpiralX(spiralDistance, theta, mult)) + halfway);
+			int y = static_cast<int>((logSpiralY(spiralDistance, theta, mult)) + halfway);
 
 			if (x < 0 || y < 0 || x >= pixels || y >= pixels) {
 				finished[j] = true;
@@ -295,20 +269,12 @@ string CreateGalaxy::suggestName() {
 	return string("Default Name");
 }
 
-string CreateGalaxy::getSeed(string seedInput) {
-	if (seedInput.empty()) {
-		return string("placeholderseed");
-	} else {
-		return seedInput;
-	}
+string CreateGalaxy::suggestSeed(string seedInput) {
+	return string("Default Seed");
 }
 
-int CreateGalaxy::getArms(int armsInput) {
-	if (armsInput <= 0) {
-		return 4;  // Placeholder
-	} else {
-		return armsInput;
-	}
+int CreateGalaxy::getArms() {
+	return arms;
 }
 
 double CreateGalaxy::suggestClusterStddev() {
@@ -323,20 +289,16 @@ double CreateGalaxy::suggestRadialDistanceMult() {
 	return 10.0;
 }
 
-double CreateGalaxy::getDensity(double densityInput) {
-	if (densityInput <= 0.0) {
-		return (pixels / 25);
-	} else {
-		return densityInput;
-	}
+double CreateGalaxy::suggestDensity() {
+	return (pixels / 25.0);
 }
 
-double CreateGalaxy::getA(double aInput) {
-	return aInput;  // TODO: Determine what values are invalid and randomly pick a value.
+double CreateGalaxy::suggestSpiralA() {
+	return 0.1;
 }
 
-double CreateGalaxy::getB(double bInput) {
-	return bInput;  // TODO: Determine what values are invalid and randomly pick a value.
+double CreateGalaxy::suggestSpiralB() {
+	return 0.3;
 }
 
 bool CreateGalaxy::getExtraStars(int extraStarsInput) {
@@ -374,28 +336,28 @@ double CreateGalaxy::getCloudsMult(double cloudsMultInput) {
 }
 
 // Since both logSpiralX and logSpiralY both require this value, this is precalculated to save time.
-double CreateGalaxy::getMult(double t, double a, double b) {
-	return a * exp(b * t);
+double CreateGalaxy::getMult(double spiralDistance, double spiralA, double spiralB) {
+	return spiralA * exp(spiralB * spiralDistance);
 }
 
-// x = a * (e^(bt)) * cos(t);
-double CreateGalaxy::logSpiralX(double t, double theta, double a, double b) {
-	double mult = exp(b * t);
-	return (a * mult * cos(t - theta));
+// x = spiralA * (e ^ (spiralB * spiralDistance)) * cos(spiralDistance);
+double CreateGalaxy::logSpiralX(double spiralDistance, double theta, double spiralA, double spiralB) {
+	double mult = exp(spiralB * spiralDistance);
+	return (spiralA * mult * cos(spiralDistance - theta));
 }
 
-// y = a * (e^(bt)) * sin(t);
-double CreateGalaxy::logSpiralY(double t, double theta, double a, double b) {
-	double mult = exp(b * t);
-	return (a * mult * sin(t - theta));
+// y = spiralA * (e ^ (spiralB * spiralDistance)) * sin(spiralDistance);
+double CreateGalaxy::logSpiralY(double spiralDistance, double theta, double spiralA, double spiralB) {
+	double mult = exp(spiralB * spiralDistance);
+	return (spiralA * mult * sin(spiralDistance - theta));
 }
 
-double CreateGalaxy::logSpiralX(double t, double theta, double mult) {
-	return (mult * cos(t - theta));
+double CreateGalaxy::logSpiralX(double spiralDistance, double theta, double mult) {
+	return (mult * cos(spiralDistance - theta));
 }
 
-double CreateGalaxy::logSpiralY(double t, double theta, double mult) {
-	return (mult * sin(t - theta));
+double CreateGalaxy::logSpiralY(double spiralDistance, double theta, double mult) {
+	return (mult * sin(spiralDistance - theta));
 }
 
 bool CreateGalaxy::isFinished(vector<bool> finished) {
