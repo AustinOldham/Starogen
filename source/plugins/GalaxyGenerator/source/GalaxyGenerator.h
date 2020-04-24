@@ -15,8 +15,8 @@
 //You should have received a copy of the GNU General Public License
 //along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PLANETGENERATOR_H
-#define PLANETGENERATOR_H
+#ifndef GALAXYGENERATOR_H
+#define GALAXYGENERATOR_H
 
 #include <string>
 

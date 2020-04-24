@@ -103,7 +103,7 @@ class CreateGalaxy {
 		//std::vector<std::string> splitString(const std::string &s, char delimiter);
 		//std::unordered_map<std::string, int> getIDMap();
 		//std::vector<std::string> getNumToString();
-		void getProbabilities();
+		void getProbabilities();  // This may be removed when discrete_distribution is used.
 		//std::vector<std::vector<float>> getColors();
 
 	public:
