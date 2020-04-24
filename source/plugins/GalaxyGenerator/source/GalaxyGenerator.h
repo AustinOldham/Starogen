@@ -1,19 +1,19 @@
-//Copyright (C) 2019  Austin Oldham
+// Copyright (C) 2020  Austin Oldham
 //
-//This file is part of Starogen.
+// This file is part of Starogen.
 //
-//Starogen is free software: you can redistribute it and/or modify
-//it under the terms of the GNU General Public License as published by
-//the Free Software Foundation, either version 3 of the License, or
-//(at your option) any later version.
+// Starogen is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//Starogen is distributed in the hope that it will be useful,
-//but WITHOUT ANY WARRANTY; without even the implied warranty of
-//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//GNU General Public License for more details.
+// Starogen is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-//You should have received a copy of the GNU General Public License
-//along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
 #ifndef GALAXYGENERATOR_H
 #define GALAXYGENERATOR_H
@@ -35,7 +35,7 @@ class GalaxyGenerator : public Object {
 	GODOT_CLASS(GalaxyGenerator, Object)
 
 	private:
-		CreateGalaxy myGalaxy;
+		CreateGalaxy myGalaxy;  // Rename this to myGalaxyGenerator.
 	public:
 		// NOTE: Static methods do not work
 
@@ -48,7 +48,7 @@ class GalaxyGenerator : public Object {
 
 		void _process(float delta);
 		void generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput);
-		ImageTexture * getGalaxy();
+		ImageTexture * getGalaxy();  // Rename this to getGalaxyImage.
 
 		std::string toStandardString(String oldString);
 };

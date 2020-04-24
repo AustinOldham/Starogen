@@ -42,9 +42,24 @@ using json = nlohmann::json;
 // TODO: Clouds will be generated using density map where the number of stars in a square around each star (or every pixel) is used for the calculation (odd number width of search only so offset = searchWidth / 2 and the locations at galaxy[y - offset + i][x - offset + j] are checked)
 // TODO: Consider replacing the density map by adding a step to the generator where star clusters are plotted in the same way as normal stars except each cluster is more dense and each time a "star" is plotted, the number stored is incremented. The values will then be normalized to be in the range [0, 1] in order to create an approximate density map.
 CreateGalaxy::CreateGalaxy() {
+	name = "Default Name";
+	seed = "Default Seed";
+	pixels = 500;
+	arms = 4;
+	radialDistanceMult = 10.0;
+	clusterStddev = 5.0;
+	density;
+	a;
+	b;
+	extraStars;
+	densityGrid = 15;
+	cloudsFrequency = 0.05;
+	cloudsMult;
+	densityMult;
 	initializeContainers();
 }
 
+// TODO: Rename this to "run".
 void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput) {
 	seed = getSeed(seedInput);
 
@@ -276,12 +291,8 @@ vector<double> CreateGalaxy::getAngles(int num, double additional) {
 	return myAngles;
 }
 
-string CreateGalaxy::getName(string nameInput) {
-	if (nameInput.empty()) {
-		return string("placeholdername");
-	} else {
-		return nameInput;
-	}
+string CreateGalaxy::suggestName() {
+	return string("Default Name");
 }
 
 string CreateGalaxy::getSeed(string seedInput) {
@@ -300,24 +311,16 @@ int CreateGalaxy::getArms(int armsInput) {
 	}
 }
 
-double CreateGalaxy::getClusterStddev(double clusterStddevInput) {
-	if (clusterStddevInput <= 0.0) {
-		if (pixels <= 100) {
-			return pixels / 40.0;
-		} else {
-			return pixels / 100.0;
-		}
+double CreateGalaxy::suggestClusterStddev() {
+	if (pixels <= 100) {
+		return pixels / 40.0;
 	} else {
-		return clusterStddevInput;
+		return pixels / 100.0;
 	}
 }
 
-double CreateGalaxy::getRadialDistanceMult(double radialDistanceMultInput) {
-	if (radialDistanceMultInput <= 0.0) {
-		return 10.0;  // Not a placeholder
-	} else {
-		return radialDistanceMultInput;
-	}
+double CreateGalaxy::suggestRadialDistanceMult() {
+	return 10.0;
 }
 
 double CreateGalaxy::getDensity(double densityInput) {

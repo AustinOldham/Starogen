@@ -21,8 +21,9 @@ onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/Galaxy
 
 signal invalid_check(type)
 
-var x = -1
-var y = -1
+# TODO: Instead of using the generalized value checker implemented here, attempt to set the value using GDNative then show an error if the function returns false.
+# TODO: Add a button to suggest values for empty boxes.
+
 var last_width = 500
 
 var is_invalid = false
