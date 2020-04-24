@@ -40,7 +40,7 @@ using json = nlohmann::json;
 // IDEA: Instead of just choosing a number and replacing the pixel, add to it so the less dense areas will naturally have different colors
 // IDEA: Each star has an 8 (or higher) bit number pair that determines its local coordinates and may have a min/max value (e.g. 256 numbers for 8 bit but min is 10 and max is 245) to ensure sufficient space between stars. If 8 bit, the coordinates are determined by the main map coordinate plus the local coordinate divided by 255.
 // TODO: Clouds will be generated using density map where the number of stars in a square around each star (or every pixel) is used for the calculation (odd number width of search only so offset = searchWidth / 2 and the locations at galaxy[y - offset + i][x - offset + j] are checked)
-
+// TODO: Consider replacing the density map by adding a step to the generator where star clusters are plotted in the same way as normal stars except each cluster is more dense and each time a "star" is plotted, the number stored is incremented. The values will then be normalized to be in the range [0, 1] in order to create an approximate density map.
 CreateGalaxy::CreateGalaxy() {
 	initializeContainers();
 }
@@ -80,10 +80,10 @@ void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput,
 
 	myGalaxy.clear();
 	myGalaxy.resize(pixels, vector<int>(pixels, 0));
-	densityMap.clear();
-	densityMap.resize(pixels, vector<double>(pixels, 0));
-	clouds.clear();
-	clouds.resize(pixels, vector<double>(pixels, 0));
+	//densityMap.clear();
+	//densityMap.resize(pixels, vector<double>(pixels, 0));
+	//clouds.clear();
+	//clouds.resize(pixels, vector<double>(pixels, 0));
 
 	cout << name << endl;
 	cout << seed << endl;
@@ -121,7 +121,7 @@ void CreateGalaxy::generate() {
 
 	while (!isFinished(finished)) {  // Runs until all items are marked as true
 		// double t = counter / 20.0;
-		double t = counter / density;
+		double t = counter / density;  // t is the distance along the spiral. Increasing the density shortens the distance between two clusters of stars, making the galaxy more dense.
 		double mult = getMult(t, a, b); //0.1, 0.3
 		for (int j = 0; j < arms; j++) {
 			if (finished[j]) {
@@ -187,14 +187,14 @@ int CreateGalaxy::getPixels() {
 	return pixels;
 }
 
-// NOTE: Add padding to the myGalaxy vector so the star clusters don't get cut off on the edges
 
+// TODO: Completely replace or remove this function since it cannot handle large inputs.
 void CreateGalaxy::createDensityMap() {
 	int subtracted = densityGrid / 2;
 	double gridSquared = static_cast<double>(densityGrid * densityGrid);
 	for (int y = 0; y < pixels; y++) {
 		for (int x = 0; x < pixels; x++) {
-			for (int i = 0; i < densityGrid; i++) {  // NxN area where N is an odd number is the number being subtracted is N / 2
+			for (int i = 0; i < densityGrid; i++) {  // NxN area where N is an odd number and the number being subtracted is N / 2
 				for (int j = 0; j < densityGrid; j++) {
 					int gridY = y - subtracted + i;
 					int gridX = x - subtracted + j;
@@ -211,7 +211,7 @@ void CreateGalaxy::createDensityMap() {
 					}
 				}
 			}
-			densityMap[y][x] = densityMap[y][x] / gridSquared;
+			densityMap[y][x] = densityMap[y][x] / gridSquared;  // The maximum possible number of stars in each "chunk" (densityGrid * densityGrid area) is densityGrid ^ 2. This make the maximum value 1 and the minimum 0.
 			if (densityMap[y][x] > 1.0) {
 				densityMap[y][x] = 1.0;
 			}
@@ -370,6 +370,7 @@ double CreateGalaxy::getCloudsMult(double cloudsMultInput) {
 	}
 }
 
+// Since both logSpiralX and logSpiralY both require this value, this is precalculated to save time.
 double CreateGalaxy::getMult(double t, double a, double b) {
 	return a * exp(b * t);
 }

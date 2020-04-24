@@ -60,10 +60,10 @@ class CreateGalaxy {
 		int arms;  // Stores the number of arms the spiral galaxy should have.
 		double radialDistanceMult;  // Changes the density of stars (this should be replaced with some type of "base density" constant since densityMult basically does the same thing).
 		double clusterStddev;  // The standard deviation of the random offset applied to each star when a cluster is placed.
-		double density;
-		double a;
-		double b;
-		bool extraStars;
+		double density;  // Arbitrary value of the density of stars (in the current implementation, increases the total number of star clusters).
+		double a;  // Arbitrary constant
+		double b;  // Rate of increase of the spiral (arbitrary constant, can be calculated with b = cot(alpha) where alpha is the angle between the radius and the tangent).
+		bool extraStars;  // Whether or not an extra, less dense cluster of stars is added. TODO: Add extra variables that control the density and number of stars added.
 		int densityGrid;
 		double cloudsMult;
 		double densityMult;
@@ -112,6 +112,7 @@ class CreateGalaxy {
 		CreateGalaxy();
 
 		// NOTE: The default arguments will likely be removed and instead be the default in the game.
+		// TODO: Replace this long list of parameters with individual setters in order to improve readability.
 		void generate(std::string nameInput, std::string seedInput = "", int pixelsInput = 500, double cloudsFrequencyInput = 0.05, int armsInput = -1, double radialDistanceMultInput = -1.0, double clusterStddevInput = -1.0, double densityInput = -1.0, double aInput = 0.1, double bInput = 0.3, int extraStarsInput = -1, int densityGridInput = -1, double cloudsMultInput = -1.0, double densityMultInput = 1.0);
 
 		int at(int x, int y);
