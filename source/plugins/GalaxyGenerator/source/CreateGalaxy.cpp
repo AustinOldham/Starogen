@@ -1,4 +1,4 @@
-//Copyright (C) 2019  Austin Oldham
+//Copyright (C) 2020  Austin Oldham
 //
 //This file is part of Starogen.
 //
@@ -127,7 +127,7 @@ void CreateGalaxy::generate() {
 			if (finished[j]) {
 				continue;
 			}
-			theta = rotation[j];
+			theta = rotation[j];  // Angle of the current arm in radians.
 			int x = static_cast<int>((logSpiralX(t, theta, mult)) + halfway);
 			int y = static_cast<int>((logSpiralY(t, theta, mult)) + halfway);
 
@@ -244,8 +244,7 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, double dist
 }
 
 int CreateGalaxy::plotStar(double distanceProportion) {
-	// TODO: Choose stars randomly (maybe add bias by storing the first star generated at x and y then rerolling if that star does not match)
-	// Choose using this https://stackoverflow.com/a/9330667/11356785
+	// TODO: Replace this implementation with std::discrete_distribution.
 
 	double probability = starClusterGen.next(0.0, 1.0);
 	double probabilitySum = 0.0;

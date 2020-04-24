@@ -55,11 +55,11 @@ class CreateGalaxy {
 
 		std::string name;
 		std::string seed;
-		int pixels;  // Width of the galaxy
+		int pixels;  // Stores the width of the galaxy.
 		//double coreLocation;  // Proportion of the distance between the center and the edge that makes up the core (currently unused).
-		int arms;
-		double radialDistanceMult;
-		double clusterStddev;
+		int arms;  // Stores the number of arms the spiral galaxy should have.
+		double radialDistanceMult;  // Changes the density of stars (this should be replaced with some type of "base density" constant since densityMult basically does the same thing).
+		double clusterStddev;  // The standard deviation of the random offset applied to each star when a cluster is placed.
 		double density;
 		double a;
 		double b;
