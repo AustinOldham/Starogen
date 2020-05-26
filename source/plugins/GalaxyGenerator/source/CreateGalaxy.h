@@ -63,7 +63,7 @@ class CreateGalaxy {
 		double density;  // Arbitrary value of the density of stars (in the current implementation, increases the total number of star clusters).
 		double spiralA;  // Arbitrary value that influences the shape of the spiral.
 		double spiralB;  // Rate of increase of the spiral (arbitrary value, can be calculated with b = cot(alpha) where alpha is the angle between the radius and the tangent).
-		bool extraStars;  // Whether or not an extra, less dense cluster of stars is added. TODO: Add extra variables that control the density and number of stars added.
+		int extraStars;  // Whether or not an extra, less dense cluster of stars is added. TODO: Add extra variables that control the density and number of stars added.
 		// int densityGrid;
 		double cloudsFrequency;
 		double cloudsMult;
@@ -137,7 +137,7 @@ class CreateGalaxy {
 		double suggestDensity();
 		double suggestSpiralA();
 		double suggestSpiralB();
-		bool suggestExtraStars();
+		int suggestExtraStars();
 		double suggestCloudsMult();
 
 		void saveGalaxy();

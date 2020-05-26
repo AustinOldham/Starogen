@@ -72,7 +72,7 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 
 	Godot::print("here2");
 
-	int pixels = myGalaxy.getPixels();
+	int pixels = myGalaxyGenerator.getPixels();
 
 	Godot::print("here3");
 
@@ -87,8 +87,8 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 
 	for (int y = 0; y < pixels; y++) {
 		for (int x = 0; x < pixels; x++) {
-			int curr = myGalaxy.at(x, y);
-			m->set_pixel(x, y, Color(myGalaxy.getRed(curr), myGalaxy.getGreen(curr), myGalaxy.getBlue(curr), myGalaxy.getAlpha(curr)));
+			int curr = myGalaxyGenerator.at(x, y);
+			m->set_pixel(x, y, Color(myGalaxyGenerator.getRed(curr), myGalaxyGenerator.getGreen(curr), myGalaxyGenerator.getBlue(curr), myGalaxyGenerator.getAlpha(curr)));
 		}
 	}
 

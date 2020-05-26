@@ -47,7 +47,7 @@ CreateGalaxy::CreateGalaxy() {
 	density = 20.0;
 	spiralA = 0.1;
 	spiralB = 0.3;
-	extraStars = true;
+	extraStars = 1;
 	// densityGrid = 15;
 	cloudsFrequency = 0.05;
 	cloudsMult = 5.0;
@@ -133,7 +133,7 @@ void CreateGalaxy::generate() {
 			// Create a map between star type and distance then choose the closest type that is greater than or equal to the number generated with "probability = starClusterGen.nextNormal(distanceProportion, 0.1)".
 			double distanceProportion = (maxRadialDistance - currRadialDistance) / maxRadialDistance;
 			int localDensity = static_cast<int>(distanceProportion * radialDistanceMult * densityMult);
-			if (extraStars) {
+			for (int k = 0; k < extraStars; k++) {
 				starCluster(x, y, localDensity, 10.0 * clusterStddev, distanceProportion); //5.0 * 10.0  Adds background clutter
 			}
 			starCluster(x, y, localDensity, clusterStddev, distanceProportion);  //stddev = 5.0
@@ -153,6 +153,114 @@ bool CreateGalaxy::setName(string nameInput) {
 	} else {
 		name = nameInput;
 		return true;
+	}
+}
+
+bool CreateGalaxy::setSeed(string seedInput) {
+	if (seedInput.empty()) {
+		return false;
+	} else {
+		seed = seedInput;
+		return true;
+	}
+}
+
+bool CreateGalaxy::setPixels(int pixelsInput) {
+	if (pixelsInput > 0) {
+		pixels = pixelsInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setCloudsFrequency(double cloudsFrequencyInput) {
+	if (cloudsFrequencyInput > 0) {
+		cloudsFrequency = cloudsFrequencyInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setArms(int armsInput) {
+	if (armsInput > 0) {
+		arms = armsInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setRadialDistanceMult(double radialDistanceMultInput) {
+	if (radialDistanceMultInput > 0) {
+		radialDistanceMult = radialDistanceMultInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setClusterStddev(double clusterStddevInput) {
+	if (clusterStddevInput >= 0) {
+		clusterStddev = clusterStddevInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setDensity(double densityInput) {
+	if (densityInput > 0) {
+		density = densityInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setSpiralA(double spiralAInput) {
+	if (spiralAInput != 0) {
+		spiralA = spiralAInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setSpiralB(double spiralBInput) {
+	if (spiralBInput != 0) {
+		spiralB = spiralBInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setExtraStars(int extraStarsInput) {
+	if (extraStarsInput >= 0) {
+		extraStars = extraStarsInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setCloudsMult(double cloudsMultInput) {
+	if (cloudsMultInput > 0) {
+		cloudsMult = cloudsMultInput;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CreateGalaxy::setDensityMult(double densityMultInput) {
+	if (densityMultInput > 0) {
+		densityMult = densityMultInput;
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -308,11 +416,11 @@ double CreateGalaxy::suggestSpiralB() {
 	return 0.3;
 }
 
-bool CreateGalaxy::suggestExtraStars() {
+int CreateGalaxy::suggestExtraStars() {
 	if (pixels <= 100) {
-		return false;
+		return 0;
 	} else {
-		return true;
+		return 1;
 	}
 }
 
