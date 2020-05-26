@@ -26,6 +26,19 @@ void GalaxyGenerator::_register_methods() {
 	register_method("getGalaxy", &GalaxyGenerator::getGalaxy);
 
 	register_method("setName", &GalaxyGenerator::setName);
+	register_method("setSeed", &GalaxyGenerator::setSeed);
+	register_method("setPixels", &GalaxyGenerator::setPixels);
+	register_method("setCloudsFrequency", &GalaxyGenerator::setCloudsFrequency);
+	register_method("setArms", &GalaxyGenerator::setArms);
+	register_method("setRadialDistanceMult", &GalaxyGenerator::setRadialDistanceMult);
+	register_method("setClusterStddev", &GalaxyGenerator::setClusterStddev);
+	register_method("setDensity", &GalaxyGenerator::setDensity);
+	register_method("setSpiralA", &GalaxyGenerator::setSpiralA);
+	register_method("setSpiralB", &GalaxyGenerator::setSpiralB);
+	register_method("setExtraStars", &GalaxyGenerator::setExtraStars);
+	register_method("setCloudsMult", &GalaxyGenerator::setCloudsMult);
+	register_method("setDensityMult", &GalaxyGenerator::setDensityMult);
+
 }
 
 GalaxyGenerator::GalaxyGenerator() {
@@ -43,10 +56,8 @@ void GalaxyGenerator::_process(float delta) {
 
 }
 
-void GalaxyGenerator::generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput) {
-	std::string name(toStandardString(nameInput));
-	std::string seed(toStandardString(seedInput));
-	myGalaxyGenerator.run(name, seed, pixelsInput, cloudsFrequencyInput, armsInput, radialDistanceMultInput, clusterStddevInput, densityInput, aInput, bInput, extraStarsInput, densityGridInput, cloudsMultInput, densityMultInput);
+void GalaxyGenerator::generateGalaxy() {
+	myGalaxyGenerator.run();
 }
 
 
