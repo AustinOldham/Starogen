@@ -113,55 +113,55 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 	return t;
 }
 
-bool setName(String nameInput) {
+bool GalaxyGenerator::setName(String nameInput) {
 	return myGalaxyGenerator.setName(toStandardString(nameInput));
 }
 
-bool setSeed(String seedInput) {
+bool GalaxyGenerator::setSeed(String seedInput) {
 	return myGalaxyGenerator.setSeed(toStandardString(seedInput));
 }
 
-bool setPixels(int pixelsInput) {
+bool GalaxyGenerator::setPixels(int pixelsInput) {
 	return myGalaxyGenerator.setPixels(pixelsInput);
 }
 
-bool setCloudsFrequency(double cloudsFrequencyInput) {
+bool GalaxyGenerator::setCloudsFrequency(double cloudsFrequencyInput) {
 	return myGalaxyGenerator.setCloudsFrequency(cloudsFrequencyInput);
 }
 
-bool setArms(int armsInput) {
+bool GalaxyGenerator::setArms(int armsInput) {
 	return myGalaxyGenerator.setArms(armsInput);
 }
 
-bool setRadialDistanceMult(double radialDistanceMultInput) {
+bool GalaxyGenerator::setRadialDistanceMult(double radialDistanceMultInput) {
 	return myGalaxyGenerator.setRadialDistanceMult(radialDistanceMultInput);
 }
 
-bool setClusterStddev(double clusterStddevInput) {
+bool GalaxyGenerator::setClusterStddev(double clusterStddevInput) {
 	return myGalaxyGenerator.setClusterStddev(clusterStddevInput);
 }
 
-bool setDensity(double densityInput) {
+bool GalaxyGenerator::setDensity(double densityInput) {
 	return myGalaxyGenerator.setDensity(densityInput);
 }
 
-bool setSpiralA(double spiralAInput) {
+bool GalaxyGenerator::setSpiralA(double spiralAInput) {
 	return myGalaxyGenerator.setSpiralA(spiralAInput);
 }
 
-bool setSpiralB(double spiralBInput) {
+bool GalaxyGenerator::setSpiralB(double spiralBInput) {
 	return myGalaxyGenerator.setSpiralB(spiralBInput);
 }
 
-bool setExtraStars(int extraStarsInput) {
+bool GalaxyGenerator::setExtraStars(int extraStarsInput) {
 	return myGalaxyGenerator.setExtraStars(extraStarsInput);
 }
 
-bool setCloudsMult(double cloudsMultInput) {
+bool GalaxyGenerator::setCloudsMult(double cloudsMultInput) {
 	return myGalaxyGenerator.setCloudsMult(cloudsMultInput);
 }
 
-bool setDensityMult(double densityMultInput) {
+bool GalaxyGenerator::setDensityMult(double densityMultInput) {
 	return myGalaxyGenerator.setDensityMult(densityMultInput);
 }
 
