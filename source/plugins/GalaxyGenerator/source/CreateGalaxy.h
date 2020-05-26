@@ -115,6 +115,21 @@ class CreateGalaxy {
 		int getPixels();
 		int getArms();
 
+		bool setName(std::string nameInput);
+		bool setSeed(std::string seedInput);
+		bool setPixels(int pixelsInput);
+		bool setCloudsFrequency(double cloudsFrequencyInput);
+		bool setArms(int armsInput);
+		bool setRadialDistanceMult(double radialDistanceMultInput);
+		bool setClusterStddev(double clusterStddevInput);
+		bool setDensity(double densityInput);
+		bool setSpiralA(double spiralAInput);
+		bool setSpiralB(double spiralBInput);
+		bool setExtraStars(int extraStarsInput);
+		// bool setDensityGrid(int densityGridInput);
+		bool setCloudsMult(double cloudsMultInput);
+		bool setDensityMult(double densityMultInput);
+
 		std::string suggestName();
 		std::string suggestSeed();
 		double suggestClusterStddev();
