@@ -36,6 +36,7 @@ class GalaxyGenerator : public Object {
 
 	private:
 		CreateGalaxy myGalaxy;  // Rename this to myGalaxyGenerator.
+
 	public:
 		// NOTE: Static methods do not work
 
@@ -47,8 +48,27 @@ class GalaxyGenerator : public Object {
 		void _init();
 
 		void _process(float delta);
-		void generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput);
+		void generateGalaxy();
 		ImageTexture * getGalaxy();  // Rename this to getGalaxyImage.
+
+		bool setName(String nameInput);
+		bool setSeed(String seedInput);
+		bool setPixels(int pixelsInput);
+		bool setCloudsFrequency(double cloudsFrequencyInput);
+		bool setArms(int armsInput);
+		bool setRadialDistanceMult(double radialDistanceMultInput);
+		bool setClusterStddev(double clusterStddevInput);
+		bool setDensity(double densityInput);
+		bool setSpiralA(double spiralAInput);
+		bool setSpiralB(double spiralBInput);
+		bool setExtraStars(int extraStarsInput);
+		// bool setDensityGrid(int densityGridInput);
+		bool setCloudsMult(double cloudsMultInput);
+		bool setDensityMult(double densityMultInput);
+
+
+
+
 
 		std::string toStandardString(String oldString);
 };

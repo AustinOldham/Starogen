@@ -103,7 +103,7 @@ class CreateGalaxy {
 
 		// NOTE: The default arguments will likely be removed and instead be the default in the game.
 		// TODO: Replace this long list of parameters with individual setters in order to improve readability.
-		void generate(std::string nameInput, std::string seedInput = "", int pixelsInput = 500, double cloudsFrequencyInput = 0.05, int armsInput = -1, double radialDistanceMultInput = -1.0, double clusterStddevInput = -1.0, double densityInput = -1.0, double aInput = 0.1, double bInput = 0.3, int extraStarsInput = -1, int densityGridInput = -1, double cloudsMultInput = -1.0, double densityMultInput = 1.0);
+		void run(std::string nameInput, std::string seedInput = "", int pixelsInput = 500, double cloudsFrequencyInput = 0.05, int armsInput = -1, double radialDistanceMultInput = -1.0, double clusterStddevInput = -1.0, double densityInput = -1.0, double aInput = 0.1, double bInput = 0.3, int extraStarsInput = -1, int densityGridInput = -1, double cloudsMultInput = -1.0, double densityMultInput = 1.0);
 
 		int at(int x, int y);
 

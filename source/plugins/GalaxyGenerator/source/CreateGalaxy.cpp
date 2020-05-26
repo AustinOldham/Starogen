@@ -56,7 +56,7 @@ CreateGalaxy::CreateGalaxy() {
 }
 
 // TODO: Rename this to "run".
-void CreateGalaxy::generate(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput) {
+void CreateGalaxy::run(string nameInput, string seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput) {
 	std::hash<string> seedHasher;
 	int seedInt = seedHasher(seed);
 	starClusterGen.setSeed(seed);
@@ -145,6 +145,15 @@ void CreateGalaxy::generate() {
 	createDensityMap();
 	createClouds();
 	// cout << "myGalaxy[y][x]: " << myGalaxy[2][1] << endl;
+}
+
+bool CreateGalaxy::setName(string nameInput) {
+	if (nameInput.empty()) {
+		return false;
+	} else {
+		name = nameInput;
+		return true;
+	}
 }
 
 int CreateGalaxy::at(int x, int y) {
