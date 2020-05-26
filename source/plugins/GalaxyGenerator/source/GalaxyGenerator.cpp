@@ -46,7 +46,7 @@ void GalaxyGenerator::_process(float delta) {
 void GalaxyGenerator::generateGalaxy(String nameInput, String seedInput, int pixelsInput, double cloudsFrequencyInput, int armsInput, double radialDistanceMultInput, double clusterStddevInput, double densityInput, double aInput, double bInput, int extraStarsInput, int densityGridInput, double cloudsMultInput, double densityMultInput) {
 	std::string name(toStandardString(nameInput));
 	std::string seed(toStandardString(seedInput));
-	myGalaxy.run(name, seed, pixelsInput, cloudsFrequencyInput, armsInput, radialDistanceMultInput, clusterStddevInput, densityInput, aInput, bInput, extraStarsInput, densityGridInput, cloudsMultInput, densityMultInput);
+	myGalaxyGenerator.run(name, seed, pixelsInput, cloudsFrequencyInput, armsInput, radialDistanceMultInput, clusterStddevInput, densityInput, aInput, bInput, extraStarsInput, densityGridInput, cloudsMultInput, densityMultInput);
 }
 
 
@@ -100,6 +100,58 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 	Godot::print("here10");
 
 	return t;
+}
+
+bool setName(String nameInput) {
+	return myGalaxyGenerator.setName(toStandardString(nameInput));
+}
+
+bool setSeed(String seedInput) {
+	return myGalaxyGenerator.setSeed(toStandardString(seedInput));
+}
+
+bool setPixels(int pixelsInput) {
+	return myGalaxyGenerator.setPixels(pixelsInput);
+}
+
+bool setCloudsFrequency(double cloudsFrequencyInput) {
+	return myGalaxyGenerator.setCloudsFrequency(cloudsFrequencyInput);
+}
+
+bool setArms(int armsInput) {
+	return myGalaxyGenerator.setArms(armsInput);
+}
+
+bool setRadialDistanceMult(double radialDistanceMultInput) {
+	return myGalaxyGenerator.setRadialDistanceMult(radialDistanceMultInput);
+}
+
+bool setClusterStddev(double clusterStddevInput) {
+	return myGalaxyGenerator.setClusterStddev(clusterStddevInput);
+}
+
+bool setDensity(double densityInput) {
+	return myGalaxyGenerator.setDensity(densityInput);
+}
+
+bool setSpiralA(double spiralAInput) {
+	return myGalaxyGenerator.setSpiralA(spiralAInput);
+}
+
+bool setSpiralB(double spiralBInput) {
+	return myGalaxyGenerator.setSpiralB(spiralBInput);
+}
+
+bool setExtraStars(int extraStarsInput) {
+	return myGalaxyGenerator.setExtraStars(extraStarsInput);
+}
+
+bool setCloudsMult(double cloudsMultInput) {
+	return myGalaxyGenerator.setCloudsMult(cloudsMultInput);
+}
+
+bool setDensityMult(double densityMultInput) {
+	return myGalaxyGenerator.setDensityMult(densityMultInput);
 }
 
 std::string GalaxyGenerator::toStandardString(String oldString) {

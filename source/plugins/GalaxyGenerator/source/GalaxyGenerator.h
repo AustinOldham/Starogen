@@ -35,7 +35,7 @@ class GalaxyGenerator : public Object {
 	GODOT_CLASS(GalaxyGenerator, Object)
 
 	private:
-		CreateGalaxy myGalaxy;  // Rename this to myGalaxyGenerator.
+		CreateGalaxy myGalaxyGenerator;
 
 	public:
 		// NOTE: Static methods do not work
