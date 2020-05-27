@@ -24,6 +24,7 @@ signal invalid_check(type, value)
 # TODO: Instead of using the generalized value checker implemented here, attempt to set the value using GDNative then show an error if the function returns false.
 # TODO: Add a button to suggest values for empty boxes.
 
+"""
 var last_width = 500
 
 var is_invalid = false
@@ -41,7 +42,7 @@ var b = 0.3
 var extra_stars = -1
 var density_grid = -1
 var density_mult = 1
-
+"""
 
 func _ready():
 	pass
@@ -123,89 +124,93 @@ func _check_success(result, type):
 	else:
 		emit_signal("invalid_check", type, true)  # Invalid input
 
+
 func _on_CloudsMultEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "Clouds Mult")
 	if (is_valid):
 		_check_success(galaxy_generator.setCloudsMult(float(new_text)), "Clouds Mult")
 
 
-
 func _on_NameEdit_text_changed(new_text):
-	name_input = new_text
+	var is_valid = _check_input_text(new_text, "Name")
+	if (is_valid):
+		_check_success(galaxy_generator.setName(new_text), "Name")
 
 
 func _on_SeedEdit_text_changed(new_text):
-	seed_input = new_text
+	var is_valid = _check_input_text(new_text, "Seed")
+	if (is_valid):
+		_check_success(galaxy_generator.setSeed(new_text), "Seed")
 
 
 func _on_SizeEdit_text_changed(new_text):
-	pixels = _check_input_int(new_text, "Size")
+	var is_valid = _check_input_int(new_text, "Size")
+	if (is_valid):
+		_check_success(galaxy_generator.setPixels(int(new_text)), "Size")
 
 
 func _on_CloudsFrequencyEdit_text_changed(new_text):
-	clouds_frequency = _check_input_float(new_text, "Clouds Frequency")
+	var is_valid = _check_input_float(new_text, "Clouds Frequency")
+	if (is_valid):
+		_check_success(galaxy_generator.setCloudsFrequency(float(new_text)), "Clouds Frequency")
 
 
 func _on_ArmsEdit_text_changed(new_text):
-	arms = _check_input_int(new_text, "Arms")
+	var is_valid = _check_input_int(new_text, "Arms")
+	if (is_valid):
+		_check_success(galaxy_generator.setArms(int(new_text)), "Arms")
 
 
 func _on_RadialDistanceMultEdit_text_changed(new_text):
-	radial_distance_mult = _check_input_float(new_text, "Radial Distance Mult")
+	var is_valid = _check_input_float(new_text, "Radial Distance Mult")
+	if (is_valid):
+		_check_success(galaxy_generator.setRadialDistanceMult(float(new_text)), "Radial Distance Mult")
 
 
 func _on_ClusterStddevEdit_text_changed(new_text):
-	cluster_stddev = _check_input_float(new_text, "Cluster Stddev")
+	var is_valid = _check_input_float(new_text, "Cluster Stddev")
+	if (is_valid):
+		_check_success(galaxy_generator.setClusterStddev(float(new_text)), "Cluster Stddev")
+
 
 
 func _on_DensityEdit_text_changed(new_text):
-	density = _check_input_float(new_text, "Density")
+	var is_valid = _check_input_float(new_text, "Density")
+	if (is_valid):
+		_check_success(galaxy_generator.setDensity(float(new_text)), "Density")
 
 
 func _on_AEdit_text_changed(new_text):
-	if (new_text.is_valid_float()):
-		a = float(new_text)
-		emit_signal("invalid_check", "")
-	elif (new_text.empty()):
-		a = 0.1
-		emit_signal("invalid_check", "")
-	else:
-		a = 0.1
-		emit_signal("invalid_check", "A")
+	var is_valid = _check_input_float(new_text, "SpiralA")
+	if (is_valid):
+		_check_success(galaxy_generator.setSpiralA(float(new_text)), "SpiralA")
 
 
 func _on_BEdit_text_changed(new_text):
-	if (new_text.is_valid_float()):
-		if (float(new_text) <= 0):
-			b = 0.3
-			emit_signal("invalid_check", "B")
-		else:
-			b = float(new_text)
-			emit_signal("invalid_check", "")
-	elif (new_text.empty()):
-		b = 0.3
-		emit_signal("invalid_check", "")
-	else:
-		b = 0.3
-		emit_signal("invalid_check", "B")
+	var is_valid = _check_input_float(new_text, "SpiralB")
+	if (is_valid):
+		_check_success(galaxy_generator.setSpiralB(float(new_text)), "SpiralB")
+
+# Redo this
+func _on_ExtraStarsEdit_item_selected(new_text):
+	var is_valid = _check_input_int(new_text, "Extra Stars")
+	if (is_valid):
+		_check_success(galaxy_generator.setExtraStars(int(new_text)), "Extra Stars")
 
 
-func _on_ExtraStarsEdit_item_selected(ID):
-	if (ID == 1):
-		extra_stars = 1
-	elif (ID == 2):
-		extra_stars = 0
-	else:
-		extra_stars = -1
+func _on_DensityMultEdit_text_changed(new_text):
+	var is_valid = _check_input_float(new_text, "Density Mult")
+	if (is_valid):
+		_check_success(galaxy_generator.setDensityMult(float(new_text)), "Density Mult")
 
-
+"""
 func _on_DensityGridEdit_text_changed(new_text):
 	density_grid = _check_input_int(new_text, "Density Grid")
-
+"""
 
 func _on_Generate_pressed():
 	print("Generation started")
-	galaxy_generator.generateGalaxy(name_input, seed_input, pixels, clouds_frequency, arms, radial_distance_mult, cluster_stddev, density, a, b, extra_stars, density_grid, clouds_mult, density_mult)
+	galaxy_generator.generateGalaxy()
 	$CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite.texture = galaxy_generator.getGalaxy()
 	print("Generation complete")
 
@@ -214,6 +219,4 @@ func _on_Start_pressed():
 	pass # Replace with function body.
 
 
-func _on_DensityMultEdit_text_changed(new_text):
-	density_mult = _check_input_float(new_text, "Density Mult")
-	print(density_mult)
+
