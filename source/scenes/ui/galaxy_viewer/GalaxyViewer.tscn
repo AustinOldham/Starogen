@@ -442,6 +442,7 @@ texture = ExtResource( 10 )
 expand = true
 stretch_mode = 2
 script = ExtResource( 11 )
+[connection signal="invalid_check" from="." to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_GalaxyViewer_invalid_check"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/NameEdit" to="." method="_on_NameEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SeedEdit" to="." method="_on_SeedEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SizeEdit" to="." method="_on_SizeEdit_text_changed"]
@@ -459,6 +460,6 @@ script = ExtResource( 11 )
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="." method="_on_Generate_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" method="_on_Generate_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="." method="_on_Start_pressed"]
-[connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_Sprite_invalid_check"]
 [connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Sprite_invalid_check"]
+[connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_Sprite_invalid_check"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Recenter_pressed"]

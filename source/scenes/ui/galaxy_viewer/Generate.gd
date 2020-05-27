@@ -12,8 +12,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_Sprite_invalid_check(type):
+func _on_GalaxyViewer_invalid_check(type):
 	if (type.empty()):
 		disabled = false
 	else:

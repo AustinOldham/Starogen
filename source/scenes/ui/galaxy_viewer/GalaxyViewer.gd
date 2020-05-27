@@ -19,7 +19,7 @@ extends Node2D
 
 onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
-signal invalid_check(type)
+signal invalid_check(type, value)
 
 # TODO: Instead of using the generalized value checker implemented here, attempt to set the value using GDNative then show an error if the function returns false.
 # TODO: Add a button to suggest values for empty boxes.
@@ -46,7 +46,7 @@ var density_mult = 1
 func _ready():
 	pass
 
-
+"""
 func _check_input_float(text, type, default, less_than, invalid_num):
 	if (text.empty()):
 		emit_signal("invalid_check", "")
@@ -69,7 +69,8 @@ func _check_input_float(text, type, default, less_than, invalid_num):
 	else:
 		emit_signal("invalid_check", type)
 		return default
-
+"""
+"""
 func _check_input_int(text, type, default, less_than, invalid_num):
 	if (text.empty()):
 		emit_signal("invalid_check", "")
@@ -92,9 +93,40 @@ func _check_input_int(text, type, default, less_than, invalid_num):
 	else:
 		emit_signal("invalid_check", type)
 		return default
+"""
+
+func _check_input_text(text, type):
+	if (text.empty()):
+		emit_signal("invalid_check", type, true)  # Invalid input
+		return false
+	else:
+		# emit_signal("invalid_check", type, false)  # Removed since a signal for valid input should only be made when the generator checks it.
+		return true  # Valid input
+
+func _check_input_float(text, type):
+	if (text.empty()):
+		emit_signal("invalid_check", type, true)  # Invalid input
+		return false
+	elif (text.is_valid_float()):
+		# emit_signal("invalid_check", type, false)  # Removed since a signal for valid input should only be made when the generator checks it.
+		return true   # Valid input
+	else:
+		emit_signal("invalid_check", type, true)  # Invalid input
+		return false
+
+func _check_input_int(text, type):
+	return _check_input_float(text, type)
+
+func _check_success(result, type):
+	if (result == true):
+		emit_signal("invalid_check", type, false)  # Valid input
+	else:
+		emit_signal("invalid_check", type, true)  # Invalid input
 
 func _on_CloudsMultEdit_text_changed(new_text):
-	clouds_mult = _check_input_float(new_text, "Clouds Mult", -1.0, true, 0.0)
+	var is_valid = _check_input_float(new_text, "Clouds Mult")
+	if (is_valid):
+		_check_success(galaxy_generator.setCloudsMult(float(new_text)), "Clouds Mult")
 
 
 
@@ -107,27 +139,27 @@ func _on_SeedEdit_text_changed(new_text):
 
 
 func _on_SizeEdit_text_changed(new_text):
-	pixels = _check_input_int(new_text, "Size", 500, true, 0)
+	pixels = _check_input_int(new_text, "Size")
 
 
 func _on_CloudsFrequencyEdit_text_changed(new_text):
-	clouds_frequency = _check_input_float(new_text, "Clouds Frequency", 0.05, true, 0.0)
+	clouds_frequency = _check_input_float(new_text, "Clouds Frequency")
 
 
 func _on_ArmsEdit_text_changed(new_text):
-	arms = _check_input_int(new_text, "Arms", -1, true, 0)
+	arms = _check_input_int(new_text, "Arms")
 
 
 func _on_RadialDistanceMultEdit_text_changed(new_text):
-	radial_distance_mult = _check_input_float(new_text, "Radial Distance Mult", -1.0, true, 0.0)
+	radial_distance_mult = _check_input_float(new_text, "Radial Distance Mult")
 
 
 func _on_ClusterStddevEdit_text_changed(new_text):
-	cluster_stddev = _check_input_float(new_text, "Cluster Stddev", -1.0, true, 0.0)
+	cluster_stddev = _check_input_float(new_text, "Cluster Stddev")
 
 
 func _on_DensityEdit_text_changed(new_text):
-	density = _check_input_float(new_text, "Density", -1.0, true, 0.0)
+	density = _check_input_float(new_text, "Density")
 
 
 func _on_AEdit_text_changed(new_text):
@@ -168,7 +200,7 @@ func _on_ExtraStarsEdit_item_selected(ID):
 
 
 func _on_DensityGridEdit_text_changed(new_text):
-	density_grid = _check_input_int(new_text, "Density Grid", -1, true, 0)
+	density_grid = _check_input_int(new_text, "Density Grid")
 
 
 func _on_Generate_pressed():
@@ -183,5 +215,5 @@ func _on_Start_pressed():
 
 
 func _on_DensityMultEdit_text_changed(new_text):
-	density_mult = _check_input_float(new_text, "Density Mult", 1.0, true, 0.0)
+	density_mult = _check_input_float(new_text, "Density Mult")
 	print(density_mult)
