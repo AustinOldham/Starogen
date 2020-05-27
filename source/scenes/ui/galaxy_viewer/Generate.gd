@@ -12,8 +12,5 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _on_GalaxyViewer_invalid_check(type):
-	if (type.empty()):
-		disabled = false
-	else:
-		disabled = true
+func _on_Invalid_prevent_generate(value):
+	disabled = value
