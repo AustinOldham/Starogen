@@ -19,6 +19,8 @@ extends Node2D
 
 onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
+const galaxy_star = preload("res://prototypes/galaxy/GalaxyStar.tscn")
+
 signal invalid_check(type, value)
 
 # TODO: Add a button to suggest values for empty boxes.
@@ -227,9 +229,21 @@ func _on_DensityGridEdit_text_changed(new_text):
 """
 
 func _on_Generate_pressed():
+	"""
 	print("Generation started")
 	galaxy_generator.generateGalaxy()
 	$CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite.texture = galaxy_generator.getGalaxy()
+	print("Generation complete")
+	"""
+	print("Generation started")
+	galaxy_generator.generateGalaxy()
+	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
+	for y in range(galaxy_generator.getPixels()):
+		for x in range(galaxy_generator.getPixels()):
+			if (galaxy_generator.at(x, y) != 0):
+				var new_star = galaxy_star.instance()
+				gui_galaxy.add_child(new_star)
+				new_star.set_position(Vector2(x, y))
 	print("Generation complete")
 
 

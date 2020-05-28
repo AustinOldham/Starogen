@@ -7,19 +7,11 @@
 [ext_resource path="res://scenes/ui/galaxy_viewer/Generate.gd" type="Script" id=5]
 [ext_resource path="res://scenes/ui/galaxy_viewer/Invalid.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui/galaxy_viewer/Start.gd" type="Script" id=7]
-[ext_resource path="res://scenes/celestial_objects/galaxy/Sprite.gd" type="Script" id=8]
-[ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=9]
-[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=10]
-[ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=11]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-corner_detail = 1
+[ext_resource path="res://images/ui/themes/default_galaxyviewer.tres" type="StyleBox" id=8]
+[ext_resource path="res://scenes/ui/galaxy_viewer/Galaxy.gd" type="Script" id=9]
+[ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=10]
+[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=11]
+[ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=12]
 
 [node name="GalaxyViewer" type="Node2D"]
 z_as_relative = false
@@ -44,6 +36,7 @@ margin_bottom = 590.0
 split_offset = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
+editor/display_folded = true
 margin_right = 277.0
 margin_bottom = 510.0
 
@@ -409,13 +402,10 @@ margin_right = 695.0
 margin_bottom = 484.0
 rect_clip_content = true
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Galaxy" type="Node2D" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox"]
-
-[node name="Sprite" type="Sprite" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy"]
-centered = false
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="Recenter" type="ToolButton" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2"]
 margin_top = 488.0
@@ -432,13 +422,13 @@ layer = -20
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/MarginContainer/ParallaxBackground"]
 motion_mirroring = Vector2( 500, 500 )
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 expand = true
 stretch_mode = 2
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 [connection signal="invalid_check" from="." to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_GalaxyViewer_invalid_check"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/NameEdit" to="." method="_on_NameEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/SeedEdit" to="." method="_on_SeedEdit_text_changed"]
@@ -458,6 +448,4 @@ script = ExtResource( 11 )
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" method="_on_Generate_pressed"]
 [connection signal="prevent_generate" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Invalid_prevent_generate"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="." method="_on_Start_pressed"]
-[connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" method="_on_Sprite_invalid_check"]
-[connection signal="invalid_check" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Sprite_invalid_check"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite" method="_on_Recenter_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy" method="_on_Recenter_pressed"]
