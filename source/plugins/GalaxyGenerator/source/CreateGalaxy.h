@@ -28,6 +28,7 @@
 #include <unordered_map>
 #include <cassert>
 #include <functional>
+#include <utility>
 
 
 #include <iomanip>
@@ -49,7 +50,9 @@ class CreateGalaxy {
 		class Planet;
 		std::vector<StarType> starList;
 
-		std::vector<std::vector<int>> myGalaxy;
+		// std::vector<std::vector<int>> myGalaxy;
+		std::unordered_map<std::pair<int, int>, int> blankGalaxyMap;
+		std::unordered_map<std::pair<int, int>, Star> galaxyMap;
 		std::vector<std::vector<double>> densityMap;
 		std::vector<std::vector<double>> clouds;
 

@@ -31,6 +31,8 @@ using std::min;
 using std::endl;
 using std::find;
 using std::unordered_map;
+using std::pair;
+using std::make_pair;
 using json = nlohmann::json;
 
 
@@ -67,8 +69,9 @@ void CreateGalaxy::run() {
 	cloudNoise.SetNoiseType(FastNoise::SimplexFractal);  // SimplexFractal for clouds
 	cloudNoise.SetFrequency(cloudsFrequency);  // 0.05 for clouds
 
-	myGalaxy.clear();
-	myGalaxy.resize(pixels, vector<int>(pixels, 0));
+	blankGalaxyMap.clear();
+	galaxyMap.clear();
+	//myGalaxy.resize(pixels, vector<int>(pixels, 0));
 	//densityMap.clear();
 	//densityMap.resize(pixels, vector<double>(pixels, 0));
 	//clouds.clear();
@@ -320,7 +323,16 @@ bool CreateGalaxy::setDensityMult(double densityMultInput) {
 }
 
 int CreateGalaxy::at(int x, int y) {
-	return myGalaxy[y][x];
+	// return myGalaxy[y][x];
+	// TODO: Make this return the star at this location and add a separate function to check for the existence of a star.
+	int curr = -1;
+	pair<int, int> location(x, y);
+	try {
+		curr = blankGalaxyMap.at(location);
+	} catch (const std::out_of_range& e) {
+		curr = 0;
+	}
+	return curr;
 }
 
 float CreateGalaxy::getRed(int index) {
@@ -395,7 +407,9 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, double dist
 			continue;
 		}
 
-		myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
+		// myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
+		pair<int, int> location(x, y);
+		blankGalaxyMap[location] = plotStar(distanceProportion);
 	}
 }
 
