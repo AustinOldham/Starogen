@@ -225,6 +225,7 @@ func _on_DensityMultEdit_text_changed(new_text):
 
 
 func _on_Generate_pressed():
+	_delete_old_stars()
 	print("Generation started")
 	galaxy_generator.generateGalaxy()
 	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
@@ -239,10 +240,15 @@ func _on_Generate_pressed():
 	print("Generation complete")
 	_spread_stars(2)
 
+func _delete_old_stars():
+	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
+	for node in gui_galaxy.get_children():
+		node.queue_free()
+
 func _spread_stars(factor):
 	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
 	for node in gui_galaxy.get_children():
-		node.position = node.position * 2
+		node.position = node.position * factor
 
 func _on_Start_pressed():
 	pass # Replace with function body.
