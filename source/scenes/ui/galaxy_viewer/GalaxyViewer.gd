@@ -237,7 +237,12 @@ func _on_Generate_pressed():
 				var curr = galaxy_generator.at(x, y)
 				new_star.get_node("Sprite").modulate = Color(galaxy_generator.getRed(curr), galaxy_generator.getGreen(curr), galaxy_generator.getBlue(curr), galaxy_generator.getAlpha(curr))
 	print("Generation complete")
+	_spread_stars(2)
 
+func _spread_stars(factor):
+	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
+	for node in gui_galaxy.get_children():
+		node.position = node.position * 2
 
 func _on_Start_pressed():
 	pass # Replace with function body.

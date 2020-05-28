@@ -22,27 +22,6 @@ var zoom_factor = 1.1
 func _ready():
 	pass
 
-"""
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			if event.button_index == BUTTON_WHEEL_DOWN:
-				_zoom_scale(-1)
-			if event.button_index == BUTTON_WHEEL_UP:
-				_zoom_scale(1)
-		if event.button_index == BUTTON_LEFT and event.is_pressed():
-			# self.on_click()
-			pass
-
-func _zoom_scale(direction):
-	#print(global_scale)
-	var temp = get_scale() + Vector2(0.1, 0.1) * direction * 5.0
-	if (temp.x <= 0.00001 or temp.y <= 0.00001):
-		pass
-	else:
-		set_scale(temp)
-"""
-
 func _input(event):
 	if event is InputEventMouse:
 		if event.is_pressed() and not event.is_echo():
