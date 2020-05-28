@@ -132,19 +132,19 @@ int GalaxyGenerator::at(int x, int y) {
 	return myGalaxyGenerator.at(x, y);
 }
 
-float getRed(int index) {
+float GalaxyGenerator::getRed(int index) {
 	return myGalaxyGenerator.getRed(index);
 }
 
-float getGreen(int index) {
+float GalaxyGenerator::getGreen(int index) {
 	return myGalaxyGenerator.getGreen(index);
 }
 
-float getBlue(int index) {
+float GalaxyGenerator::getBlue(int index) {
 	return myGalaxyGenerator.getBlue(index);
 }
 
-float getAlpha(int index) {
+float GalaxyGenerator::getAlpha(int index) {
 	return myGalaxyGenerator.getAlpha(index);
 }
 
