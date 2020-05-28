@@ -27,6 +27,11 @@ void GalaxyGenerator::_register_methods() {
 
 	register_method("at", &GalaxyGenerator::at);
 
+	register_method("getRed", &GalaxyGenerator::getRed);
+	register_method("getGreen", &GalaxyGenerator::getGreen);
+	register_method("getBlue", &GalaxyGenerator::getBlue);
+	register_method("getAlpha", &GalaxyGenerator::getAlpha);
+
 	register_method("getName", &GalaxyGenerator::getName);
 	register_method("getSeed", &GalaxyGenerator::getSeed);
 	register_method("getPixels", &GalaxyGenerator::getPixels);

@@ -234,6 +234,8 @@ func _on_Generate_pressed():
 				var new_star = galaxy_star.instance()
 				gui_galaxy.add_child(new_star)
 				new_star.set_position(Vector2(x, y))
+				var curr = galaxy_generator.at(x, y)
+				new_star.get_node("Sprite").modulate = Color(galaxy_generator.getRed(curr), galaxy_generator.getGreen(curr), galaxy_generator.getBlue(curr), galaxy_generator.getAlpha(curr))
 	print("Generation complete")
 
 
