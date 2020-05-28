@@ -132,6 +132,22 @@ int GalaxyGenerator::at(int x, int y) {
 	return myGalaxyGenerator.at(x, y);
 }
 
+float getRed(int index) {
+	return myGalaxyGenerator.getRed(index);
+}
+
+float getGreen(int index) {
+	return myGalaxyGenerator.getGreen(index);
+}
+
+float getBlue(int index) {
+	return myGalaxyGenerator.getBlue(index);
+}
+
+float getAlpha(int index) {
+	return myGalaxyGenerator.getAlpha(index);
+}
+
 
 String GalaxyGenerator::getName() {
 	return toGodotString(myGalaxyGenerator.getName());

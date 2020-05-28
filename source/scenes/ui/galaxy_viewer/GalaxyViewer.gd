@@ -223,18 +223,8 @@ func _on_DensityMultEdit_text_changed(new_text):
 	if (is_valid):
 		_check_success(galaxy_generator.setDensityMult(float(new_text)), "Density Mult")
 
-"""
-func _on_DensityGridEdit_text_changed(new_text):
-	density_grid = _check_input_int(new_text, "Density Grid")
-"""
 
 func _on_Generate_pressed():
-	"""
-	print("Generation started")
-	galaxy_generator.generateGalaxy()
-	$CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy/Sprite.texture = galaxy_generator.getGalaxy()
-	print("Generation complete")
-	"""
 	print("Generation started")
 	galaxy_generator.generateGalaxy()
 	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy

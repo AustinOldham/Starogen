@@ -53,6 +53,11 @@ class GalaxyGenerator : public Object {
 
 		int at(int x, int y);
 
+		float getRed(int index);
+		float getGreen(int index);
+		float getBlue(int index);
+		float getAlpha(int index);
+
 		String getName();
 		String getSeed();
 		int getPixels();
