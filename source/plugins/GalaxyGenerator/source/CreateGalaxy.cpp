@@ -43,11 +43,14 @@ CreateGalaxy::CreateGalaxy() {
 	pixels = 500;
 	arms = 4;
 	radialDistanceMult = 10.0;
-	clusterStddev = 5.0;
-	density = 20.0;
+	// clusterStddev = 5.0;
+	clusterStddev = 7.0;
+	// density = 20.0;
+	density = 10.0;
 	spiralA = 0.1;
 	spiralB = 0.3;
-	extraStars = 1;
+	// extraStars = 1;
+	extraStars = 0;
 	// densityGrid = 15;
 	cloudsFrequency = 0.05;
 	cloudsMult = 5.0;
