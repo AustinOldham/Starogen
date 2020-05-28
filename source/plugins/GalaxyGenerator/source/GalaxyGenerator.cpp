@@ -25,6 +25,20 @@ void GalaxyGenerator::_register_methods() {
 	register_method("generateGalaxy", &GalaxyGenerator::generateGalaxy);
 	register_method("getGalaxy", &GalaxyGenerator::getGalaxy);
 
+	register_method("getName", &GalaxyGenerator::getName);
+	register_method("getSeed", &GalaxyGenerator::getSeed);
+	register_method("getPixels", &GalaxyGenerator::getPixels);
+	register_method("getCloudsFrequency", &GalaxyGenerator::getCloudsFrequency);
+	register_method("getArms", &GalaxyGenerator::getArms);
+	register_method("getRadialDistanceMult", &GalaxyGenerator::getRadialDistanceMult);
+	register_method("getClusterStddev", &GalaxyGenerator::getClusterStddev);
+	register_method("getDensity", &GalaxyGenerator::getDensity);
+	register_method("getSpiralA", &GalaxyGenerator::getSpiralA);
+	register_method("getSpiralB", &GalaxyGenerator::getSpiralB);
+	register_method("getExtraStars", &GalaxyGenerator::getExtraStars);
+	register_method("getCloudsMult", &GalaxyGenerator::getCloudsMult);
+	register_method("getDensityMult", &GalaxyGenerator::getDensityMult);
+
 	register_method("setName", &GalaxyGenerator::setName);
 	register_method("setSeed", &GalaxyGenerator::setSeed);
 	register_method("setPixels", &GalaxyGenerator::setPixels);
@@ -38,7 +52,6 @@ void GalaxyGenerator::_register_methods() {
 	register_method("setExtraStars", &GalaxyGenerator::setExtraStars);
 	register_method("setCloudsMult", &GalaxyGenerator::setCloudsMult);
 	register_method("setDensityMult", &GalaxyGenerator::setDensityMult);
-
 }
 
 GalaxyGenerator::GalaxyGenerator() {
@@ -113,6 +126,61 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 	return t;
 }
 
+
+
+
+String GalaxyGenerator::getName() {
+	return toGodotString(myGalaxyGenerator.getName());
+}
+
+String GalaxyGenerator::getSeed() {
+	return toGodotString(myGalaxyGenerator.getSeed());
+}
+
+int GalaxyGenerator::getPixels() {
+	return myGalaxyGenerator.getPixels();
+}
+
+double GalaxyGenerator::getCloudsFrequency() {
+	return myGalaxyGenerator.getCloudsFrequency();
+}
+
+int GalaxyGenerator::getArms() {
+	return myGalaxyGenerator.getArms();
+}
+
+double GalaxyGenerator::getRadialDistanceMult() {
+	return myGalaxyGenerator.getRadialDistanceMult();
+}
+
+double GalaxyGenerator::getClusterStddev() {
+	return myGalaxyGenerator.getClusterStddev();
+}
+
+double GalaxyGenerator::getDensity() {
+	return myGalaxyGenerator.getDensity();
+}
+
+double GalaxyGenerator::getSpiralA() {
+	return myGalaxyGenerator.getSpiralA();
+}
+
+double GalaxyGenerator::getSpiralB() {
+	return myGalaxyGenerator.getSpiralB();
+}
+
+int GalaxyGenerator::getExtraStars() {
+	return myGalaxyGenerator.getExtraStars();
+}
+
+double GalaxyGenerator::getCloudsMult() {
+	return myGalaxyGenerator.getCloudsMult();
+}
+
+double GalaxyGenerator::getDensityMult() {
+	return myGalaxyGenerator.getDensityMult();
+}
+
 bool GalaxyGenerator::setName(String nameInput) {
 	return myGalaxyGenerator.setName(toStandardString(nameInput));
 }
@@ -167,4 +235,9 @@ bool GalaxyGenerator::setDensityMult(double densityMultInput) {
 
 std::string GalaxyGenerator::toStandardString(String oldString) {
 	return std::string(oldString.alloc_c_string());
+}
+
+String GalaxyGenerator::toGodotString(std::string oldString) {
+	String newString(oldString.c_str());
+	return newString;
 }

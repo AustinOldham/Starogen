@@ -85,6 +85,7 @@ class GalaxyGenerator : public Object {
 
 
 		std::string toStandardString(String oldString);
+		String toGodotString(std::string oldString);
 };
 
 }
