@@ -147,6 +147,58 @@ void CreateGalaxy::generate() {
 	// cout << "myGalaxy[y][x]: " << myGalaxy[2][1] << endl;
 }
 
+string CreateGalaxy::getName() {
+	return name;
+}
+
+string CreateGalaxy::getSeed() {
+	return seed;
+}
+
+int CreateGalaxy::getPixels() {
+	return pixels;
+}
+
+double CreateGalaxy::getCloudsFrequency() {
+	return cloudsFrequency;
+}
+
+int CreateGalaxy::getArms() {
+	return arms;
+}
+
+double CreateGalaxy::getRadialDistanceMult() {
+	return radialDistanceMult;
+}
+
+double CreateGalaxy::getClusterStddev() {
+	return clusterStddev;
+}
+
+double CreateGalaxy::getDensity() {
+	return density;
+}
+
+double CreateGalaxy::getSpiralA() {
+	return spiralA;
+}
+
+double CreateGalaxy::getSpiralB() {
+	return spiralB;
+}
+
+int CreateGalaxy::getExtraStars() {
+	return extraStars;
+}
+
+double CreateGalaxy::getCloudsMult() {
+	return cloudsMult;
+}
+
+double CreateGalaxy::getDensityMult() {
+	return densityMult;
+}
+
 bool CreateGalaxy::setName(string nameInput) {
 	if (nameInput.empty()) {
 		return false;
