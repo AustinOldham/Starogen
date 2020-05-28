@@ -295,6 +295,10 @@ margin_left = 202.0
 margin_top = 280.0
 margin_right = 267.0
 margin_bottom = 304.0
+focus_mode = 1
+theme = ExtResource( 3 )
+expand_to_text_length = true
+focus_mode = 1
 
 [node name="DensityGrid" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_top = 309.0
