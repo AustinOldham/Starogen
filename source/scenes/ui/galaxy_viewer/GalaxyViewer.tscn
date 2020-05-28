@@ -398,7 +398,7 @@ size_flags_vertical = 3
 
 [node name="GalaxyBox" type="PanelContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2"]
 margin_right = 695.0
-margin_bottom = 484.0
+margin_bottom = 482.0
 rect_clip_content = true
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 8 )
@@ -406,15 +406,47 @@ custom_styles/panel = ExtResource( 8 )
 [node name="Galaxy" type="Node2D" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox"]
 script = ExtResource( 9 )
 
-[node name="Recenter" type="ToolButton" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2"]
-margin_top = 488.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2"]
+margin_top = 486.0
 margin_right = 695.0
 margin_bottom = 510.0
+custom_constants/separation = 20
+
+[node name="Recenter" type="ToolButton" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 103.0
+margin_bottom = 24.0
 focus_mode = 1
 theme = ExtResource( 3 )
 enabled_focus_mode = 1
 text = "Reset View"
 align = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 123.0
+margin_right = 319.0
+margin_bottom = 24.0
+
+[node name="StarSpread" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/HBoxContainer"]
+margin_top = 1.0
+margin_right = 127.0
+margin_bottom = 23.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Star Spread:"
+
+[node name="StarSpreadEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/HBoxContainer"]
+margin_left = 131.0
+margin_right = 196.0
+margin_bottom = 24.0
+focus_mode = 1
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/selection_color = Color( 0, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+text = "1"
+expand_to_text_length = true
+focus_mode = 1
+caret_blink = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/MarginContainer"]
 layer = -20
@@ -447,4 +479,5 @@ script = ExtResource( 12 )
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" to="." method="_on_Generate_pressed"]
 [connection signal="prevent_generate" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Invalid_prevent_generate"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="." method="_on_Start_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy" method="_on_Recenter_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy" method="_on_Recenter_pressed"]
+[connection signal="text_entered" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/HBoxContainer/StarSpreadEdit" to="." method="_on_StarSpreadEdit_text_entered"]

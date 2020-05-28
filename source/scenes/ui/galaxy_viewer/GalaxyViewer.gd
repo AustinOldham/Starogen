@@ -239,7 +239,6 @@ func _on_Generate_pressed():
 				var curr = galaxy_generator.at(x, y)
 				new_star.get_node("Sprite").modulate = Color(galaxy_generator.getRed(curr), galaxy_generator.getGreen(curr), galaxy_generator.getBlue(curr), galaxy_generator.getAlpha(curr))
 	print("Generation complete")
-	_spread_stars(2)
 
 func _delete_old_stars():
 	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
@@ -254,3 +253,6 @@ func _spread_stars(factor):
 func _on_Start_pressed():
 	pass # Replace with function body.
 
+func _on_StarSpreadEdit_text_entered(new_text):
+	if (!new_text.empty() and new_text.is_valid_float() and int(new_text) > 0):
+		_spread_stars(int(new_text))
