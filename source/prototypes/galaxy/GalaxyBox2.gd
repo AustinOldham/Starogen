@@ -23,7 +23,11 @@ const galaxy_star = preload("res://prototypes/galaxy/GalaxyStar.tscn")
 func _ready():
 	print("Generation started")
 	galaxy_generator.generateGalaxy()
-	for i in range(galaxy_generator.getPixels()):
-		
+	for y in range(galaxy_generator.getPixels()):
+		for x in range(galaxy_generator.getPixels()):
+			if (galaxy_generator.at(x, y) != 0):
+				var new_star = galaxy_star.instance()
+				add_child(new_star)
+				new_star.set_position(Vector2(x, y))
 	# $Galaxy2/Sprite.texture = galaxy_generator.getGalaxy()
 	print("Generation complete")
