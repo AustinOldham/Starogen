@@ -336,14 +336,6 @@ float CreateGalaxy::getAlpha(int index) {
 	return starList[index].alpha;
 }
 
-int CreateGalaxy::getPixels() {
-	return pixels;
-}
-
-int CreateGalaxy::getArms() {
-	return arms;
-}
-
 
 // TODO: Completely replace or remove this function since it cannot handle large inputs.
 /*
