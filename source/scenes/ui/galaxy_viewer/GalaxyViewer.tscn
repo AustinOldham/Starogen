@@ -44,18 +44,18 @@ margin_bottom = 590.0
 split_offset = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
-margin_right = 300.0
+margin_right = 277.0
 margin_bottom = 510.0
 
 [node name="Settings" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer"]
-margin_right = 300.0
+margin_right = 277.0
 margin_bottom = 33.0
 custom_fonts/font = ExtResource( 2 )
 text = "Settings"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer"]
 margin_top = 37.0
-margin_right = 300.0
+margin_right = 277.0
 margin_bottom = 481.0
 columns = 2
 
@@ -69,7 +69,7 @@ text = "Name:"
 
 [node name="NameEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 24.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -91,7 +91,7 @@ text = "Seed:"
 [node name="SeedEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 28.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 52.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -113,7 +113,7 @@ text = "Size:"
 [node name="SizeEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 56.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 80.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -136,7 +136,7 @@ text = "Clouds Frequency:"
 [node name="CloudsFrequencyEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 84.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 108.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -159,7 +159,7 @@ text = "Arms:"
 [node name="ArmsEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 112.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 136.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -181,7 +181,7 @@ text = "Radial Distance Mult:"
 [node name="RadialDistanceMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 140.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 164.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -203,7 +203,7 @@ text = "ClusterStddev:"
 [node name="ClusterStddevEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 168.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 192.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -225,7 +225,7 @@ text = "Density:"
 [node name="DensityEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 196.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 220.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -247,7 +247,7 @@ text = "A:"
 [node name="AEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 224.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 248.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -270,7 +270,7 @@ text = "B:"
 [node name="BEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 252.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 276.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -290,18 +290,11 @@ theme = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Extra Stars:"
 
-[node name="ExtraStarsEdit" type="OptionButton" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
+[node name="ExtraStarsEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 280.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 304.0
-focus_mode = 1
-theme = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-enabled_focus_mode = 1
-text = "Default"
-items = [ "Default", null, false, 0, null, "True", null, false, 1, null, "False", null, false, 2, null ]
-selected = 0
 
 [node name="DensityGrid" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_top = 309.0
@@ -314,7 +307,7 @@ text = "Density Grid:"
 [node name="DensityGridEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 308.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 332.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -336,7 +329,7 @@ text = "Density Mult:"
 [node name="DensityMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 336.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 360.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -358,7 +351,7 @@ text = "Clouds Mult:"
 [node name="CloudsMultEdit" type="LineEdit" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 364.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 388.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -383,7 +376,7 @@ script = ExtResource( 5 )
 [node name="Invalid" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 202.0
 margin_top = 393.0
-margin_right = 290.0
+margin_right = 267.0
 margin_bottom = 415.0
 theme = ExtResource( 3 )
 custom_colors/font_color = Color( 0.921569, 0.0627451, 0.121569, 1 )
@@ -402,13 +395,13 @@ text = "Start"
 script = ExtResource( 7 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
-margin_left = 312.0
+margin_left = 289.0
 margin_right = 984.0
 margin_bottom = 510.0
 size_flags_vertical = 3
 
 [node name="GalaxyBox" type="PanelContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2"]
-margin_right = 672.0
+margin_right = 695.0
 margin_bottom = 484.0
 rect_clip_content = true
 size_flags_vertical = 3
@@ -422,7 +415,7 @@ script = ExtResource( 8 )
 
 [node name="Recenter" type="ToolButton" parent="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2"]
 margin_top = 488.0
-margin_right = 672.0
+margin_right = 695.0
 margin_bottom = 510.0
 focus_mode = 1
 theme = ExtResource( 3 )
@@ -453,7 +446,7 @@ script = ExtResource( 11 )
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityEdit" to="." method="_on_DensityEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/AEdit" to="." method="_on_AEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/BEdit" to="." method="_on_BEdit_text_changed"]
-[connection signal="item_selected" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ExtraStarsEdit" to="." method="_on_ExtraStarsEdit_item_selected"]
+[connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/ExtraStarsEdit" to="." method="_on_ExtraStarsEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityGridEdit" to="." method="_on_DensityGridEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/DensityMultEdit" to="." method="_on_DensityMultEdit_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/CloudsMultEdit" to="." method="_on_CloudsMultEdit_text_changed"]

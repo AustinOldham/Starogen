@@ -21,7 +21,6 @@ onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/Galaxy
 
 signal invalid_check(type, value)
 
-# TODO: Instead of using the generalized value checker implemented here, attempt to set the value using GDNative then show an error if the function returns false.
 # TODO: Add a button to suggest values for empty boxes.
 
 """
@@ -45,7 +44,7 @@ var density_mult = 1
 """
 
 func _ready():
-	pass
+	_populate_entries()
 
 """
 func _check_input_float(text, type, default, less_than, invalid_num):
@@ -96,6 +95,10 @@ func _check_input_int(text, type, default, less_than, invalid_num):
 		return default
 """
 
+func _populate_entries():
+	var grid_container = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer
+	grid_container.get_node("NameEdit").text = galaxy_generator.getName()
+
 func _check_input_text(text, type):
 	if (text.empty()):
 		emit_signal("invalid_check", type, true)  # Invalid input
@@ -103,6 +106,7 @@ func _check_input_text(text, type):
 	else:
 		# emit_signal("invalid_check", type, false)  # Removed since a signal for valid input should only be made when the generator checks it.
 		return true  # Valid input
+
 
 func _check_input_float(text, type):
 	if (text.empty()):
@@ -115,8 +119,10 @@ func _check_input_float(text, type):
 		emit_signal("invalid_check", type, true)  # Invalid input
 		return false
 
+
 func _check_input_int(text, type):
 	return _check_input_float(text, type)
+
 
 func _check_success(result, type):
 	if (result == true):
@@ -191,8 +197,8 @@ func _on_BEdit_text_changed(new_text):
 	if (is_valid):
 		_check_success(galaxy_generator.setSpiralB(float(new_text)), "SpiralB")
 
-# Redo this
-func _on_ExtraStarsEdit_item_selected(new_text):
+
+func _on_ExtraStarsEdit_text_changed(new_text):
 	var is_valid = _check_input_int(new_text, "Extra Stars")
 	if (is_valid):
 		_check_success(galaxy_generator.setExtraStars(int(new_text)), "Extra Stars")
@@ -217,6 +223,4 @@ func _on_Generate_pressed():
 
 func _on_Start_pressed():
 	pass # Replace with function body.
-
-
 
