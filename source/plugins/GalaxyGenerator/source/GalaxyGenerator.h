@@ -51,6 +51,20 @@ class GalaxyGenerator : public Object {
 		void generateGalaxy();
 		ImageTexture * getGalaxy();  // Rename this to getGalaxyImage.
 
+		String getName();
+		String getSeed();
+		int getPixels();
+		double getCloudsFrequency();
+		int getArms();
+		double getRadialDistanceMult();
+		double getClusterStddev();
+		double getDensity();
+		double getSpiralA();
+		double getSpiralB();
+		int getExtraStars();
+		double getCloudsMult();
+		double getDensityMult();
+
 		bool setName(String nameInput);
 		bool setSeed(String seedInput);
 		bool setPixels(int pixelsInput);
