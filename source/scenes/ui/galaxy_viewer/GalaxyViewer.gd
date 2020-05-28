@@ -19,7 +19,7 @@ extends Node2D
 
 onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
-const galaxy_star = preload("res://prototypes/galaxy/GalaxyStar.tscn")
+const galaxy_star = preload("res://scenes/ui/galaxy_viewer/GalaxyStar.tscn")
 
 signal invalid_check(type, value)
 
@@ -234,6 +234,7 @@ func _on_Generate_pressed():
 			if (galaxy_generator.at(x, y) != 0):
 				var new_star = galaxy_star.instance()
 				gui_galaxy.add_child(new_star)
+				new_star.original_coordinates = Vector2(x, y)
 				new_star.set_position(Vector2(x, y))
 				var curr = galaxy_generator.at(x, y)
 				new_star.get_node("Sprite").modulate = Color(galaxy_generator.getRed(curr), galaxy_generator.getGreen(curr), galaxy_generator.getBlue(curr), galaxy_generator.getAlpha(curr))
@@ -248,7 +249,7 @@ func _delete_old_stars():
 func _spread_stars(factor):
 	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
 	for node in gui_galaxy.get_children():
-		node.position = node.position * factor
+		node.position = node.original_coordinates * factor
 
 func _on_Start_pressed():
 	pass # Replace with function body.
