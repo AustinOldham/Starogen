@@ -98,6 +98,18 @@ func _check_input_int(text, type, default, less_than, invalid_num):
 func _populate_entries():
 	var grid_container = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer
 	grid_container.get_node("NameEdit").text = galaxy_generator.getName()
+	grid_container.get_node("SeedEdit").text = galaxy_generator.getSeed()
+	grid_container.get_node("SizeEdit").text = str(galaxy_generator.getPixels())
+	grid_container.get_node("CloudsFrequencyEdit").text = str(galaxy_generator.getCloudsFrequency())
+	grid_container.get_node("ArmsEdit").text = str(galaxy_generator.getArms())
+	grid_container.get_node("RadialDistanceMultEdit").text = str(galaxy_generator.getRadialDistanceMult())
+	grid_container.get_node("ClusterStddevEdit").text = str(galaxy_generator.getClusterStddev())
+	grid_container.get_node("DensityEdit").text = str(galaxy_generator.getDensity())
+	grid_container.get_node("AEdit").text = str(galaxy_generator.getSpiralA())
+	grid_container.get_node("BEdit").text = str(galaxy_generator.getSpiralB())
+	grid_container.get_node("ExtraStarsEdit").text = str(galaxy_generator.getExtraStars())
+	grid_container.get_node("DensityMultEdit").text = str(galaxy_generator.getDensityMult())
+	grid_container.get_node("CloudsMultEdit").text = str(galaxy_generator.getCloudsMult())
 
 func _check_input_text(text, type):
 	if (text.empty()):
