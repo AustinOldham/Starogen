@@ -112,8 +112,19 @@ class CreateGalaxy {
 		float getBlue(int index);
 		float getAlpha(int index);
 
+		std::string getName();
+		std::string getSeed();
 		int getPixels();
+		double getCloudsFrequency();
 		int getArms();
+		double getRadialDistanceMult();
+		double getClusterStddev();
+		double getDensity();
+		double getSpiralA();
+		double getSpiralB();
+		int getExtraStars();
+		double getCloudsMult();
+		double getDensityMult();
 
 		bool setName(std::string nameInput);
 		bool setSeed(std::string seedInput);
