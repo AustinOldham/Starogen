@@ -25,6 +25,8 @@ void GalaxyGenerator::_register_methods() {
 	register_method("generateGalaxy", &GalaxyGenerator::generateGalaxy);
 	register_method("getGalaxy", &GalaxyGenerator::getGalaxy);
 
+	register_method("at", &GalaxyGenerator::at);
+
 	register_method("getName", &GalaxyGenerator::getName);
 	register_method("getSeed", &GalaxyGenerator::getSeed);
 	register_method("getPixels", &GalaxyGenerator::getPixels);
@@ -126,7 +128,9 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 	return t;
 }
 
-
+int GalaxyGenerator::at(int x, int y) {
+	return myGalaxyGenerator.at(x, y);
+}
 
 
 String GalaxyGenerator::getName() {
