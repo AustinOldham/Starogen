@@ -55,8 +55,8 @@ func _input(event):
 
 func _zoom_at_point(zoom_change, mouse_position):
 	scale = scale * zoom_change
-	var delta_x = (mouse_position.x - global_position.x) * (zoom_factor - 1)
-	var delta_y = (mouse_position.y - global_position.y) * (zoom_factor - 1)
+	var delta_x = (mouse_position.x - global_position.x) * (zoom_change - 1)
+	var delta_y = (mouse_position.y - global_position.y) * (zoom_change - 1)
 	global_position.x = global_position.x - delta_x
 	global_position.y = global_position.y - delta_y
 
