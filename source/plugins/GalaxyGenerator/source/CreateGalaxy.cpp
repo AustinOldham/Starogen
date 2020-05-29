@@ -553,9 +553,9 @@ void CreateGalaxy::initializeContainers() {
 	getProbabilities();
 }
 
-vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileName) {
+vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) {
 	vector<CreateGalaxy::StarType> myStarList;
-	std::ifstream input(fileName);
+	std::ifstream input(fileNameInput);
 	json j;
 	input >> j;
 	int i = 0;
@@ -588,9 +588,40 @@ void CreateGalaxy::getProbabilities() {
 	}
 }
 
-// TODO: Implement this in the Galaxy class.
-void CreateGalaxy::saveGalaxy() {
-	// Godot autoload and cereal serialization
+bool CreateGalaxy::saveGalaxy(string fileNameInput) {
+	// See Godot autoload
+	cout << "Saving" << endl;
+
+	for (int i = 0; i < starList.size(); i++) {
+		cout << starList[i].name << " " << starList[i].type << endl;
+	}
+
+	string testFile("C:\\serialization_test\\test.bin");
+	std::ofstream ostr(testFile.c_str(), std::ios::binary);
+	boost::archive::binary_oarchive oa(ostr);
+	oa << starList;
+	ostr.close();
+	cout << "Saved" << endl;
+	return true;
+}
+
+bool CreateGalaxy::loadGalaxy(string fileNameInput) {
+	cout << "Loading" << endl;
+
+	vector<StarType> loadedStarList;
+
+	string testFile("C:\\serialization_test\\test.bin");
+	std::ifstream istr(testFile.c_str(), std::ios::binary);
+	boost::archive::binary_iarchive ia(istr);
+	ia >> loadedStarList;
+	istr.close();
+
+	for (int i = 0; i < loadedStarList.size(); i++) {
+		cout << loadedStarList[i].name << " " << loadedStarList[i].type << endl;
+	}
+
+	cout << "Loaded" << endl;
+	return true;
 }
 
 int CreateGalaxy::Galaxy::starAtPosition(int x, int y) {

@@ -98,7 +98,7 @@ sources = sources + Glob('../Libraries/RandClass/*.cpp')
 
 env.Append(CPPPATH = boost_prefix)
 #env.Append(CPPPATH = [os.path.join(boost_prefix, "include")])
-#env.Append(LIBPATH = [os.path.join(boost_prefix, "lib")])
+env.Append(LIBPATH = [os.path.join(boost_prefix, "stage\lib")])
 
 library = env.SharedLibrary(target=env['target_path'] + env['target_name'] , source=sources)
 

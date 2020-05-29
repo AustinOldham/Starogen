@@ -87,12 +87,11 @@ class GalaxyGenerator : public Object {
 		bool setCloudsMult(double cloudsMultInput);
 		bool setDensityMult(double densityMultInput);
 
-
-
-
-
 		std::string toStandardString(String oldString);
 		String toGodotString(std::string oldString);
+
+		bool saveGalaxy(String fileNameInput);
+		bool loadGalaxy(String fileNameInput);
 };
 
 }

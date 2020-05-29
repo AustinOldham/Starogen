@@ -38,6 +38,9 @@
 
 #include <nlohmann/json.hpp>
 #include <boost/functional/hash.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp >
+#include <boost/serialization/vector.hpp>
 #include "RandClass/RandClass.h"
 #include "FastNoise/FastNoise.h"
 #include "Star.h"
@@ -97,7 +100,7 @@ class CreateGalaxy {
 		//void printClouds(const std::vector<std::vector<double>> myVector, std::string fileName);
 		//void printColorPalette(std::string fileName);
 		void initializeContainers();
-		std::vector<StarType> readStarFile(std::string fileName);
+		std::vector<StarType> readStarFile(std::string fileNameInput);
 		//std::vector<std::vector<std::string>> readFile(std::string fileName);
 		//std::vector<std::string> splitString(const std::string &s, char delimiter);
 		//std::unordered_map<std::string, int> getIDMap();
@@ -158,7 +161,8 @@ class CreateGalaxy {
 		int suggestExtraStars();
 		double suggestCloudsMult();
 
-		void saveGalaxy();
+		bool saveGalaxy(std::string fileNameInput);
+		bool loadGalaxy(std::string fileNameInput);
 };
 
 struct CreateGalaxy::StarType {
@@ -173,6 +177,20 @@ struct CreateGalaxy::StarType {
 	float green;
 	float blue;
 	float alpha;
+
+	template <typename Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+    	ar & name;
+    	ar & type;
+
+    	ar & chance;
+    	ar & adjustedChance;
+
+    	ar & red;
+    	ar & green;
+    	ar & blue;
+    	ar & alpha;
+	}
 };
 
 // TODO: Put this in a completely separate file.

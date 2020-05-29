@@ -59,6 +59,9 @@ void GalaxyGenerator::_register_methods() {
 	register_method("setExtraStars", &GalaxyGenerator::setExtraStars);
 	register_method("setCloudsMult", &GalaxyGenerator::setCloudsMult);
 	register_method("setDensityMult", &GalaxyGenerator::setDensityMult);
+
+	register_method("saveGalaxy", &GalaxyGenerator::saveGalaxy);
+	register_method("loadGalaxy", &GalaxyGenerator::loadGalaxy);
 }
 
 GalaxyGenerator::GalaxyGenerator() {
@@ -265,4 +268,12 @@ std::string GalaxyGenerator::toStandardString(String oldString) {
 String GalaxyGenerator::toGodotString(std::string oldString) {
 	String newString(oldString.c_str());
 	return newString;
+}
+
+bool GalaxyGenerator::saveGalaxy(String fileNameInput) {
+	return myGalaxyGenerator.saveGalaxy(toStandardString(fileNameInput));
+}
+
+bool GalaxyGenerator::loadGalaxy(String fileNameInput) {
+	return myGalaxyGenerator.loadGalaxy(toStandardString(fileNameInput));
 }

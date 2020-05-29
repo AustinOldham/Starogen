@@ -251,7 +251,8 @@ func _spread_stars(factor):
 		node.position = node.original_coordinates * factor
 
 func _on_Start_pressed():
-	pass # Replace with function body.
+	galaxy_generator.saveGalaxy("this is a placeholder")
+	galaxy_generator.loadGalaxy("this is a placeholder")
 
 func _on_StarSpreadEdit_text_entered(new_text):
 	if (!new_text.empty() and new_text.is_valid_float() and int(new_text) > 0):
