@@ -1,1 +1,2 @@
 Folders containing data that must be read by the C++ plugins need to be manually copied over due to the way Godot handles exporting.
+Make sure the plugins are compiled in release mode and the project is not exported in debug mode.
