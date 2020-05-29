@@ -22,6 +22,10 @@
 #include <unordered_map>
 #include <utility>
 
+#include <boost/functional/hash.hpp>
+
+#include "Star.h"
+
 class Galaxy {
 	private:
 		std::string name;
@@ -39,8 +43,41 @@ class Galaxy {
 		double cloudsMult;
 		double densityMult;
 
+	public:
+		Galaxy();
+
 		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
 		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
-}
+
+		int at(int x, int y);
+
+		std::string getName();
+		std::string getSeed();
+		int getPixels();
+		double getCloudsFrequency();
+		int getArms();
+		double getRadialDistanceMult();
+		double getClusterStddev();
+		double getDensity();
+		double getSpiralA();
+		double getSpiralB();
+		int getExtraStars();
+		double getCloudsMult();
+		double getDensityMult();
+
+		bool setName(std::string nameInput);
+		bool setSeed(std::string seedInput);
+		bool setPixels(int pixelsInput);
+		bool setCloudsFrequency(double cloudsFrequencyInput);
+		bool setArms(int armsInput);
+		bool setRadialDistanceMult(double radialDistanceMultInput);
+		bool setClusterStddev(double clusterStddevInput);
+		bool setDensity(double densityInput);
+		bool setSpiralA(double spiralAInput);
+		bool setSpiralB(double spiralBInput);
+		bool setExtraStars(int extraStarsInput);
+		bool setCloudsMult(double cloudsMultInput);
+		bool setDensityMult(double densityMultInput);
+};
 
 #endif  // GALAXY_H

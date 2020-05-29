@@ -40,34 +40,31 @@ using json = nlohmann::json;
 // TODO: Clouds will be generated using density map where the number of stars in a square around each star (or every pixel) is used for the calculation (odd number width of search only so offset = searchWidth / 2 and the locations at galaxy[y - offset + i][x - offset + j] are checked)
 // TODO: Consider replacing the density map by adding a step to the generator where star clusters are plotted in the same way as normal stars except each cluster is more dense and each time a "star" is plotted, the number stored is incremented. The values will then be normalized to be in the range [0, 1] in order to create an approximate density map.
 CreateGalaxy::CreateGalaxy() {
-	myGalaxy.name = "Default Name";
-	myGalaxy.seed = "Default Seed";
-	myGalaxy.pixels = 500;
-	myGalaxy.arms = 4;
-	myGalaxy.radialDistanceMult = 10.0;
-	// clusterStddev = 5.0;
-	myGalaxy.clusterStddev = 7.0;
-	// density = 20.0;
-	myGalaxy.density = 10.0;
-	myGalaxy.spiralA = 0.1;
-	myGalaxy.spiralB = 0.3;
-	// extraStars = 1;
-	myGalaxy.extraStars = 0;
-	// densityGrid = 15;
-	myGalaxy.cloudsFrequency = 0.05;
-	myGalaxy.cloudsMult = 5.0;
-	myGalaxy.densityMult = 1.0;
 	initializeContainers();
 }
 
 void CreateGalaxy::run() {
-	// TODO: Store each variable inside the Galaxy object in order to save it for future reference.
+
+	name = myGalaxy.getName();
+	seed = myGalaxy.getSeed();
+	pixels = myGalaxy.getPixels();
+	arms = myGalaxy.getArms();
+	radialDistanceMult = myGalaxy.getRadialDistanceMult();
+	clusterStddev = myGalaxy.getClusterStddev();
+	density = myGalaxy.getDensity();
+	spiralA = myGalaxy.getSpiralA();
+	spiralB = myGalaxy.getSpiralB();
+	extraStars = myGalaxy.getExtraStars();
+	cloudsFrequency = myGalaxy.getCloudsFrequency();
+	cloudsMult = myGalaxy.getCloudsMult();
+	densityMult = myGalaxy.getDensityMult();
+
 	std::hash<string> seedHasher;
-	int seedInt = seedHasher(myGalaxy.seed);
-	starClusterGen.setSeed(myGalaxy.seed);
+	int seedInt = seedHasher(seed);
+	starClusterGen.setSeed(seed);
 	cloudNoise.SetSeed(seedInt);
 	cloudNoise.SetNoiseType(FastNoise::SimplexFractal);  // SimplexFractal for clouds
-	cloudNoise.SetFrequency(myGalaxy.cloudsFrequency);  // 0.05 for clouds
+	cloudNoise.SetFrequency(cloudsFrequency);  // 0.05 for clouds
 
 	myGalaxy.blankGalaxyMap.clear();
 	myGalaxy.galaxyMap.clear();
@@ -180,7 +177,7 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, int distanc
 
 		// myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
 		pair<int, int> location(x + modX, y + modY);
-		blankGalaxyMap[location] = distanceProportionInt;
+		myGalaxy.blankGalaxyMap[location] = distanceProportionInt;
 	}
 }
 
@@ -207,198 +204,118 @@ Star CreateGalaxy::plotStar(int distanceProportionInt) {
 }
 
 void CreateGalaxy::populateEmptyStars() {
-	for (auto it : blankGalaxyMap) {
-		galaxyMap[it.first] = plotStar(it.second);
+	for (auto it : myGalaxy.blankGalaxyMap) {
+		myGalaxy.galaxyMap[it.first] = plotStar(it.second);
 	}
 }
 
 
 string CreateGalaxy::getName() {
-	return name;
+	return myGalaxy.getName();
 }
 
 string CreateGalaxy::getSeed() {
-	return seed;
+	return myGalaxy.getSeed();
 }
 
 int CreateGalaxy::getPixels() {
-	return pixels;
+	return myGalaxy.getPixels();
 }
 
 double CreateGalaxy::getCloudsFrequency() {
-	return cloudsFrequency;
+	return myGalaxy.getCloudsFrequency();
 }
 
 int CreateGalaxy::getArms() {
-	return arms;
+	return myGalaxy.getArms();
 }
 
 double CreateGalaxy::getRadialDistanceMult() {
-	return radialDistanceMult;
+	return myGalaxy.getRadialDistanceMult();
 }
 
 double CreateGalaxy::getClusterStddev() {
-	return clusterStddev;
+	return myGalaxy.getClusterStddev();
 }
 
 double CreateGalaxy::getDensity() {
-	return density;
+	return myGalaxy.getDensity();
 }
 
 double CreateGalaxy::getSpiralA() {
-	return spiralA;
+	return myGalaxy.getSpiralA();
 }
 
 double CreateGalaxy::getSpiralB() {
-	return spiralB;
+	return myGalaxy.getSpiralB();
 }
 
 int CreateGalaxy::getExtraStars() {
-	return extraStars;
+	return myGalaxy.getExtraStars();
 }
 
 double CreateGalaxy::getCloudsMult() {
-	return cloudsMult;
+	return myGalaxy.getCloudsMult();
 }
 
 double CreateGalaxy::getDensityMult() {
-	return densityMult;
+	return myGalaxy.getDensityMult();
 }
 
 bool CreateGalaxy::setName(string nameInput) {
-	if (nameInput.empty()) {
-		return false;
-	} else {
-		name = nameInput;
-		return true;
-	}
+	return myGalaxy.setName(nameInput);
 }
 
 bool CreateGalaxy::setSeed(string seedInput) {
-	if (seedInput.empty()) {
-		return false;
-	} else {
-		seed = seedInput;
-		return true;
-	}
+	return myGalaxy.setSeed(seedInput);
 }
 
 bool CreateGalaxy::setPixels(int pixelsInput) {
-	if (pixelsInput > 0) {
-		pixels = pixelsInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setPixels(pixelsInput);
 }
 
 bool CreateGalaxy::setCloudsFrequency(double cloudsFrequencyInput) {
-	if (cloudsFrequencyInput > 0) {
-		cloudsFrequency = cloudsFrequencyInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setCloudsFrequency(cloudsFrequencyInput);
 }
 
 bool CreateGalaxy::setArms(int armsInput) {
-	if (armsInput > 0) {
-		arms = armsInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setArms(armsInput);
 }
 
 bool CreateGalaxy::setRadialDistanceMult(double radialDistanceMultInput) {
-	if (radialDistanceMultInput > 0) {
-		radialDistanceMult = radialDistanceMultInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setRadialDistanceMult(radialDistanceMult);
 }
 
 bool CreateGalaxy::setClusterStddev(double clusterStddevInput) {
-	if (clusterStddevInput >= 0) {
-		clusterStddev = clusterStddevInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setClusterStddev(clusterStddevInput);
 }
 
 bool CreateGalaxy::setDensity(double densityInput) {
-	if (densityInput > 0) {
-		density = densityInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setDensity(densityMult);
 }
 
 bool CreateGalaxy::setSpiralA(double spiralAInput) {
-	if (spiralAInput != 0) {
-		spiralA = spiralAInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setSpiralA(spiralAInput);
 }
 
 bool CreateGalaxy::setSpiralB(double spiralBInput) {
-	if (spiralBInput != 0) {
-		spiralB = spiralBInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setSpiralB(spiralBInput);
 }
 
 bool CreateGalaxy::setExtraStars(int extraStarsInput) {
-	if (extraStarsInput >= 0) {
-		extraStars = extraStarsInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setExtraStars(extraStarsInput);
 }
 
 bool CreateGalaxy::setCloudsMult(double cloudsMultInput) {
-	if (cloudsMultInput > 0) {
-		cloudsMult = cloudsMultInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setCloudsMult(cloudsMultInput);
 }
 
 bool CreateGalaxy::setDensityMult(double densityMultInput) {
-	if (densityMultInput > 0) {
-		densityMult = densityMultInput;
-		return true;
-	} else {
-		return false;
-	}
+	return myGalaxy.setDensityMult(densityMultInput);
 }
 
 int CreateGalaxy::at(int x, int y) {
-	// return myGalaxy[y][x];
-	// TODO: Make this return the star at this location and add a separate function to check for the existence of a star.
-	/*int curr = -1;
-	pair<int, int> location(x, y);
-	try {
-		curr = blankGalaxyMap.at(location);
-	} catch (const std::out_of_range& e) {
-		curr = 0;
-	}
-	return curr; */
-	auto search = galaxyMap.find(make_pair(x, y));
-	if (search != galaxyMap.end()) {
-		return (search->second).getStarTypeID();
-	} else {
-		return 0;
-	}
+	return myGalaxy.at(x, y);
 }
 
 float CreateGalaxy::getRed(int index) {
@@ -473,10 +390,10 @@ string CreateGalaxy::suggestSeed() {
 }
 
 double CreateGalaxy::suggestClusterStddev() {
-	if (pixels <= 100) {
-		return pixels / 40.0;
+	if (myGalaxy.getPixels() <= 100) {
+		return myGalaxy.getPixels() / 40.0;
 	} else {
-		return pixels / 100.0;
+		return myGalaxy.getPixels() / 100.0;
 	}
 }
 
@@ -485,7 +402,7 @@ double CreateGalaxy::suggestRadialDistanceMult() {
 }
 
 double CreateGalaxy::suggestDensity() {
-	return (pixels / 25.0);
+	return (myGalaxy.getPixels() / 25.0);
 }
 
 double CreateGalaxy::suggestSpiralA() {
@@ -497,7 +414,7 @@ double CreateGalaxy::suggestSpiralB() {
 }
 
 int CreateGalaxy::suggestExtraStars() {
-	if (pixels <= 100) {
+	if (myGalaxy.getPixels() <= 100) {
 		return 0;
 	} else {
 		return 1;
@@ -622,10 +539,6 @@ bool CreateGalaxy::loadGalaxy(string fileNameInput) {
 
 	cout << "Loaded" << endl;
 	return true;
-}
-
-int CreateGalaxy::Galaxy::starAtPosition(int x, int y) {
-	return 2;
 }
 
 /*vector<vector<string>> CreateGalaxy::readFile(string fileName) {

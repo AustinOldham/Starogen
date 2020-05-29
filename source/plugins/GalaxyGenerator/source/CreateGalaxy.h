@@ -39,11 +39,12 @@
 #include <nlohmann/json.hpp>
 #include <boost/functional/hash.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/binary_iarchive.hpp >
+#include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include "RandClass/RandClass.h"
 #include "FastNoise/FastNoise.h"
 #include "Star.h"
+#include "Galaxy.h"
 
 class CreateGalaxy {
 	private:
@@ -64,7 +65,7 @@ class CreateGalaxy {
 		std::vector<std::vector<double>> densityMap;
 		std::vector<std::vector<double>> clouds;
 
-		/*std::string name;
+		std::string name;
 		std::string seed;
 		int pixels;  // Stores the width of the galaxy.
 		//double coreLocation;  // Proportion of the distance between the center and the edge that makes up the core (currently unused).
@@ -78,7 +79,7 @@ class CreateGalaxy {
 		// int densityGrid;
 		double cloudsFrequency;
 		double cloudsMult;
-		double densityMult;*/
+		double densityMult;
 
 		void generate();
 		void createApproximateDensityMap();
@@ -194,10 +195,5 @@ struct CreateGalaxy::StarType {
 };
 
 
-
-class CreateGalaxy::Planet {
-	std::string name;
-	std::string seed;
-};
 
 #endif  // CREATEGALAXY_H
