@@ -181,16 +181,16 @@ struct CreateGalaxy::StarType {
 
 	template <typename Archive>
 	void serialize(Archive& ar, const unsigned int version) {
-    	ar & name;
-    	ar & type;
+		ar & name;
+		ar & type;
 
-    	ar & chance;
-    	ar & adjustedChance;
+		ar & chance;
+		ar & adjustedChance;
 
-    	ar & red;
-    	ar & green;
-    	ar & blue;
-    	ar & alpha;
+		ar & red;
+		ar & green;
+		ar & blue;
+		ar & alpha;
 	}
 };
 

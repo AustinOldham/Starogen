@@ -17,6 +17,10 @@
 
 extends Node2D
 
+onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
+
+const galaxy_star = preload("res://scenes/ui/galaxy_viewer/GalaxyStar.tscn")
+
 var zoom_factor = 1.1
 
 func _ready():
@@ -55,3 +59,35 @@ func _process(delta):
 func _on_Recenter_pressed():
 	global_position = get_parent().get_parent().get_global_transform().origin
 	scale = Vector2(1, 1)
+
+func generate_galaxy():
+	_delete_old_stars()
+	print("Generation started")
+	galaxy_generator.generateGalaxy()
+	print("Generation complete")
+	_draw_stars()
+
+func _draw_stars():
+	print("Drawing stars")
+	for y in range(galaxy_generator.getPixels()):
+		for x in range(galaxy_generator.getPixels()):
+			if (galaxy_generator.at(x, y) != 0):
+				var new_star = galaxy_star.instance()
+				add_child(new_star)
+				new_star.original_coordinates = Vector2(x, y)
+				new_star.set_position(Vector2(x, y))
+				var curr = galaxy_generator.at(x, y)
+				new_star.get_node("Sprite").modulate = Color(galaxy_generator.getRed(curr), galaxy_generator.getGreen(curr), galaxy_generator.getBlue(curr), galaxy_generator.getAlpha(curr))
+	print("Finished drawing stars")
+
+func _delete_old_stars():
+	for node in get_children():
+		node.queue_free()
+
+func _spread_stars(factor):
+	for node in get_children():
+		node.position = node.original_coordinates * factor
+
+func _on_StarSpreadEdit_text_entered(new_text):
+	if (!new_text.empty() and new_text.is_valid_float() and int(new_text) > 0):
+		_spread_stars(int(new_text))

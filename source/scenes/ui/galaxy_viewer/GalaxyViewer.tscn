@@ -480,4 +480,4 @@ script = ExtResource( 12 )
 [connection signal="prevent_generate" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Invalid" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Generate" method="_on_Invalid_prevent_generate"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/Recenter" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy" method="_on_Recenter_pressed"]
-[connection signal="text_entered" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/HBoxContainer/StarSpreadEdit" to="." method="_on_StarSpreadEdit_text_entered"]
+[connection signal="text_entered" from="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/HBoxContainer/StarSpreadEdit" to="CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy" method="_on_StarSpreadEdit_text_entered"]

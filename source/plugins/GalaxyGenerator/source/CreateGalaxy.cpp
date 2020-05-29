@@ -44,7 +44,7 @@ CreateGalaxy::CreateGalaxy() {
 }
 
 void CreateGalaxy::run() {
-
+	// TODO: Have the generator store the modified variables then set them in myGalaxy when generation starts in case the user changes those variables after generation but does not click "generate" again.
 	name = myGalaxy.getName();
 	seed = myGalaxy.getSeed();
 	pixels = myGalaxy.getPixels();
@@ -516,7 +516,8 @@ bool CreateGalaxy::saveGalaxy(string fileNameInput) {
 	string testFile("C:\\serialization_test\\test.galaxy");
 	std::ofstream ostr(testFile.c_str(), std::ios::binary);
 	boost::archive::binary_oarchive oa(ostr);
-	oa << starList;
+	// oa << starList;
+	oa << myGalaxy;
 	ostr.close();
 	cout << "Saved" << endl;
 	return true;
@@ -525,17 +526,23 @@ bool CreateGalaxy::saveGalaxy(string fileNameInput) {
 bool CreateGalaxy::loadGalaxy(string fileNameInput) {
 	cout << "Loading" << endl;
 
-	vector<StarType> loadedStarList;
+	// vector<StarType> loadedStarList;
+
+	Galaxy testGalaxy;
 
 	string testFile("C:\\serialization_test\\test.galaxy");
 	std::ifstream istr(testFile.c_str(), std::ios::binary);
 	boost::archive::binary_iarchive ia(istr);
-	ia >> loadedStarList;
+	// ia >> loadedStarList;
+	ia >> testGalaxy;
 	istr.close();
 
-	for (int i = 0; i < loadedStarList.size(); i++) {
-		cout << loadedStarList[i].name << " " << loadedStarList[i].type << endl;
-	}
+	cout << testGalaxy.getName() << endl;
+	cout << testGalaxy.getPixels() << endl;
+
+	// for (int i = 0; i < loadedStarList.size(); i++) {
+	//	cout << loadedStarList[i].name << " " << loadedStarList[i].type << endl;
+	// }
 
 	cout << "Loaded" << endl;
 	return true;

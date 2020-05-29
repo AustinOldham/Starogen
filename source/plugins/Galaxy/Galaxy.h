@@ -23,11 +23,30 @@
 #include <utility>
 
 #include <boost/functional/hash.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 
 #include "Star.h"
 
 class Galaxy {
 	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive & ar, const unsigned int version) {
+			ar & name;
+			ar & seed;
+			ar & pixels;
+			ar & arms;
+			ar & radialDistanceMult;
+			ar & clusterStddev;
+			ar & density;
+			ar & spiralA;
+			ar & spiralB;
+			ar & extraStars;
+			ar & cloudsFrequency;
+			ar & cloudsMult;
+			ar & densityMult;
+		}
 		std::string name;
 		std::string seed;
 		int pixels;  // Stores the width of the galaxy.

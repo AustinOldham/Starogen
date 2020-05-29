@@ -17,6 +17,10 @@
 
 extends CanvasLayer
 
+# TODO: Remove the galaxy generator from this file since this is only a test.
+
+onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
+
 func _ready():
 	$MarginContainer/VBoxContainer/MenuOptions/Continue.connect("pressed", self, "continue_game")
 	$MarginContainer/VBoxContainer/MenuOptions/NewGame.connect("pressed", self, "new_game")
@@ -25,7 +29,8 @@ func _ready():
 	$MarginContainer/VBoxContainer/MenuOptions/Quit.connect("pressed", self, "quit_game")
 
 func continue_game():
-	get_tree().change_scene("res://prototypes/sample_space/SampleSpace.tscn")
+	# get_tree().change_scene("res://prototypes/sample_space/SampleSpace.tscn")
+	galaxy_generator.loadGalaxy("this is a placeholder")
 
 func new_game():
 	get_tree().change_scene("res://scenes/ui/galaxy_viewer/GalaxyViewer.tscn")
