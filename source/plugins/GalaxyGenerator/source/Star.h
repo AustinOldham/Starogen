@@ -21,14 +21,16 @@
 #include <string>
 
 class Star {
-	public:
-		Star();
-		explicit Star(int id);
-
+	private:
 		std::string name;
 		std::string seed;
 
 		int starTypeID;
+	public:
+		Star();
+		explicit Star(int id);
+
+		int getStarTypeID();
 };
 
 #endif  // STAR_H

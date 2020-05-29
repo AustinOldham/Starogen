@@ -24,3 +24,7 @@ Star::Star() {
 Star::Star(int starTypeID) {
 	starTypeID = id;
 }
+
+int Star::getStarTypeID() {
+	return starTypeID;
+}

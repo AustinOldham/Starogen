@@ -385,14 +385,20 @@ bool CreateGalaxy::setDensityMult(double densityMultInput) {
 int CreateGalaxy::at(int x, int y) {
 	// return myGalaxy[y][x];
 	// TODO: Make this return the star at this location and add a separate function to check for the existence of a star.
-	int curr = -1;
+	/*int curr = -1;
 	pair<int, int> location(x, y);
 	try {
 		curr = blankGalaxyMap.at(location);
 	} catch (const std::out_of_range& e) {
 		curr = 0;
 	}
-	return curr;
+	return curr; */
+	auto search = galaxyMap.find(make_pair(x, y));
+	if (search != galaxyMap.end()) {
+		return (search->second).getStarTypeID();
+	} else {
+		return 0;
+	}
 }
 
 float CreateGalaxy::getRed(int index) {
