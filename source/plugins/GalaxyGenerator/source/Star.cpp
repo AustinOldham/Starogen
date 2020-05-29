@@ -21,7 +21,7 @@ Star::Star() {
 	starTypeID = -1;
 }
 
-Star::Star(int starTypeID) {
+Star::Star(int id) {
 	starTypeID = id;
 }
 

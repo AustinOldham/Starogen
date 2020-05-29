@@ -29,6 +29,7 @@
 #include <cassert>
 #include <functional>
 #include <utility>
+#include <stdexcept>
 
 
 #include <iomanip>
@@ -80,7 +81,7 @@ class CreateGalaxy {
 		void createApproximateDensityMap();
 		void createClouds();
 		void starCluster(int x, int y, int num, double stddev, int distanceProportionInt);
-		void plotStar(int distanceProportionInt);
+		Star plotStar(int distanceProportionInt);
 		void populateEmptyStars();
 		std::vector<double> calculateAngles(int num, double additional);
 		double getMult(double t, double a, double b);
