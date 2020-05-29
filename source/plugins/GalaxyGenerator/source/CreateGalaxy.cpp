@@ -401,14 +401,14 @@ void CreateGalaxy::createClouds() {
 
 void CreateGalaxy::starCluster(int x, int y, int num, double stddev, double distanceProportion) {  // stddev = 5.0
 	for (int i = 0; i < num; i++) {
-		double modX = starClusterGen.nextNormal(0.0, stddev);
-		double modY = starClusterGen.nextNormal(0.0, stddev);
+		int modX = static_cast<int>(starClusterGen.nextNormal(0.0, stddev));
+		int modY = static_cast<int>(starClusterGen.nextNormal(0.0, stddev));
 		if (x + modX < 0 || y + modY < 0 || x + modX >= pixels || y + modY >= pixels) {
 			continue;
 		}
 
 		// myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
-		pair<int, int> location(x, y);
+		pair<int, int> location(x + modX, y + modY);
 		blankGalaxyMap[location] = plotStar(distanceProportion);
 	}
 }

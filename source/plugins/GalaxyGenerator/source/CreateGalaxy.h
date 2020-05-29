@@ -51,7 +51,9 @@ class CreateGalaxy {
 		class Planet;
 		std::vector<StarType> starList;
 
-		// std::vector<std::vector<int>> myGalaxy;
+		// TODO: Test the 2D vector version later on in order to determine whether or not speed should be sacrificed for memory.
+		// std::vector<std::vector<int>> blankGalaxyMap;
+		// std::vector<std::vector<Star>> galaxyMap;
 		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
 		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
 		std::vector<std::vector<double>> densityMap;
