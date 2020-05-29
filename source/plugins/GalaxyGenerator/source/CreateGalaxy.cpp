@@ -140,9 +140,9 @@ void CreateGalaxy::generate() {
 			double distanceProportion = (maxRadialDistance - currRadialDistance) / maxRadialDistance;
 			int localDensity = static_cast<int>(distanceProportion * radialDistanceMult * densityMult);
 			for (int k = 0; k < extraStars; k++) {
-				starCluster(x, y, localDensity, 10.0 * clusterStddev, static_cast<int>(distanceProportion)); //5.0 * 10.0  Adds background clutter
+				starCluster(x, y, localDensity, 10.0 * clusterStddev, static_cast<int>(distanceProportion * 100.0)); //5.0 * 10.0  Adds background clutter
 			}
-			starCluster(x, y, localDensity, clusterStddev, static_cast<int>(distanceProportion));  //stddev = 5.0
+			starCluster(x, y, localDensity, clusterStddev, static_cast<int>(distanceProportion * 100.0));  //stddev = 5.0
 		}
 		counter++;
 	}
@@ -184,7 +184,7 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, int distanc
 	}
 }
 
-void CreateGalaxy::plotStar(double distanceProportion) {
+Star CreateGalaxy::plotStar(int distanceProportionInt) {
 	// TODO: Replace this implementation with std::discrete_distribution.
 
 	double probability = starClusterGen.next(0.0, 1.0);

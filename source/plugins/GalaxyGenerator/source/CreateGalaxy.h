@@ -39,6 +39,7 @@
 #include <boost/functional/hash.hpp>
 #include "RandClass/RandClass.h"
 #include "FastNoise/FastNoise.h"
+#include "Star.h"
 
 class CreateGalaxy {
 	private:
@@ -47,7 +48,7 @@ class CreateGalaxy {
 
 		struct StarType;
 		class Galaxy;
-		class Star;
+		// class Star;
 		class Planet;
 		std::vector<StarType> starList;
 
@@ -78,7 +79,7 @@ class CreateGalaxy {
 		void generate();
 		void createApproximateDensityMap();
 		void createClouds();
-		void starCluster(int x, int y, int num, double stddev, double distanceProportion);
+		void starCluster(int x, int y, int num, double stddev, int distanceProportionInt);
 		void plotStar(int distanceProportionInt);
 		void populateEmptyStars();
 		std::vector<double> calculateAngles(int num, double additional);
@@ -181,12 +182,7 @@ class CreateGalaxy::Galaxy {
 	int starAtPosition(int x, int y);
 };
 
-class CreateGalaxy::Star {
-	std::string name;
-	std::string seed;
 
-	int starTypeID;
-};
 
 class CreateGalaxy::Planet {
 	std::string name;
