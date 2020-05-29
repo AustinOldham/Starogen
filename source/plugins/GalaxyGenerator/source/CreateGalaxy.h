@@ -49,22 +49,22 @@ class CreateGalaxy {
 	private:
 		RandClass starClusterGen;
 		FastNoise cloudNoise;
+		Galaxy myGalaxy;
 
 		struct StarType;
-		class Galaxy;
+		// class Galaxy;
 		// class Star;
-		class Planet;
+		// class Planet;
+		// TODO: Move this inside the galaxy class.
 		std::vector<StarType> starList;
 
 		// TODO: Test the 2D vector version later on in order to determine whether or not speed should be sacrificed for memory.
 		// std::vector<std::vector<int>> blankGalaxyMap;
 		// std::vector<std::vector<Star>> galaxyMap;
-		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
-		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
 		std::vector<std::vector<double>> densityMap;
 		std::vector<std::vector<double>> clouds;
 
-		std::string name;
+		/*std::string name;
 		std::string seed;
 		int pixels;  // Stores the width of the galaxy.
 		//double coreLocation;  // Proportion of the distance between the center and the edge that makes up the core (currently unused).
@@ -78,7 +78,7 @@ class CreateGalaxy {
 		// int densityGrid;
 		double cloudsFrequency;
 		double cloudsMult;
-		double densityMult;
+		double densityMult;*/
 
 		void generate();
 		void createApproximateDensityMap();
@@ -191,14 +191,6 @@ struct CreateGalaxy::StarType {
     	ar & blue;
     	ar & alpha;
 	}
-};
-
-// TODO: Put this in a completely separate file.
-class CreateGalaxy::Galaxy {
-	std::string name;
-	std::string seed;
-
-	int starAtPosition(int x, int y);
 };
 
 

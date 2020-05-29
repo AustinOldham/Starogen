@@ -40,37 +40,37 @@ using json = nlohmann::json;
 // TODO: Clouds will be generated using density map where the number of stars in a square around each star (or every pixel) is used for the calculation (odd number width of search only so offset = searchWidth / 2 and the locations at galaxy[y - offset + i][x - offset + j] are checked)
 // TODO: Consider replacing the density map by adding a step to the generator where star clusters are plotted in the same way as normal stars except each cluster is more dense and each time a "star" is plotted, the number stored is incremented. The values will then be normalized to be in the range [0, 1] in order to create an approximate density map.
 CreateGalaxy::CreateGalaxy() {
-	name = "Default Name";
-	seed = "Default Seed";
-	pixels = 500;
-	arms = 4;
-	radialDistanceMult = 10.0;
+	myGalaxy.name = "Default Name";
+	myGalaxy.seed = "Default Seed";
+	myGalaxy.pixels = 500;
+	myGalaxy.arms = 4;
+	myGalaxy.radialDistanceMult = 10.0;
 	// clusterStddev = 5.0;
-	clusterStddev = 7.0;
+	myGalaxy.clusterStddev = 7.0;
 	// density = 20.0;
-	density = 10.0;
-	spiralA = 0.1;
-	spiralB = 0.3;
+	myGalaxy.density = 10.0;
+	myGalaxy.spiralA = 0.1;
+	myGalaxy.spiralB = 0.3;
 	// extraStars = 1;
-	extraStars = 0;
+	myGalaxy.extraStars = 0;
 	// densityGrid = 15;
-	cloudsFrequency = 0.05;
-	cloudsMult = 5.0;
-	densityMult = 1.0;
+	myGalaxy.cloudsFrequency = 0.05;
+	myGalaxy.cloudsMult = 5.0;
+	myGalaxy.densityMult = 1.0;
 	initializeContainers();
 }
 
 void CreateGalaxy::run() {
 	// TODO: Store each variable inside the Galaxy object in order to save it for future reference.
 	std::hash<string> seedHasher;
-	int seedInt = seedHasher(seed);
-	starClusterGen.setSeed(seed);
+	int seedInt = seedHasher(myGalaxy.seed);
+	starClusterGen.setSeed(myGalaxy.seed);
 	cloudNoise.SetSeed(seedInt);
 	cloudNoise.SetNoiseType(FastNoise::SimplexFractal);  // SimplexFractal for clouds
-	cloudNoise.SetFrequency(cloudsFrequency);  // 0.05 for clouds
+	cloudNoise.SetFrequency(myGalaxy.cloudsFrequency);  // 0.05 for clouds
 
-	blankGalaxyMap.clear();
-	galaxyMap.clear();
+	myGalaxy.blankGalaxyMap.clear();
+	myGalaxy.galaxyMap.clear();
 	//myGalaxy.resize(pixels, vector<int>(pixels, 0));
 	//densityMap.clear();
 	//densityMap.resize(pixels, vector<double>(pixels, 0));
@@ -592,11 +592,11 @@ bool CreateGalaxy::saveGalaxy(string fileNameInput) {
 	// See Godot autoload
 	cout << "Saving" << endl;
 
-	for (int i = 0; i < starList.size(); i++) {
-		cout << starList[i].name << " " << starList[i].type << endl;
-	}
+	// for (int i = 0; i < starList.size(); i++) {
+	//	cout << starList[i].name << " " << starList[i].type << endl;
+	// }
 
-	string testFile("C:\\serialization_test\\test.bin");
+	string testFile("C:\\serialization_test\\test.galaxy");
 	std::ofstream ostr(testFile.c_str(), std::ios::binary);
 	boost::archive::binary_oarchive oa(ostr);
 	oa << starList;
@@ -610,7 +610,7 @@ bool CreateGalaxy::loadGalaxy(string fileNameInput) {
 
 	vector<StarType> loadedStarList;
 
-	string testFile("C:\\serialization_test\\test.bin");
+	string testFile("C:\\serialization_test\\test.galaxy");
 	std::ifstream istr(testFile.c_str(), std::ios::binary);
 	boost::archive::binary_iarchive ia(istr);
 	ia >> loadedStarList;
