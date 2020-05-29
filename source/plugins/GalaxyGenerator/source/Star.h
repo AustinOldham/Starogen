@@ -22,7 +22,9 @@
 
 class Star {
 	public:
+		Star();
 		explicit Star(int id);
+
 		std::string name;
 		std::string seed;
 

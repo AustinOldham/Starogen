@@ -195,7 +195,8 @@ Star CreateGalaxy::plotStar(int distanceProportionInt) {
 	for (int i = 0; i < starList.size(); i++) {
 		probabilitySum += starList[i].adjustedChance;
 		if (probability <= probabilitySum) {
-			return i;
+			Star newStar(i);
+			return newStar;
 		}
 	}
 
@@ -207,7 +208,7 @@ Star CreateGalaxy::plotStar(int distanceProportionInt) {
 
 void populateEmptyStars() {
 	for (auto it : blankGalaxyMap) {
-
+		galaxyMap[it.first] = plotStar(it.second);
 	}
 }
 
