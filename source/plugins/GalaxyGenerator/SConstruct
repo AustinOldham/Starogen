@@ -14,6 +14,8 @@ opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/'))
 opts.Add(PathVariable('target_name', 'The library name.', 'libGalaxyGenerator', PathVariable.PathAccept))
 
+opts.Add(PathVariable('boost_path', "Boost path", 'C:\Program Files\boost\boost_1_73_0'))
+
 # Local dependency paths, adapt them to your setup
 godot_headers_path = "../../godot-cpp/godot_headers/"
 cpp_bindings_path = "../../godot-cpp/"
@@ -24,6 +26,13 @@ bits = 64
 
 # Updates the environment with the option variables.
 opts.Update(env)
+
+
+# Checks if the location of the Boost library is specified.
+if env['boost_path'] == '':
+    print("No valid path to the Boost installation is specified.")
+
+boost_prefix = env['boost_path']
 
 # Process some arguments
 if env['use_llvm']:
@@ -86,6 +95,10 @@ env.Append(CPPPATH=['source/', '../Libraries/FastNoise', '../Libraries/RandClass
 sources = Glob('source/*.cpp')
 sources = sources + Glob('../Libraries/FastNoise/*.cpp')
 sources = sources + Glob('../Libraries/RandClass/*.cpp')
+
+env.Append(CPPPATH = boost_prefix)
+#env.Append(CPPPATH = [os.path.join(boost_prefix, "include")])
+#env.Append(LIBPATH = [os.path.join(boost_prefix, "lib")])
 
 library = env.SharedLibrary(target=env['target_path'] + env['target_name'] , source=sources)
 

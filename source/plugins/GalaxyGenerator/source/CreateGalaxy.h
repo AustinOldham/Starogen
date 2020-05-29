@@ -36,6 +36,7 @@
 
 
 #include <nlohmann/json.hpp>
+#include <boost/functional/hash.hpp>
 #include "RandClass/RandClass.h"
 #include "FastNoise/FastNoise.h"
 
@@ -51,8 +52,8 @@ class CreateGalaxy {
 		std::vector<StarType> starList;
 
 		// std::vector<std::vector<int>> myGalaxy;
-		std::unordered_map<std::pair<int, int>, int> blankGalaxyMap;
-		std::unordered_map<std::pair<int, int>, Star> galaxyMap;
+		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
+		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
 		std::vector<std::vector<double>> densityMap;
 		std::vector<std::vector<double>> clouds;
 
