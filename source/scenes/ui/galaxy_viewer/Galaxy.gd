@@ -78,6 +78,7 @@ func _draw_stars():
 	for y in range(galaxy_generator.getPixels()):
 		for x in range(galaxy_generator.getPixels()):
 			if (galaxy_generator.at(x, y) != 0):
+				# print(Vector2(x, y))
 				var new_star = galaxy_star.instance()
 				add_child(new_star)
 				new_star.original_coordinates = Vector2(x, y)

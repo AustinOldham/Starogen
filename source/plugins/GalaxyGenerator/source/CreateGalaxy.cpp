@@ -524,21 +524,22 @@ bool CreateGalaxy::saveGalaxy(string fileNameInput) {
 }
 
 bool CreateGalaxy::loadGalaxy(string fileNameInput) {
+	// TODO: Move this to the galaxy manager.
 	cout << "Loading" << endl;
 
 	// vector<StarType> loadedStarList;
 
-	Galaxy testGalaxy;
+	// Galaxy testGalaxy;
 
 	string testFile("C:\\serialization_test\\test.galaxy");
 	std::ifstream istr(testFile.c_str(), std::ios::binary);
 	boost::archive::binary_iarchive ia(istr);
 	// ia >> loadedStarList;
-	ia >> testGalaxy;
+	ia >> myGalaxy;
 	istr.close();
 
-	cout << testGalaxy.getName() << endl;
-	cout << testGalaxy.getPixels() << endl;
+	cout << myGalaxy.getName() << endl;
+	cout << myGalaxy.getPixels() << endl;
 
 	// for (int i = 0; i < loadedStarList.size(); i++) {
 	//	cout << loadedStarList[i].name << " " << loadedStarList[i].type << endl;

@@ -25,6 +25,7 @@
 #include <boost/functional/hash.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 
 #include "Star.h"
 
@@ -46,6 +47,9 @@ class Galaxy {
 			ar & cloudsFrequency;
 			ar & cloudsMult;
 			ar & densityMult;
+
+			ar & blankGalaxyMap;  // This may be unnecessary.
+			ar & galaxyMap;
 		}
 		std::string name;
 		std::string seed;
