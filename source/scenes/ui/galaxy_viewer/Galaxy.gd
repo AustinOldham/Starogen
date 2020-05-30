@@ -34,6 +34,8 @@ func _input(event):
 				_zoom_at_point(zoom_factor, mouse_position)
 			elif event.button_index == BUTTON_WHEEL_DOWN:
 				_zoom_at_point(1 / zoom_factor, mouse_position)
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
+		self.on_click()
 
 
 func _zoom_at_point(zoom_change, mouse_position):
@@ -112,3 +114,26 @@ func _spread_stars(factor):
 func _on_StarSpreadEdit_text_entered(new_text):
 	if (!new_text.empty() and new_text.is_valid_float() and int(new_text) > 0):
 		_spread_stars(int(new_text))
+
+
+func on_click():
+	print("Click")
+	print(get_global_mouse_position())
+	print(get_global_transform().origin)
+	#var x = get_global_mouse_position().x - ($Galaxy/Sprite.get_global_transform().origin.x * (width / ($Galaxy/Sprite.scale.x * width)))
+	#var y = get_global_mouse_position().y - ($Galaxy/Sprite.get_global_transform().origin.y * (width / ($Galaxy/Sprite.scale.y * width)))
+	#var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) * (width / ($Galaxy/Sprite.scale.x * width))
+	#var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) * (width / ($Galaxy/Sprite.scale.y * width))
+	
+	# var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) / $Galaxy/Sprite.scale.x
+	# var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) / $Galaxy/Sprite.scale.y
+
+	var x = (get_global_mouse_position().x - get_global_transform().origin.x) / scale.x
+	var y = (get_global_mouse_position().y - get_global_transform().origin.y) / scale.y	
+
+	# $Galaxy/Sprite.localX = x
+	# $Galaxy/Sprite.localY = y
+	print("sprite x: " + str(x) + "  sprite y: " + str(y))
+	if (x < galaxy_generator.getPixels() and y < galaxy_generator.getPixels() and x >= 0 and y >= 0):
+		print("Contained")
+		# $Galaxy/Sprite.update()
