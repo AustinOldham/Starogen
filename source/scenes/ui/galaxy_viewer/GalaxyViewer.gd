@@ -17,9 +17,11 @@
 
 extends Node2D
 
-onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
+# onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
-const galaxy_star = preload("res://scenes/ui/galaxy_viewer/GalaxyStar.tscn")
+# const galaxy_star = preload("res://scenes/ui/galaxy_viewer/GalaxyStar.tscn")
+
+var galaxy_gui
 
 signal invalid_check(type, value)
 
@@ -46,6 +48,7 @@ var density_mult = 1
 """
 
 func _ready():
+	galaxy_gui = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
 	_populate_entries()
 
 """
@@ -99,19 +102,19 @@ func _check_input_int(text, type, default, less_than, invalid_num):
 
 func _populate_entries():
 	var grid_container = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer/GridContainer
-	grid_container.get_node("NameEdit").text = galaxy_generator.getName()
-	grid_container.get_node("SeedEdit").text = galaxy_generator.getSeed()
-	grid_container.get_node("SizeEdit").text = str(galaxy_generator.getPixels())
-	grid_container.get_node("CloudsFrequencyEdit").text = str(galaxy_generator.getCloudsFrequency())
-	grid_container.get_node("ArmsEdit").text = str(galaxy_generator.getArms())
-	grid_container.get_node("RadialDistanceMultEdit").text = str(galaxy_generator.getRadialDistanceMult())
-	grid_container.get_node("ClusterStddevEdit").text = str(galaxy_generator.getClusterStddev())
-	grid_container.get_node("DensityEdit").text = str(galaxy_generator.getDensity())
-	grid_container.get_node("AEdit").text = str(galaxy_generator.getSpiralA())
-	grid_container.get_node("BEdit").text = str(galaxy_generator.getSpiralB())
-	grid_container.get_node("ExtraStarsEdit").text = str(galaxy_generator.getExtraStars())
-	grid_container.get_node("DensityMultEdit").text = str(galaxy_generator.getDensityMult())
-	grid_container.get_node("CloudsMultEdit").text = str(galaxy_generator.getCloudsMult())
+	grid_container.get_node("NameEdit").text = galaxy_gui.galaxy_generator.getName()
+	grid_container.get_node("SeedEdit").text = galaxy_gui.galaxy_generator.getSeed()
+	grid_container.get_node("SizeEdit").text = str(galaxy_gui.galaxy_generator.getPixels())
+	grid_container.get_node("CloudsFrequencyEdit").text = str(galaxy_gui.galaxy_generator.getCloudsFrequency())
+	grid_container.get_node("ArmsEdit").text = str(galaxy_gui.galaxy_generator.getArms())
+	grid_container.get_node("RadialDistanceMultEdit").text = str(galaxy_gui.galaxy_generator.getRadialDistanceMult())
+	grid_container.get_node("ClusterStddevEdit").text = str(galaxy_gui.galaxy_generator.getClusterStddev())
+	grid_container.get_node("DensityEdit").text = str(galaxy_gui.galaxy_generator.getDensity())
+	grid_container.get_node("AEdit").text = str(galaxy_gui.galaxy_generator.getSpiralA())
+	grid_container.get_node("BEdit").text = str(galaxy_gui.galaxy_generator.getSpiralB())
+	grid_container.get_node("ExtraStarsEdit").text = str(galaxy_gui.galaxy_generator.getExtraStars())
+	grid_container.get_node("DensityMultEdit").text = str(galaxy_gui.galaxy_generator.getDensityMult())
+	grid_container.get_node("CloudsMultEdit").text = str(galaxy_gui.galaxy_generator.getCloudsMult())
 
 func _check_input_text(text, type):
 	if (text.empty()):
@@ -148,85 +151,84 @@ func _check_success(result, type):
 func _on_CloudsMultEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "Clouds Mult")
 	if (is_valid):
-		_check_success(galaxy_generator.setCloudsMult(float(new_text)), "Clouds Mult")
+		_check_success(galaxy_gui.galaxy_generator.setCloudsMult(float(new_text)), "Clouds Mult")
 
 
 func _on_NameEdit_text_changed(new_text):
 	var is_valid = _check_input_text(new_text, "Name")
 	if (is_valid):
-		_check_success(galaxy_generator.setName(new_text), "Name")
+		_check_success(galaxy_gui.galaxy_generator.setName(new_text), "Name")
 
 
 func _on_SeedEdit_text_changed(new_text):
 	var is_valid = _check_input_text(new_text, "Seed")
 	if (is_valid):
-		_check_success(galaxy_generator.setSeed(new_text), "Seed")
+		_check_success(galaxy_gui.galaxy_generator.setSeed(new_text), "Seed")
 
 
 func _on_SizeEdit_text_changed(new_text):
 	var is_valid = _check_input_int(new_text, "Size")
 	if (is_valid):
-		_check_success(galaxy_generator.setPixels(int(new_text)), "Size")
+		_check_success(galaxy_gui.galaxy_generator.setPixels(int(new_text)), "Size")
 
 
 func _on_CloudsFrequencyEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "Clouds Frequency")
 	if (is_valid):
-		_check_success(galaxy_generator.setCloudsFrequency(float(new_text)), "Clouds Frequency")
+		_check_success(galaxy_gui.galaxy_generator.setCloudsFrequency(float(new_text)), "Clouds Frequency")
 
 
 func _on_ArmsEdit_text_changed(new_text):
 	var is_valid = _check_input_int(new_text, "Arms")
 	if (is_valid):
-		_check_success(galaxy_generator.setArms(int(new_text)), "Arms")
+		_check_success(galaxy_gui.galaxy_generator.setArms(int(new_text)), "Arms")
 
 
 func _on_RadialDistanceMultEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "Radial Distance Mult")
 	if (is_valid):
-		_check_success(galaxy_generator.setRadialDistanceMult(float(new_text)), "Radial Distance Mult")
+		_check_success(galaxy_gui.galaxy_generator.setRadialDistanceMult(float(new_text)), "Radial Distance Mult")
 
 
 func _on_ClusterStddevEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "Cluster Stddev")
 	if (is_valid):
-		_check_success(galaxy_generator.setClusterStddev(float(new_text)), "Cluster Stddev")
+		_check_success(galaxy_gui.galaxy_generator.setClusterStddev(float(new_text)), "Cluster Stddev")
 
 
 
 func _on_DensityEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "Density")
 	if (is_valid):
-		_check_success(galaxy_generator.setDensity(float(new_text)), "Density")
+		_check_success(galaxy_gui.galaxy_generator.setDensity(float(new_text)), "Density")
 
 
 func _on_AEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "SpiralA")
 	if (is_valid):
-		_check_success(galaxy_generator.setSpiralA(float(new_text)), "SpiralA")
+		_check_success(galaxy_gui.galaxy_generator.setSpiralA(float(new_text)), "SpiralA")
 
 
 func _on_BEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "SpiralB")
 	if (is_valid):
-		_check_success(galaxy_generator.setSpiralB(float(new_text)), "SpiralB")
+		_check_success(galaxy_gui.galaxy_generator.setSpiralB(float(new_text)), "SpiralB")
 
 
 func _on_ExtraStarsEdit_text_changed(new_text):
 	var is_valid = _check_input_int(new_text, "Extra Stars")
 	if (is_valid):
-		_check_success(galaxy_generator.setExtraStars(int(new_text)), "Extra Stars")
+		_check_success(galaxy_gui.galaxy_generator.setExtraStars(int(new_text)), "Extra Stars")
 
 
 func _on_DensityMultEdit_text_changed(new_text):
 	var is_valid = _check_input_float(new_text, "Density Mult")
 	if (is_valid):
-		_check_success(galaxy_generator.setDensityMult(float(new_text)), "Density Mult")
+		_check_success(galaxy_gui.galaxy_generator.setDensityMult(float(new_text)), "Density Mult")
 
 
 func _on_Generate_pressed():
-	var gui_galaxy = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
-	gui_galaxy.generate_galaxy()
+	galaxy_gui.generate_galaxy()
 """
 	_delete_old_stars()
 	print("Generation started")
@@ -255,7 +257,7 @@ func _spread_stars(factor):
 """
 
 func _on_Start_pressed():
-	galaxy_generator.saveGalaxy("this is a placeholder")
+	galaxy_gui.galaxy_generator.saveGalaxy("this is a placeholder")
 
 """
 func _on_StarSpreadEdit_text_entered(new_text):

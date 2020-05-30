@@ -67,6 +67,12 @@ func generate_galaxy():
 	print("Generation complete")
 	_draw_stars()
 
+func load_galaxy(path):
+	# TODO: Use the galaxy manager instead
+	galaxy_generator.loadGalaxy(path)
+	_delete_old_stars()
+	_draw_stars()
+
 func _draw_stars():
 	print("Drawing stars")
 	for y in range(galaxy_generator.getPixels()):
