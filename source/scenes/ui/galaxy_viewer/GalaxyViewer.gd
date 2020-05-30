@@ -48,7 +48,8 @@ var density_mult = 1
 """
 
 func _ready():
-	galaxy_gui = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
+	#galaxy_gui = $CanvasLayer/MarginContainer/HSplitContainer/VBoxContainer2/GalaxyBox/Galaxy
+	galaxy_gui = $CanvasLayer/MarginContainer/HSplitContainer/HBoxContainer2/VBoxContainer2/GalaxyBox/Galaxy
 	_populate_entries()
 
 """

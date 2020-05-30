@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/ui/galaxy_viewer/Generate.gd" type="Script" id=5]
 [ext_resource path="res://scenes/ui/galaxy_viewer/Invalid.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui/galaxy_viewer/Start.gd" type="Script" id=7]
-[ext_resource path="res://scenes/ui/galaxy_viewer/GalaxyVBoxContainer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/ui/galaxy_viewer/GalaxyContainer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/StaticStarBackground.tscn" type="PackedScene" id=9]
 
 [node name="GalaxyViewer" type="Node2D"]
@@ -397,7 +397,7 @@ size_flags_vertical = 0
 theme = ExtResource( 3 )
 text = "BACK"
 
-[node name="VBoxContainer2" parent="CanvasLayer/MarginContainer/HSplitContainer" instance=ExtResource( 8 )]
+[node name="HBoxContainer2" parent="CanvasLayer/MarginContainer/HSplitContainer" instance=ExtResource( 8 )]
 margin_left = 289.0
 margin_right = 984.0
 margin_bottom = 515.0
