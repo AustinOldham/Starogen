@@ -257,10 +257,14 @@ func _spread_stars(factor):
 """
 
 func _on_Start_pressed():
-	galaxy_gui.galaxy_generator.saveGalaxy("this is a placeholder")
+	galaxy_gui.save_galaxy()
 
 """
 func _on_StarSpreadEdit_text_entered(new_text):
 	if (!new_text.empty() and new_text.is_valid_float() and int(new_text) > 0):
 		_spread_stars(int(new_text))
 """
+
+
+func _on_BackButton_pressed():
+	get_tree().change_scene("res://scenes/ui/main_menu/MainMenu.tscn")

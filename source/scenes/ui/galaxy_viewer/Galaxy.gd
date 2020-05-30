@@ -67,11 +67,25 @@ func generate_galaxy():
 	print("Generation complete")
 	_draw_stars()
 
-func load_galaxy(path):
+func load_galaxy(galaxy_name):
+	load_galaxy_path(UserPreferences.default_save_path, galaxy_name)
+
+func load_galaxy_path(path, galaxy_name):
+	var dir = Directory.new()
+	dir.make_dir_recursive(path)
 	# TODO: Use the galaxy manager instead
-	galaxy_generator.loadGalaxy(path)
+	galaxy_generator.loadGalaxy(path, galaxy_name)
 	_delete_old_stars()
 	_draw_stars()
+
+func save_galaxy():
+	save_galaxy_path(UserPreferences.default_save_path)
+
+func save_galaxy_path(path):
+	var dir = Directory.new()
+	dir.make_dir_recursive(path)
+	print(path)
+	galaxy_generator.saveGalaxy(path)
 
 func _draw_stars():
 	print("Drawing stars")

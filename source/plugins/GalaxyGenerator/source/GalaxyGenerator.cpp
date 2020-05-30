@@ -270,10 +270,10 @@ String GalaxyGenerator::toGodotString(std::string oldString) {
 	return newString;
 }
 
-bool GalaxyGenerator::saveGalaxy(String fileNameInput) {
-	return myGalaxyGenerator.saveGalaxy(toStandardString(fileNameInput));
+bool GalaxyGenerator::saveGalaxy(String pathInput) {
+	return myGalaxyGenerator.saveGalaxy(toStandardString(pathInput));
 }
 
-bool GalaxyGenerator::loadGalaxy(String fileNameInput) {
-	return myGalaxyGenerator.loadGalaxy(toStandardString(fileNameInput));
+bool GalaxyGenerator::loadGalaxy(String pathInput, String fileNameInput) {
+	return myGalaxyGenerator.loadGalaxy(toStandardString(pathInput), toStandardString(fileNameInput));
 }

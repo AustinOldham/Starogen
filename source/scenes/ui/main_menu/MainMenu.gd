@@ -27,7 +27,7 @@ func _ready():
 
 func continue_game():
 	# get_tree().change_scene("res://prototypes/sample_space/SampleSpace.tscn")
-	get_tree().change_scene("res://scenes/ui/galaxy_viewer/GalaxyMapViewer.tscn")
+	get_tree().change_scene("res://scenes/ui/SaveSelector.tscn")
 
 func new_game():
 	get_tree().change_scene("res://scenes/ui/galaxy_viewer/GalaxyViewer.tscn")

@@ -90,8 +90,8 @@ class GalaxyGenerator : public Object {
 		std::string toStandardString(String oldString);
 		String toGodotString(std::string oldString);
 
-		bool saveGalaxy(String fileNameInput);
-		bool loadGalaxy(String fileNameInput);
+		bool saveGalaxy(String pathInput);
+		bool loadGalaxy(String pathInput, String fileNameInput);
 };
 
 }

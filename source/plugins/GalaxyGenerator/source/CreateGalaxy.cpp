@@ -505,7 +505,7 @@ void CreateGalaxy::getProbabilities() {
 	}
 }
 
-bool CreateGalaxy::saveGalaxy(string fileNameInput) {
+bool CreateGalaxy::saveGalaxy(string pathInput) {
 	// See Godot autoload
 	cout << "Saving" << endl;
 
@@ -513,8 +513,20 @@ bool CreateGalaxy::saveGalaxy(string fileNameInput) {
 	//	cout << starList[i].name << " " << starList[i].type << endl;
 	// }
 
-	string testFile("C:\\serialization_test\\test.galaxy");
-	std::ofstream ostr(testFile.c_str(), std::ios::binary);
+	//string testFile("C:\\serialization_test\\test.galaxy");
+	//std::filesystem::path fileLocation(testFile);
+	// std::ofstream ostr(testFile.c_str(), std::ios::binary);
+
+	std::filesystem::path dir(pathInput);
+	dir.make_preferred();
+	string newName = myGalaxy.getName();
+	std::replace(newName.begin(), newName.end(), ' ', '_');
+	std::filesystem::path fileLocation = dir / newName;
+	fileLocation.replace_extension(".galaxy");
+
+	cout << fileLocation << endl;
+
+	std::ofstream ostr(fileLocation.c_str(), std::ios::binary);
 	boost::archive::binary_oarchive oa(ostr);
 	// oa << starList;
 	oa << myGalaxy;
@@ -523,7 +535,7 @@ bool CreateGalaxy::saveGalaxy(string fileNameInput) {
 	return true;
 }
 
-bool CreateGalaxy::loadGalaxy(string fileNameInput) {
+bool CreateGalaxy::loadGalaxy(string pathInput, string fileNameInput) {
 	// TODO: Move this to the galaxy manager.
 	cout << "Loading" << endl;
 
@@ -531,8 +543,18 @@ bool CreateGalaxy::loadGalaxy(string fileNameInput) {
 
 	// Galaxy testGalaxy;
 
-	string testFile("C:\\serialization_test\\test.galaxy");
-	std::ifstream istr(testFile.c_str(), std::ios::binary);
+	//string testFile("C:\\serialization_test\\test.galaxy");
+	//std::ifstream istr(testFile.c_str(), std::ios::binary);
+
+	std::filesystem::path dir(pathInput);
+	dir.make_preferred();
+	std::replace(fileNameInput.begin(), fileNameInput.end(), ' ', '_');
+	std::filesystem::path fileLocation = dir / fileNameInput;
+	fileLocation.replace_extension(".galaxy");
+
+	cout << fileLocation << endl;
+
+	std::ifstream istr(fileLocation.c_str(), std::ios::binary);
 	boost::archive::binary_iarchive ia(istr);
 	// ia >> loadedStarList;
 	ia >> myGalaxy;

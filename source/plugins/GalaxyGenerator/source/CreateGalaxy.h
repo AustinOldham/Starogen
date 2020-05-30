@@ -30,6 +30,7 @@
 #include <functional>
 #include <utility>
 #include <stdexcept>
+#include <filesystem>
 
 
 #include <iomanip>
@@ -162,8 +163,8 @@ class CreateGalaxy {
 		int suggestExtraStars();
 		double suggestCloudsMult();
 
-		bool saveGalaxy(std::string fileNameInput);
-		bool loadGalaxy(std::string fileNameInput);
+		bool saveGalaxy(std::string pathInput);
+		bool loadGalaxy(std::string pathInput, std::string fileNameInput);
 };
 
 struct CreateGalaxy::StarType {
