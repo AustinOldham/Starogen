@@ -21,7 +21,11 @@ onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/Galaxy
 
 const galaxy_star = preload("res://scenes/ui/galaxy_viewer/GalaxyStar.tscn")
 
+var star_dict = {}
+
 var zoom_factor = 1.1
+
+var current_spread_factor = 1
 
 func _ready():
 	pass
@@ -35,7 +39,7 @@ func _input(event):
 			elif event.button_index == BUTTON_WHEEL_DOWN:
 				_zoom_at_point(1 / zoom_factor, mouse_position)
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
-		self.on_click()
+		self._on_click()
 
 
 func _zoom_at_point(zoom_change, mouse_position):
@@ -91,6 +95,7 @@ func save_galaxy_path(path):
 
 func _draw_stars():
 	print("Drawing stars")
+	star_dict.clear()
 	for y in range(galaxy_generator.getPixels()):
 		for x in range(galaxy_generator.getPixels()):
 			if (galaxy_generator.at(x, y) != 0):
@@ -101,13 +106,16 @@ func _draw_stars():
 				new_star.set_position(Vector2(x, y))
 				var curr = galaxy_generator.at(x, y)
 				new_star.get_node("Sprite").modulate = Color(galaxy_generator.getRed(curr), galaxy_generator.getGreen(curr), galaxy_generator.getBlue(curr), galaxy_generator.getAlpha(curr))
+				star_dict[Vector2(x, y)] = new_star
 	print("Finished drawing stars")
+	_spread_stars(current_spread_factor)
 
 func _delete_old_stars():
 	for node in get_children():
 		node.queue_free()
 
 func _spread_stars(factor):
+	current_spread_factor = factor
 	for node in get_children():
 		node.position = node.original_coordinates * factor
 
@@ -116,24 +124,21 @@ func _on_StarSpreadEdit_text_entered(new_text):
 		_spread_stars(int(new_text))
 
 
-func on_click():
+func _on_click():
 	print("Click")
 	print(get_global_mouse_position())
 	print(get_global_transform().origin)
-	#var x = get_global_mouse_position().x - ($Galaxy/Sprite.get_global_transform().origin.x * (width / ($Galaxy/Sprite.scale.x * width)))
-	#var y = get_global_mouse_position().y - ($Galaxy/Sprite.get_global_transform().origin.y * (width / ($Galaxy/Sprite.scale.y * width)))
-	#var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) * (width / ($Galaxy/Sprite.scale.x * width))
-	#var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) * (width / ($Galaxy/Sprite.scale.y * width))
-	
-	# var x = (get_global_mouse_position().x - $Galaxy/Sprite.get_global_transform().origin.x) / $Galaxy/Sprite.scale.x
-	# var y = (get_global_mouse_position().y - $Galaxy/Sprite.get_global_transform().origin.y) / $Galaxy/Sprite.scale.y
 
 	var x = (get_global_mouse_position().x - get_global_transform().origin.x) / scale.x
-	var y = (get_global_mouse_position().y - get_global_transform().origin.y) / scale.y	
+	var y = (get_global_mouse_position().y - get_global_transform().origin.y) / scale.y
+	x = x / current_spread_factor
+	y = y / current_spread_factor
+	x = int(x)
+	y = int(y)
 
-	# $Galaxy/Sprite.localX = x
-	# $Galaxy/Sprite.localY = y
 	print("sprite x: " + str(x) + "  sprite y: " + str(y))
 	if (x < galaxy_generator.getPixels() and y < galaxy_generator.getPixels() and x >= 0 and y >= 0):
 		print("Contained")
-		# $Galaxy/Sprite.update()
+		var curr_star = star_dict.get(Vector2(x, y))
+		if (curr_star != null):
+			print("There is a star at " + str(curr_star.original_coordinates.x) + " " + str(curr_star.original_coordinates.y))
