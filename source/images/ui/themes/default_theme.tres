@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://images/ui/themes/default_button_stylebox.tres" type="StyleBox" id=1]
 [ext_resource path="res://images/ui/themes/default_linedit_stylebox.tres" type="StyleBox" id=2]
@@ -7,6 +7,26 @@
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_right = 5
+border_color = Color( 1, 1, 1, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.117647, 0.447059, 0.101961, 1 )
+border_color = Color( 0.419608, 0.0627451, 0.372549, 1 )
 
 [resource]
 default_font = ExtResource( 3 )
@@ -78,6 +98,7 @@ PopupMenu/styles/labeled_separator_right = ExtResource( 1 )
 PopupMenu/styles/panel = ExtResource( 1 )
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = ExtResource( 1 )
+ScrollContainer/styles/bg = null
 ToolButton/colors/font_color = Color( 1, 1, 1, 1 )
 ToolButton/colors/font_color_disabled = Color( 0.192157, 0.192157, 0.192157, 1 )
 ToolButton/colors/font_color_hover = Color( 0.486275, 0.988235, 0, 1 )
@@ -89,3 +110,12 @@ ToolButton/styles/focus = SubResource( 1 )
 ToolButton/styles/hover = SubResource( 1 )
 ToolButton/styles/normal = SubResource( 2 )
 ToolButton/styles/pressed = SubResource( 1 )
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = SubResource( 3 )
+VScrollBar/styles/grabber_highlight = SubResource( 3 )
+VScrollBar/styles/grabber_pressed = SubResource( 3 )
+VScrollBar/styles/scroll = SubResource( 6 )
+VScrollBar/styles/scroll_focus = SubResource( 7 )
