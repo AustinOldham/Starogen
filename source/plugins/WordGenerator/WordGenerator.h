@@ -24,6 +24,9 @@
 
 #include "RandClass/RandClass.h"
 
+
+// TODO: Add a random distribution based on the seed to allow for different looking languages.
+
 class WordGenerator {
 	private:
 		RandClass randomGen;
