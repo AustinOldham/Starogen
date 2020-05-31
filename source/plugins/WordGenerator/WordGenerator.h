@@ -22,6 +22,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <iostream>
 
 #include "RandClass/RandClass.h"
 
@@ -52,7 +53,7 @@ class WordGenerator {
 		bool readSyllableFiles();
 		bool readConsonantSyllableFile(std::string filePathInput);
 		bool readVowelSyllableFile(std::string filePathInput);
-		std::string generateWord(RandClass rand, RandClass randSyllable, int minLength, int maxLength);  // The default minimum length is 1 character.
+		std::string generateWord(RandClass& rand, RandClass& randSyllable, int minLength, int maxLength);  // The default minimum length is 1 character.
 
 	public:
 		WordGenerator();
@@ -65,10 +66,10 @@ class WordGenerator {
 		std::string nextWordFromSeed(std::string seedInput, int minLength, int maxLength);
 		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
 
-		std::string getRandomCombinedSyllable(RandClass randSyllable);
-		std::string getRandomSyllable(RandClass randSyllable, bool isVowelInput);
-		std::string getRandomVowelSyllable(RandClass randSyllable);
-		std::string getRandomConsonantSyllable(RandClass randSyllable);
+		std::string getRandomCombinedSyllable(RandClass& randSyllable);
+		std::string getRandomSyllable(RandClass& randSyllable, bool isVowelInput);
+		std::string getRandomVowelSyllable(RandClass& randSyllable);
+		std::string getRandomConsonantSyllable(RandClass& randSyllable);
 		bool isConsonant(std::string currSyllable);
 
 		bool setDefaultMaxLength(int maxLengthInput);
@@ -76,7 +77,7 @@ class WordGenerator {
 
 		bool setCensoredWordsPath(std::string pathInput);
 
-		int getConsecutiveConsonantNum(RandClass rand);
+		int getConsecutiveConsonantNum(RandClass& rand);
 };
 
 #endif  // WORDGENERATOR_H
