@@ -143,6 +143,6 @@ func _on_click():
 		print("Contained")
 		var curr_star = star_dict.get(Vector2(x, y))
 		if (curr_star != null):
-			print(galaxy_generator.getStarNameAt(curr_star.original_coordinates) + " is a star at " + str(curr_star.original_coordinates.x) + " " + str(curr_star.original_coordinates.y))
-			star_info_panel.get_node("ScrollContainer/VBoxContainer/DynamicCurrStarLabel").text = galaxy_generator.getStarNameAt(curr_star.original_coordinates)
+			print(galaxy_generator.getStarNameAt(curr_star.original_coordinates.x, curr_star.original_coordinates.y) + " is a star at " + str(curr_star.original_coordinates.x) + " " + str(curr_star.original_coordinates.y))
+			star_info_panel.get_node("ScrollContainer/VBoxContainer/DynamicCurrStarLabel").text = galaxy_generator.getStarNameAt(curr_star.original_coordinates.x, curr_star.original_coordinates.y)
 			
