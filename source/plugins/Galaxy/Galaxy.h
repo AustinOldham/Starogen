@@ -105,6 +105,8 @@ class Galaxy {
 		bool setExtraStars(int extraStarsInput);
 		bool setCloudsMult(double cloudsMultInput);
 		bool setDensityMult(double densityMultInput);
+
+		bool capitalize(std::string& wordInput);
 };
 
 #endif  // GALAXY_H

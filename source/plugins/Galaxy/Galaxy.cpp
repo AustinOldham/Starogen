@@ -23,8 +23,12 @@ using std::make_pair;
 
 Galaxy::Galaxy() {
 	WordGenerator tempWordGenerator;
-	name = tempWordGenerator.nextWord();
-	seed = tempWordGenerator.nextWord();
+	name = tempWordGenerator.nextWord(1, 10);
+	capitalize(name);
+
+	seed = tempWordGenerator.nextWord(1, 10);
+	capitalize(seed);
+
 	pixels = 500;
 	arms = 4;
 	radialDistanceMult = 10.0;
@@ -228,4 +232,11 @@ int Galaxy::at(int x, int y) {
 	} else {
 		return 0;
 	}
+}
+
+bool Galaxy::capitalize(string& wordInput) {
+	if (!wordInput.empty()) {
+		wordInput[0] = std::toupper(wordInput[0]);
+	}
+	return true;
 }

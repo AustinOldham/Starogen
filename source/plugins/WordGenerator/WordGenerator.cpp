@@ -191,6 +191,55 @@ bool WordGenerator::setSeed(string seedInput) {
 	return true;
 }
 
-string WordGenerator::getName() {
-	return string("PLACEHOLDER");
+/*string WordGenerator::getName() {
+	return getName(-1, -1);
+}
+
+string WordGenerator::getName(int minLength, int maxLength) {
+	return generateWord(randomGen, syllableSelector, minLength, maxLength);
+}*/
+
+string WordGenerator::getName(int keyInput) {
+	return getName(to_string(keyInput));
+}
+
+string WordGenerator::getName(string keyInput) {
+	return getName(keyInput, -1, -1);
+}
+
+string WordGenerator::getName(int keyInput, int minLength, int maxLength) {
+	return getName(to_string(keyInput), minLength, maxLength);
+}
+
+string WordGenerator::getName(string keyInput, int minLength, int maxLength) {
+	RandClass tempRandomGen(keyInput);
+	RandClass tempSyllableSelector(keyInput);
+	string name = retrieveName(keyInput);
+	if (name != null) {
+		return name;
+	} else {
+		do {
+			name = generateWord(tempRandomGen, tempSyllableSelector, minLength, maxLength);
+		} while (!isNameTaken(name));
+	}
+	usedNames[keyInput] = name;
+	return name;
+}
+
+string WordGenerator::retrieveName(string keyInput) {
+	auto search = usedNames.find(keyInput);
+	if (search != usedNames.end()) {
+		return (search->second);
+	} else {
+		return null;
+	}
+}
+
+bool WordGenerator::isNameTaken(string nameInput) {
+	for (auto keyValuePair : usedNames) {
+		if (nameInput.compare(keyValuePair.second) == 0) {
+			return true;  // Name is taken.
+		}
+	}
+	return false;
 }

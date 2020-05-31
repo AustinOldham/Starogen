@@ -69,7 +69,19 @@ class WordGenerator {
 		std::string nextWordFromSeed(std::string seedInput, int minLength, int maxLength);
 		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
 
-		std::string getName();
+		// std::string getName();
+		// std::string getName(int minLength);
+		std::string getName(std::string keyInput);
+		std::string getName(int keyInput);
+		std::string getName(std::string keyInput, int minLength, int maxLength);
+		std::string getName(int keyInput, int minLength, int maxLength);
+
+		std::string getNameFromSeed(std::string keyInput, std::string seedInput);
+		std::string getNameFromSeed(int keyInput, std::string seedInput);
+		std::string getNameFromSeed(std::string keyInput, std::string seedInput, int minLength, int maxLength);
+		std::string getNameFromSeed(int keyInput, std::string seedInput, int minLength, int maxLength);
+
+		  // This function uses a separate random number generator.
 
 		std::string translateWord();  // This will share the same list of used words as getName() and will be used for dialogue.
 
@@ -87,6 +99,9 @@ class WordGenerator {
 		bool setSeed(std::string seedInput);
 
 		int getConsecutiveConsonantNum(RandClass& rand);
+
+		std::string retrieveName(std::string keyInput);
+		bool isNameTaken(std::string nameInput);
 };
 
 #endif  // WORDGENERATOR_H
