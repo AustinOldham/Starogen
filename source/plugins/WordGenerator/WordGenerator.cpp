@@ -24,8 +24,56 @@ WordGenerator::WordGenerator() {}
 
 WordGenerator::WordGenerator(string seedInput) : randomGen(seedInput), syllableSelector(seedInput) {}
 
+bool WordGenerator::readSyllableFiles() {
+	bool consonantFileSuccessful = readSyllableFiles("config/consonant_syllables.txt");
+	bool vowelFileSuccessful = readSyllableFiles("config/vowel_syllables.txt");
+	return (consonantFileSuccessful && vowelFileSuccessful);
+}
+
+bool WordGenerator::readConsonantSyllableFile(string filePathInput) {
+	std::ifstream consonantsIn(filePathInput);
+	if (consonantsIn.is_open()) {
+		string line;
+		while (std::getline(consonantsIn, line)) {
+			if (!line.empty()) {
+				if (line.front() == '#') {
+					continue;
+				}
+				if (line.back() == '\r') {  // Removes the carriage return character on Linux.
+					line.pop_back();
+				}
+				consonantSyllables.push_back(line);
+			}
+		}
+		consonantsIn.close();
+	} else {
+		return false;
+	}
+}
+
+bool WordGenerator::readVowelSyllableFile(string filePathInput) {
+	std::ifstream vowelsIn(filePathInput);
+	if (vowelsIn.is_open()) {
+		string line;
+		while (std::getline(vowelsIn, line)) {
+			if (!line.empty()) {
+				if (line.front() == '#') {
+					continue;
+				}
+				if (line.back() == '\r') {  // Removes the carriage return character on Linux.
+					line.pop_back();
+				}
+				vowelSyllables.push_back(line);
+			}
+		}
+		vowelsIn.close();
+	} else {
+		return false;
+	}	
+}
+
 string WordGenerator::nextWord() {
-	return nextWord(-1, -1);
+	return nextWord(1, -1);
 }
 
 string WordGenerator::nextWord(int minLength, int maxLength) {
@@ -37,7 +85,7 @@ string WordGenerator::nextWordFromSeed(int seedInput) {
 }
 
 string WordGenerator::nextWordFromSeed(string seedInput) {
-	return nextWordFromSeed(seedInput, -1, -1);
+	return nextWordFromSeed(seedInput, 1, -1);
 }
 
 string nextWordFromSeed(int seedInput, int minLength, int maxLength) {
@@ -51,5 +99,5 @@ string nextWordFromSeed(string seedInput, int minLength, int maxLength) {
 }
 
 string generateWord(rand, randSyllable, minLength, maxLength) {
-	
+	// A length of -1 means the length requirement is ignored.
 }

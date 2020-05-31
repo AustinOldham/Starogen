@@ -20,6 +20,7 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
 
 #include "RandClass/RandClass.h"
 
@@ -34,6 +35,7 @@ class WordGenerator {
 		vector<std::string> vowelSyllables;
 
 		bool readSyllableFiles();
+		std::string generateWord(RandClass rand, RandClass randSyllable, int minLength, int maxLength); // The default minimum length is 1 character.
 
 	public:
 		WordGenerator();
@@ -46,7 +48,7 @@ class WordGenerator {
 		std::string nextWordFromSeed(std::string seedInput, int minLength, int maxLength);
 		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
 
-		std::string generateWord(RandClass rand, RandClass randSyllable, int minLength, int maxLength);
+		
 };
 
 #endif  // WORDGENERATOR_H
