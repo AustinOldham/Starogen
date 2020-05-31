@@ -183,3 +183,9 @@ int WordGenerator::getConsecutiveConsonantNum(RandClass& rand) {
 	}
 	return num;
 }
+
+bool WordGenerator::setSeed(string seedInput) {
+	// If random syllable frequencies are used, they must be updated when the seed is changed.
+	randomGen.setSeed(seedInput);
+	syllableSelector.setSeed(seedInput);
+}

@@ -51,6 +51,9 @@ class Galaxy {
 			ar & blankGalaxyMap;  // This may be unnecessary.
 			ar & galaxyMap;
 		}
+
+		WordGenerator myWordGenerator;
+
 		std::string name;
 		std::string seed;
 		int pixels;  // Stores the width of the galaxy.

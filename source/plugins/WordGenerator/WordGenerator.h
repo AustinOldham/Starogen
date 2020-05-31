@@ -77,6 +77,8 @@ class WordGenerator {
 
 		bool setCensoredWordsPath(std::string pathInput);
 
+		bool setSeed(std::string seedInput);
+
 		int getConsecutiveConsonantNum(RandClass& rand);
 };
 
