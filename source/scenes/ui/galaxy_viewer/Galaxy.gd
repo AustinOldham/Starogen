@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Austin Oldham
+# Copyright (C) 2020  Austin Oldham
 #
 # This file is part of Starogen.
 #
@@ -20,6 +20,8 @@ extends Node2D
 onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
 const galaxy_star = preload("res://scenes/ui/galaxy_viewer/GalaxyStar.tscn")
+
+onready var star_info_panel = get_node("../../../VBoxContainer/StarInfoPanel")
 
 var star_dict = {}
 
@@ -98,13 +100,13 @@ func _draw_stars():
 	star_dict.clear()
 	for y in range(galaxy_generator.getPixels()):
 		for x in range(galaxy_generator.getPixels()):
-			if (galaxy_generator.at(x, y) != 0):
+			if (galaxy_generator.getStarTypeIDAt(x, y) != -1):
 				# print(Vector2(x, y))
 				var new_star = galaxy_star.instance()
 				add_child(new_star)
 				new_star.original_coordinates = Vector2(x, y)
 				new_star.set_position(Vector2(x, y))
-				var curr = galaxy_generator.at(x, y)
+				var curr = galaxy_generator.getStarTypeIDAt(x, y)
 				new_star.get_node("Sprite").modulate = Color(galaxy_generator.getRed(curr), galaxy_generator.getGreen(curr), galaxy_generator.getBlue(curr), galaxy_generator.getAlpha(curr))
 				star_dict[Vector2(x, y)] = new_star
 	print("Finished drawing stars")
@@ -141,4 +143,6 @@ func _on_click():
 		print("Contained")
 		var curr_star = star_dict.get(Vector2(x, y))
 		if (curr_star != null):
-			print("There is a star at " + str(curr_star.original_coordinates.x) + " " + str(curr_star.original_coordinates.y))
+			print(galaxy_generator.getStarNameAt(curr_star.original_coordinates) + " is a star at " + str(curr_star.original_coordinates.x) + " " + str(curr_star.original_coordinates.y))
+			star_info_panel.get_node("ScrollContainer/VBoxContainer/DynamicCurrStarLabel").text = galaxy_generator.getStarNameAt(curr_star.original_coordinates)
+			

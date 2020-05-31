@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Austin Oldham
+# Copyright (C) 2020  Austin Oldham
 #
 # This file is part of Starogen.
 #
