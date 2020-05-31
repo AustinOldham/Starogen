@@ -46,6 +46,9 @@ void GalaxyGenerator::_register_methods() {
 	register_method("getCloudsMult", &GalaxyGenerator::getCloudsMult);
 	register_method("getDensityMult", &GalaxyGenerator::getDensityMult);
 
+	register_method("getStarNameAt", &GalaxyGenerator::getStarNameAt);
+	register_method("getStarTypeIDAt", &GalaxyGenerator::getStarTypeIDAt);
+
 	register_method("setName", &GalaxyGenerator::setName);
 	register_method("setSeed", &GalaxyGenerator::setSeed);
 	register_method("setPixels", &GalaxyGenerator::setPixels);
@@ -276,4 +279,12 @@ bool GalaxyGenerator::saveGalaxy(String pathInput) {
 
 bool GalaxyGenerator::loadGalaxy(String pathInput, String fileNameInput) {
 	return myGalaxyGenerator.loadGalaxy(toStandardString(pathInput), toStandardString(fileNameInput));
+}
+
+String GalaxyGenerator::getStarNameAt(int x, int y) {
+	return toGodotString(myGalaxyGenerator.getStarNameAt(x, y));
+}
+
+int GalaxyGenerator::getStarTypeIDAt(int x, int y) {
+	return myGalaxyGenerator.getStarTypeIDAt(x, y);
 }

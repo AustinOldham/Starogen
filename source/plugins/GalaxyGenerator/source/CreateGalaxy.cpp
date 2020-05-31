@@ -319,7 +319,7 @@ bool CreateGalaxy::setDensityMult(double densityMultInput) {
 	return myGalaxy.setDensityMult(densityMultInput);
 }
 
-int CreateGalaxy::at(int x, int y) {
+Star CreateGalaxy::at(int x, int y) {
 	return myGalaxy.at(x, y);
 }
 
@@ -613,3 +613,17 @@ vector<string> CreateGalaxy::splitString(const string &s, char delimiter) {
 
 	return result;
 }*/
+
+string CreateGalaxy::getStarNameAt(int x, int y) {
+	Star tempStar = at(x, y);
+	if (tempStar.getStarTypeID() == -1) {
+		return "";
+	} else {
+		return tempStar.getName();
+	}
+}
+
+int CreateGalaxy::getStarTypeIDAt(int x, int y) {
+	Star tempStar = at(x, y);
+	return tempStar.getStarTypeID();
+}

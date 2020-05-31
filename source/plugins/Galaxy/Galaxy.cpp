@@ -225,7 +225,7 @@ string Galaxy::generateName(string keyInput) {  // Generates a capitalized name.
 	return tempName;
 }
 
-int Galaxy::at(int x, int y) {
+Star Galaxy::at(int x, int y) {
 	// return myGalaxy[y][x];
 	// TODO: Make this return the star at this location and add a separate function to check for the existence of a star.
 	/*int curr = -1;
@@ -238,9 +238,10 @@ int Galaxy::at(int x, int y) {
 	return curr; */
 	auto search = galaxyMap.find(make_pair(x, y));
 	if (search != galaxyMap.end()) {
-		return (search->second).getStarTypeID();
+		// return (search->second).getStarTypeID();
+		return (search->second);
 	} else {
-		return 0;
+		return blankStar;
 	}
 }
 

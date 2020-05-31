@@ -118,7 +118,7 @@ class CreateGalaxy {
 
 		void run();
 
-		int at(int x, int y);
+		Star at(int x, int y);
 
 		float getRed(int index);
 		float getGreen(int index);
@@ -138,6 +138,9 @@ class CreateGalaxy {
 		int getExtraStars();
 		double getCloudsMult();
 		double getDensityMult();
+
+		std::string getStarNameAt(int x, int y);
+		int getStarTypeIDAt(int x, int y);
 
 		bool setName(std::string nameInput);
 		bool setSeed(std::string seedInput);

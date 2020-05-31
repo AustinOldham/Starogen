@@ -72,6 +72,9 @@ class GalaxyGenerator : public Object {
 		double getCloudsMult();
 		double getDensityMult();
 
+		String getStarNameAt(int x, int y);
+		int getStarTypeIDAt(int x, int y);
+
 		bool setName(String nameInput);
 		bool setSeed(String seedInput);
 		bool setPixels(int pixelsInput);

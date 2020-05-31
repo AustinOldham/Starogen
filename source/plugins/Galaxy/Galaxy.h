@@ -70,6 +70,8 @@ class Galaxy {
 		double cloudsMult;
 		double densityMult;
 
+		Star blankStar;
+
 	public:
 		Galaxy();
 

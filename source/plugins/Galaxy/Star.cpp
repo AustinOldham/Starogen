@@ -31,6 +31,10 @@ int Star::getStarTypeID() {
 	return starTypeID;
 }
 
+string Star::getName() {
+	return name;
+}
+
 bool Star::setName(string nameInput) {
 	name = nameInput;
 	return true;
