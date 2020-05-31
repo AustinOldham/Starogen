@@ -20,13 +20,17 @@
 using std::string;
 using std::to_string;
 
-WordGenerator::WordGenerator() : defaultMinLength(1), defaultMaxLength(20) {}
+WordGenerator::WordGenerator() : defaultMinLength(1), defaultMaxLength(20) {
+	readSyllableFiles();
+}
 
-WordGenerator::WordGenerator(string seedInput) : defaultMinLength(1), defaultMaxLength(20), randomGen(seedInput), syllableSelector(seedInput) {}
+WordGenerator::WordGenerator(string seedInput) : defaultMinLength(1), defaultMaxLength(20), randomGen(seedInput), syllableSelector(seedInput) {
+	readSyllableFiles();
+}
 
 bool WordGenerator::readSyllableFiles() {
-	bool consonantFileSuccessful = readSyllableFiles("config/consonant_syllables.txt");
-	bool vowelFileSuccessful = readSyllableFiles("config/vowel_syllables.txt");
+	bool consonantFileSuccessful = readConsonantSyllableFile("config/consonant_syllables.txt");
+	bool vowelFileSuccessful = readVowelSyllableFile("config/vowel_syllables.txt");
 	if (consonantFileSuccessful && vowelFileSuccessful) {
 		combinedSyllables = consonantSyllables;
 		combinedSyllables.insert(combinedSyllables.end(), vowelSyllables.begin(), vowelSyllables.end());
@@ -97,9 +101,9 @@ string WordGenerator::nextWordFromSeed(int seedInput, int minLength, int maxLeng
 }
 
 string WordGenerator::nextWordFromSeed(string seedInput, int minLength, int maxLength) {
-	RandomGen tempRandomGen(seedInput);
-	RandomGen tempSyllableSelector(seedInput);
-	return generateWord(tempRandomGen, minLength, maxLength);
+	RandClass tempRandomGen(seedInput);
+	RandClass tempSyllableSelector(seedInput);
+	return generateWord(tempRandomGen, tempSyllableSelector, minLength, maxLength);
 }
 
 string WordGenerator::generateWord(rand, randSyllable, minLength, maxLength) {

@@ -52,7 +52,7 @@ class WordGenerator {
 		bool readSyllableFiles();
 		bool readConsonantSyllableFile(std::string filePathInput);
 		bool readVowelSyllableFile(std::string filePathInput);
-		std::string generateWord(RandClass rand, RandClass randSyllable, int minLength, int maxLength); // The default minimum length is 1 character.
+		std::string generateWord(RandClass rand, RandClass randSyllable, int minLength, int maxLength);  // The default minimum length is 1 character.
 
 	public:
 		WordGenerator();
