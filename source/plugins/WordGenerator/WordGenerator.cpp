@@ -20,9 +20,9 @@
 using std::string;
 using std::to_string;
 
-WordGenerator::WordGenerator() {}
+WordGenerator::WordGenerator() : defaultMinLength(1), defaultMaxLength(20) {}
 
-WordGenerator::WordGenerator(string seedInput) : randomGen(seedInput), syllableSelector(seedInput) {}
+WordGenerator::WordGenerator(string seedInput) : defaultMinLength(1), defaultMaxLength(20), randomGen(seedInput), syllableSelector(seedInput) {}
 
 bool WordGenerator::readSyllableFiles() {
 	bool consonantFileSuccessful = readSyllableFiles("config/consonant_syllables.txt");
@@ -77,7 +77,7 @@ bool WordGenerator::readVowelSyllableFile(string filePathInput) {
 }
 
 string WordGenerator::nextWord() {
-	return nextWord(1, -1);
+	return nextWord(-1, -1);
 }
 
 string WordGenerator::nextWord(int minLength, int maxLength) {
@@ -89,7 +89,7 @@ string WordGenerator::nextWordFromSeed(int seedInput) {
 }
 
 string WordGenerator::nextWordFromSeed(string seedInput) {
-	return nextWordFromSeed(seedInput, 1, -1);
+	return nextWordFromSeed(seedInput, -1, -1);
 }
 
 string nextWordFromSeed(int seedInput, int minLength, int maxLength) {
@@ -103,12 +103,37 @@ string nextWordFromSeed(string seedInput, int minLength, int maxLength) {
 }
 
 string generateWord(rand, randSyllable, minLength, maxLength) {
-	// A length of -1 means the length requirement is ignored.
+	if (minLength == -1) {
+		minLength = defaultMinLength;
+	}
+	if (maxLength == -1) {
+		maxLength = defaultMaxLength;
+	}
 	string word = "";
-	string nextSyllable;
+	string nextSyllable = getRandomCombinedSyllable(randSyllable);
+	bool startsWithConsonant = isConsonant(nextSyllable);
 }
 
 string getRandomCombinedSyllable(RandClass randSyllable) {
 	int index = randSyllable.next(0, combinedSyllables.size() - 1);
 	return combinedSyllables[index];
+}
+
+bool isConsonant(string currSyllable) {
+	if (std::find(consonantSyllables.begin(), consonantSyllables.end(), currSyllable) != consonantSyllables.end()) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+int getConsecutiveConsonantNum(RandClass rand) {
+	int num = static_cast<int>(rand.nextNormal(0, 4 * maxConsecutiveConsonants));
+	if (num < 0) {
+		num = num * (-1);
+	}
+	if (num > maxConsecutiveConsonants) {
+		num = maxConsecutiveConsonants;
+	}
+	return num;
 }

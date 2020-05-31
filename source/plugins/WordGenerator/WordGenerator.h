@@ -21,6 +21,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 
 #include "RandClass/RandClass.h"
 
@@ -38,7 +39,15 @@ class WordGenerator {
 		vector<std::string> vowelSyllables;
 		vector<std::string> combinedSyllables;
 
+		vector<std::string> censoredWordsList;
+
 		const int maxConsecutiveConsonants = 5;
+		int defaultMaxLength;
+		int defaultMinLength;
+
+		bool usesCensoredWordsList;
+
+		std::string censoredWordsPath;
 
 		bool readSyllableFiles();
 		bool readConsonantSyllableFile(std::string filePathInput);
@@ -56,7 +65,15 @@ class WordGenerator {
 		std::string nextWordFromSeed(std::string seedInput, int minLength, int maxLength);
 		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
 
-		
+		std::string getRandomCombinedSyllable(RandClass randSyllable);
+		bool isConsonant(std::string currSyllable);
+
+		bool setDefaultMaxLength(int maxLengthInput);
+		bool setDefaultMinLength(int minLengthInput);
+
+		bool setCensoredWordsPath(std::string pathInput);
+
+		int getConsecutiveConsonantNum();
 };
 
 #endif  // WORDGENERATOR_H
