@@ -23,6 +23,7 @@
 #include <fstream>
 #include <algorithm>
 #include <iostream>
+#include <unordered_map>
 
 #include "RandClass/RandClass.h"
 
@@ -41,6 +42,8 @@ class WordGenerator {
 		std::vector<std::string> combinedSyllables;
 
 		std::vector<std::string> censoredWordsList;
+
+		std::unordered_map<std::string, std::string> usedNames;
 
 		const int maxConsecutiveConsonants = 5;
 		int defaultMaxLength;
@@ -65,6 +68,10 @@ class WordGenerator {
 		std::string nextWordFromSeed(int seedInput);
 		std::string nextWordFromSeed(std::string seedInput, int minLength, int maxLength);
 		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
+
+		std::string getName();
+
+		std::string translateWord();  // This will share the same list of used words as getName() and will be used for dialogue.
 
 		std::string getRandomCombinedSyllable(RandClass& randSyllable);
 		std::string getRandomSyllable(RandClass& randSyllable, bool isVowelInput);

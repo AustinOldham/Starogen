@@ -46,6 +46,7 @@
 #include "FastNoise/FastNoise.h"
 #include "Star.h"
 #include "Galaxy.h"
+#include "WordGenerator.h"
 
 class CreateGalaxy {
 	private:

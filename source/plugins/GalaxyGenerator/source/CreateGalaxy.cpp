@@ -382,11 +382,13 @@ vector<double> CreateGalaxy::calculateAngles(int num, double additional) {
 }
 
 string CreateGalaxy::suggestName() {
-	return string("Default Name");
+	WordGenerator tempWordGenerator;
+	return tempWordGenerator.nextWord();
 }
 
 string CreateGalaxy::suggestSeed() {
-	return string("Default Seed");
+	WordGenerator tempWordGenerator;
+	return tempWordGenerator.nextWord();
 }
 
 double CreateGalaxy::suggestClusterStddev() {

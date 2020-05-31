@@ -28,6 +28,7 @@
 #include <boost/serialization/unordered_map.hpp>
 
 #include "Star.h"
+#include "WordGenerator.h"
 
 class Galaxy {
 	private:

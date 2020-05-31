@@ -22,8 +22,9 @@ using std::pair;
 using std::make_pair;
 
 Galaxy::Galaxy() {
-	name = "Default Name";
-	seed = "Default Seed";
+	WordGenerator tempWordGenerator;
+	name = tempWordGenerator.nextWord();
+	seed = tempWordGenerator.nextWord();
 	pixels = 500;
 	arms = 4;
 	radialDistanceMult = 10.0;
