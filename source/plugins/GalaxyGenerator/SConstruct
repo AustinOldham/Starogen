@@ -91,11 +91,12 @@ env.Append(LIBPATH=[cpp_bindings_path + 'bin/'])
 env.Append(LIBS=[cpp_library])
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
-env.Append(CPPPATH=['source/', '../Libraries/FastNoise', '../Libraries/RandClass/', '../Libraries/nlohmann/', '../Galaxy/'])
+env.Append(CPPPATH=['source/', '../Libraries/FastNoise', '../Libraries/RandClass/', '../Libraries/nlohmann/', '../Galaxy/', '../WordGenerator/'])
 sources = Glob('source/*.cpp')
 sources = sources + Glob('../Libraries/FastNoise/*.cpp')
 sources = sources + Glob('../Libraries/RandClass/*.cpp')
 sources = sources + Glob('../Galaxy/*.cpp')
+sources = sources + Glob('../WordGenerator/*.cpp')
 
 env.Append(CPPPATH = boost_prefix)
 #env.Append(CPPPATH = [os.path.join(boost_prefix, "include")])

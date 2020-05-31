@@ -31,11 +31,14 @@ class WordGenerator {
 	private:
 		RandClass randomGen;
 		// RandClass tempRandomGen;
-		RandClass syllableSelector;
+		RandClass syllableSelector;  // This may be unnecessary.
 		// RandClass tempSyllableSelector;
 
 		vector<std::string> consonantSyllables;
 		vector<std::string> vowelSyllables;
+		vector<std::string> combinedSyllables;
+
+		const int maxConsecutiveConsonants = 5;
 
 		bool readSyllableFiles();
 		bool readConsonantSyllableFile(std::string filePathInput);

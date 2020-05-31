@@ -27,6 +27,10 @@ WordGenerator::WordGenerator(string seedInput) : randomGen(seedInput), syllableS
 bool WordGenerator::readSyllableFiles() {
 	bool consonantFileSuccessful = readSyllableFiles("config/consonant_syllables.txt");
 	bool vowelFileSuccessful = readSyllableFiles("config/vowel_syllables.txt");
+	if (consonantFileSuccessful && vowelFileSuccessful) {
+		combinedSyllables = consonantSyllables;
+		combinedSyllables.insert(combinedSyllables.end(), vowelSyllables.begin(), vowelSyllables.end());
+	}
 	return (consonantFileSuccessful && vowelFileSuccessful);
 }
 
@@ -100,4 +104,11 @@ string nextWordFromSeed(string seedInput, int minLength, int maxLength) {
 
 string generateWord(rand, randSyllable, minLength, maxLength) {
 	// A length of -1 means the length requirement is ignored.
+	string word = "";
+	string nextSyllable;
+}
+
+string getRandomCombinedSyllable(RandClass randSyllable) {
+	int index = randSyllable.next(0, combinedSyllables.size() - 1);
+	return combinedSyllables[index];
 }
