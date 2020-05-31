@@ -107,6 +107,9 @@ class Galaxy {
 		bool setDensityMult(double densityMultInput);
 
 		bool capitalize(std::string& wordInput);
+
+		std::string generateName(int keyInput);
+		std::string generateName(std::string keyInput);
 };
 
 #endif  // GALAXY_H

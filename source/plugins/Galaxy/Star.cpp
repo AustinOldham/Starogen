@@ -17,6 +17,8 @@
 
 #include "Star.h"
 
+using std::string;
+
 Star::Star() {
 	starTypeID = -1;
 }
@@ -27,4 +29,18 @@ Star::Star(int id) {
 
 int Star::getStarTypeID() {
 	return starTypeID;
+}
+
+bool Star::setName(string nameInput) {
+	name = nameInput;
+	return true;
+}
+
+bool Star::setSeed(int seedInput) {
+	return setSeed(std::to_string(seedInput));
+}
+
+bool Star::setSeed(string seedInput) {
+	seed = seedInput;
+	return true;
 }

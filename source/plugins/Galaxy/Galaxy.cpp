@@ -215,6 +215,16 @@ bool Galaxy::setDensityMult(double densityMultInput) {
 	}
 }
 
+string Galaxy::generateName(int keyInput) {  // Generates a capitalized name.
+	return generateName(std::to_string(keyInput));
+}
+
+string Galaxy::generateName(string keyInput) {  // Generates a capitalized name.
+	string tempName = myWordGenerator.getName(keyInput);
+	capitalize(tempName);
+	return tempName;
+}
+
 int Galaxy::at(int x, int y) {
 	// return myGalaxy[y][x];
 	// TODO: Make this return the star at this location and add a separate function to check for the existence of a star.
