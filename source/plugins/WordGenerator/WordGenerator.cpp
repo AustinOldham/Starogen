@@ -212,15 +212,13 @@ string WordGenerator::getName(int keyInput, int minLength, int maxLength) {
 }
 
 string WordGenerator::getName(string keyInput, int minLength, int maxLength) {
-	RandClass tempRandomGen(keyInput);
-	RandClass tempSyllableSelector(keyInput);
 	string name = retrieveName(keyInput);
-	if (name != null) {
+	if (!name.empty()) {
 		return name;
 	} else {
 		do {
-			name = generateWord(tempRandomGen, tempSyllableSelector, minLength, maxLength);
-		} while (!isNameTaken(name));
+			name = generateWord(randomGen, syllableSelector, minLength, maxLength);
+		} while (isNameTaken(name));
 	}
 	usedNames[keyInput] = name;
 	return name;
@@ -231,7 +229,7 @@ string WordGenerator::retrieveName(string keyInput) {
 	if (search != usedNames.end()) {
 		return (search->second);
 	} else {
-		return null;
+		return "";
 	}
 }
 

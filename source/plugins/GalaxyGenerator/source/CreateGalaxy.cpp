@@ -206,9 +206,12 @@ Star CreateGalaxy::plotStar(int starSeedInput) {
 }
 
 void CreateGalaxy::populateEmptyStars() {
+	cout << "Populating empty stars" << endl;
+	int counter = 0;
 	for (auto it : myGalaxy.blankGalaxyMap) {
 		myGalaxy.galaxyMap[it.first] = plotStar(it.second);
 	}
+	cout << "Finished populating empty stars" << endl;
 }
 
 
