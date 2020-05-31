@@ -282,8 +282,6 @@ bool GalaxyGenerator::loadGalaxy(String pathInput, String fileNameInput) {
 }
 
 String GalaxyGenerator::getStarNameAt(int x, int y) {
-	std::cout << "Star name (GalaxyGenerator::getStarNameAt)" << std::endl;
-	std::cout << myGalaxyGenerator.getStarNameAt(x, y) << std::endl;
 	return toGodotString(myGalaxyGenerator.getStarNameAt(x, y));
 }
 

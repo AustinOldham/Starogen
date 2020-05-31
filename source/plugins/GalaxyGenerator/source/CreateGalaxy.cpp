@@ -194,7 +194,6 @@ Star CreateGalaxy::plotStar(int starSeedInput) {
 		if (probability <= probabilitySum) {
 			Star newStar(i);
 			string starName = myGalaxy.generateName(starSeedInput);
-			cout << "Star name: " << starName << endl;
 			newStar.setName(starName);
 			newStar.setSeed(starSeedInput);
 			return newStar;
