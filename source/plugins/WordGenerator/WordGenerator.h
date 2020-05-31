@@ -35,11 +35,11 @@ class WordGenerator {
 		RandClass syllableSelector;  // This may be unnecessary.
 		// RandClass tempSyllableSelector;
 
-		vector<std::string> consonantSyllables;
-		vector<std::string> vowelSyllables;
-		vector<std::string> combinedSyllables;
+		std::vector<std::string> consonantSyllables;
+		std::vector<std::string> vowelSyllables;
+		std::vector<std::string> combinedSyllables;
 
-		vector<std::string> censoredWordsList;
+		std::vector<std::string> censoredWordsList;
 
 		const int maxConsecutiveConsonants = 5;
 		int defaultMaxLength;
