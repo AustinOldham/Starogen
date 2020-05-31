@@ -19,6 +19,7 @@
 #define WORDGENERATOR_H
 
 #include <string>
+#include <vector>
 
 #include "RandClass/RandClass.h"
 
@@ -27,9 +28,14 @@ class WordGenerator {
 		RandClass randomGen;
 		RandClass tempRandomGen;
 
+		vector<std::string> consonantSyllables;
+		vector<std::string> vowelSyllables;
+
+		bool readSyllableFiles();
+
 	public:
 		WordGenerator();
-		WordGenerator(std::string seedInput);
+		explicit WordGenerator(std::string seedInput);
 
 		std::string nextWord();
 		std::string nextWord(int minLength, int maxLength);

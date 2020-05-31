@@ -19,10 +19,14 @@
 
 using std::string;
 
-WordGenerator::WordGenerator() {
+WordGenerator::WordGenerator() {}
 
+WordGenerator::WordGenerator(string seedInput) : randomGen(seedInput) {}
+
+WordGenerator::nextWord() {
+	nextWord(-1, -1);
 }
 
-WordGenerator::WordGenerator(string seedInput) {
+WordGenerator::nextWord(int minLength, int maxLength) {
 	
 }
