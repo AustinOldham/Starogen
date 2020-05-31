@@ -25,7 +25,7 @@ void GalaxyGenerator::_register_methods() {
 	register_method("generateGalaxy", &GalaxyGenerator::generateGalaxy);
 	register_method("getGalaxy", &GalaxyGenerator::getGalaxy);
 
-	register_method("at", &GalaxyGenerator::at);
+	// register_method("at", &GalaxyGenerator::at);
 
 	register_method("getRed", &GalaxyGenerator::getRed);
 	register_method("getGreen", &GalaxyGenerator::getGreen);
@@ -113,7 +113,7 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 
 	for (int y = 0; y < pixels; y++) {
 		for (int x = 0; x < pixels; x++) {
-			int curr = myGalaxyGenerator.at(x, y);
+			int curr = myGalaxyGenerator.getStarTypeIDAt(x, y);
 			m->set_pixel(x, y, Color(myGalaxyGenerator.getRed(curr), myGalaxyGenerator.getGreen(curr), myGalaxyGenerator.getBlue(curr), myGalaxyGenerator.getAlpha(curr)));
 		}
 	}
@@ -139,9 +139,9 @@ ImageTexture * GalaxyGenerator::getGalaxy() {
 	return t;
 }
 
-int GalaxyGenerator::at(int x, int y) {
-	return myGalaxyGenerator.at(x, y);
-}
+//int GalaxyGenerator::at(int x, int y) {
+//	return myGalaxyGenerator.at(x, y);
+//}
 
 float GalaxyGenerator::getRed(int index) {
 	return myGalaxyGenerator.getRed(index);

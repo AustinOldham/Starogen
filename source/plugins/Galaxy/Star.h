@@ -41,6 +41,7 @@ class Star {
 		explicit Star(int id);
 
 		int getStarTypeID();
+		std::string getName();
 
 		bool setName(std::string nameInput);
 		bool setSeed(int seedInput);

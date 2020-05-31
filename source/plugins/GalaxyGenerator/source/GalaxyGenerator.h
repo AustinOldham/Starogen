@@ -51,7 +51,7 @@ class GalaxyGenerator : public Object {
 		void generateGalaxy();
 		ImageTexture * getGalaxy();  // Rename this to getGalaxyImage.
 
-		int at(int x, int y);
+		// int at(int x, int y);
 
 		float getRed(int index);
 		float getGreen(int index);
