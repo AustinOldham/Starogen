@@ -92,34 +92,64 @@ string WordGenerator::nextWordFromSeed(string seedInput) {
 	return nextWordFromSeed(seedInput, -1, -1);
 }
 
-string nextWordFromSeed(int seedInput, int minLength, int maxLength) {
+string WordGenerator::nextWordFromSeed(int seedInput, int minLength, int maxLength) {
 	return nextWordFromSeed(to_string(seedInput), minLength, maxLength);
 }
 
-string nextWordFromSeed(string seedInput, int minLength, int maxLength) {
+string WordGenerator::nextWordFromSeed(string seedInput, int minLength, int maxLength) {
 	RandomGen tempRandomGen(seedInput);
 	RandomGen tempSyllableSelector(seedInput);
 	return generateWord(tempRandomGen, minLength, maxLength);
 }
 
-string generateWord(rand, randSyllable, minLength, maxLength) {
+string WordGenerator::generateWord(rand, randSyllable, minLength, maxLength) {
 	if (minLength == -1) {
 		minLength = defaultMinLength;
 	}
 	if (maxLength == -1) {
 		maxLength = defaultMaxLength;
 	}
+	int localMaxLength = rand.next(minLength, maxLength);
 	string word = "";
 	string nextSyllable = getRandomCombinedSyllable(randSyllable);
-	bool startsWithConsonant = isConsonant(nextSyllable);
+	bool currentIsConsonant = isConsonant(nextSyllable);
+	while (true) {
+		if ((word + nextSyllable).size() == localMaxLength) {
+			return (word + nextSyllable);
+		} else if ((word + nextSyllable).size() > localMaxLength) {
+			nextSyllable = getRandomSyllable(randSyllable, currentIsConsonant);
+			continue;
+		}
+		word = word + nextSyllable;
+		currentIsConsonant = !currentIsConsonant;
+		nextSyllable = getRandomSyllable(randSyllable, currentIsConsonant);
+	}
 }
 
-string getRandomCombinedSyllable(RandClass randSyllable) {
+string WordGenerator::getRandomSyllable(RandClass randSyllable, bool isConsonantInput) {
+	if (isConsonantInput) {
+		return getRandomConsonantSyllable(randSyllable);
+	} else {
+		return getRandomVowelSyllable(randSyllable);
+	}
+}
+
+string WordGenerator::getRandomVowelSyllable(RandClass randSyllable) {
+	int index = randSyllable.next(0, vowelSyllables.size() - 1);
+	return vowelSyllables[index];
+}
+
+string WordGenerator::getRandomConsonantSyllable(RandClass randSyllable) {
+	int index = randSyllable.next(0, consonantSyllables.size() - 1);
+	return consonantSyllables[index];
+}
+
+string WordGenerator::getRandomCombinedSyllable(RandClass randSyllable) {
 	int index = randSyllable.next(0, combinedSyllables.size() - 1);
 	return combinedSyllables[index];
 }
 
-bool isConsonant(string currSyllable) {
+bool WordGenerator::isConsonant(string currSyllable) {
 	if (std::find(consonantSyllables.begin(), consonantSyllables.end(), currSyllable) != consonantSyllables.end()) {
 		return true;
 	} else {
@@ -127,8 +157,8 @@ bool isConsonant(string currSyllable) {
 	}
 }
 
-int getConsecutiveConsonantNum(RandClass rand) {
-	int num = static_cast<int>(rand.nextNormal(0, 4 * maxConsecutiveConsonants));
+int WordGenerator::getConsecutiveConsonantNum(RandClass rand) {
+	int num = static_cast<int>(rand.nextNormal(0, 1));
 	if (num < 0) {
 		num = num * (-1);
 	}

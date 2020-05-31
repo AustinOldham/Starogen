@@ -66,6 +66,7 @@ class WordGenerator {
 		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
 
 		std::string getRandomCombinedSyllable(RandClass randSyllable);
+		std::string getRandomSyllable(RandClass randSyllable, bool isVowelInput);
 		bool isConsonant(std::string currSyllable);
 
 		bool setDefaultMaxLength(int maxLengthInput);
