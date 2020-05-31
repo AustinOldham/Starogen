@@ -18,15 +18,38 @@
 #include "WordGenerator.h"
 
 using std::string;
+using std::to_string;
 
 WordGenerator::WordGenerator() {}
 
-WordGenerator::WordGenerator(string seedInput) : randomGen(seedInput) {}
+WordGenerator::WordGenerator(string seedInput) : randomGen(seedInput), syllableSelector(seedInput) {}
 
-WordGenerator::nextWord() {
-	nextWord(-1, -1);
+string WordGenerator::nextWord() {
+	return nextWord(-1, -1);
 }
 
-WordGenerator::nextWord(int minLength, int maxLength) {
+string WordGenerator::nextWord(int minLength, int maxLength) {
+	return generateWord(randomGen, syllableSelector, minLength, maxLength);
+}
+
+string WordGenerator::nextWordFromSeed(int seedInput) {
+	return nextWordFromSeed(to_string(seedInput));
+}
+
+string WordGenerator::nextWordFromSeed(string seedInput) {
+	return nextWordFromSeed(seedInput, -1, -1);
+}
+
+string nextWordFromSeed(int seedInput, int minLength, int maxLength) {
+	return nextWordFromSeed(to_string(seedInput), minLength, maxLength);
+}
+
+string nextWordFromSeed(string seedInput, int minLength, int maxLength) {
+	RandomGen tempRandomGen(seedInput);
+	RandomGen tempSyllableSelector(seedInput);
+	return generateWord(tempRandomGen, minLength, maxLength);
+}
+
+string generateWord(rand, randSyllable, minLength, maxLength) {
 	
 }

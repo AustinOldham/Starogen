@@ -26,7 +26,9 @@
 class WordGenerator {
 	private:
 		RandClass randomGen;
-		RandClass tempRandomGen;
+		// RandClass tempRandomGen;
+		RandClass syllableSelector;
+		// RandClass tempSyllableSelector;
 
 		vector<std::string> consonantSyllables;
 		vector<std::string> vowelSyllables;
@@ -44,7 +46,7 @@ class WordGenerator {
 		std::string nextWordFromSeed(std::string seedInput, int minLength, int maxLength);
 		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
 
-		std::string generateWord(RandClass rand, int minLength, int maxLength);
+		std::string generateWord(RandClass rand, RandClass randSyllable, int minLength, int maxLength);
 };
 
 #endif  // WORDGENERATOR_H
