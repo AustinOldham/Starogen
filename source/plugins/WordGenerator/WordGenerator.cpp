@@ -106,7 +106,7 @@ string WordGenerator::nextWordFromSeed(string seedInput, int minLength, int maxL
 	return generateWord(tempRandomGen, tempSyllableSelector, minLength, maxLength);
 }
 
-string WordGenerator::generateWord(rand, randSyllable, minLength, maxLength) {
+string WordGenerator::generateWord(RandClass rand, RandClass randSyllable, int minLength, int maxLength) {
 	if (minLength == -1) {
 		minLength = defaultMinLength;
 	}

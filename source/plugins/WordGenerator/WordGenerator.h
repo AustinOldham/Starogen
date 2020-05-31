@@ -67,6 +67,8 @@ class WordGenerator {
 
 		std::string getRandomCombinedSyllable(RandClass randSyllable);
 		std::string getRandomSyllable(RandClass randSyllable, bool isVowelInput);
+		std::string getRandomVowelSyllable(RandClass randSyllable);
+		std::string getRandomConsonantSyllable(RandClass randSyllable);
 		bool isConsonant(std::string currSyllable);
 
 		bool setDefaultMaxLength(int maxLengthInput);
@@ -74,7 +76,7 @@ class WordGenerator {
 
 		bool setCensoredWordsPath(std::string pathInput);
 
-		int getConsecutiveConsonantNum();
+		int getConsecutiveConsonantNum(RandClass rand);
 };
 
 #endif  // WORDGENERATOR_H
