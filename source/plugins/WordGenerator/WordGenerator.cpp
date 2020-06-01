@@ -21,6 +21,8 @@ using std::string;
 using std::to_string;
 using std::cout;
 using std::endl;
+using std::vector;
+using std::list;
 
 WordGenerator::WordGenerator() : defaultMinLength(1), defaultMaxLength(20) {
 	readSyllableFiles();
@@ -240,4 +242,17 @@ bool WordGenerator::isNameTaken(string nameInput) {
 		}
 	}
 	return false;
+}
+
+list<int> WordGenerator::base10ToArbitraryBase(int input, int base) {
+	list<int> output;
+	if (input == 0) {
+		output.push_front(0);
+		return output;
+	}
+	while (input > 0) {
+		output.push_front(input % base);
+		input = input / base;
+	}
+	return output;
 }

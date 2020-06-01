@@ -20,6 +20,7 @@
 
 #include <string>
 #include <vector>
+#include <list>
 #include <fstream>
 #include <algorithm>
 #include <iostream>
@@ -46,7 +47,7 @@ class WordGenerator {
 		std::unordered_map<std::string, std::string> usedNames;
 
 		const int maxConsecutiveConsonants = 5;
-		int defaultMaxLength;
+		int defaultMaxLength;  // This is a loose maximum since additional characters may need to be added in the case where there are many names already.
 		int defaultMinLength;
 
 		bool usesCensoredWordsList;
@@ -80,6 +81,10 @@ class WordGenerator {
 		std::string getNameFromSeed(int keyInput, std::string seedInput);
 		std::string getNameFromSeed(std::string keyInput, std::string seedInput, int minLength, int maxLength);
 		std::string getNameFromSeed(int keyInput, std::string seedInput, int minLength, int maxLength);
+
+		std::string getSatelliteName(std::string primaryBodyName);  // Names the planet of a star by appending a Roman numeral.
+
+		std::list<int> base10ToArbitraryBase(int input, int base);
 
 		  // This function uses a separate random number generator.
 
