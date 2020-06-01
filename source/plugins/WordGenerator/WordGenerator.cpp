@@ -256,3 +256,12 @@ list<int> WordGenerator::base10ToArbitraryBase(int input, int base) {
 	}
 	return output;
 }
+
+string WordGenerator::getGreekLettersFromNumber(int input, string delimiter) {
+	string output = "";
+	list<int> convertedNumber = base10ToArbitraryBase(input, greekAlphabet.size());
+	for (const auto& number : convertedNumber) {
+		output = output + greekAlphabet[number] + delimiter;
+	}
+	return output;
+}

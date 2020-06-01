@@ -63,6 +63,33 @@ class WordGenerator {
 		WordGenerator();
 		explicit WordGenerator(std::string seedInput);
 
+		const std::vector<std::string> greekAlphabet = {
+			"Alpha",
+			"Beta",
+			"Gamma",
+			"Delta",
+			"Epsilon",
+			"Zeta",
+			"Eta",
+			"Theta",
+			"Iota",
+			"Kappa",
+			"Lambda",
+			"Mu",
+			"Nu",
+			"Xi",
+			"Omicron",
+			"Pi",
+			"Rho",
+			"Sigma",
+			"Tau",
+			"Upsilon",
+			"Phi",
+			"Chi",
+			"Psi",
+			"Omega"
+		};
+
 		std::string nextWord();
 		std::string nextWord(int minLength, int maxLength);
 		std::string nextWordFromSeed(std::string seedInput);  // This function uses a separate random number generator.
@@ -85,6 +112,7 @@ class WordGenerator {
 		std::string getSatelliteName(std::string primaryBodyName);  // Names the planet of a star by appending a Roman numeral.
 
 		std::list<int> base10ToArbitraryBase(int input, int base);
+		std::string getGreekLettersFromNumber(int number, std::string delimiter);
 
 		  // This function uses a separate random number generator.
 
