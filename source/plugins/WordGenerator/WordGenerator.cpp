@@ -100,7 +100,7 @@ string WordGenerator::nextWord(int minLength, int maxLength) {
 	return generateWord(randomGen, syllableSelector, minLength, maxLength);
 }
 
-string WordGenerator::nextWordFromSeed(int seedInput) {
+string WordGenerator::nextWordFromSeed(unsigned int seedInput) {
 	return nextWordFromSeed(to_string(seedInput));
 }
 
@@ -108,7 +108,7 @@ string WordGenerator::nextWordFromSeed(string seedInput) {
 	return nextWordFromSeed(seedInput, -1, -1);
 }
 
-string WordGenerator::nextWordFromSeed(int seedInput, int minLength, int maxLength) {
+string WordGenerator::nextWordFromSeed(unsigned int seedInput, int minLength, int maxLength) {
 	return nextWordFromSeed(to_string(seedInput), minLength, maxLength);
 }
 
@@ -209,7 +209,7 @@ string WordGenerator::getName(string keyInput) {
 	return getName(keyInput, -1, -1);
 }
 
-string WordGenerator::getName(int keyInput, int minLength, int maxLength) {
+string WordGenerator::getName(unsigned int keyInput, int minLength, int maxLength) {
 	return getName(to_string(keyInput), minLength, maxLength);
 }
 

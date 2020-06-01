@@ -27,6 +27,11 @@
 #include <unordered_map>
 #include <iterator>
 
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/unordered_map.hpp>
+
 #include "RandClass/RandClass.h"
 
 
@@ -34,6 +39,30 @@
 
 class WordGenerator {
 	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive & ar, const unsigned int version) {
+			ar & randomGen;
+			ar & syllableSelector;
+
+			ar & consonantSyllables;
+			ar & vowelSyllables;
+			ar & combinedSyllables;
+
+			ar & censoredWordsList;
+
+			ar & usedNames;
+
+			ar & maxConsecutiveConsonants;
+			ar & defaultMaxLength;
+			ar & defaultMinLength;
+
+			ar & usesCensoredWordsList;
+
+			ar & censoredWordsPath;
+
+			ar & greekAlphabet;
+		}
 		RandClass randomGen;
 		// RandClass tempRandomGen;
 		RandClass syllableSelector;  // This may be unnecessary.
@@ -47,11 +76,12 @@ class WordGenerator {
 
 		std::unordered_map<std::string, std::string> usedNames;
 
-		const int maxConsecutiveConsonants = 5;
+		// const int maxConsecutiveConsonants = 5;
+		int maxConsecutiveConsonants = 5;
 		int defaultMaxLength;  // This is a loose maximum since additional characters may need to be added in the case where there are many names already.
 		int defaultMinLength;
 
-		bool usesCensoredWordsList;
+		bool usesCensoredWordsList = false;
 
 		std::string censoredWordsPath;
 
@@ -64,7 +94,9 @@ class WordGenerator {
 		WordGenerator();
 		explicit WordGenerator(std::string seedInput);
 
-		const std::vector<std::string> greekAlphabet = {
+		// NOTE: There is a way to serialize a const.
+		// const std::vector<std::string> greekAlphabet = {
+		std::vector<std::string> greekAlphabet = {
 			"Alpha",
 			"Beta",
 			"Gamma",

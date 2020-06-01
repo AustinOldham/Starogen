@@ -20,18 +20,70 @@
 
 #include <iostream>
 #include <random>
-#include <string>
 #include <ctime>
+#include <string>
+#include <sstream>
+
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/serialization/split_member.hpp>
 
 class RandClass {
 	private:
+		friend class boost::serialization::access;
+		/*template<class Archive>
+		void serialize(Archive & ar, const unsigned int version) {
+			ar & generator;
+			ar & seed;
+
+			ar & min;
+			ar & max;
+		}*/
+		template<class Archive>
+		void save(Archive & ar, const unsigned int version) const {
+			// ar << boost::serialization::base_object<const base_class_of_T>(*this);
+
+			std::stringstream ss;
+			ss << generator;
+			std::string generatorString = ss.str();
+			ar << generatorString;
+
+			ar << seed;
+
+			ar << min;
+			ar << max;
+		}
+
+		template<class Archive>
+		void load(Archive & ar, const unsigned int version) {
+			// ar >> boost::serialization::base_object<base_class_of_T>(*this);
+
+			std::string generatorString;
+			ar >> generatorString;
+			std::stringstream ss;
+			ss.str(generatorString);
+			ss >> generator;
+
+			ar >> seed;
+
+			ar >> min;
+			ar >> max;
+		}
+
+		template<class Archive>
+		void serialize(Archive & ar, const unsigned int file_version) {
+			boost::serialization::split_member(ar, *this, file_version);
+		}
+
 		std::mt19937 generator;
 		std::string seed;
+
 		int min;
 		int max;
+
 	public:
 		RandClass();
-		RandClass(std::string);
+		explicit RandClass(std::string);
 		RandClass(std::string seedInput, int minInput, int maxInput);
 		RandClass(int, int);
 		void setSeed();
