@@ -251,3 +251,15 @@ bool Galaxy::capitalize(string& wordInput) {
 	}
 	return true;
 }
+
+unsigned int Galaxy::getNextUniqueID() {
+	unsigned int temp = nextUniqueID;
+	nextUniqueID++;
+	return temp;
+}
+
+bool Galaxy::setSeedHash(unsigned int seedHashInput) {
+	seedHash = seedHashInput;
+	nextUniqueID = seedHashInput + 1;
+	return true;
+}

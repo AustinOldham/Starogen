@@ -87,7 +87,7 @@ class CreateGalaxy {
 		void createApproximateDensityMap();
 		void createClouds();
 		void starCluster(int x, int y, int num, double stddev, int distanceProportionInt);
-		Star plotStar(int starSeedInput);
+		Star plotStar(unsigned int starSeedInput);
 		void populateEmptyStars();
 		std::vector<double> calculateAngles(int num, double additional);
 		double getMult(double t, double a, double b);

@@ -60,9 +60,10 @@ void CreateGalaxy::run() {
 	densityMult = myGalaxy.getDensityMult();
 
 	std::hash<string> seedHasher;
-	int seedInt = seedHasher(seed);
+	unsigned int seedHash = seedHasher(seed);
+	myGalaxy.setSeedHash(seedHash);
 	starClusterGen.setSeed(seed);
-	cloudNoise.SetSeed(seedInt);
+	cloudNoise.SetSeed(seedHash);
 	cloudNoise.SetNoiseType(FastNoise::SimplexFractal);  // SimplexFractal for clouds
 	cloudNoise.SetFrequency(cloudsFrequency);  // 0.05 for clouds
 
@@ -177,11 +178,11 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, int distanc
 
 		// myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
 		pair<int, int> location(x + modX, y + modY);
-		myGalaxy.blankGalaxyMap[location] = starClusterGen.next();
+		myGalaxy.blankGalaxyMap[location] = static_cast<unsigned int>(starClusterGen.next());
 	}
 }
 
-Star CreateGalaxy::plotStar(int starSeedInput) {
+Star CreateGalaxy::plotStar(unsigned int starSeedInput) {
 	// TODO: Replace this implementation with std::discrete_distribution.
 
 	double probability = starClusterGen.next(0.0, 1.0);

@@ -94,21 +94,21 @@ class WordGenerator {
 		std::string nextWord();
 		std::string nextWord(int minLength, int maxLength);
 		std::string nextWordFromSeed(std::string seedInput);  // This function uses a separate random number generator.
-		std::string nextWordFromSeed(int seedInput);
+		std::string nextWordFromSeed(unsigned int seedInput);
 		std::string nextWordFromSeed(std::string seedInput, int minLength, int maxLength);
-		std::string nextWordFromSeed(int seedInput, int minLength, int maxLength);
+		std::string nextWordFromSeed(unsigned int seedInput, int minLength, int maxLength);
 
 		// std::string getName();
 		// std::string getName(int minLength);
 		std::string getName(std::string keyInput);
-		std::string getName(int keyInput);
+		std::string getName(unsigned int keyInput);
 		std::string getName(std::string keyInput, int minLength, int maxLength);
-		std::string getName(int keyInput, int minLength, int maxLength);
+		std::string getName(unsigned int keyInput, int minLength, int maxLength);
 
 		std::string getNameFromSeed(std::string keyInput, std::string seedInput);
-		std::string getNameFromSeed(int keyInput, std::string seedInput);
+		std::string getNameFromSeed(unsigned int keyInput, std::string seedInput);
 		std::string getNameFromSeed(std::string keyInput, std::string seedInput, int minLength, int maxLength);
-		std::string getNameFromSeed(int keyInput, std::string seedInput, int minLength, int maxLength);
+		std::string getNameFromSeed(unsigned int keyInput, std::string seedInput, int minLength, int maxLength);
 
 		std::string getSatelliteName(std::string primaryBodyName);  // Names the planet of a star by appending a Roman numeral.
 

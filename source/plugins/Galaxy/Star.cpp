@@ -40,11 +40,11 @@ bool Star::setName(string nameInput) {
 	return true;
 }
 
-bool Star::setSeed(int seedInput) {
-	return setSeed(std::to_string(seedInput));
-}
+// bool Star::setSeed(int seedInput) {
+// 	return setSeed(std::to_string(seedInput));
+// }
 
-bool Star::setSeed(string seedInput) {
+bool Star::setSeed(unsigned int seedInput) {
 	seed = seedInput;
 	return true;
 }

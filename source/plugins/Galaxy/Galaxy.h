@@ -35,6 +35,8 @@ class Galaxy {
 		friend class boost::serialization::access;
 		template<class Archive>
 		void serialize(Archive & ar, const unsigned int version) {
+			ar & myWordGenerator;
+
 			ar & name;
 			ar & seed;
 			ar & pixels;
@@ -48,6 +50,8 @@ class Galaxy {
 			ar & cloudsFrequency;
 			ar & cloudsMult;
 			ar & densityMult;
+			ar & seedHash;
+			ar & nextUniqueID;
 
 			ar & blankGalaxyMap;  // This may be unnecessary.
 			ar & galaxyMap;
@@ -69,13 +73,15 @@ class Galaxy {
 		double cloudsFrequency;
 		double cloudsMult;
 		double densityMult;
+		unsigned int seedHash;
+		unsigned int nextUniqueID;  // If the size of this becomes an issue, convert everything to uint64_t.
 
 		Star blankStar;
 
 	public:
 		Galaxy();
 
-		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
+		std::unordered_map<std::pair<int, int>, unsigned int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
 		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
 
 		Star at(int x, int y);
@@ -93,6 +99,7 @@ class Galaxy {
 		int getExtraStars();
 		double getCloudsMult();
 		double getDensityMult();
+		unsigned int getNextUniqueID();
 
 		bool setName(std::string nameInput);
 		bool setSeed(std::string seedInput);
@@ -107,6 +114,7 @@ class Galaxy {
 		bool setExtraStars(int extraStarsInput);
 		bool setCloudsMult(double cloudsMultInput);
 		bool setDensityMult(double densityMultInput);
+		bool setSeedHash(int seedHashInput)
 
 		bool capitalize(std::string& wordInput);
 

@@ -201,7 +201,7 @@ string WordGenerator::getName(int minLength, int maxLength) {
 	return generateWord(randomGen, syllableSelector, minLength, maxLength);
 }*/
 
-string WordGenerator::getName(int keyInput) {
+string WordGenerator::getName(unsigned int keyInput) {
 	return getName(to_string(keyInput));
 }
 
@@ -215,12 +215,25 @@ string WordGenerator::getName(int keyInput, int minLength, int maxLength) {
 
 string WordGenerator::getName(string keyInput, int minLength, int maxLength) {
 	string name = retrieveName(keyInput);
+	string suffix = "";
+	int loops = 0;
 	if (!name.empty()) {
 		return name;
 	} else {
 		do {
+			if (loops == 3) {
+				break;
+			}
 			name = generateWord(randomGen, syllableSelector, minLength, maxLength);
+			loops++;
 		} while (isNameTaken(name));
+		if (loops == 3) {
+			do {
+				suffix = getGreekLettersFromNumber(loops - 2, " ");  // Starts with Beta.
+				loops++;
+			} while (isNameTaken(name + suffix));
+			name = name + suffix;
+		}
 	}
 	usedNames[keyInput] = name;
 	return name;

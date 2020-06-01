@@ -33,7 +33,8 @@ class Star {
 			ar & starTypeID;
 		}
 		std::string name;
-		std::string seed;
+		// std::string seed;
+		unsigned int seed;
 
 		int starTypeID;
 	public:
@@ -44,8 +45,8 @@ class Star {
 		std::string getName();
 
 		bool setName(std::string nameInput);
-		bool setSeed(int seedInput);
-		bool setSeed(std::string seedInput);
+		// bool setSeed(int seedInput);
+		bool setSeed(unsigned int seedInput);
 };
 
 #endif  // STAR_H
