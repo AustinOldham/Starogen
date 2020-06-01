@@ -81,7 +81,7 @@ class Galaxy {
 	public:
 		Galaxy();
 
-		std::unordered_map<std::pair<int, int>, unsigned int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
+		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
 		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
 
 		Star at(int x, int y);

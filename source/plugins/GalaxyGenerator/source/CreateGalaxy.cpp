@@ -178,11 +178,11 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, int distanc
 
 		// myGalaxy[y + modY][x + modX] = plotStar(distanceProportion);
 		pair<int, int> location(x + modX, y + modY);
-		myGalaxy.blankGalaxyMap[location] = static_cast<unsigned int>(starClusterGen.next());
+		myGalaxy.blankGalaxyMap[location] = distanceProportionInt;
 	}
 }
 
-Star CreateGalaxy::plotStar(unsigned int starSeedInput) {
+Star CreateGalaxy::plotStar(int distanceProportionInt) {
 	// TODO: Replace this implementation with std::discrete_distribution.
 
 	double probability = starClusterGen.next(0.0, 1.0);
@@ -194,9 +194,10 @@ Star CreateGalaxy::plotStar(unsigned int starSeedInput) {
 		probabilitySum += starList[i].adjustedChance;
 		if (probability <= probabilitySum) {
 			Star newStar(i);
-			string starName = myGalaxy.generateName(starSeedInput);
+			unsigned int starSeed = myGalaxy.getNextUniqueID();
+			string starName = myGalaxy.generateName(starSeed);
 			newStar.setName(starName);
-			newStar.setSeed(starSeedInput);
+			newStar.setSeed(starSeed);
 			return newStar;
 		}
 	}
