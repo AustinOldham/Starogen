@@ -25,6 +25,7 @@
 #include <algorithm>
 #include <iostream>
 #include <unordered_map>
+#include <iterator>
 
 #include "RandClass/RandClass.h"
 

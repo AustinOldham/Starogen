@@ -260,8 +260,11 @@ list<int> WordGenerator::base10ToArbitraryBase(int input, int base) {
 string WordGenerator::getGreekLettersFromNumber(int input, string delimiter) {
 	string output = "";
 	list<int> convertedNumber = base10ToArbitraryBase(input, greekAlphabet.size());
-	for (const auto& number : convertedNumber) {
-		output = output + greekAlphabet[number] + delimiter;
+	for (auto it = convertedNumber.cbegin(); it != convertedNumber.cend(); it++) {
+		output = output + greekAlphabet[*it];
+		if (std::next(it) != convertedNumber.cend()) {
+			output = output + delimiter;
+		}
 	}
 	return output;
 }
