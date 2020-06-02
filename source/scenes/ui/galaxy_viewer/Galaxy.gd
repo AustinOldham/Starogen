@@ -125,6 +125,16 @@ func _on_StarSpreadEdit_text_entered(new_text):
 	if (!new_text.empty() and new_text.is_valid_float() and int(new_text) > 0):
 		_spread_stars(int(new_text))
 
+func _click_is_contained():
+	var galaxy_box = get_parent()
+	var galaxy_box_mouse = galaxy_box.get_local_mouse_position()
+	if (galaxy_box_mouse.x < 0 or galaxy_box_mouse.y < 0):
+		return false
+	var galaxy_box_rect = galaxy_box.get_rect()
+	if (galaxy_box_mouse.x > galaxy_box_rect.size.x or galaxy_box_mouse.y > galaxy_box_rect.size.y):
+		return false
+	else:
+		return true
 
 func _on_click():
 	print("Click")
@@ -139,7 +149,7 @@ func _on_click():
 	y = int(y)
 
 	print("sprite x: " + str(x) + "  sprite y: " + str(y))
-	if (x < galaxy_generator.getPixels() and y < galaxy_generator.getPixels() and x >= 0 and y >= 0):
+	if (x < galaxy_generator.getPixels() and y < galaxy_generator.getPixels() and x >= 0 and y >= 0 and _click_is_contained()):
 		print("Contained")
 		var curr_star = star_dict.get(Vector2(x, y))
 		if (curr_star != null):

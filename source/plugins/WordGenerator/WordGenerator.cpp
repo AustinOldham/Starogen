@@ -231,8 +231,8 @@ string WordGenerator::getName(string keyInput, int minLength, int maxLength) {
 			do {
 				suffix = getGreekLettersFromNumber(loops - 2, " ");  // Starts with Beta.
 				loops++;
-			} while (isNameTaken(name + suffix));
-			name = name + suffix;
+			} while (isNameTaken(name + " " + suffix));
+			name = name + " " + suffix;
 		}
 	}
 	usedNames[keyInput] = name;
