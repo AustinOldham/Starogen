@@ -26,6 +26,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <iterator>
+#include <filesystem>
 
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -83,11 +84,12 @@ class WordGenerator {
 
 		bool usesCensoredWordsList = false;
 
-		std::string censoredWordsPath;
+		std::string censoredWordsPath;  // Absolute path to the directory that contains lists of censored words.
 
 		bool readSyllableFiles();
 		bool readConsonantSyllableFile(std::string filePathInput);
 		bool readVowelSyllableFile(std::string filePathInput);
+		bool readCensoredWordsFiles();
 		std::string generateWord(RandClass& rand, RandClass& randSyllable, int minLength, int maxLength);  // The default minimum length is 1 character.
 
 	public:
@@ -161,6 +163,8 @@ class WordGenerator {
 		bool setDefaultMinLength(int minLengthInput);
 
 		bool setCensoredWordsPath(std::string pathInput);
+		bool censoredWordsPathEmpty();
+		bool containsCensoredWord(std::string wordInput);
 
 		bool setSeed(std::string seedInput);
 

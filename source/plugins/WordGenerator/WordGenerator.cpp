@@ -43,6 +43,7 @@ bool WordGenerator::readSyllableFiles() {
 }
 
 bool WordGenerator::readConsonantSyllableFile(string filePathInput) {
+	// TODO: Ensure this works on Linux and Mac.
 	std::ifstream consonantsIn(filePathInput);
 	cout << "Reading consonants" << endl;
 	if (consonantsIn.is_open()) {
@@ -131,10 +132,17 @@ string WordGenerator::generateWord(RandClass& rand, RandClass& randSyllable, int
 	bool currentIsConsonant = isConsonant(nextSyllable);
 	while (true) {
 		// Add a loop that loops through this getConsecutiveConsonantNum() times.
+
 		if ((word + nextSyllable).size() == localMaxLength) {
-			// In the future, make a simple dictionary of the basic vowels (aeiouy) and checks if each letter belongs in that dictionary. If one does, return the word, otherwise, recurse until a vowel is found.
-			return (word + nextSyllable);
+			if (usesCensoredWordsList && containsCensoredWord(word + nextSyllable)) {
+				return generateWord(rand, randSyllable, minLength, maxLength);
+			} else {
+				// In the future, make a simple dictionary of the basic vowels (aeiouy) and checks if each letter belongs in that dictionary. If one does, return the word, otherwise, recurse until a vowel is found.
+				return (word + nextSyllable);
+			}
+
 		} else if ((word + nextSyllable).size() > localMaxLength) {
+			// This can be optimized by sorting the syllables by length and only choosing one that fits.
 			nextSyllable = getRandomSyllable(randSyllable, currentIsConsonant);
 			continue;
 		}
@@ -142,6 +150,15 @@ string WordGenerator::generateWord(RandClass& rand, RandClass& randSyllable, int
 		currentIsConsonant = !currentIsConsonant;
 		nextSyllable = getRandomSyllable(randSyllable, currentIsConsonant);
 	}
+}
+
+bool WordGenerator::containsCensoredWord(string wordInput) {
+	for (auto const& censoredWord : censoredWordsList) {
+		if (wordInput.find(censoredWord) != std::string::npos) {
+			return true;  // Contains the censored word.
+		}
+	}
+	return false;  // Does not contain a censored word.
 }
 
 string WordGenerator::getRandomSyllable(RandClass& randSyllable, bool isConsonantInput) {
@@ -280,4 +297,56 @@ string WordGenerator::getGreekLettersFromNumber(int input, string delimiter) {
 		}
 	}
 	return output;
+}
+
+bool WordGenerator::setCensoredWordsPath(string pathInput) {
+	censoredWordsPath = pathInput;
+	censoredWordsList.clear();
+	if (censoredWordsPathEmpty()) {
+		usesCensoredWordsList = false;
+		return true;
+	} else {
+		usesCensoredWordsList = true;
+		return readCensoredWordsFiles();
+	}
+}
+
+bool WordGenerator::censoredWordsPathEmpty() {
+	std::filesystem::path dir(censoredWordsPath);
+	dir.make_preferred();
+	return(std::filesystem::is_empty(dir));  // Checks if any files are present in that directory.
+}
+
+bool WordGenerator::readCensoredWordsFiles() {
+	cout << "Loading censored words lists" << endl;
+
+	std::filesystem::path dir(censoredWordsPath);
+	dir.make_preferred();
+
+	for (const auto & file : std::filesystem::directory_iterator(dir)) {
+		std::ifstream censoredWordsIn(file.path());
+		cout << "Reading " << file.path() << endl;
+		if (censoredWordsIn.is_open()) {
+			string line;
+			while (std::getline(censoredWordsIn, line)) {
+				if (!line.empty()) {
+					if (line.front() == '#') {
+						continue;
+					}
+					if (line.back() == '\r') {  // Removes the carriage return character on Linux.
+						line.pop_back();
+					}
+					cout << line << endl;
+					censoredWordsList.push_back(line);
+				}
+			}
+			censoredWordsIn.close();
+		} else {
+			return false;
+		}
+	}
+
+
+	cout << "Done reading censored words" << endl;
+	return true;
 }

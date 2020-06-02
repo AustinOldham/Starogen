@@ -55,9 +55,11 @@ class Galaxy {
 
 			ar & blankGalaxyMap;  // This may be unnecessary.
 			ar & galaxyMap;
+
+			ar & blankStar;
 		}
 
-		WordGenerator myWordGenerator;
+		WordGenerator myWordGenerator;  // TODO: Add a function to clear this each time a new galaxy is generated so the old words are not taken.
 
 		std::string name;
 		std::string seed;
