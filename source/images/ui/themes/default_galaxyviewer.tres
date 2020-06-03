@@ -8,4 +8,3 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 corner_detail = 1
-anti_aliasing = false

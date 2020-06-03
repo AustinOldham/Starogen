@@ -16,7 +16,6 @@
 # along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
 extends Sprite
-
 onready var galaxy_generator = preload("res://plugins/GalaxyGenerator/bin/GalaxyGenerator.gdns").new()
 
 signal invalid_check(type)
@@ -25,6 +24,7 @@ var x = -1
 var y = -1
 var last_width = 500
 
+"""
 var is_invalid = false
 var name_input = ""
 var seed_input = ""
@@ -39,7 +39,7 @@ var a = 0.1
 var b = 0.3
 var extra_stars = -1
 var density_grid = -1
-
+"""
 
 func _ready():
 	pass
@@ -108,6 +108,7 @@ func on_click():
 		y = localY
 		update()
 
+"""
 func _check_input_float(text, type, default, less_than, invalid_num):
 	if (text.empty()):
 		emit_signal("invalid_check", "")
@@ -239,7 +240,7 @@ func _on_Generate_pressed():
 	print("Generation complete")
 	print(get_global_transform().x)
 	print(get_global_transform().y)
-
+"""
 
 func _on_Recenter_pressed():
 	global_position = get_parent().get_parent().get_global_transform().origin

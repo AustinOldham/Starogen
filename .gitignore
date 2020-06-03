@@ -3,5 +3,8 @@
 *.obj
 *.dblite
 *.import
+*.exp
+*.lib
 
 source/.import/
+
