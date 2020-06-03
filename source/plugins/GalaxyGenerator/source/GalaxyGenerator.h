@@ -95,6 +95,8 @@ class GalaxyGenerator : public Object {
 
 		bool saveGalaxy(String pathInput);
 		bool loadGalaxy(String pathInput, String fileNameInput);
+
+		bool setCensoredWordsPath(String pathInput);
 };
 
 }

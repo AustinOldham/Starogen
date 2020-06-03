@@ -169,6 +169,8 @@ class CreateGalaxy {
 
 		bool saveGalaxy(std::string pathInput);
 		bool loadGalaxy(std::string pathInput, std::string fileNameInput);
+
+		bool setCensoredWordsPath(std::string pathInput);
 };
 
 struct CreateGalaxy::StarType {

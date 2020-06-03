@@ -69,6 +69,7 @@ void CreateGalaxy::run() {
 
 	myGalaxy.blankGalaxyMap.clear();
 	myGalaxy.galaxyMap.clear();
+	myGalaxy.clearNames();
 	//myGalaxy.resize(pixels, vector<int>(pixels, 0));
 	//densityMap.clear();
 	//densityMap.resize(pixels, vector<double>(pixels, 0));
@@ -629,4 +630,8 @@ string CreateGalaxy::getStarNameAt(int x, int y) {
 int CreateGalaxy::getStarTypeIDAt(int x, int y) {
 	Star tempStar = at(x, y);
 	return tempStar.getStarTypeID();
+}
+
+bool CreateGalaxy::setCensoredWordsPath(string pathInput) {
+	return myGalaxy.setCensoredWordsPath(pathInput);
 }

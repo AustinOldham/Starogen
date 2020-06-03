@@ -263,3 +263,11 @@ bool Galaxy::setSeedHash(unsigned int seedHashInput) {
 	nextUniqueID = seedHashInput + 1;
 	return true;
 }
+
+bool Galaxy::clearNames() {
+	return myWordGenerator.clearNames();
+}
+
+bool Galaxy::setCensoredWordsPath(string pathInput) {
+	return myWordGenerator.setCensoredWordsPath(pathInput);
+}

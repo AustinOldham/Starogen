@@ -122,6 +122,9 @@ class Galaxy {
 
 		std::string generateName(int keyInput);
 		std::string generateName(std::string keyInput);
+
+		bool clearNames();
+		bool setCensoredWordsPath(std::string pathInput);
 };
 
 #endif  // GALAXY_H

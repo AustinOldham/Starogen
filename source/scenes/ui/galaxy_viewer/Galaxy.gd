@@ -30,7 +30,7 @@ var zoom_factor = 1.1
 var current_spread_factor = 1
 
 func _ready():
-	pass
+	_set_censored_words_path(UserPreferences.default_censored_words_path)
 
 func _input(event):
 	if event is InputEventMouse:
@@ -156,3 +156,7 @@ func _on_click():
 			print(galaxy_generator.getStarNameAt(curr_star.original_coordinates.x, curr_star.original_coordinates.y) + " is a star at " + str(curr_star.original_coordinates.x) + " " + str(curr_star.original_coordinates.y))
 			star_info_panel.get_node("ScrollContainer/VBoxContainer/DynamicCurrStarLabel").text = galaxy_generator.getStarNameAt(curr_star.original_coordinates.x, curr_star.original_coordinates.y)
 			
+func _set_censored_words_path(pathInput):
+	var dir = Directory.new()
+	dir.make_dir_recursive(pathInput)
+	galaxy_generator.setCensoredWordsPath(pathInput)

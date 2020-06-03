@@ -172,6 +172,8 @@ class WordGenerator {
 
 		std::string retrieveName(std::string keyInput);
 		bool isNameTaken(std::string nameInput);
+
+		bool clearNames();
 };
 
 #endif  // WORDGENERATOR_H

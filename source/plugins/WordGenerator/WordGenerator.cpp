@@ -350,3 +350,8 @@ bool WordGenerator::readCensoredWordsFiles() {
 	cout << "Done reading censored words" << endl;
 	return true;
 }
+
+bool WordGenerator::clearNames() {
+	usedNames.clear();
+	return true;
+}

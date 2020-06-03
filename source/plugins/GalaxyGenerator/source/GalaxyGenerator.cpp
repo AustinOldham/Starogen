@@ -65,6 +65,8 @@ void GalaxyGenerator::_register_methods() {
 
 	register_method("saveGalaxy", &GalaxyGenerator::saveGalaxy);
 	register_method("loadGalaxy", &GalaxyGenerator::loadGalaxy);
+
+	register_method("setCensoredWordsPath", &GalaxyGenerator::setCensoredWordsPath);
 }
 
 GalaxyGenerator::GalaxyGenerator() {
@@ -287,4 +289,8 @@ String GalaxyGenerator::getStarNameAt(int x, int y) {
 
 int GalaxyGenerator::getStarTypeIDAt(int x, int y) {
 	return myGalaxyGenerator.getStarTypeIDAt(x, y);
+}
+
+bool GalaxyGenerator::setCensoredWordsPath(String pathInput) {
+	return myGalaxyGenerator.setCensoredWordsPath(toStandardString(pathInput));
 }
