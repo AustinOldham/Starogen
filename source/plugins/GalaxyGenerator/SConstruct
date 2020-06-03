@@ -60,10 +60,11 @@ if env['platform'] == "osx":
 elif env['platform'] in ('x11', 'linux'):
     env['target_path'] += 'x11/'
     cpp_library += '.linux'
+    env.Append(LINKFLAGS = ['-lboost_serialization', '-lboost_system'])
     if env['target'] in ('debug', 'd'):
-        env.Append(CCFLAGS = ['-fPIC', '-g3','-Og', '-std=c++17'])
+        env.Append(CCFLAGS = ['-fPIC', '-g3','-Og', '-std=c++17', '-lboost_serialization', '-lboost_system'])
     else:
-        env.Append(CCFLAGS = ['-fPIC', '-g','-O3', '-std=c++17'])
+        env.Append(CCFLAGS = ['-fPIC', '-g','-O3', '-std=c++17', '-lboost_serialization', '-lboost_system'])
 
 elif env['platform'] == "windows":
     env['target_path'] += 'win64/'
@@ -99,8 +100,12 @@ sources = sources + Glob('../Galaxy/*.cpp')
 sources = sources + Glob('../WordGenerator/*.cpp')
 
 env.Append(CPPPATH = boost_prefix)
-#env.Append(CPPPATH = [os.path.join(boost_prefix, "include")])
+env.Append(CPPPATH = [os.path.join(boost_prefix, "boost")])
+env.Append(CPPPATH = [os.path.join(boost_prefix, "include")])
+
 env.Append(LIBPATH = [os.path.join(boost_prefix, "stage\lib")])
+env.Append(LIBPATH = [os.path.join(boost_prefix, "")])
+env.Append(LIBPATH = [os.path.join(boost_prefix, "boost")])
 
 library = env.SharedLibrary(target=env['target_path'] + env['target_name'] , source=sources)
 
