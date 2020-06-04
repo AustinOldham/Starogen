@@ -24,6 +24,8 @@ func _ready():
 	$MarginContainer/VBoxContainer/MenuOptions/Options.connect("pressed", self, "options")
 	$MarginContainer/VBoxContainer/MenuOptions/Credits.connect("pressed", self, "credits")
 	$MarginContainer/VBoxContainer/MenuOptions/Quit.connect("pressed", self, "quit_game")
+	if (!UserPreferences.hide_censored_words_popup):
+		$MarginContainer/WarningPopup.popup()
 
 func continue_game():
 	# get_tree().change_scene("res://prototypes/sample_space/SampleSpace.tscn")

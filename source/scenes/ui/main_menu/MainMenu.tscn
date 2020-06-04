@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/ui/main_menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_title.tres" type="DynamicFont" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=7]
 [ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=8]
 [ext_resource path="res://scenes/ui/main_menu/FakeShip.gd" type="Script" id=9]
+[ext_resource path="res://scenes/ui/main_menu/WarningPopup.gd" type="Script" id=10]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -151,3 +152,55 @@ polygon = PoolVector2Array( -8, -4, -4, -4, -4, -3, -3, -3, -3, -2, 7, -2, 7, -1
 [node name="Camera2D" type="Camera2D" parent="MarginContainer/FakeShip"]
 anchor_mode = 0
 current = true
+
+[node name="WarningPopup" type="WindowDialog" parent="MarginContainer"]
+visible = true
+margin_left = 20.0
+margin_top = 80.0
+margin_right = 1004.0
+margin_bottom = 590.0
+theme = ExtResource( 3 )
+window_title = "Warning"
+resizable = true
+script = ExtResource( 10 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/WarningPopup"]
+margin_right = 980.0
+margin_bottom = 506.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/WarningPopup/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 970.0
+margin_bottom = 496.0
+
+[node name="Label" type="Label" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
+visible = false
+margin_right = 960.0
+margin_bottom = 452.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Starogen uses a random word generator that creates words out of random letters. As a result, it is possible for offensive words to be generated. If this is an issue for you, go to https://starogen.fandom.com/wiki/Custom_Censored_Words to see how to censor these words."
+autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
+margin_right = 960.0
+theme = ExtResource( 3 )
+text = "Starogen uses a random word generator that creates words out of random letters. As a result, it is possible for offensive words to be generated. If this is an issue for you, go to https://starogen.fandom.com/wiki/Custom_Censored_Words to see how to censor these words."
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 960.0
+margin_bottom = 30.0
+theme = ExtResource( 3 )
+shortcut_in_tooltip = false
+text = "Don't show this again"
+flat = true
+[connection signal="resized" from="MarginContainer/WarningPopup" to="MarginContainer/WarningPopup" method="_on_WarningPopup_resized"]
+[connection signal="toggled" from="MarginContainer/WarningPopup/MarginContainer/VBoxContainer/CheckBox" to="MarginContainer/WarningPopup" method="_on_CheckBox_toggled"]
