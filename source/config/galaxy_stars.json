@@ -191,11 +191,11 @@
   "antimatter_star": {
     "name": "antimatter_star",
     "type": "special",
-    "chance": 0.001,
-    "red": 0.0,
-    "green": 0.0,
-    "blue": 1.0,
+    "chance": 0.01,
+    "red": 0.502,
+    "green": 0.502,
+    "blue": 0.502,
     "alpha": 1.0,
-    "special_tags":["antimatter"]
+    "special_tags": ["antimatter"]
   }
 }
