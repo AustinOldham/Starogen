@@ -18,8 +18,20 @@
 #ifndef PLANET_H
 #define PLANET_H
 
+#include <string>
+#include <unordered_map>
+
 class Planet {
 	private:
+		std::string name;
+
+		int planetTypeID;
+
+		double averageTemperature;  // Kelvin
+
+		std::unordered_map<std::string, double> metals;  // Stores which metals are available on a planet and how much remains.
+		std::unordered_map<std::string, double> atmosphere;  // Stores which types of gasses are present in the atmosphere and at what concentration.
+
 	public:
 		Planet();
 }
