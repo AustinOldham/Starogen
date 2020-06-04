@@ -187,5 +187,15 @@
     "green": 0.0,
     "blue": 1.0,
     "alpha": 1.0
+  },
+  "antimatter_star": {
+    "name": "antimatter_star",
+    "type": "special",
+    "chance": 0.001,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0,
+    "special_tags":["antimatter"]
   }
 }
