@@ -3,8 +3,11 @@
 		"type": "solid",
 		"chance": 5.0,
 		"properties": {
-			"atmosphere": {
+			"gases": {
 				"none": {
+
+				},
+				"trace": {
 
 				},
 				"sparse": {
@@ -40,8 +43,11 @@
 
 				}
 			},
-			"metals": {
+			"inorganic_resources": {
 				"none": {
+
+				},
+				"trace": {
 
 				},
 				"sparse": {
@@ -63,11 +69,17 @@
 		"type": "gas",
 		"chance": 0.5,
 		"properties": {
-			"atmosphere_density": {
+			"gases": {
 				"none": {
 
 				},
+				"trace": {
+
+				},
 				"sparse": {
+					"description": "There is hardly any atmosphere."
+				},
+				"normal": {
 
 				},
 				"rich": {
