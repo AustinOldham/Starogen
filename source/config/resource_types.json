@@ -1,0 +1,37 @@
+{
+	"inorganic_resources": {
+		"iron": {
+			"chance": 20.0,
+			"abundance": 5.0,
+		},
+		"copper": {
+
+		},
+		"carbon": {
+
+		},
+		"silver": {
+
+		},
+		"gold": {
+
+		},
+		"silicon": {
+
+		},
+		"water": {
+
+		}
+	},
+	"gases": {
+		"oxygen": {
+
+		},
+		"nitrogen": {
+
+		},
+		"carbon_dioxide": {
+
+		}
+	}
+}
