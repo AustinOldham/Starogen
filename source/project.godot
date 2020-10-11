@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "CelestialBody",
+"language": "GDScript",
+"path": "res://scenes/celestial_objects/CelestialBody.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Ship",
 "language": "GDScript",
 "path": "res://scenes/ships/Ship.gd"
 } ]
 _global_script_class_icons={
+"CelestialBody": "",
 "Ship": ""
 }
 
@@ -22,10 +28,41 @@ _global_script_class_icons={
 
 config/name="Starogen"
 run/main_scene="res://scenes/ui/main_menu/MainMenu.tscn"
-boot_splash/image="res://assets/application/starogen_logo_v2_256px.png"
+boot_splash/image="res://images/application/starogen_logo_v2_256px.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://assets/application/starogen_logo_v2_16px.png"
+config/icon="res://images/application/starogen_logo_v2_16px.png"
+
+[autoload]
+
+UserPreferences="*res://scripts/user_preferences.gd"
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[physics]
+
+2d/default_gravity_vector=Vector2( 0, 0 )
 
 [rendering]
 

@@ -1,0 +1,18 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=false
+
+[entry]
+
+X11.64="res://plugins/GalaxyGenerator/bin/x11/libGalaxyGenerator.so"
+Windows.64="res://plugins/GalaxyGenerator/bin/win64/libGalaxyGenerator.dll"
+OSX.64="res://plugins/GalaxyGenerator/bin/osx/libGalaxyGenerator.dylib"
+
+[dependencies]
+
+X11.64=[  ]
+Windows.64=[  ]
+OSX.64=[  ]

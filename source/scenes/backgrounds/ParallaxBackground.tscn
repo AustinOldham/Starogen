@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=1]
-[ext_resource path="res://assets/backgrounds/starrybg_1.png" type="Texture" id=2]
+[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=3]
+
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 

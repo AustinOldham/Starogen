@@ -1,0 +1,18 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=false
+
+[entry]
+
+X11.64="res://plugins/PlanetGenerator/bin/x11/libPlanetGenerator.so"
+Windows.64="res://plugins/PlanetGenerator/bin/win64/libPlanetGenerator.dll"
+OSX.64="res://plugins/PlanetGenerator/bin/osx/libPlanetGenerator.dylib"
+
+[dependencies]
+
+X11.64=[  ]
+Windows.64=[  ]
+OSX.64=[  ]

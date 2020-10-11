@@ -1,17 +1,15 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/ui/main_menu/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/starogen_font_wider/starogen_font_wider_title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/fonts/starogen_font_wider/starogen_font_wider_30px.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=4]
-[ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=5]
-[ext_resource path="res://assets/backgrounds/starrybg_1.png" type="Texture" id=6]
-[ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=7]
-[ext_resource path="res://scenes/ui/main_menu/FakeShip.gd" type="Script" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://images/ui/themes/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_30px.tres" type="DynamicFont" id=4]
+[ext_resource path="res://images/fonts/starogen_font_wider/starogen_font_wider_20px.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scenes/backgrounds/ParallaxLayer.gd" type="Script" id=6]
+[ext_resource path="res://images/backgrounds/starrybg_1.png" type="Texture" id=7]
+[ext_resource path="res://scenes/backgrounds/TextureRect.gd" type="Script" id=8]
+[ext_resource path="res://scenes/ui/main_menu/FakeShip.gd" type="Script" id=9]
+[ext_resource path="res://scenes/ui/main_menu/WarningPopup.gd" type="Script" id=10]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -45,68 +43,62 @@ size_flags_vertical = 3
 custom_constants/separation = 30
 alignment = 1
 
-[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
-margin_top = 27.0
+[node name="Continue" type="ToolButton" parent="MarginContainer/VBoxContainer/MenuOptions"]
+margin_top = 42.0
 margin_right = 984.0
-margin_bottom = 66.0
-custom_styles/focus = SubResource( 1 )
-custom_fonts/font = ExtResource( 3 )
+margin_bottom = 75.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_disabled = Color( 0.192157, 0.192157, 0.192157, 1 )
 custom_colors/font_color_hover = Color( 0.486275, 0.988235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.258824, 0.52549, 0, 1 )
-disabled = true
 text = "Continue"
-flat = true
 
-[node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
-margin_top = 96.0
+[node name="NewGame" type="ToolButton" parent="MarginContainer/VBoxContainer/MenuOptions"]
+margin_top = 105.0
 margin_right = 984.0
-margin_bottom = 135.0
-custom_styles/focus = SubResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+margin_bottom = 138.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_disabled = Color( 0.192157, 0.192157, 0.192157, 1 )
 custom_colors/font_color_hover = Color( 0.486275, 0.988235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.258824, 0.52549, 0, 1 )
 text = "New Game"
-flat = true
 
-[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
-margin_top = 165.0
+[node name="Options" type="ToolButton" parent="MarginContainer/VBoxContainer/MenuOptions"]
+margin_top = 168.0
 margin_right = 984.0
-margin_bottom = 204.0
-custom_styles/focus = SubResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+margin_bottom = 201.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_disabled = Color( 0.192157, 0.192157, 0.192157, 1 )
 custom_colors/font_color_hover = Color( 0.486275, 0.988235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.258824, 0.52549, 0, 1 )
 disabled = true
 text = "Options"
-flat = true
 
-[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
-margin_top = 234.0
+[node name="Credits" type="ToolButton" parent="MarginContainer/VBoxContainer/MenuOptions"]
+margin_top = 231.0
 margin_right = 984.0
-margin_bottom = 273.0
-custom_styles/focus = SubResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+margin_bottom = 264.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_disabled = Color( 0.192157, 0.192157, 0.192157, 1 )
 custom_colors/font_color_hover = Color( 0.486275, 0.988235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.258824, 0.52549, 0, 1 )
 disabled = true
 text = "Credits"
-flat = true
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
-margin_top = 303.0
+[node name="Quit" type="ToolButton" parent="MarginContainer/VBoxContainer/MenuOptions"]
+margin_top = 294.0
 margin_right = 984.0
-margin_bottom = 342.0
-custom_styles/focus = SubResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+margin_bottom = 327.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_disabled = Color( 0.192157, 0.192157, 0.192157, 1 )
 custom_colors/font_color_hover = Color( 0.486275, 0.988235, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.258824, 0.52549, 0, 1 )
 text = "Quit"
-flat = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 488.0
@@ -114,13 +106,13 @@ margin_right = 984.0
 margin_bottom = 510.0
 
 [node name="Version" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 193.0
+margin_right = 72.0
 margin_bottom = 22.0
-custom_fonts/font = ExtResource( 4 )
-text = "Prototype 6-23-19"
+custom_fonts/font = ExtResource( 5 )
+text = "v0.1.0.0"
 
 [node name="Blank" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 197.0
+margin_left = 76.0
 margin_top = 4.0
 margin_right = 568.0
 margin_bottom = 18.0
@@ -130,24 +122,26 @@ size_flags_horizontal = 3
 margin_left = 572.0
 margin_right = 984.0
 margin_bottom = 22.0
-custom_fonts/font = ExtResource( 4 )
-text = "© 2019 Austin Oldham. All rights reserved."
+custom_fonts/font = ExtResource( 5 )
+text = "© 2020 Austin Oldham. All rights reserved."
 align = 2
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="MarginContainer"]
+scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="MarginContainer/ParallaxBackground"]
 motion_mirroring = Vector2( 500, 500 )
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 2
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="FakeShip" type="KinematicBody2D" parent="MarginContainer"]
-script = ExtResource( 8 )
+editor/display_folded = true
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -158,3 +152,57 @@ polygon = PoolVector2Array( -8, -4, -4, -4, -4, -3, -3, -3, -3, -2, 7, -2, 7, -1
 [node name="Camera2D" type="Camera2D" parent="MarginContainer/FakeShip"]
 anchor_mode = 0
 current = true
+
+[node name="WarningPopup" type="WindowDialog" parent="MarginContainer"]
+visible = true
+margin_left = 20.0
+margin_top = 80.0
+margin_right = 1004.0
+margin_bottom = 590.0
+theme = ExtResource( 3 )
+window_title = "Warning"
+resizable = true
+script = ExtResource( 10 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/WarningPopup"]
+margin_right = 980.0
+margin_bottom = 506.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/WarningPopup/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 970.0
+margin_bottom = 496.0
+
+[node name="Label" type="Label" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
+margin_right = 960.0
+margin_bottom = 452.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "Starogen uses a random word generator that creates words out of random letters. As a result, it is possible for offensive words to be generated. If this is an issue for you, go to https://github.com/AustinOldham/Starogen to see how to censor these words."
+autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
+margin_top = 456.0
+margin_right = 960.0
+margin_bottom = 456.0
+theme = ExtResource( 3 )
+text = "Starogen uses a random word generator that creates words out of random letters. As a result, it is possible for offensive words to be generated. If this is an issue for you, go to https://starogen.fandom.com/wiki/Custom_Censored_Words to see how to censor these words."
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
+margin_top = 460.0
+margin_right = 960.0
+margin_bottom = 486.0
+theme = ExtResource( 3 )
+shortcut_in_tooltip = false
+text = "Don't show this again"
+flat = true
+[connection signal="resized" from="MarginContainer/WarningPopup" to="MarginContainer/WarningPopup" method="_on_WarningPopup_resized"]
+[connection signal="toggled" from="MarginContainer/WarningPopup/MarginContainer/VBoxContainer/CheckBox" to="MarginContainer/WarningPopup" method="_on_CheckBox_toggled"]

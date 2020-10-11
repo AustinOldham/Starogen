@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/celestial_objects/sample_planet.png" type="Texture" id=1]
+[ext_resource path="res://images/celestial_objects/sample_planet.png" type="Texture" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 76.0592

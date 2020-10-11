@@ -1,0 +1,191 @@
+{
+  "blank": {
+    "name": "blank",
+    "type": "blank",
+    "chance": 0.0,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 0.0,
+    "alpha": 0.0
+  },
+  "white": {
+    "name": "white",
+    "type": "a_type",
+    "chance": 1.0,
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  },
+  "blue_white": {
+    "name": "blue_white",
+    "type": "b_type",
+    "chance": 2.0,
+    "red": 0.682,
+    "green": 0.737,
+    "blue": 0.976,
+    "alpha": 1.0
+  },
+  "yellow_white": {
+    "name": "yellow_white",
+    "type": "f_type",
+    "chance": 2.0,
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 0.760,
+    "alpha": 1.0
+  },
+  "yellow": {
+    "name": "yellow",
+    "type": "g_type",
+    "chance": 1.0,
+    "red": 0.949,
+    "green": 0.949,
+    "blue": 0.149,
+    "alpha": 1.0
+  },
+  "yellow_dwarf": {
+    "name": "yellow_dwarf",
+    "type": "g_type",
+    "chance": 1.0,
+    "red": 0.949,
+    "green": 0.949,
+    "blue": 0.149,
+    "alpha": 1.0
+  },
+  "yellow_supergiant": {
+    "name": "yellow_supergiant",
+    "type": "g_type",
+    "chance": 1.0,
+    "red": 0.949,
+    "green": 0.949,
+    "blue": 0.149,
+    "alpha": 1.0
+  },
+  "yellow_hypergiant": {
+    "name": "yellow_hypergiant",
+    "type": "g_type",
+    "chance": 1.0,
+    "red": 0.949,
+    "green": 0.949,
+    "blue": 0.149,
+    "alpha": 1.0
+  },
+  "orange": {
+    "name": "orange",
+    "type": "k_type",
+    "chance": 1.0,
+    "red": 0.949,
+    "green": 0.419,
+    "blue": 0.203,
+    "alpha": 1.0
+  },
+  "orange_dwarf": {
+    "name": "orange_dwarf",
+    "type": "k_type",
+    "chance": 1.0,
+    "red": 0.949,
+    "green": 0.419,
+    "blue": 0.203,
+    "alpha": 1.0
+  },
+  "red": {
+    "name": "red",
+    "type": "m_type",
+    "chance": 1.0,
+    "red": 0.952,
+    "green": 0.113,
+    "blue": 0.215,
+    "alpha": 1.0
+  },
+  "red_dwarf": {
+    "name": "red_dwarf",
+    "type": "m_type",
+    "chance": 1.0,
+    "red": 0.952,
+    "green": 0.113,
+    "blue": 0.215,
+    "alpha": 1.0
+  },
+  "red_supergiant": {
+    "name": "red_supergiant",
+    "type": "m_type",
+    "chance": 1.0,
+    "red": 0.952,
+    "green": 0.113,
+    "blue": 0.215,
+    "alpha": 1.0
+  },
+  "red_hypergiant": {
+    "name": "red_hypergiant",
+    "type": "m_type",
+    "chance": 1.0,
+    "red": 0.952,
+    "green": 0.113,
+    "blue": 0.215,
+    "alpha": 1.0
+  },
+  "blue": {
+    "name": "blue",
+    "type": "o_type",
+    "chance": 0.2,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  },
+  "blue_wd": {
+    "name": "blue_wd",
+    "type": "o_type",
+    "chance": 0.2,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  },
+  "blue_dwarf": {
+    "name": "blue_dwarf",
+    "type": "o_type",
+    "chance": 0.2,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  },
+  "blue_giant": {
+    "name": "blue_giant",
+    "type": "o_type",
+    "chance": 0.2,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  },
+  "blue_supergiant": {
+    "name": "blue_supergiant",
+    "type": "o_type",
+    "chance": 0.2,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  },
+  "blue_hypergiant": {
+    "name": "blue_hypergiant",
+    "type": "o_type",
+    "chance": 0.2,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  },
+  "blue_sdo": {
+    "name": "blue_sdo",
+    "type": "o_type",
+    "chance": 0.2,
+    "red": 0.0,
+    "green": 0.0,
+    "blue": 1.0,
+    "alpha": 1.0
+  }
+}
