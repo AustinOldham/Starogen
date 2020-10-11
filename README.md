@@ -14,3 +14,6 @@ Linux and Windows: Download a premade version on the releases page (coming soon)
 Steps:
 
 1. git clone --recursive https://github.com/AustinOldham/Starogen.git
+2. Refer to compilation\_notes.md for more information about compiling the plugins
+3. Open Godot and export the game
+4. Copy over the compiled binaries and the config directory to the same directory as the exported binary

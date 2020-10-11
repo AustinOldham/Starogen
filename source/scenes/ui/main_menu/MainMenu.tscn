@@ -106,13 +106,13 @@ margin_right = 984.0
 margin_bottom = 510.0
 
 [node name="Version" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 193.0
+margin_right = 72.0
 margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
-text = "Prototype 6-23-19"
+text = "v0.1.0.0"
 
 [node name="Blank" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 197.0
+margin_left = 76.0
 margin_top = 4.0
 margin_right = 568.0
 margin_bottom = 18.0
@@ -123,7 +123,7 @@ margin_left = 572.0
 margin_right = 984.0
 margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
-text = "© 2019 Austin Oldham. All rights reserved."
+text = "© 2020 Austin Oldham. All rights reserved."
 align = 2
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="MarginContainer"]
@@ -181,23 +181,25 @@ margin_right = 970.0
 margin_bottom = 496.0
 
 [node name="Label" type="Label" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
-visible = false
 margin_right = 960.0
 margin_bottom = 452.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Starogen uses a random word generator that creates words out of random letters. As a result, it is possible for offensive words to be generated. If this is an issue for you, go to https://starogen.fandom.com/wiki/Custom_Censored_Words to see how to censor these words."
+theme = ExtResource( 3 )
+text = "Starogen uses a random word generator that creates words out of random letters. As a result, it is possible for offensive words to be generated. If this is an issue for you, go to https://github.com/AustinOldham/Starogen to see how to censor these words."
 autowrap = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
+margin_top = 456.0
 margin_right = 960.0
+margin_bottom = 456.0
 theme = ExtResource( 3 )
 text = "Starogen uses a random word generator that creates words out of random letters. As a result, it is possible for offensive words to be generated. If this is an issue for you, go to https://starogen.fandom.com/wiki/Custom_Censored_Words to see how to censor these words."
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/WarningPopup/MarginContainer/VBoxContainer"]
-margin_top = 4.0
+margin_top = 460.0
 margin_right = 960.0
-margin_bottom = 30.0
+margin_bottom = 486.0
 theme = ExtResource( 3 )
 shortcut_in_tooltip = false
 text = "Don't show this again"
