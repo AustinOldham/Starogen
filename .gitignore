@@ -5,6 +5,7 @@
 *.import
 *.exp
 *.lib
+*.backup
 
 source/.import/
 
