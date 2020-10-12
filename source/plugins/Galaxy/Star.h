@@ -23,6 +23,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 
+#include "Planet.h"
+
 class Star {
 	private:
 		friend class boost::serialization::access;
@@ -31,22 +33,29 @@ class Star {
 			ar & name;
 			ar & seed;
 			ar & starTypeID;
+			ar & planetList;
 		}
 		std::string name;
 		// std::string seed;
 		unsigned int seed;
 
 		int starTypeID;
+
+		std::vector<Planet> planetList;
 	public:
 		Star();
 		explicit Star(int id);
 
 		int getStarTypeID();
 		std::string getName();
+		std::vector getPlanetList();
 
 		bool setName(std::string nameInput);
 		// bool setSeed(int seedInput);
 		bool setSeed(unsigned int seedInput);
+		bool addPlanet(Planet planetInput);
+		bool insertPlanet(Planet planetInput, int index);
+		bool removePlanet(Planet planetInput);
 };
 
 #endif  // STAR_H

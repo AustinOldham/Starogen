@@ -18,6 +18,7 @@
 #include "Star.h"
 
 using std::string;
+using std::vector;
 
 Star::Star() {
 	starTypeID = -1;
@@ -33,6 +34,10 @@ int Star::getStarTypeID() {
 
 string Star::getName() {
 	return name;
+}
+
+vector<Planet> Star::getPlanetList() {
+	return planetList;
 }
 
 bool Star::setName(string nameInput) {
