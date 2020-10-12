@@ -41,14 +41,15 @@ class Star {
 
 		int starTypeID;
 
-		std::vector<Planet> planetList;
+		std::vector<Planet> planetList;  // An ordered list of planets orbiting this star
 	public:
 		Star();
 		explicit Star(int id);
 
 		int getStarTypeID();
 		std::string getName();
-		std::vector getPlanetList();
+		std::vector<Planet> getPlanetList();
+		std::vector<std::string> getPlanetNameList();  // Returns a list of all planet names in the vector. TODO: Add another option to get a vector with the planet names and the orbiting moons after each planet name (maybe add a special character in front of it to mark it as a moon so it is easier to render in Godot)
 
 		bool setName(std::string nameInput);
 		// bool setSeed(int seedInput);
