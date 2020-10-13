@@ -18,6 +18,7 @@
 #ifndef GALAXY_H
 #define GALAXY_H
 
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -57,6 +58,8 @@ class Galaxy {
 			ar & galaxyMap;
 
 			ar & blankStar;
+
+			ar & inorganicResourceNameIntMap;
 		}
 
 		WordGenerator myWordGenerator;  // TODO: Add a function to clear this each time a new galaxy is generated so the old words are not taken.
@@ -80,11 +83,13 @@ class Galaxy {
 
 		Star blankStar;
 
+		std::unordered_map<std::string, uint16_t> inorganicResourceNameIntMap;  // Used so planets can be stored efficiently (resource name string -> 16-bit int -> resource amount)
+
 	public:
 		Galaxy();
 
 		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
-		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
+		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;  // TODO: See if this can be made private
 
 		Star at(int x, int y);
 

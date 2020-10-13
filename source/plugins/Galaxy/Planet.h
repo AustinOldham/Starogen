@@ -18,6 +18,7 @@
 #ifndef PLANET_H
 #define PLANET_H
 
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 
@@ -33,7 +34,7 @@ class Planet {
 			ar & seed;
 			ar & planetTypeID;
 			ar & averageTemperature;
-			ar & inorganic_resources;
+			ar & inorganicResources;
 			ar & gases;
 		}
 		std::string name;
@@ -43,11 +44,10 @@ class Planet {
 
 		double averageTemperature;  // Kelvin
 
-		std::unordered_map<std::string, double> inorganic_resources;  // Stores which resources (carbon, iron, etc., not from organisms) are available on a planet and how much remains.
+		std::unordered_map<uint16_t, double> inorganicResources;  // Stores which resources (carbon, iron, etc., not from organisms) are available on a planet and how much remains.
 		// Resources will be in units zettagrams (10^21 grams)
-		// TODO: Since this is very inefficient, replace the string with an 16-bit integer and store a map in the Galaxy class that maps a string to one of these integers (resource string -> 16-bit integer -> resource amount)
 		// During resource generation, certain types of stars may include or exclude certain materials on the planets
-		std::unordered_map<std::string, double> gases;  // Stores which types of gases are present in the atmosphere and at what concentration.
+		std::unordered_map<uint16_t, double> gases;  // Stores which types of gases are present in the atmosphere and at what concentration.
 
 	public:
 		Planet();
