@@ -45,7 +45,8 @@ class Planet {
 
 		std::unordered_map<std::string, double> inorganic_resources;  // Stores which resources (carbon, iron, etc., not from organisms) are available on a planet and how much remains.
 		// Resources will be in units zettagrams (10^21 grams)
-		// TODO: Since this is very inefficient, replace the string with an 16-bit integer and store a map in the Galaxy class that maps a string to one of these integers
+		// TODO: Since this is very inefficient, replace the string with an 16-bit integer and store a map in the Galaxy class that maps a string to one of these integers (resource string -> 16-bit integer -> resource amount)
+		// During resource generation, certain types of stars may include or exclude certain materials on the planets
 		std::unordered_map<std::string, double> gases;  // Stores which types of gases are present in the atmosphere and at what concentration.
 
 	public:
