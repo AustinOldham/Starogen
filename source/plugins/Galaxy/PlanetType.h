@@ -15,45 +15,44 @@
 // You should have received a copy of the GNU General Public License
 // along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PLANET_H
-#define PLANET_H
+#ifndef PLANETTYPE_H
+#define PLANETTYPE_H
 
 #include <cstdint>
 #include <string>
-#include <unordered_map>
 
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 
-class Planet {
+#include "InorganicResourceType.h"
+
+class PlanetType {
 	private:
 		friend class boost::serialization::access;
 		template<class Archive>
 		void serialize(Archive & ar, const unsigned int version) {
 			ar & name;
-			ar & seed;
+			ar & type;
 
 			ar & planetTypeID;
 
-			ar & averageTemperature;
-
-			ar & inorganicResources;
-			ar & gases;
+			ar & customInorganicResourceMap;
 		}
+
+	public:
+		inline PlanetType() {
+			planetTypeID = -1;
+		}
+
 		std::string name;
-		unsigned int seed;
+		std::string type;
 
 		uint16_t planetTypeID;
 
-		double averageTemperature;  // Kelvin
-
-		std::unordered_map<uint16_t, double> inorganicResources;  // Stores which resources (carbon, iron, etc., not from organisms) are available on a planet and how much remains.
-		// Resources will be in units zettagrams (10^21 grams)
-		// During resource generation, certain types of stars may include or exclude certain materials on the planets
-		std::unordered_map<uint16_t, double> gases;  // Stores which types of gases are present in the atmosphere and at what concentration.
-
-	public:
-		Planet();
+		std::unordered_map<std::string, InorganicResourceType> customInorganicResourceMap;  // Contains the planet-specific overrides
 };
 
-#endif  // PLANET_H
+
+
+#endif  // PLANETTYPE_H

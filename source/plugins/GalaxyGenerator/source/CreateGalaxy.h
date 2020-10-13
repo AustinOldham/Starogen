@@ -118,6 +118,8 @@ class CreateGalaxy {
 
 		void run();
 
+		void createPlanets();
+
 		Star at(int x, int y);
 
 		float getRed(int index);

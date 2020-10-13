@@ -149,7 +149,6 @@ void CreateGalaxy::generate() {
 
 	populateEmptyStars();
 
-
 	// createDensityMap();
 	// createClouds();
 	// cout << "myGalaxy[y][x]: " << myGalaxy[2][1] << endl;

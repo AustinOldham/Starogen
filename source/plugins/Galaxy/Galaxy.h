@@ -28,6 +28,8 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
 
+#include "InorganicResourceType.h"
+#include "PlanetType.h"
 #include "Star.h"
 #include "WordGenerator.h"
 
@@ -137,45 +139,6 @@ class Galaxy {
 
 		bool clearNames();
 		bool setCensoredWordsPath(std::string pathInput);
-};
-
-struct Galaxy::InorganicResourceType {
-	std::string name;
-
-	double chanceMultiplier;
-	double abundanceMultiplier;
-
-	uint16_t inorganicResourceTypeID;
-
-	template <typename Archive>
-	void serialize(Archive& ar, const unsigned int version) {
-		ar & name;
-
-		ar & chanceMultiplier;
-		ar & abundanceMultiplier;
-
-		ar & inorganicResourceTypeID;
-	}
-};
-
-struct Galaxy::PlanetType {
-	std::string name;
-	std::string type;
-
-	uint16_t planetTypeID;
-
-	std::unordered_map<std::string, InorganicResourceType> customInorganicResourceMap;
-	// NOTE: The struct InorganicResourceType must come before this struct
-
-	template <typename Archive>
-	void serialize(Archive& ar, const unsigned int version) {
-		ar & name;
-		ar & type;
-
-		ar & planetTypeID;
-
-		ar & customInorganicResourceMap;
-	}
 };
 
 #endif  // GALAXY_H

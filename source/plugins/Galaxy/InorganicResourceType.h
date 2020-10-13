@@ -15,45 +15,43 @@
 // You should have received a copy of the GNU General Public License
 // along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef PLANET_H
-#define PLANET_H
+#ifndef INORGANICRESOURCETYPE_H
+#define INORGANICRESOURCETYPE_H
 
 #include <cstdint>
 #include <string>
-#include <unordered_map>
 
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 
-class Planet {
+class InorganicResourceType {
 	private:
 		friend class boost::serialization::access;
 		template<class Archive>
 		void serialize(Archive & ar, const unsigned int version) {
 			ar & name;
-			ar & seed;
 
-			ar & planetTypeID;
+			ar & chanceMultiplier;
+			ar & abundanceMultiplier;
 
-			ar & averageTemperature;
-
-			ar & inorganicResources;
-			ar & gases;
+			ar & inorganicResourceTypeID;
 		}
-		std::string name;
-		unsigned int seed;
-
-		uint16_t planetTypeID;
-
-		double averageTemperature;  // Kelvin
-
-		std::unordered_map<uint16_t, double> inorganicResources;  // Stores which resources (carbon, iron, etc., not from organisms) are available on a planet and how much remains.
-		// Resources will be in units zettagrams (10^21 grams)
-		// During resource generation, certain types of stars may include or exclude certain materials on the planets
-		std::unordered_map<uint16_t, double> gases;  // Stores which types of gases are present in the atmosphere and at what concentration.
 
 	public:
-		Planet();
+		// TODO: Consider moving this to a separate .cpp file if this causes problems
+		inline InorganicResourceType() {
+			inorganicResourceTypeID = -1;
+			chanceMultiplier = 0;
+			abundanceMultiplier = 0;
+		}
+
+		std::string name;
+
+		double chanceMultiplier;
+		double abundanceMultiplier;
+
+		uint16_t inorganicResourceTypeID;
 };
 
-#endif  // PLANET_H
+
+#endif  // INORGANICRESOURCETYPE_H
