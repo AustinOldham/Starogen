@@ -32,15 +32,18 @@ class Planet {
 		void serialize(Archive & ar, const unsigned int version) {
 			ar & name;
 			ar & seed;
+
 			ar & planetTypeID;
+
 			ar & averageTemperature;
+
 			ar & inorganicResources;
 			ar & gases;
 		}
 		std::string name;
 		unsigned int seed;
 
-		int planetTypeID;
+		uint16_t planetTypeID;
 
 		double averageTemperature;  // Kelvin
 

@@ -59,7 +59,10 @@ class Galaxy {
 
 			ar & blankStar;
 
-			ar & inorganicResourceNameIntMap;
+			ar & inorganicResourceTypeMap;
+			ar & inorganicResourceTypeList;
+
+			ar & planetTypeList;
 		}
 
 		WordGenerator myWordGenerator;  // TODO: Add a function to clear this each time a new galaxy is generated so the old words are not taken.
@@ -83,7 +86,11 @@ class Galaxy {
 
 		Star blankStar;  // Returned when the "at" function is given the coordinates to empty space and is added for optimization
 
-		std::unordered_map<std::string, uint16_t> inorganicResourceNameIntMap;  // Used so planets can be stored efficiently (resource name string -> 16-bit int -> resource amount)
+		std::unordered_map<std::string, InorganicResourceType> inorganicResourceTypeMap;  // Used so planets can be stored efficiently (resource name string -> InorganicResourceType -> 16-bit int (inorganicResourceTypeID) -> resource amount).
+		// TODO: Make this map bidirectional so I can determine which resources are on each planet efficiently
+		std::vector<InorganicResourceType> inorganicResourceTypeList;  // Used when determining the proportions of resources on a planet
+
+		std::vector<PlanetType> planetTypeList;
 
 	public:
 		Galaxy();
@@ -130,6 +137,44 @@ class Galaxy {
 
 		bool clearNames();
 		bool setCensoredWordsPath(std::string pathInput);
+};
+
+struct Galaxy::InorganicResourceType {
+	std::string name;
+
+	double chanceMultiplier;
+	double abundanceMultiplier;
+
+	uint16_t inorganicResourceTypeID;
+
+	template <typename Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+		ar & name;
+
+		ar & chanceMultiplier;
+		ar & abundanceMultiplier;
+
+		ar & inorganicResourceTypeID;
+	}
+};
+
+struct Galaxy::PlanetType {
+	std::string name;
+	std::string type;
+
+	uint16_t planetTypeID;
+
+	std::unordered_map<std::string, InorganicResourceType> customInorganicResourceMap;
+
+	template <typename Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+		ar & name;
+		ar & type;
+
+		ar & planetTypeID;
+
+		ar & customInorganicResourceMap;
+	}
 };
 
 #endif  // GALAXY_H

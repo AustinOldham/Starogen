@@ -1,6 +1,6 @@
 {
 	"basic_solid": {
-
+		"chance": 5.0
 	},
 	"iron_planet": {
 		"inorganic_resources": {
@@ -8,6 +8,7 @@
 				"chance_multiplier": 1.0,
 				"abundance_multipler": 100.0
 			}
-		}
+		},
+		"chance": 0.2
 	}
 }

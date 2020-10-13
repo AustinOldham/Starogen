@@ -40,6 +40,7 @@ class Star {
 		unsigned int seed;
 
 		int starTypeID;  // Index of the StarType array in CreateGalaxy (determined in the plotStar method)
+		// TODO: Make this a uint16_t
 
 		std::vector<Planet> planetList;  // An ordered list of planets orbiting this star
 	public:
