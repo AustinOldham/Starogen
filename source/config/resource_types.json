@@ -1,8 +1,8 @@
 {
 	"inorganic_resources": {
 		"iron": {
-			"chance": 20.0,
-			"abundance": 5.0,
+			"chance_multiplier": 0.98,
+			"abundance_multiplier": 10.0
 		},
 		"copper": {
 

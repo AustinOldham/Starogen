@@ -44,6 +44,7 @@ class Planet {
 		double averageTemperature;  // Kelvin
 
 		std::unordered_map<std::string, double> inorganic_resources;  // Stores which resources (carbon, iron, etc., not from organisms) are available on a planet and how much remains.
+		// Resources will be in units zettagrams (10^21 grams)
 		std::unordered_map<std::string, double> gases;  // Stores which types of gases are present in the atmosphere and at what concentration.
 
 	public:
