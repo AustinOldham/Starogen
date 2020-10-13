@@ -6,7 +6,7 @@
 		"inorganic_resources": {
 			"iron": {
 				"chance_multiplier": 1.0,
-				
+				"abundance_multipler": 100.0
 			}
 		}
 	}
