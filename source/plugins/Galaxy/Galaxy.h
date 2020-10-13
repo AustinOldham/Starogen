@@ -165,6 +165,7 @@ struct Galaxy::PlanetType {
 	uint16_t planetTypeID;
 
 	std::unordered_map<std::string, InorganicResourceType> customInorganicResourceMap;
+	// NOTE: The struct InorganicResourceType must come before this struct
 
 	template <typename Archive>
 	void serialize(Archive& ar, const unsigned int version) {
