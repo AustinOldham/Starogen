@@ -79,9 +79,9 @@ class Galaxy {
 		double cloudsMult;
 		double densityMult;
 		unsigned int seedHash;
-		unsigned int nextUniqueID;  // If the size of this becomes an issue, convert everything to uint64_t.
+		unsigned int nextUniqueID;  // If the size of this becomes an issue, convert everything to uint64_t (maybe the fast version).
 
-		Star blankStar;
+		Star blankStar;  // Returned when the "at" function is given the coordinates to empty space and is added for optimization
 
 		std::unordered_map<std::string, uint16_t> inorganicResourceNameIntMap;  // Used so planets can be stored efficiently (resource name string -> 16-bit int -> resource amount)
 
@@ -91,7 +91,7 @@ class Galaxy {
 		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
 		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;  // TODO: See if this can be made private
 
-		Star at(int x, int y);
+		Star at(int x, int y);  // Returns the star at these coordinates. Returns blankStar if there is no star there.
 
 		std::string getName();
 		std::string getSeed();

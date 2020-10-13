@@ -173,13 +173,14 @@ class CreateGalaxy {
 		bool setCensoredWordsPath(std::string pathInput);
 };
 
-struct CreateGalaxy::StarType {
+struct CreateGalaxy::StarType {  // TODO: Move this over to Galaxy.h and refactor the code to make that possible so this can be stored
 	std::string name;
 	std::string type;
 
 	// int id;
 	double chance;
 	double adjustedChance;
+	double meanPlanets;
 
 	float red;
 	float green;
@@ -193,6 +194,7 @@ struct CreateGalaxy::StarType {
 
 		ar & chance;
 		ar & adjustedChance;
+		ar & meanPlanets;
 
 		ar & red;
 		ar & green;
