@@ -37,6 +37,10 @@ config/icon="res://images/application/starogen_logo_v2_16px.png"
 
 UserPreferences="*res://scripts/user_preferences.gd"
 
+[display]
+
+window/size/height=644
+
 [importer_defaults]
 
 texture={
