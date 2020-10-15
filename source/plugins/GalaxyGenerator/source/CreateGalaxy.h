@@ -110,6 +110,9 @@ class CreateGalaxy {
 		void initializeContainers();
 		std::vector<StarType> readStarFile(std::string fileNameInput);
 		std::vector<InorganicResourceType> readInorganicResourceTypeFile(std::string fileNameInput);
+		std::vector<PlanetType> readPlanetTypeFile(std::string fileNameInput);
+
+		InorganicResourceType readInorganicResourceType(nlohmann::json element, int newID);
 
 
 

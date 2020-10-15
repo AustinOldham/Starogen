@@ -45,6 +45,12 @@ class InorganicResourceType {
 			abundanceMultiplier = 0;
 		}
 
+		inline explicit InorganicResourceType(int inorganicResourceTypeIDinput) {
+			inorganicResourceTypeID = inorganicResourceTypeIDinput;
+			chanceMultiplier = 0;
+			abundanceMultiplier = 0;
+		}
+
 		std::string name;
 
 		double chanceMultiplier;

@@ -37,7 +37,7 @@ class PlanetType {
 
 			ar & planetTypeID;
 
-			ar & customInorganicResourceMap;
+			ar & customInorganicResourceTypeMap;
 		}
 
 	public:
@@ -50,7 +50,7 @@ class PlanetType {
 
 		uint16_t planetTypeID;
 
-		std::unordered_map<std::string, InorganicResourceType> customInorganicResourceMap;  // Contains the planet-specific overrides
+		std::unordered_map<std::string, InorganicResourceType> customInorganicResourceTypeMap;  // Contains the planet-specific overrides (only affects the chance and abundance, not the properties of the element)
 };
 
 

@@ -1,8 +1,10 @@
 {
 	"basic_solid": {
+		"name": "basic_solid",
 		"chance": 5.0
 	},
 	"iron_planet": {
+		"name": "iron_planet",
 		"inorganic_resources": {
 			"iron": {
 				"chance_multiplier": 1.0,

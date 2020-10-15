@@ -529,20 +529,36 @@ vector<InorganicResourceType> CreateGalaxy::readInorganicResourceTypeFile(string
 	input >> j;
 	int i = 0;
 	for (auto& element : j["inorganic_resources"]) {
-		myInorganicResourceTypeList.push_back(InorganicResourceType());
-
-		myInorganicResourceTypeList[i].name = element["name"];
-		cout << myInorganicResourceTypeList[i].name << endl;
-
-		myInorganicResourceTypeList[i].chanceMultiplier = element["chance_multiplier"];
-		cout << myInorganicResourceTypeList[i].chanceMultiplier << endl;
-
-		myInorganicResourceTypeList[i].abundanceMultiplier = element["abundance_multiplier"];
-		cout << myInorganicResourceTypeList[i].abundanceMultiplier << endl;
-
+		myInorganicResourceTypeList.push_back(readInorganicResourceType(element, i));
 		i++;
 	}
 	return myInorganicResourceTypeList;
+}
+
+InorganicResourceType CreateGalaxy::readInorganicResourceType(json element, int newID) {
+		InorganicResourceType myInorganicResourceType(newID);
+
+		// TODO: Put this in a function since it will be used for planets
+
+		myInorganicResourceType.name = element["name"];
+		cout << myInorganicResourceType.name << endl;
+
+		myInorganicResourceType.chanceMultiplier = element["chance_multiplier"];
+		cout << myInorganicResourceType.chanceMultiplier << endl;
+
+		myInorganicResourceType.abundanceMultiplier = element["abundance_multiplier"];
+		cout << myInorganicResourceType.abundanceMultiplier << endl;
+
+		cout << myInorganicResourceType.inorganicResourceTypeID << endl;
+
+		return myInorganicResourceType;
+
+}
+
+vector<PlanetType> CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
+	// TODO: Make sure the custom resource types are implemented
+	vector<PlanetType> myPlanetTypeList;
+	return myPlanetTypeList;
 }
 
 void CreateGalaxy::getProbabilities() {
