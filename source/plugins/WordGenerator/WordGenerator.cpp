@@ -62,6 +62,7 @@ bool WordGenerator::readConsonantSyllableFile(string filePathInput) {
 		}
 		consonantsIn.close();
 	} else {
+		cout << "You probably forgot to copy the config directory over" << endl;
 		return false;
 	}
 	cout << "Done reading consonants" << endl;

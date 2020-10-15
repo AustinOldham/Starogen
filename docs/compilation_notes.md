@@ -22,7 +22,7 @@ NOTE: This must be done before compiling the plugins
 2. May need to see README.md in this directory to see how to generate and use custom bindings if you are having issues with compiling
 3. Compile
 ```scons platform=<platform> generate_bindings=yes bits=64 -j<number of cores (optional flag)>```
-4. Add `target=release` and run that command again if you do not want to use the debug mode
+4. Add `target=release` or `target=debug` depending on which one you need
 
 ## Boost
 

@@ -20,6 +20,7 @@
 using std::string;
 using std::pair;
 using std::make_pair;
+using std::vector;
 
 Galaxy::Galaxy() {
 	WordGenerator tempWordGenerator;
@@ -213,6 +214,11 @@ bool Galaxy::setDensityMult(double densityMultInput) {
 	} else {
 		return false;
 	}
+}
+
+bool Galaxy::setInorganicResourceTypeList(vector<InorganicResourceType> inorganicResourceTypeListInput) {
+	inorganicResourceTypeList = inorganicResourceTypeListInput;
+	return true;
 }
 
 string Galaxy::generateName(int keyInput) {  // Generates a capitalized name.

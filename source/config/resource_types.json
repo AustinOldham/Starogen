@@ -1,34 +1,42 @@
 {
 	"inorganic_resources": {
 		"iron": {
+			"name": "iron",
 			"chance_multiplier": 0.98,
 			"abundance_multiplier": 10.0
 		},
 		"copper": {
+			"name": "copper",
 			"chance_multiplier": 0.5,
 			"abundance_multiplier": 2.0
 		},
 		"carbon": {
+			"name": "carbon",
 			"chance_multiplier": 0.98,
 			"abundance_multiplier": 10.0
 		},
 		"silver": {
+			"name": "silver",
 			"chance_multiplier": 0.5,
 			"abundance_multiplier": 1.0
 		},
 		"gold": {
+			"name": "gold",
 			"chance_multiplier": 0.5,
 			"abundance_multiplier": 1.0
 		},
 		"silicon": {
+			"name": "silicon",
 			"chance_multiplier": 0.98,
 			"abundance_multiplier": 2.0
 		},
 		"water": {
+			"name": "water",
 			"chance_multiplier": 0.2,
 			"abundance_multiplier": 2.0
 		},
 		"solid_starogen": {
+			"name": "solid_starogen",
 			"chance_multiplier": 0.0001,
 			"abundance_multiplier": 0.0001
 		}

@@ -44,6 +44,7 @@
 #include <boost/serialization/vector.hpp>
 #include "RandClass/RandClass.h"
 #include "FastNoise/FastNoise.h"
+#include "InorganicResourceType.h"
 #include "Star.h"
 #include "Galaxy.h"
 #include "WordGenerator.h"
@@ -55,10 +56,7 @@ class CreateGalaxy {
 		Galaxy myGalaxy;
 
 		struct StarType;
-		// class Galaxy;
-		// class Star;
-		// class Planet;
-		// TODO: Move this inside the galaxy class.
+
 		std::vector<StarType> starList;  // TODO: Rename to starTypeList.
 
 		// TODO: Test the 2D vector version later on in order to determine whether or not speed should be sacrificed for memory.
@@ -97,18 +95,35 @@ class CreateGalaxy {
 		double logSpiralY(double t, double theta, double mult);
 		bool isFinished(std::vector<bool> finished);
 		double radialDistance(int x, int y, double centerX, double centerY);
+
+
+
+
 		//void printWhiteGalaxy(const std::vector<std::vector<int>> myVector, std::string fileName);
 		//void printGalaxy(const std::vector<std::vector<int>> myVector, std::string fileName);
 		//void printDensityMap(const std::vector<std::vector<double>> myVector, std::string fileName);
 		//void printClouds(const std::vector<std::vector<double>> myVector, std::string fileName);
 		//void printColorPalette(std::string fileName);
+
+
+
 		void initializeContainers();
 		std::vector<StarType> readStarFile(std::string fileNameInput);
+		std::vector<InorganicResourceType> readInorganicResourceTypeFile(std::string fileNameInput);
+
+
+
 		//std::vector<std::vector<std::string>> readFile(std::string fileName);
 		//std::vector<std::string> splitString(const std::string &s, char delimiter);
 		//std::unordered_map<std::string, int> getIDMap();
 		//std::vector<std::string> getNumToString();
+
+
+
 		void getProbabilities();  // This may be removed when discrete_distribution is used.
+
+
+
 		//std::vector<std::vector<float>> getColors();
 
 	public:

@@ -132,6 +132,9 @@ class Galaxy {
 		bool setDensityMult(double densityMultInput);
 		bool setSeedHash(unsigned int seedHashInput);
 
+		// bool setStarTypeList(std::vector<StarType> starTypeListInput);  // TODO: Implement this
+		bool setInorganicResourceTypeList(std::vector<InorganicResourceType> inorganicResourceTypeListInput);
+
 		bool capitalize(std::string& wordInput);
 
 		std::string generateName(int keyInput);
