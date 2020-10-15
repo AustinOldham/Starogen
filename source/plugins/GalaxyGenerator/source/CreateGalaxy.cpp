@@ -149,10 +149,23 @@ void CreateGalaxy::generate() {
 
 	populateEmptyStars();
 
-
 	// createDensityMap();
 	// createClouds();
 	// cout << "myGalaxy[y][x]: " << myGalaxy[2][1] << endl;
+}
+
+
+void CreateGalaxy::createPlanets() {
+	// Steps:
+	// 1. Iterate through the galaxy map to find any star where the number of planets is greater than 0
+	// 2. Determine the type of planet in the same way I determine the type of star (TODO: Write a method to parse the planets and resources file first)
+	// 3. Assign a name, seed, and mass the same way I do for stars
+	// 4. For each resource type:
+	//	4a. Get the percent chance for it to appear (and check the planet type to see if it has values that override this resource type)
+	//  4b. Get the relative abundance (abundance_multiplier) for that resource (checking if there is a custom one for that planet type) and append it to a temp vector and add it to a temp sum
+	// 5. After the relative abundance of each resource is summed up, divide all of them by that sum to get the percentage of the planet's mass that is composed of this resource.
+	// 6. Calculate the mass of each resource by multiplying that percentage by the total mass of the planet
+	// TODO: In the future, maybe replace the relative abundance with one that's calculated using it as the mean for a standard distribution and making the standard deviation 1/3 of the mean
 }
 
 
@@ -196,7 +209,7 @@ Star CreateGalaxy::plotStar(int distanceProportionInt) {
 		probabilitySum += starList[i].adjustedChance;
 		if (probability <= probabilitySum) {
 			Star newStar(i);
-			unsigned int starSeed = myGalaxy.getNextUniqueID();
+			unsigned int starSeed = myGalaxy.getNextUniqueID();  // TODO: This may be more interesting if it used a random number instead
 			string starName = myGalaxy.generateName(starSeed);
 			newStar.setName(starName);
 			newStar.setSeed(starSeed);

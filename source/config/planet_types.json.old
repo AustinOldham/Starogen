@@ -1,0 +1,114 @@
+{
+	"solid": {
+		"type": "solid",
+		"chance": 5.0,
+		"properties": {
+			"gases": {
+				"none": {
+
+				},
+				"trace": {
+
+				},
+				"sparse": {
+					"description": "There is hardly any atmosphere."
+				},
+				"normal": {
+
+				},
+				"rich": {
+
+				},
+				"heavy": {
+
+				}
+			},
+			"temperature": {
+				"frozen": {
+
+				},
+				"cold": {
+
+				},
+				"mild": {
+
+				},
+				"warm": {
+
+				},
+				"hot": {
+
+				},
+				"scorching": {
+
+				}
+			},
+			"inorganic_resources": {
+				"none": {
+
+				},
+				"trace": {
+
+				},
+				"sparse": {
+
+				},
+				"normal": {
+
+				},
+				"rich": {
+
+				},
+				"abundant": {
+
+				}
+			}
+		}
+	},
+	"gas": {
+		"type": "gas",
+		"chance": 0.5,
+		"properties": {
+			"gases": {
+				"none": {
+
+				},
+				"trace": {
+
+				},
+				"sparse": {
+					"description": "There is hardly any atmosphere."
+				},
+				"normal": {
+
+				},
+				"rich": {
+
+				},
+				"heavy": {
+
+				}
+			},
+			"temperature": {
+				"frozen": {
+
+				},
+				"cold": {
+
+				},
+				"mild": {
+
+				},
+				"warm": {
+
+				},
+				"hot": {
+
+				},
+				"scorching": {
+
+				}
+			}
+		}		
+	}
+}

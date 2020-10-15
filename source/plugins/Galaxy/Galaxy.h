@@ -18,6 +18,7 @@
 #ifndef GALAXY_H
 #define GALAXY_H
 
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -27,6 +28,8 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
 
+#include "InorganicResourceType.h"
+#include "PlanetType.h"
 #include "Star.h"
 #include "WordGenerator.h"
 
@@ -57,6 +60,11 @@ class Galaxy {
 			ar & galaxyMap;
 
 			ar & blankStar;
+
+			ar & inorganicResourceTypeMap;
+			ar & inorganicResourceTypeList;
+
+			ar & planetTypeList;
 		}
 
 		WordGenerator myWordGenerator;  // TODO: Add a function to clear this each time a new galaxy is generated so the old words are not taken.
@@ -76,17 +84,23 @@ class Galaxy {
 		double cloudsMult;
 		double densityMult;
 		unsigned int seedHash;
-		unsigned int nextUniqueID;  // If the size of this becomes an issue, convert everything to uint64_t.
+		unsigned int nextUniqueID;  // If the size of this becomes an issue, convert everything to uint64_t (maybe the fast version).
 
-		Star blankStar;
+		Star blankStar;  // Returned when the "at" function is given the coordinates to empty space and is added for optimization
+
+		std::unordered_map<std::string, InorganicResourceType> inorganicResourceTypeMap;  // Used so planets can be stored efficiently (resource name string -> InorganicResourceType -> 16-bit int (inorganicResourceTypeID) -> resource amount).
+		// TODO: Make this map bidirectional so I can determine which resources are on each planet efficiently
+		std::vector<InorganicResourceType> inorganicResourceTypeList;  // Used when determining the proportions of resources on a planet
+
+		std::vector<PlanetType> planetTypeList;
 
 	public:
 		Galaxy();
 
 		std::unordered_map<std::pair<int, int>, int, boost::hash<std::pair<int, int>>> blankGalaxyMap;
-		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;
+		std::unordered_map<std::pair<int, int>, Star, boost::hash<std::pair<int, int>>> galaxyMap;  // TODO: See if this can be made private
 
-		Star at(int x, int y);
+		Star at(int x, int y);  // Returns the star at these coordinates. Returns blankStar if there is no star there.
 
 		std::string getName();
 		std::string getSeed();

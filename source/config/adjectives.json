@@ -1,0 +1,25 @@
+{
+	"inorganic_resources": {
+		"none": {
+			"value": 0.0
+		},
+		"trace": {
+			"value": 0.1
+		},
+		"sparse": {
+			"value": 0.5
+		},
+		"normal": {
+			"value": 1.0
+		},
+		"rich": {
+			"value": 1.5
+		},
+		"abundant": {
+			"value": 3.0
+		},
+		"extreme": {
+			"value": 10.0
+		}
+	}
+}
