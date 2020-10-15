@@ -215,6 +215,11 @@ bool Galaxy::setDensityMult(double densityMultInput) {
 	}
 }
 
+bool Galaxy::setInorganicResourceTypeList(vector<InorganicResourceType> inorganicResourceTypeListInput) {
+	inorganicResourceTypeList = inorganicResourceTypeListInput;
+	return true;
+}
+
 string Galaxy::generateName(int keyInput) {  // Generates a capitalized name.
 	return generateName(std::to_string(keyInput));
 }

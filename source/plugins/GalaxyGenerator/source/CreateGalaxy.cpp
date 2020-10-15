@@ -521,6 +521,10 @@ vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) 
 	return myStarList;
 }
 
+vector<InorganicResourceType> CreateGalaxy::readInorganicResourceTypeFile(string fileNameInput) {
+
+}
+
 void CreateGalaxy::getProbabilities() {
 	double probabilitySum = 0.0;
 
