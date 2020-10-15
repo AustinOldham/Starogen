@@ -133,7 +133,7 @@ class Galaxy {
 		bool setSeedHash(unsigned int seedHashInput);
 
 		// bool setStarTypeList(std::vector<StarType> starTypeListInput);  // TODO: Implement this
-		bool setInorganicResourceTypeList(std::vector<inorganicResourceType> inorganicResourceTypeListInput);
+		bool setInorganicResourceTypeList(std::vector<InorganicResourceType> inorganicResourceTypeListInput);
 
 		bool capitalize(std::string& wordInput);
 

@@ -20,6 +20,7 @@
 using std::string;
 using std::pair;
 using std::make_pair;
+using std::vector;
 
 Galaxy::Galaxy() {
 	WordGenerator tempWordGenerator;
