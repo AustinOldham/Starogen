@@ -22,13 +22,15 @@ NOTE: This must be done before compiling the plugins
 2. May need to see README.md in this directory to see how to generate and use custom bindings if you are having issues with compiling
 3. Compile
 ```scons platform=<platform> generate_bindings=yes bits=64 -j<number of cores (optional flag)>```
+4. Add `target=release` or `target=debug` depending on which one you need
 
 ## Boost
 
 - You should follow the instructions on the official website but this may be helpful if you have issues getting it to compile
 - Run bootstrap.bat/bootstrap.sh (Starogen requires the compiled version, not the header-only version)
-- Run b2.exe/b2 afterwards
+- Run b2.exe/b2 afterwards with `-j8 address-model=64 link=static threading=multi --build-type=complete` (might need `debug-symbols=on` for debug mode)
 - `<your boost path>` refers to the directory that has bootstrap.bat/bootstrap.sh 
+- Might have to change all `-MD` and `-MDd` arguments to `-MT` and `-MTd` in the SCons file in order to release it
 
 
 ## Galaxy Generator

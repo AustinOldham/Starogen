@@ -15,41 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "Star.h"
+#include "Planet.h"
 
-using std::string;
-using std::vector;
-
-Star::Star() {
-	starTypeID = -1;
-}
-
-Star::Star(int id) {
-	starTypeID = id;
-}
-
-int Star::getStarTypeID() {
-	return starTypeID;
-}
-
-string Star::getName() {
-	return name;
-}
-
-vector<Planet> Star::getPlanetList() {
-	return planetList;
-}
-
-bool Star::setName(string nameInput) {
-	name = nameInput;
-	return true;
-}
-
-// bool Star::setSeed(int seedInput) {
-// 	return setSeed(std::to_string(seedInput));
-// }
-
-bool Star::setSeed(unsigned int seedInput) {
-	seed = seedInput;
-	return true;
-}
+Planet::Planet() {}
