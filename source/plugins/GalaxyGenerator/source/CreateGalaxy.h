@@ -59,7 +59,7 @@ class CreateGalaxy {
 		// class Star;
 		// class Planet;
 		// TODO: Move this inside the galaxy class.
-		std::vector<StarType> starList;
+		std::vector<StarType> starList;  // TODO: Rename to starTypeList.
 
 		// TODO: Test the 2D vector version later on in order to determine whether or not speed should be sacrificed for memory.
 		// std::vector<std::vector<int>> blankGalaxyMap;
@@ -118,6 +118,8 @@ class CreateGalaxy {
 
 		void run();
 
+		void createPlanets();
+
 		Star at(int x, int y);
 
 		float getRed(int index);
@@ -173,13 +175,16 @@ class CreateGalaxy {
 		bool setCensoredWordsPath(std::string pathInput);
 };
 
-struct CreateGalaxy::StarType {
+struct CreateGalaxy::StarType {  // TODO: Move this over to Galaxy.h and refactor the code to make that possible so this can be stored
 	std::string name;
 	std::string type;
+
+	// TODO: Add starTypeID to this list (as uint16_t?) which is the index of this type in the array in CreateGalaxy
 
 	// int id;
 	double chance;
 	double adjustedChance;
+	double meanPlanets;
 
 	float red;
 	float green;
@@ -193,6 +198,7 @@ struct CreateGalaxy::StarType {
 
 		ar & chance;
 		ar & adjustedChance;
+		ar & meanPlanets;
 
 		ar & red;
 		ar & green;

@@ -1,0 +1,1 @@
+// Refers to any other objects that might be orbiting something that does not have its own class

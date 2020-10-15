@@ -15,49 +15,45 @@
 // You should have received a copy of the GNU General Public License
 // along with Starogen.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef STAR_H
-#define STAR_H
+#ifndef PLANET_H
+#define PLANET_H
 
+#include <cstdint>
 #include <string>
+#include <unordered_map>
 
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 
-#include "Planet.h"
-
-class Star {
+class Planet {
 	private:
 		friend class boost::serialization::access;
 		template<class Archive>
 		void serialize(Archive & ar, const unsigned int version) {
 			ar & name;
 			ar & seed;
-			ar & starTypeID;
-			ar & planetList;
+
+			ar & planetTypeID;
+
+			ar & averageTemperature;
+
+			ar & inorganicResources;
+			ar & gases;
 		}
 		std::string name;
-		// std::string seed;
 		unsigned int seed;
 
-		int starTypeID;  // Index of the StarType array in CreateGalaxy (determined in the plotStar method)
-		// TODO: Make this a uint16_t
+		uint16_t planetTypeID;
 
-		std::vector<Planet> planetList;  // An ordered list of planets orbiting this star
+		double averageTemperature;  // Kelvin
+
+		std::unordered_map<uint16_t, double> inorganicResources;  // Stores which resources (carbon, iron, etc., not from organisms) are available on a planet and how much remains.
+		// Resources will be in units zettagrams (10^21 grams)
+		// During resource generation, certain types of stars may include or exclude certain materials on the planets
+		std::unordered_map<uint16_t, double> gases;  // Stores which types of gases are present in the atmosphere and at what concentration.
+
 	public:
-		Star();
-		explicit Star(int id);
-
-		int getStarTypeID();
-		std::string getName();
-		std::vector<Planet> getPlanetList();
-		std::vector<std::string> getPlanetNameList();  // Returns a list of all planet names in the vector. TODO: Add another option to get a vector with the planet names and the orbiting moons after each planet name (maybe add a special character in front of it to mark it as a moon so it is easier to render in Godot)
-
-		bool setName(std::string nameInput);
-		// bool setSeed(int seedInput);
-		bool setSeed(unsigned int seedInput);
-		bool addPlanet(Planet planetInput);
-		bool insertPlanet(Planet planetInput, int index);
-		bool removePlanet(Planet planetInput);
+		Planet();
 };
 
-#endif  // STAR_H
+#endif  // PLANET_H
