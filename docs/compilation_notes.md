@@ -28,8 +28,9 @@ NOTE: This must be done before compiling the plugins
 
 - You should follow the instructions on the official website but this may be helpful if you have issues getting it to compile
 - Run bootstrap.bat/bootstrap.sh (Starogen requires the compiled version, not the header-only version)
-- Run b2.exe/b2 afterwards
+- Run b2.exe/b2 afterwards with `-j8 address-model=64 link=static threading=multi --build-type=complete` (might need `debug-symbols=on` for debug mode)
 - `<your boost path>` refers to the directory that has bootstrap.bat/bootstrap.sh 
+- Might have to change all `-MD` and `-MDd` arguments to `-MT` and `-MTd` in the SCons file in order to release it
 
 
 ## Galaxy Generator

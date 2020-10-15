@@ -1,6 +1,6 @@
 #!python
 import os, subprocess
-
+# TODO: Update this with the changes I've made to the GalaxyGenerator SCons file
 opts = Variables([], ARGUMENTS)
 
 # Gets the standard flags CC, CCX, etc.
