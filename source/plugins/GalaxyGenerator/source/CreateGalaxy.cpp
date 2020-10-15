@@ -496,6 +496,7 @@ double CreateGalaxy::radialDistance(int x, int y, double centerX, double centerY
 
 void CreateGalaxy::initializeContainers() {
 	starList = readStarFile("config/galaxy_stars.json");
+	myGalaxy.setInorganicResourceTypeList(readInorganicResourceTypeFile("config/resource_types.json"))
 	getProbabilities();
 }
 
@@ -522,7 +523,26 @@ vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) 
 }
 
 vector<InorganicResourceType> CreateGalaxy::readInorganicResourceTypeFile(string fileNameInput) {
+	vector<InorganicResourceType> myInorganicResourceTypeList;
+	std::ifstream input(fileNameInput);
+	json j;
+	input >> j;
+	int i = 0;
+	for (auto& element : j["inorganic_resources"]) {
+		myInorganicResourceTypeList.push_back(InorganicResourceType());
 
+		myInorganicResourceTypeList[i].name = element.key();
+		cout << myInorganicResourceTypeList[i].name << endl;
+
+		myInorganicResourceTypeList[i].chanceMultiplier = element["chance_multiplier"];
+		cout << myInorganicResourceTypeList[i].chanceMultiplier << endl;
+
+		myInorganicResourceTypeList[i].abundanceMultiplier = element["abundance_multiplier"];
+		cout << myInorganicResourceTypeList[i].abundanceMultiplier << endl;
+
+		i++;
+	}
+	return myInorganicResourceTypeList;
 }
 
 void CreateGalaxy::getProbabilities() {
