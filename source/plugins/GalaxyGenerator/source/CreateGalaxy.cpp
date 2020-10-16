@@ -524,7 +524,7 @@ vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) 
 
 void CreateGalaxy::readInorganicResourceTypeFile(string fileNameInput) {
 	vector<InorganicResourceType> myInorganicResourceTypeList;
-	unordered_map<string, InorganicResourceType> myInorganicResourceTypeMap;
+	unordered_map<string, uint16_t> myInorganicResourceTypeMap;
 	std::ifstream input(fileNameInput);
 	json j;
 	input >> j;
@@ -532,7 +532,7 @@ void CreateGalaxy::readInorganicResourceTypeFile(string fileNameInput) {
 	for (auto& element : j["inorganic_resources"]) {
 		InorganicResourceType tempInorganicResourceType = readInorganicResourceType(element, i);
 		myInorganicResourceTypeList.push_back(tempInorganicResourceType);
-		myInorganicResourceTypeMap[tempInorganicResourceType.name] = tempInorganicResourceType;
+		myInorganicResourceTypeMap[tempInorganicResourceType.name] = i;  // i is the ID for this type
 		i++;
 	}
 	myGalaxy.setInorganicResourceTypeList(myInorganicResourceTypeList);
@@ -572,21 +572,22 @@ void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 		myPlanetTypeList[i].name = j["name"];
 		cout << myPlanetTypeList[i].name << endl;
 
-		myPlanetTypeList[i].chance = j["chance"]
+		myPlanetTypeList[i].chance = j["chance"];
 		cout << myPlanetTypeList[i].chance << endl;
 
 		for (auto& inorganicResourceJSON : j["inorganic_resources"]) {
-			uint16_t resourceID = (myGalaxy.getInorganicResourceType(inorganicResourceJSON["name"])).inorganicResourceTypeID;
+			string tempName(inorganicResourceJSON["name"]);
+			uint16_t resourceID = (myGalaxy.getInorganicResourceType(tempName)).inorganicResourceTypeID;
 			InorganicResourceType tempInorganicResourceType = readInorganicResourceType(inorganicResourceJSON, resourceID);
 
-			myInorganicResourceTypeMap[tempInorganicResourceType.name] = tempInorganicResourceType;
+			myCustomInorganicResourceTypeMap[tempInorganicResourceType.name] = tempInorganicResourceType;
 		}
 
 		myPlanetTypeList[i].customInorganicResourceTypeMap = myCustomInorganicResourceTypeMap;
 
 		i++;
 	}
-	myGalaxy.setPlanetTypeList(myInorganicResourceTypeList);
+	myGalaxy.setPlanetTypeList(myPlanetTypeList);
 }
 
 void CreateGalaxy::getProbabilities() {

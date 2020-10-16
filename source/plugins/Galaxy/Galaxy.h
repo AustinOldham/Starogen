@@ -137,7 +137,7 @@ class Galaxy {
 
 		// bool setStarTypeList(std::vector<StarType> starTypeListInput);  // TODO: Implement this
 		bool setInorganicResourceTypeList(std::vector<InorganicResourceType> inorganicResourceTypeListInput);
-		bool setInorganicResourceTypeMap(std::unordered_map<std::string, InorganicResourceType> inorganicResourceTypeMapInput);
+		bool setInorganicResourceTypeMap(std::unordered_map<std::string, uint16_t> inorganicResourceTypeMapInput);
 
 		bool setPlanetTypeList(std::vector<PlanetType> planetTypeListInput);
 

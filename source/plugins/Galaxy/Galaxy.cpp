@@ -230,7 +230,7 @@ bool Galaxy::setInorganicResourceTypeList(vector<InorganicResourceType> inorgani
 	return true;
 }
 
-bool Galaxy::setInorganicResourceTypeMap(unordered_map<string, InorganicResourceType> inorganicResourceTypeMapInput) {
+bool Galaxy::setInorganicResourceTypeMap(unordered_map<string, uint16_t> inorganicResourceTypeMapInput) {
 	inorganicResourceTypeMap = inorganicResourceTypeMapInput;
 	return true;
 }

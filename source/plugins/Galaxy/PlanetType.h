@@ -48,7 +48,7 @@ class PlanetType {
 			chance = 0;
 		}
 
-		inline explicit PlanetType(newID) {
+		inline explicit PlanetType(int newID) {
 			planetTypeID = newID;
 			chance = 0;
 		}
