@@ -134,6 +134,7 @@ class Galaxy {
 
 		// bool setStarTypeList(std::vector<StarType> starTypeListInput);  // TODO: Implement this
 		bool setInorganicResourceTypeList(std::vector<InorganicResourceType> inorganicResourceTypeListInput);
+		bool setInorganicResourceTypeMap(std::unordered_map<std::string, InorganicResourceType> inorganicResourceTypeMapInput);
 
 		bool capitalize(std::string& wordInput);
 

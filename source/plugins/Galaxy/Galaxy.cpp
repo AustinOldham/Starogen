@@ -20,6 +20,7 @@
 using std::string;
 using std::pair;
 using std::make_pair;
+using std::unordered_map;
 using std::vector;
 
 Galaxy::Galaxy() {
@@ -218,6 +219,11 @@ bool Galaxy::setDensityMult(double densityMultInput) {
 
 bool Galaxy::setInorganicResourceTypeList(vector<InorganicResourceType> inorganicResourceTypeListInput) {
 	inorganicResourceTypeList = inorganicResourceTypeListInput;
+	return true;
+}
+
+bool Galaxy::setInorganicResourceTypeMap(unordered_map<string, InorganicResourceType> inorganicResourceTypeMapInput) {
+	inorganicResourceTypeMap = inorganicResourceTypeMapInput;
 	return true;
 }
 
