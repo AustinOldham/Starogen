@@ -61,6 +61,7 @@ class PlanetType {
 		uint16_t planetTypeID;
 
 		std::unordered_map<std::string, InorganicResourceType> customInorganicResourceTypeMap;  // Contains the planet-specific overrides (only affects the chance and abundance, not the properties of the element)
+		// TODO: See if it's necessary to set it as an empty container (when there are no custom resources) or if it's fine the way it is
 };
 
 

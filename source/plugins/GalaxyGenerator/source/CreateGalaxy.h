@@ -32,6 +32,9 @@
 #include <stdexcept>
 #include <filesystem>
 
+#include <typeinfo>
+// Used for debugging
+
 
 #include <iomanip>
 // delete this later

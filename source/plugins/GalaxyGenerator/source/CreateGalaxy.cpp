@@ -158,7 +158,7 @@ void CreateGalaxy::generate() {
 void CreateGalaxy::createPlanets() {
 	// Steps:
 	// 1. Iterate through the galaxy map to find any star where the number of planets is greater than 0
-	// 2. Determine the type of planet in the same way I determine the type of star (TODO: Write a method to parse the planets and resources file first)
+	// 2. Determine the type of planet in the same way I determine the type of star
 	// 3. Assign a name, seed, and mass the same way I do for stars
 	// 4. For each resource type:
 	//	4a. Get the percent chance for it to appear (and check the planet type to see if it has values that override this resource type)
@@ -497,6 +497,7 @@ double CreateGalaxy::radialDistance(int x, int y, double centerX, double centerY
 void CreateGalaxy::initializeContainers() {
 	starList = readStarFile("config/galaxy_stars.json");
 	readInorganicResourceTypeFile("config/resource_types.json");
+	readPlanetTypeFile("config/planet_types.json");
 	getProbabilities();
 }
 
@@ -554,31 +555,49 @@ InorganicResourceType CreateGalaxy::readInorganicResourceType(json element, int 
 		cout << myInorganicResourceType.inorganicResourceTypeID << endl;
 
 		return myInorganicResourceType;
-
 }
 
 void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
-	// TODO: Make sure the custom resource types are implemented
 	vector<PlanetType> myPlanetTypeList;
+	// cout << "here1" << endl;
 	std::ifstream input(fileNameInput);
+	// cout << "here2" << endl;
 	json j;
 	input >> j;
+	// cout << "here3" << endl;
 	int i = 0;
 	for (auto& element : j) {
 		myPlanetTypeList.push_back(PlanetType(i));
+		// cout << "here4" << endl;
 
-		unordered_map<string, InorganicResourceType> myCustomInorganicResourceTypeMap;
 
-		myPlanetTypeList[i].name = j["name"];
+		myPlanetTypeList[i].name = element["name"];
 		cout << myPlanetTypeList[i].name << endl;
 
-		myPlanetTypeList[i].chance = j["chance"];
+		myPlanetTypeList[i].chance = element["chance"];
 		cout << myPlanetTypeList[i].chance << endl;
 
-		for (auto& inorganicResourceJSON : j["inorganic_resources"]) {
-			string tempName(inorganicResourceJSON["name"]);
-			uint16_t resourceID = (myGalaxy.getInorganicResourceType(tempName)).inorganicResourceTypeID;
-			InorganicResourceType tempInorganicResourceType = readInorganicResourceType(inorganicResourceJSON, resourceID);
+		if (!element.contains("inorganic_resources")) {  // Not all planets have custom resources
+			continue;
+		}
+
+		unordered_map<string, InorganicResourceType> myCustomInorganicResourceTypeMap;
+		// cout << "here5" << endl;
+
+		for (auto& inorganicResourceJSON : element["inorganic_resources"]) {
+			// cout << typeid(inorganicResourceJSON["name"]).name() << endl;
+			// cout << "here6" << endl;
+			string tempName = inorganicResourceJSON["name"];
+			// cout << "here7" << endl;
+			InorganicResourceType tempInorganicResourceType = myGalaxy.getInorganicResourceType(tempName);
+			// TODO: Ensure this is a deep copy
+
+			// cout << "here8" << endl;
+			tempInorganicResourceType.chanceMultiplier = inorganicResourceJSON["chance_multiplier"];
+			cout << tempInorganicResourceType.chanceMultiplier << endl;
+
+			tempInorganicResourceType.abundanceMultiplier = inorganicResourceJSON["abundance_multiplier"];
+			cout << tempInorganicResourceType.abundanceMultiplier << endl;
 
 			myCustomInorganicResourceTypeMap[tempInorganicResourceType.name] = tempInorganicResourceType;
 		}

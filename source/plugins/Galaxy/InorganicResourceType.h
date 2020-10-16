@@ -51,6 +51,13 @@ class InorganicResourceType {
 			abundanceMultiplier = 0;
 		}
 
+		inline InorganicResourceType(const InorganicResourceType &old) {  // Copy constructor
+			name = old.name;
+			chanceMultiplier = old.chanceMultiplier;
+			abundanceMultiplier = old.abundanceMultiplier;
+			inorganicResourceTypeID = old.inorganicResourceTypeID;
+		}
+
 		std::string name;
 
 		double chanceMultiplier;
