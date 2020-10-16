@@ -542,8 +542,6 @@ void CreateGalaxy::readInorganicResourceTypeFile(string fileNameInput) {
 InorganicResourceType CreateGalaxy::readInorganicResourceType(json element, int newID) {
 		InorganicResourceType myInorganicResourceType(newID);
 
-		// TODO: Put this in a function since it will be used for planets
-
 		myInorganicResourceType.name = element["name"];
 		cout << myInorganicResourceType.name << endl;
 
@@ -562,7 +560,33 @@ InorganicResourceType CreateGalaxy::readInorganicResourceType(json element, int 
 void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 	// TODO: Make sure the custom resource types are implemented
 	vector<PlanetType> myPlanetTypeList;
-	// return myPlanetTypeList;
+	std::ifstream input(fileNameInput);
+	json j;
+	input >> j;
+	int i = 0;
+	for (auto& element : j) {
+		myPlanetTypeList.push_back(PlanetType(i));
+
+		unordered_map<string, InorganicResourceType> myCustomInorganicResourceTypeMap;
+
+		myPlanetTypeList[i].name = j["name"];
+		cout << myPlanetTypeList[i].name << endl;
+
+		myPlanetTypeList[i].chance = j["chance"]
+		cout << myPlanetTypeList[i].chance << endl;
+
+		for (auto& inorganicResourceJSON : j["inorganic_resources"]) {
+			uint16_t resourceID = (myGalaxy.getInorganicResourceType(inorganicResourceJSON["name"])).inorganicResourceTypeID;
+			InorganicResourceType tempInorganicResourceType = readInorganicResourceType(inorganicResourceJSON, resourceID);
+
+			myInorganicResourceTypeMap[tempInorganicResourceType.name] = tempInorganicResourceType;
+		}
+
+		myPlanetTypeList[i].customInorganicResourceTypeMap = myCustomInorganicResourceTypeMap;
+
+		i++;
+	}
+	myGalaxy.setPlanetTypeList(myInorganicResourceTypeList);
 }
 
 void CreateGalaxy::getProbabilities() {

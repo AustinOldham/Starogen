@@ -100,6 +100,14 @@ double Galaxy::getDensityMult() {
 	return densityMult;
 }
 
+InorganicResourceType Galaxy::getInorganicResourceType(std::string nameInput) {
+	return getInorganicResourceType(inorganicResourceTypeMap[nameInput]);
+}
+
+InorganicResourceType Galaxy::getInorganicResourceType(int typeID) {
+	return inorganicResourceTypeList[typeID];
+}
+
 bool Galaxy::setName(string nameInput) {
 	if (nameInput.empty()) {
 		return false;
@@ -224,6 +232,11 @@ bool Galaxy::setInorganicResourceTypeList(vector<InorganicResourceType> inorgani
 
 bool Galaxy::setInorganicResourceTypeMap(unordered_map<string, InorganicResourceType> inorganicResourceTypeMapInput) {
 	inorganicResourceTypeMap = inorganicResourceTypeMapInput;
+	return true;
+}
+
+bool Galaxy::setPlanetTypeList(vector<PlanetType> planetTypeListInput) {
+	planetTypeList = planetTypeListInput;
 	return true;
 }
 

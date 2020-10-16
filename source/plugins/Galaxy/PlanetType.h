@@ -35,6 +35,8 @@ class PlanetType {
 			ar & name;
 			ar & type;
 
+			ar & chance;
+
 			ar & planetTypeID;
 
 			ar & customInorganicResourceTypeMap;
@@ -43,10 +45,18 @@ class PlanetType {
 	public:
 		inline PlanetType() {
 			planetTypeID = -1;
+			chance = 0;
+		}
+
+		inline explicit PlanetType(newID) {
+			planetTypeID = newID;
+			chance = 0;
 		}
 
 		std::string name;
 		std::string type;
+
+		double chance;
 
 		uint16_t planetTypeID;
 

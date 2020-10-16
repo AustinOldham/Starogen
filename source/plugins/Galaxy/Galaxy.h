@@ -88,9 +88,9 @@ class Galaxy {
 
 		Star blankStar;  // Returned when the "at" function is given the coordinates to empty space and is added for optimization
 
-		std::unordered_map<std::string, InorganicResourceType> inorganicResourceTypeMap;  // Used so planets can be stored efficiently (resource name string -> InorganicResourceType -> 16-bit int (inorganicResourceTypeID) -> resource amount).
-		// TODO: Make this map bidirectional so I can determine which resources are on each planet efficiently
-		std::vector<InorganicResourceType> inorganicResourceTypeList;  // Used when determining the proportions of resources on a planet
+		std::unordered_map<std::string, uint16_t> inorganicResourceTypeMap;  // Used so planets can be stored efficiently (resource name string -> 16-bit int (inorganicResourceTypeID) -> resource amount).
+		// std::unordered_map<uint16_t, std::string> reverseInorganicResourceTypeMap;
+		std::vector<InorganicResourceType> inorganicResourceTypeList;  // Used when determining the proportions of resources on a planet. Also used to find the resource type given the ID.
 
 		std::vector<PlanetType> planetTypeList;
 
@@ -117,6 +117,9 @@ class Galaxy {
 		double getDensityMult();
 		unsigned int getNextUniqueID();
 
+		InorganicResourceType getInorganicResourceType(std::string nameInput);
+		InorganicResourceType getInorganicResourceType(int typeID);
+
 		bool setName(std::string nameInput);
 		bool setSeed(std::string seedInput);
 		bool setPixels(int pixelsInput);
@@ -135,6 +138,8 @@ class Galaxy {
 		// bool setStarTypeList(std::vector<StarType> starTypeListInput);  // TODO: Implement this
 		bool setInorganicResourceTypeList(std::vector<InorganicResourceType> inorganicResourceTypeListInput);
 		bool setInorganicResourceTypeMap(std::unordered_map<std::string, InorganicResourceType> inorganicResourceTypeMapInput);
+
+		bool setPlanetTypeList(std::vector<PlanetType> planetTypeListInput);
 
 		bool capitalize(std::string& wordInput);
 
