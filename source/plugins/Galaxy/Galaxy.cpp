@@ -308,6 +308,10 @@ float Galaxy::getStarColorAlpha(int starTypeID) {
 	return starTypeList[starTypeID].alpha;
 }
 
+int Galaxy::getStarTypeMeanPlanets(int starTypeID) {
+	return starTypeList[starTypeID].meanPlanets;
+}
+
 bool Galaxy::setSeedHash(unsigned int seedHashInput) {
 	seedHash = seedHashInput;
 	nextUniqueID = seedHashInput + 1;

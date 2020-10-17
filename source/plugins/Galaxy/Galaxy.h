@@ -126,6 +126,8 @@ class Galaxy {
 		float getStarColorBlue(int starTypeID);
 		float getStarColorAlpha(int starTypeID);
 
+		int getStarTypeMeanPlanets(int starTypeID);
+
 		InorganicResourceType getInorganicResourceType(std::string nameInput);
 		InorganicResourceType getInorganicResourceType(int typeID);  // TODO: Consider making this const
 

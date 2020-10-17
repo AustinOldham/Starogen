@@ -18,6 +18,7 @@
 #ifndef STAR_H
 #define STAR_H
 
+#include <cstdint>
 #include <string>
 
 #include <boost/archive/binary_oarchive.hpp>
@@ -32,15 +33,18 @@ class Star {
 		void serialize(Archive & ar, const unsigned int version) {
 			ar & name;
 			ar & seed;
+
+			ar & planetCount;
+
 			ar & starTypeID;
 			ar & planetList;
 		}
 		std::string name;
-		// std::string seed;
 		unsigned int seed;
 
-		int starTypeID;  // Index of the StarType array in CreateGalaxy (determined in the plotStar method)
-		// TODO: Make this a uint16_t
+		uint16_t planetCount;  // TODO: Could make this uint8_t but it probably doesn't matter
+
+		uint16_t starTypeID;  // Index of the StarType array in Galaxy (determined in the plotStar method)
 
 		std::vector<Planet> planetList;  // An ordered list of planets orbiting this star
 	public:
@@ -55,6 +59,10 @@ class Star {
 		bool setName(std::string nameInput);
 		// bool setSeed(int seedInput);
 		bool setSeed(unsigned int seedInput);
+
+		bool setPlanetCount(uint16_t planetCountInput);
+
+		bool setPlanetList(std::vector<Planet> planetListInput);
 		bool addPlanet(Planet planetInput);
 		bool insertPlanet(Planet planetInput, int index);
 		bool removePlanet(Planet planetInput);

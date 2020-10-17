@@ -53,3 +53,14 @@ bool Star::setSeed(unsigned int seedInput) {
 	seed = seedInput;
 	return true;
 }
+
+
+bool Star::setPlanetCount(uint16_t planetCountInput) {
+	planetCount = planetCountInput;
+	return true;
+}
+
+bool Star::setPlanetList(std::vector<Planet> planetListInput) {
+	planetList = planetListInput;
+	return true;
+}

@@ -91,16 +91,21 @@ class CreateGalaxy {
 		void generate();
 		void createApproximateDensityMap();
 		void createClouds();
+		std::vector<Planet> createPlanets(int planetCount);
 		void starCluster(int x, int y, int num, double stddev, int distanceProportionInt);
 		Star plotStar(int distanceProportionInt);
 		void populateEmptyStars();
+		int calculatePlanetCount(int mean);
+
 		std::vector<double> calculateAngles(int num, double additional);
 		double getMult(double t, double a, double b);
 		double logSpiralX(double t, double theta, double a, double b);
 		double logSpiralY(double t, double theta, double a, double b);
 		double logSpiralX(double t, double theta, double mult);
 		double logSpiralY(double t, double theta, double mult);
+
 		bool isFinished(std::vector<bool> finished);
+
 		double radialDistance(int x, int y, double centerX, double centerY);
 
 
@@ -143,7 +148,7 @@ class CreateGalaxy {
 
 		void run();
 
-		void createPlanets();
+
 
 		Star at(int x, int y);
 
