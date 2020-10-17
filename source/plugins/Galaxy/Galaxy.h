@@ -121,6 +121,11 @@ class Galaxy {
 		double getDensityMult();
 		unsigned int getNextUniqueID();
 
+		float getStarColorRed(int starTypeID);
+		float getStarColorGreen(int starTypeID);
+		float getStarColorBlue(int starTypeID);
+		float getStarColorAlpha(int starTypeID);
+
 		InorganicResourceType getInorganicResourceType(std::string nameInput);
 		InorganicResourceType getInorganicResourceType(int typeID);  // TODO: Consider making this const
 

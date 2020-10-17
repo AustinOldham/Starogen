@@ -58,6 +58,7 @@
 class CreateGalaxy {
 	private:
 		RandClass starClusterGen;
+		CustomDiscreteDistribution starTypeGen;
 		FastNoise cloudNoise;
 		Galaxy myGalaxy;
 

@@ -287,6 +287,22 @@ unsigned int Galaxy::getNextUniqueID() {
 	return temp;
 }
 
+float Galaxy::getStarColorRed(int starTypeID) {
+	return starTypeList[starTypeID].red;
+}
+
+float Galaxy::getStarColorGreen(int starTypeID) {
+	return starTypeList[starTypeID].green;
+}
+
+float Galaxy::getStarColorBlue(int starTypeID) {
+	return starTypeList[starTypeID].blue;
+}
+
+float Galaxy::getStarColorAlpha(int starTypeID) {
+	return starTypeList[starTypeID].alpha;
+}
+
 bool Galaxy::setSeedHash(unsigned int seedHashInput) {
 	seedHash = seedHashInput;
 	nextUniqueID = seedHashInput + 1;
