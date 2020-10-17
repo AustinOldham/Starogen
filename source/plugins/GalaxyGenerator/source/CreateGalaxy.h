@@ -46,6 +46,7 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include "RandClass/RandClass.h"
+#include "RandClass/CustomDiscreteDistribution.h"
 #include "FastNoise/FastNoise.h"
 #include "ParsedTypes/InorganicResourceType.h"
 #include "ParsedTypes/PlanetType.h"

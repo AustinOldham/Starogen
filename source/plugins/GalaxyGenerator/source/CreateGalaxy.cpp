@@ -575,9 +575,9 @@ void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 		myPlanetTypeList[i].chance = element["chance"];
 		cout << myPlanetTypeList[i].chance << endl;
 
-		if (!element.contains("inorganic_resources")) {  // Not all planets have custom resources
-			continue;
-		}
+		// if (!element.contains("inorganic_resources")) {  // Not all planets have custom resources (this is actually not necessary because it skips on its own (and I can't have it when I add other types of resources))
+		// 	continue;
+		// }
 
 		unordered_map<string, InorganicResourceType> myCustomInorganicResourceTypeMap;
 
@@ -606,6 +606,8 @@ void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 void CreateGalaxy::getProbabilities() {
 	// TODO: Use my CustomDiscreteDistribution class and make it using https://stackoverflow.com/a/31153984/11356785
 	double probabilitySum = 0.0;
+
+	vector<StarType> tempStarTypeList = myGalaxy.getStarTypeList();
 
 	for (int i = 0; i < starList.size(); i++) {
 		probabilitySum += starList[i].chance;
