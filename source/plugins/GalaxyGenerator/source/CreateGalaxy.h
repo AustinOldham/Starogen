@@ -47,7 +47,9 @@
 #include <boost/serialization/vector.hpp>
 #include "RandClass/RandClass.h"
 #include "FastNoise/FastNoise.h"
-#include "InorganicResourceType.h"
+#include "ParsedTypes/InorganicResourceType.h"
+#include "ParsedTypes/PlanetType.h"
+#include "ParsedTypes/StarType.h"
 #include "Star.h"
 #include "Galaxy.h"
 #include "WordGenerator.h"
@@ -58,9 +60,9 @@ class CreateGalaxy {
 		FastNoise cloudNoise;
 		Galaxy myGalaxy;
 
-		struct StarType;
+		// struct StarType;
 
-		std::vector<StarType> starList;  // TODO: Rename to starTypeList.
+		// std::vector<StarType> starList;  // TODO: Rename to starTypeList.
 
 		// TODO: Test the 2D vector version later on in order to determine whether or not speed should be sacrificed for memory.
 		// std::vector<std::vector<int>> blankGalaxyMap;
@@ -195,39 +197,6 @@ class CreateGalaxy {
 
 		bool setCensoredWordsPath(std::string pathInput);
 };
-
-struct CreateGalaxy::StarType {  // TODO: Move this over to Galaxy.h and refactor the code to make that possible so this can be stored
-	std::string name;
-	std::string type;
-
-	// TODO: Add starTypeID to this list (as uint16_t?) which is the index of this type in the array in CreateGalaxy
-
-	// int id;
-	double chance;
-	double adjustedChance;
-	double meanPlanets;
-
-	float red;
-	float green;
-	float blue;
-	float alpha;
-
-	template <typename Archive>
-	void serialize(Archive& ar, const unsigned int version) {
-		ar & name;
-		ar & type;
-
-		ar & chance;
-		ar & adjustedChance;
-		ar & meanPlanets;
-
-		ar & red;
-		ar & green;
-		ar & blue;
-		ar & alpha;
-	}
-};
-
 
 
 #endif  // CREATEGALAXY_H

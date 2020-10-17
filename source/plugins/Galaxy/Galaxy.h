@@ -28,8 +28,9 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
 
-#include "InorganicResourceType.h"
-#include "PlanetType.h"
+#include "ParsedTypes/InorganicResourceType.h"
+#include "ParsedTypes/PlanetType.h"
+#include "ParsedTypes/StarType.h"
 #include "Star.h"
 #include "WordGenerator.h"
 
@@ -89,8 +90,9 @@ class Galaxy {
 		Star blankStar;  // Returned when the "at" function is given the coordinates to empty space and is added for optimization
 
 		std::unordered_map<std::string, uint16_t> inorganicResourceTypeMap;  // Used so planets can be stored efficiently (resource name string -> 16-bit int (inorganicResourceTypeID) -> resource amount).
-		// std::unordered_map<uint16_t, std::string> reverseInorganicResourceTypeMap;
 		std::vector<InorganicResourceType> inorganicResourceTypeList;  // Used when determining the proportions of resources on a planet. Also used to find the resource type given the ID.
+
+		std::vector<StarType> starTypeList;
 
 		std::vector<PlanetType> planetTypeList;
 

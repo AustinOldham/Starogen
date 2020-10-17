@@ -200,7 +200,7 @@ void CreateGalaxy::starCluster(int x, int y, int num, double stddev, int distanc
 Star CreateGalaxy::plotStar(int distanceProportionInt) {
 	// TODO: Replace this implementation with std::discrete_distribution.
 
-	double probability = starClusterGen.next(0.0, 1.0);
+	double probability = starClusterGen.next(0.0, 1.0);  // Number between 0 and 1
 	double probabilitySum = 0.0;
 
 	// cout << probability << endl;
@@ -502,7 +502,7 @@ void CreateGalaxy::initializeContainers() {
 }
 
 vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) {
-	vector<CreateGalaxy::StarType> myStarList;
+	vector<StarType> myStarList;
 	std::ifstream input(fileNameInput);
 	json j;
 	input >> j;
@@ -559,17 +559,14 @@ InorganicResourceType CreateGalaxy::readInorganicResourceType(json element, int 
 
 void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 	vector<PlanetType> myPlanetTypeList;
-	// cout << "here1" << endl;
 	std::ifstream input(fileNameInput);
-	// cout << "here2" << endl;
+
 	json j;
 	input >> j;
-	// cout << "here3" << endl;
+
 	int i = 0;
 	for (auto& element : j) {
 		myPlanetTypeList.push_back(PlanetType(i));
-		// cout << "here4" << endl;
-
 
 		myPlanetTypeList[i].name = element["name"];
 		cout << myPlanetTypeList[i].name << endl;
@@ -582,17 +579,13 @@ void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 		}
 
 		unordered_map<string, InorganicResourceType> myCustomInorganicResourceTypeMap;
-		// cout << "here5" << endl;
 
 		for (auto& inorganicResourceJSON : element["inorganic_resources"]) {
-			// cout << typeid(inorganicResourceJSON["name"]).name() << endl;
-			// cout << "here6" << endl;
 			string tempName = inorganicResourceJSON["name"];
-			// cout << "here7" << endl;
+
 			InorganicResourceType tempInorganicResourceType = myGalaxy.getInorganicResourceType(tempName);
 			// TODO: Ensure this is a deep copy
 
-			// cout << "here8" << endl;
 			tempInorganicResourceType.chanceMultiplier = inorganicResourceJSON["chance_multiplier"];
 			cout << tempInorganicResourceType.chanceMultiplier << endl;
 
@@ -610,6 +603,7 @@ void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 }
 
 void CreateGalaxy::getProbabilities() {
+	// TODO: Use my CustomDiscreteDistribution class and make it using https://stackoverflow.com/a/31153984/11356785
 	double probabilitySum = 0.0;
 
 	for (int i = 0; i < starList.size(); i++) {
@@ -617,7 +611,7 @@ void CreateGalaxy::getProbabilities() {
 	}
 
 	for (int i = 0; i < starList.size(); i++) {
-		starList[i].adjustedChance = starList[i].chance / probabilitySum;  // Normalizes the probabilities so they are between 0.0 and 1.0.
+		starList[i].chance = starList[i].chance / probabilitySum;  // Normalizes the probabilities so they are between 0.0 and 1.0.
 		// cout << starList[i].adjustedChance << endl;
 	}
 }

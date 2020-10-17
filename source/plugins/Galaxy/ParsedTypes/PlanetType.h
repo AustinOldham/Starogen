@@ -25,7 +25,8 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
 
-#include "InorganicResourceType.h"
+#include "ParsedTypes/InorganicResourceType.h"
+// TODO: Remove the ParsedTypes part
 
 class PlanetType {
 	private:
