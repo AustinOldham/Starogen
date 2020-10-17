@@ -65,6 +65,8 @@ class Galaxy {
 			ar & inorganicResourceTypeMap;
 			ar & inorganicResourceTypeList;
 
+			ar & starTypeList;
+
 			ar & planetTypeList;
 		}
 
@@ -120,7 +122,9 @@ class Galaxy {
 		unsigned int getNextUniqueID();
 
 		InorganicResourceType getInorganicResourceType(std::string nameInput);
-		InorganicResourceType getInorganicResourceType(int typeID);
+		InorganicResourceType getInorganicResourceType(int typeID);  // TODO: Consider making this const
+
+		const std::vector<StarType> getStarTypeList();  // TODO: Consider adding a method to get an iterator
 
 		bool setName(std::string nameInput);
 		bool setSeed(std::string seedInput);
@@ -142,6 +146,8 @@ class Galaxy {
 		bool setInorganicResourceTypeMap(std::unordered_map<std::string, uint16_t> inorganicResourceTypeMapInput);
 
 		bool setPlanetTypeList(std::vector<PlanetType> planetTypeListInput);
+
+		bool setStarTypeList(std::vector<StarType> starTypeListInput);
 
 		bool capitalize(std::string& wordInput);
 

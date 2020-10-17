@@ -113,7 +113,7 @@ class CreateGalaxy {
 
 
 		void initializeContainers();
-		std::vector<StarType> readStarFile(std::string fileNameInput);
+		void readStarFile(std::string fileNameInput);
 		void readInorganicResourceTypeFile(std::string fileNameInput);
 		void readPlanetTypeFile(std::string fileNameInput);
 

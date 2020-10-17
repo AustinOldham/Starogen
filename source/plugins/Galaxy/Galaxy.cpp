@@ -108,6 +108,10 @@ InorganicResourceType Galaxy::getInorganicResourceType(int typeID) {
 	return inorganicResourceTypeList[typeID];
 }
 
+const StarType Galaxy::getStarTypeList() {
+	return starTypeList;
+}
+
 bool Galaxy::setName(string nameInput) {
 	if (nameInput.empty()) {
 		return false;

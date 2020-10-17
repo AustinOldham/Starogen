@@ -495,13 +495,13 @@ double CreateGalaxy::radialDistance(int x, int y, double centerX, double centerY
 }
 
 void CreateGalaxy::initializeContainers() {
-	starList = readStarFile("config/galaxy_stars.json");
+	readStarFile("config/galaxy_stars.json");  // TODO: Change the name of galaxy_stars to star_types and move the types to a separate directory
 	readInorganicResourceTypeFile("config/resource_types.json");
 	readPlanetTypeFile("config/planet_types.json");
 	getProbabilities();
 }
 
-vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) {
+void CreateGalaxy::readStarFile(string fileNameInput) {
 	vector<StarType> myStarList;
 	std::ifstream input(fileNameInput);
 	json j;
@@ -509,10 +509,11 @@ vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) 
 	int i = 0;
 	for (auto& element : j) {
 		// cout << element["name"] << '\n';
-		myStarList.push_back(CreateGalaxy::StarType());
+		myStarList.push_back(StarType(i));
 		myStarList[i].name = element["name"];
 		// cout << myStarList[i].name << endl;
 		myStarList[i].type = element["type"];
+		myStarList[i].meanPlanets = element["mean_planets"]
 		myStarList[i].chance = element["chance"];
 		myStarList[i].red = element["red"];
 		myStarList[i].green = element["green"];
@@ -520,7 +521,7 @@ vector<CreateGalaxy::StarType> CreateGalaxy::readStarFile(string fileNameInput) 
 		myStarList[i].alpha = element["alpha"];
 		i++;
 	}
-	return myStarList;
+	myGalaxy.setStarTypeList(myStarList);
 }
 
 void CreateGalaxy::readInorganicResourceTypeFile(string fileNameInput) {
