@@ -340,7 +340,7 @@ float CreateGalaxy::getBlue(int index) {
 }
 
 float CreateGalaxy::getAlpha(int index) {
-	return return myGalaxy.getStarColorAlpha(index);
+	return myGalaxy.getStarColorAlpha(index);
 }
 
 
@@ -499,7 +499,7 @@ void CreateGalaxy::readStarFile(string fileNameInput) {
 		myStarList[i].name = element["name"];
 		// cout << myStarList[i].name << endl;
 		myStarList[i].type = element["type"];
-		myStarList[i].meanPlanets = element["mean_planets"]
+		myStarList[i].meanPlanets = element["mean_planets"];
 		myStarList[i].chance = element["chance"];
 		myStarList[i].red = element["red"];
 		myStarList[i].green = element["green"];
@@ -592,7 +592,7 @@ void CreateGalaxy::readPlanetTypeFile(string fileNameInput) {
 void CreateGalaxy::getProbabilities() {
 	vector<StarType> tempStarTypeList = myGalaxy.getStarTypeList();
 	vector<int> starTypeWeights;
-	for (int i = 0; i < tempStarTypeList; i++) {
+	for (int i = 0; i < tempStarTypeList.size(); i++) {
 		starTypeWeights.push_back(tempStarTypeList[i].chance);
 	}
 

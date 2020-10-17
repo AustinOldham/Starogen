@@ -108,7 +108,7 @@ InorganicResourceType Galaxy::getInorganicResourceType(int typeID) {
 	return inorganicResourceTypeList[typeID];
 }
 
-const StarType Galaxy::getStarTypeList() {
+vector<StarType> Galaxy::getStarTypeList() {
 	return starTypeList;
 }
 
@@ -241,6 +241,11 @@ bool Galaxy::setInorganicResourceTypeMap(unordered_map<string, uint16_t> inorgan
 
 bool Galaxy::setPlanetTypeList(vector<PlanetType> planetTypeListInput) {
 	planetTypeList = planetTypeListInput;
+	return true;
+}
+
+bool Galaxy::setStarTypeList(vector<StarType> starTypeListInput) {
+	starTypeList = starTypeListInput;
 	return true;
 }
 

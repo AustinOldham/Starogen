@@ -129,7 +129,7 @@ class Galaxy {
 		InorganicResourceType getInorganicResourceType(std::string nameInput);
 		InorganicResourceType getInorganicResourceType(int typeID);  // TODO: Consider making this const
 
-		const std::vector<StarType> getStarTypeList();  // TODO: Consider adding a method to get an iterator
+		std::vector<StarType> getStarTypeList();  // TODO: Consider adding a method to get an iterator
 
 		bool setName(std::string nameInput);
 		bool setSeed(std::string seedInput);
